@@ -15,5 +15,8 @@ namespace mah_boi.Tools
         void RemoveString(string stringName, string stringValue);
         void RemoveString(StrString stringSample);
         void RenameString(string oldStringName, string newStringName);
+        void RenameAllStrings(string oldStringName, string newStringName);
+        bool StringExist(string stringName);
+        bool StringExist(StrString stringSample);
     }
 }

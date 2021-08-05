@@ -23,6 +23,7 @@ namespace mah_boi.Tools
         void RemoveCategoryWithStrings(string categoryName);
         void RemoveCategoryWithStrings(StrCategory categorySample);
         void RemoveCategoryWithoutStrings(string categoryName);
+        void RenameCategory(string oldCategoryName, string newCategoryName);
         void MoveToCategory(string stringName, string oldParentCategoryName, string newParentCategoryName);
         CsfFile ConvertToCsf();
         CsfFile ConvertToCsf(string fileName);

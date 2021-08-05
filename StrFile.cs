@@ -25,6 +25,7 @@ namespace mah_boi.Tools
     ///     Лейблы являются сочетанием категорий и строк, разделяемыми через двоеточие.
     ///     Лейблы регистронезависимы, т.к. писать можно их в любом регистре.
     ///     Лейблы могут повторяться.
+    ///     Названия лейблов состоят исключительно из символов ASCII
     ///     
     ///     Приведу пример более подробно то, что описал текстом:
     ///     
@@ -72,6 +73,9 @@ namespace mah_boi.Tools
 
         public StrFile(string fileName)
         {
+            if (!File.Exists(fileName))
+                throw new StrParseException("Файл для парсинга не существует");
+
             FileName = fileName;
 
             Parse();
@@ -84,7 +88,7 @@ namespace mah_boi.Tools
         }
         #endregion
 
-        #region Работа с парсингом и выводом
+        #region Парсинг
         /// <summary>
         ///     Парсинг .str файла.
         /// </summary>
@@ -96,11 +100,15 @@ namespace mah_boi.Tools
 
             var tmpListOfCategory = new List<StrCategory>();
 
-            // Согласно https://modenc.renegadeprojects.com/CSF_File_Format название строки состоит исключительно из ASCII символов
-            // дополнительно к этому стоит отметить, что формат поддерживает комментарии, которые подобны комментариям из FORTRAN 66
-            // т.е. комментрии должны начинаться с 1-ой буквы строки. Комметрий создаётся за счёт символов //, как в C-подобных языках
+            // Согласно https://modenc.renegadeprojects.com/CSF_File_Format
+            // название строки состоит исключительно из ASCII символов
+            // дополнительно к этому стоит отметить, что формат поддерживает
+            // комментарии, которые подобны комментариям из FORTRAN 66
+            // т.е. комментрии должны начинаться с 1-ой буквы строки.
+            // Комметрий создаётся за счёт символов //, как в C-подобных языках
             int searchStatus = (int)LineType.Label;
 
+            // красиво-ленивый способ пробежаться по всем строкам файла. Имхо, но это лучше, чем просто считывать
             foreach (var currentLine in new StreamReader(FileName).ReadToEnd().Split(Environment.NewLine))
             {
                 // считанная строка - комментарий или пустая строка
@@ -129,9 +137,9 @@ namespace mah_boi.Tools
                                                 + Environment.NewLine
                                                 + $"Ошибка в строке: \"{currentLine}\"");
 
-                // считанная строка содержит ошибку, т.к. нет окончания
+                // считанная строка содержит ошибку, т.к. нет значения
                 else if (currentLine.Trim().ToLower() == "end" && searchStatus == (int)LineType.Value)
-                    throw new StrParseException("Ошибка форматирования: после названия лейбла идёт закрытие строки"
+                    throw new StrParseException("Ошибка форматирования: после названия лейбла идёт закрытие строки, а не значение"
                                                 + Environment.NewLine
                                                 + Environment.NewLine
                                                 + "Воспользуйтесь ковычками \"\" для обозначения пустой строки"
@@ -167,7 +175,8 @@ namespace mah_boi.Tools
                         }
                     }
 
-                    if (stringName == string.Empty) // если не было двоеточия, то всё название лейбла - это название строки
+                    // если не было двоеточия, то всё название лейбла - это название строки
+                    if (stringName == string.Empty)
                     {
                         stringName = categoryName;
                         categoryName = NOCATEGORYSTRINGS;
@@ -377,6 +386,11 @@ namespace mah_boi.Tools
             return null;
         }
 
+        /// <summary>
+        ///     Проверка на наличие определённой категории с<br/>
+        ///     файле по указанному названию категории.<br/>
+        ///     При первом вхождении возвращает истину.
+        /// </summary>
         public bool CategoryExist(string categoryName)
         {
             foreach (var category in categoriesOfFile)
@@ -386,6 +400,11 @@ namespace mah_boi.Tools
             return false;
         }
 
+        /// <summary>
+        ///     Проверка на наличие определённой категории с<br/>
+        ///     файле по указанному экземпляру категории.<br/>
+        ///     При первом вхождении возвращает истину.
+        /// </summary>
         public bool CategoryExist(StrCategory categorySample)
         {
             foreach (var category in categoriesOfFile)
@@ -401,9 +420,8 @@ namespace mah_boi.Tools
         public bool StringExist(string stringName)
         {
             foreach (var category in categoriesOfFile)
-                foreach (var str in category.stringsOfCategory)
-                    if (str.StringName == stringName)
-                        return true;
+                if (category.StringExist(stringName))
+                    return true;
 
             return false;
         }
@@ -417,10 +435,9 @@ namespace mah_boi.Tools
         {
             foreach (var category in categoriesOfFile)
                 if (category.CategoryName == categoryName)
-                    foreach (var str in category.stringsOfCategory)
-                        if (str.StringName == stringName) 
-                            return true;
-            
+                    if (category.StringExist(stringName))
+                        return true;
+
             return false;
         }
 
@@ -433,24 +450,35 @@ namespace mah_boi.Tools
         {
             foreach (var category in categoriesOfFile)
                 if (category.CategoryName == categoryName)
-                    foreach (var str in category.stringsOfCategory)
-                        if (str.StringName == stringSample.StringName)
-                            return true;
+                    if (category.StringExist(stringSample))
+                        return true;
 
             return false;
         }
 
+        /// <summary>
+        ///     Удаление категории вместе со строками по указанному названию.
+        ///     Удаляется только первое вхождение.
+        /// </summary>
         public void RemoveCategoryWithStrings(string categoryName)
         {
             foreach (var category in categoriesOfFile)
                 if (category.CategoryName == categoryName)
-                    categoriesOfFile.Remove(new StrCategory(GetCategory(categoryName)));
+                    categoriesOfFile.Remove(GetCategory(categoryName));
         }
 
+        /// <summary>
+        ///     Удаление категории вместе со строками по указанному экземпляру.
+        ///     Удаляется только первое вхождение.
+        /// </summary>
         public void RemoveCategoryWithStrings(StrCategory categorySample) 
             =>
                 categoriesOfFile.Remove(categorySample);
 
+        /// <summary>
+        ///     Удаление категории и перемещение строк в из удаляемой категории в буффер пустых строк.<br/>
+        ///     Удаляется только первое вхождение.
+        /// </summary>
         public void RemoveCategoryWithoutStrings(string categoryName)
         {
             if (!CategoryExist(categoryName)) return;
@@ -462,18 +490,30 @@ namespace mah_boi.Tools
                 {
                     category.stringsOfCategory.ForEach(elem => NoCategoryStrings.AddString(elem));
                     categoriesOfFile.Remove(category);
-                    categoriesOfFile.Remove(new StrCategory(GetCategory(NOCATEGORYSTRINGS)));
+                    categoriesOfFile.Remove(GetCategory(NOCATEGORYSTRINGS));
                     categoriesOfFile.Add(NoCategoryStrings);
                 }
         }
 
         /// <summary>
-        ///     Перемещает все подходящие строки из одной категори в другую.
+        ///     Переименовка категории. Переименовывает первую категорию, попавшую под условие поиска.
+        /// </summary>
+        public void RenameCategory(string oldCategoryName, string newCategoryName)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == oldCategoryName)
+                    category.CategoryName = newCategoryName;
+        }
+
+        /// <summary>
+        ///     Перемещает все подходящие строки из одной категории в другую. Нет учёта повторений.
         /// </summary>
         public void MoveToCategory(string stringName, string oldParentCategoryName, string newParentCategoryName)
         {
             if (!StringExist(oldParentCategoryName, stringName)) return;
-            if (!CategoryExist(newParentCategoryName)) return;
+
+            if (!CategoryExist(newParentCategoryName))
+                categoriesOfFile.Add(new StrCategory(newParentCategoryName));
 
             List<StrCategory> list = categoriesOfFile.Where(elem => elem.CategoryName == oldParentCategoryName
                                                                  || elem.CategoryName == newParentCategoryName).ToList();
@@ -516,7 +556,6 @@ namespace mah_boi.Tools
         public override bool Equals(object obj)
             =>
                 obj == (object)this;
-
         public override int GetHashCode()
             =>
                 base.GetHashCode();

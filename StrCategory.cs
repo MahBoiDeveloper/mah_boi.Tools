@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace mah_boi.Tools
 {
@@ -19,6 +20,9 @@ namespace mah_boi.Tools
             =>
                 stringsOfCategory = new List<StrString>(categorySample.stringsOfCategory);
 
+        /// <summary>
+        ///     Возращает значение указанной строки.
+        /// </summary>
         public string GetStringValue(string stringName)
         {
             foreach(var tmp in stringsOfCategory)
@@ -64,15 +68,46 @@ namespace mah_boi.Tools
                 stringsOfCategory.RemoveAll(elem => elem == stringSample);
 
         /// <summary>
-        ///     Переименование строк, подходящих под указанное название.
+        ///     Переименование строки, подходящей под указанное название.
         /// </summary>
         public void RenameString(string oldStringName, string newStringName)
         {
             foreach (var tmp in stringsOfCategory)
             {
                 if (tmp.StringName == oldStringName)
+                {
+                    tmp.StringName = newStringName;
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Переименование строк, подходящих под указанное название.
+        /// </summary>
+        public void RenameAllStrings(string oldStringName, string newStringName)
+        {
+            foreach (var tmp in stringsOfCategory)
+            {
+                if (tmp.StringName == oldStringName)
                     tmp.StringName = newStringName;
             }
+        }
+
+        public bool StringExist(string stringName)
+        {
+            if (stringsOfCategory.Where(elem => elem.StringName == stringName).ToList().Count > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool StringExist(StrString stringSample)
+        {
+            if (stringsOfCategory.Where(elem => elem == stringSample).ToList().Count > 0)
+                return true;
+            else
+                return false;
         }
 
         public static bool operator ==(StrCategory firstCategory, StrCategory secondCategory)
