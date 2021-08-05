@@ -1,0 +1,74 @@
+SCRIPT:Destroy the final boss. No cheating. Wave 
+"Destroy the final boss.
+\w Typed another text for test.
+\n No cheating.  Wave "
+END
+
+
+// ///////////////////////////////////// //
+//                                       //
+//                                       //
+//                                       //
+//               CREDITS                 //
+//                                       //
+//                                       //
+//                                       //
+// ///////////////////////////////////// //
+	
+Credits:ModName
+	"Command and Conquer : Generals Evolution"
+End
+	
+Credits:ModVersion
+	"Release Candidate 2"
+End
+	
+Credits:ModAuthorTitle
+	"Author"
+End
+	
+Credits:ModAuthor1
+	"Gunship_Mark_II & sgor00"
+End
+	
+Credits:ModHomepageTitle
+	"Homepage"
+End
+	
+
+//              ////////////
+
+
+Credits:ModHomepage1
+	"http://www.moddb.com/mods/command-and-conquer-generals-evolution"
+End
+	
+Credits:ModHomepage2
+	"http://gunshipstuff.x10.mx/"
+End
+
+
+/////////////////////////
+//// NEW TEST CRIPTS ////
+/////////////////////////
+
+SCRIPT:New Wave in
+"New Wave in"
+END
+
+SCRIPT:Wave
+"Wave"
+END
+
+SCRIPT:Kill Counter
+"Kill Counter"
+END
+
+SCRIPT:Destroy the boss to proceed to the next wave. No cheating. Wave 
+"Destroy the boss to proceed to the next wave. No cheating. Wave "
+END
+
+SCRIPT:Destroy the bosses to proceed to the next wave. No cheating. Wave 
+"Destroy the bosses to proceed to the next wave. No cheating. Wave "
+END
+
