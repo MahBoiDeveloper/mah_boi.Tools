@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    class StrString : IStrString
+    class StrString : IStringTableString
     {
         public string StringName { get; set; }
         public string StringValue { get; set; }

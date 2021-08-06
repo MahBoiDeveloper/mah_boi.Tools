@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    interface IStrCategory
+    interface IStringTableCategory
     {
         string CategoryName { get; set; }
         string GetStringValue(string stringName);

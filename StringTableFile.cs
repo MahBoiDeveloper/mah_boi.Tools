@@ -6,5 +6,6 @@ namespace mah_boi.Tools
 {
     abstract class StringTableFile
     {
+
     }
 }

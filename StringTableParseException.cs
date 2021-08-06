@@ -5,9 +5,9 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    class StrParseException : Exception
+    class StringTableParseException : Exception
     {
-        public StrParseException(string message) : base(message)
+        public StringTableParseException(string message) : base(message)
         {
         }
     }

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace mah_boi.Tools
 {
-    class StrCategory : IStrCategory
+    class StrCategory : IStringTableCategory
     {
         public string CategoryName { get; set; }
         public List<StrString> stringsOfCategory;

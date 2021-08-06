@@ -79,7 +79,7 @@ namespace mah_boi.Tools
         public StrFile(string fileName)
         {
             if (!File.Exists(fileName))
-                throw new StrParseException("Файл для парсинга не существует");
+                throw new StringTableParseException("Файл для парсинга не существует");
 
             FileName = fileName;
 
@@ -127,7 +127,7 @@ namespace mah_boi.Tools
                     && currentLine.IndexOf(':') > -1
                     && currentLine.IndexOf(':', currentLine.IndexOf(':') + 1) > -1
                 )
-                    throw new StrParseException("Ошибка форматирования: указано несколько двоеточий в названии лейбла"
+                    throw new StringTableParseException("Ошибка форматирования: указано несколько двоеточий в названии лейбла"
                                                 + Environment.NewLine
                                                 + Environment.NewLine
                                                 + $"Ошибка в строке: \"{currentLine}\"");
@@ -137,14 +137,14 @@ namespace mah_boi.Tools
                 (
                     searchStatus == (int)LineType.End && currentLine.Trim().ToLower() != "end"
                 )
-                    throw new StrParseException("Ошибка форматирования: после значения лейбла идёт другая строка со значением"
+                    throw new StringTableParseException("Ошибка форматирования: после значения лейбла идёт другая строка со значением"
                                                 + Environment.NewLine
                                                 + Environment.NewLine
                                                 + $"Ошибка в строке: \"{currentLine}\"");
 
                 // считанная строка содержит ошибку, т.к. нет значения
                 else if (currentLine.Trim().ToLower() == "end" && searchStatus == (int)LineType.Value)
-                    throw new StrParseException("Ошибка форматирования: после названия лейбла идёт закрытие строки, а не значение"
+                    throw new StringTableParseException("Ошибка форматирования: после названия лейбла идёт закрытие строки, а не значение"
                                                 + Environment.NewLine
                                                 + Environment.NewLine
                                                 + "Воспользуйтесь ковычками \"\" для обозначения пустой строки"
@@ -240,7 +240,7 @@ namespace mah_boi.Tools
                     && !currentLine.Trim().StartsWith("\\n")
                 )
                 {
-                    throw new StrParseException("Ошибка форматирования: отсутствие символов \"\\n\" в начале составной строки."
+                    throw new StringTableParseException("Ошибка форматирования: отсутствие символов \"\\n\" в начале составной строки."
                                                 + Environment.NewLine
                                                 + Environment.NewLine
                                                 + $"Ошибка в строке: \"{currentLine}\"");
@@ -259,7 +259,7 @@ namespace mah_boi.Tools
                 // на случай непредвиденных проблем
                 else
                 {
-                    throw new StrParseException("Неизвестная ошибка форматирования."
+                    throw new StringTableParseException("Неизвестная ошибка форматирования."
                                                 + Environment.NewLine
                                                 + Environment.NewLine
                                                 + $"Ошибка в строке: \"{currentLine}\"");

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    interface ICsfLabelValue
+    class CsfLabelValue
     {
     }
 }
