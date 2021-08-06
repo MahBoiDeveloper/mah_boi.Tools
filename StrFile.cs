@@ -62,10 +62,8 @@ namespace mah_boi.Tools
     ///     Some text for string
     ///     ""
     ///     end
-    class StrFile : IStrFile
+    class StrFile : StringTable, IStrFile
     {
-        public const string NOCATEGORYSTRINGS = ".NOCATEGORYSTRINGS";
-        private string FileName { get; set; }
         private List<StrCategory> categoriesOfFile;
 
         #region Конструкторы
@@ -97,7 +95,7 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Парсинг .str файла.
         /// </summary>
-        public void Parse()
+        public override void Parse()
         {
             string categoryName = string.Empty;
             string stringName   = string.Empty;
@@ -382,7 +380,7 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Возвращает все строки первой найденной категории.
         /// </summary>
-        public List<StrString> GetCategoryStrings(string categoryName)
+        public List<StringTableString> GetCategoryStrings(string categoryName)
         {
             foreach (var category in categoriesOfFile)
                 if (category.CategoryName == categoryName)
@@ -451,7 +449,7 @@ namespace mah_boi.Tools
         ///     При нахождении первого вхождения выходит, <br/>
         ///     выдавая положительный результат.
         /// </summary>
-        public bool StringExist(string categoryName, StrString stringSample)
+        public bool StringExist(string categoryName, StringTableString stringSample)
         {
             foreach (var category in categoriesOfFile)
                 if (category.CategoryName == categoryName)

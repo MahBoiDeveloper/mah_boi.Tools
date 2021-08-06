@@ -8,17 +8,17 @@ namespace mah_boi.Tools
     class StrCategory : IStringTableCategory
     {
         public string CategoryName { get; set; }
-        public List<StrString> stringsOfCategory;
+        public List<StringTableString> stringsOfCategory;
 
         public StrCategory(string categoryName)
         {
             CategoryName = categoryName;
-            stringsOfCategory = new List<StrString>();
+            stringsOfCategory = new List<StringTableString>();
         }
 
         public StrCategory(StrCategory categorySample)
             =>
-                stringsOfCategory = new List<StrString>(categorySample.stringsOfCategory);
+                stringsOfCategory = new List<StringTableString>(categorySample.stringsOfCategory);
 
         /// <summary>
         ///     Возращает значение указанной строки.
@@ -37,19 +37,19 @@ namespace mah_boi.Tools
         /// </summary>
         public void AddString(string stringName)
             =>
-                stringsOfCategory.Add(new StrString(stringName));
+                stringsOfCategory.Add(new StringTableString(stringName));
 
         /// <summary>
         ///     Добавление в категорию строки с указанным названием и значением.
         /// </summary>
         public void AddString(string stringName, string stringValue)         
             =>
-                stringsOfCategory.Add(new StrString(stringName, stringValue));
+                stringsOfCategory.Add(new StringTableString(stringName, stringValue));
 
         /// <summary>
         ///     Добавление в категорию заранее сформированной строки.
         /// </summary>
-        public void AddString(StrString stringSample)                       
+        public void AddString(StringTableString stringSample)                       
             => 
                 stringsOfCategory.Add(stringSample);
 
@@ -58,12 +58,12 @@ namespace mah_boi.Tools
         /// </summary>
         public void RemoveString(string stringName, string stringValue)      
             => 
-                stringsOfCategory.Remove(new StrString(stringName, stringValue));
+                stringsOfCategory.Remove(new StringTableString(stringName, stringValue));
 
         /// <summary>
         ///     Удалении из категории строк, совпадающих со строкой, указанной в параметрах.
         /// </summary>
-        public void RemoveString(StrString stringSample)                     
+        public void RemoveString(StringTableString stringSample)                     
             => 
                 stringsOfCategory.RemoveAll(elem => elem == stringSample);
 
@@ -102,7 +102,7 @@ namespace mah_boi.Tools
                 return false;
         }
 
-        public bool StringExist(StrString stringSample)
+        public bool StringExist(StringTableString stringSample)
         {
             if (stringsOfCategory.Where(elem => elem == stringSample).ToList().Count > 0)
                 return true;

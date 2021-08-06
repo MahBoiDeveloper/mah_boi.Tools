@@ -4,7 +4,10 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    class CsfFile : ICsfFile
+    class CsfFile : StringTable
     {
+        public override void Parse()
+        {
+        }
     }
 }

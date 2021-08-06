@@ -10,13 +10,13 @@ namespace mah_boi.Tools
         string CategoryName { get; set; }
         string GetStringValue(string stringName);
         void AddString(string stringName);
-        void AddString(StrString stringSample);
+        void AddString(StringTableString stringSample);
         void AddString(string stringName, string stringValue);
         void RemoveString(string stringName, string stringValue);
-        void RemoveString(StrString stringSample);
+        void RemoveString(StringTableString stringSample);
         void RenameString(string oldStringName, string newStringName);
         void RenameAllStrings(string oldStringName, string newStringName);
         bool StringExist(string stringName);
-        bool StringExist(StrString stringSample);
+        bool StringExist(StringTableString stringSample);
     }
 }

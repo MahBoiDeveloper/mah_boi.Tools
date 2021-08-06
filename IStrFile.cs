@@ -7,9 +7,8 @@ namespace mah_boi.Tools
 {
     interface IStrFile
     {
-        void Parse();
         List<string> GetCategoriesNames();
-        List<StrString> GetCategoryStrings(string categoryName);
+        List<StringTableString> GetCategoryStrings(string categoryName);
         StrCategory GetCategory(string categoryName);
         List<StrCategory> GetAllCategories(string categoryName);
         string GetStringValue(string categoryName, string stringName);
@@ -17,7 +16,7 @@ namespace mah_boi.Tools
         void Save(string fileName);
         bool StringExist(string stringName);
         bool StringExist(string categoryName, string stringName);
-        bool StringExist(string categoryName, StrString stringSample);
+        bool StringExist(string categoryName, StringTableString stringSample);
         bool CategoryExist(string categoryName);
         bool CategoryExist(StrCategory categoryName);
         void RemoveCategoryWithStrings(string categoryName);

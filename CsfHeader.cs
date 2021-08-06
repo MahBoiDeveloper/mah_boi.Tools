@@ -12,7 +12,7 @@ namespace mah_boi.Tools
         public readonly char[] STR          = " RTS".ToCharArray();
         public readonly char[] STRW         = "WRTS".ToCharArray();
 
-        public enum LanguagesCodes
+        public enum LanguagesCodes : UInt32
         {
             US           = 0,
             UK           = 1,
@@ -24,7 +24,7 @@ namespace mah_boi.Tools
             Jabberwockie = 7,
             Korean       = 8,
             Chinese      = 9,
-            Unknown
+            Unknown      = 0
         };
 
         public char[] csf;
