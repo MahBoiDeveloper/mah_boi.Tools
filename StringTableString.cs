@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace mah_boi.Tools
 {
-    abstract class StringTableString : IStringTableString
+    class StringTableString : IStringTableString
     {
         public string StringName { get; set; }
         public string StringValue { get; set; }

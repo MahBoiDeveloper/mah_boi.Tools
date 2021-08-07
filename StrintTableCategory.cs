@@ -5,18 +5,18 @@ using System.Linq;
 
 namespace mah_boi.Tools
 {
-    class StrCategory : IStringTableCategory
+    class StrintTableCategory : IStringTableCategory
     {
         public string CategoryName { get; set; }
         public List<StringTableString> stringsOfCategory;
 
-        public StrCategory(string categoryName)
+        public StrintTableCategory(string categoryName)
         {
             CategoryName = categoryName;
             stringsOfCategory = new List<StringTableString>();
         }
 
-        public StrCategory(StrCategory categorySample)
+        public StrintTableCategory(StrintTableCategory categorySample)
             =>
                 stringsOfCategory = new List<StringTableString>(categorySample.stringsOfCategory);
 
@@ -110,7 +110,7 @@ namespace mah_boi.Tools
                 return false;
         }
 
-        public static bool operator ==(StrCategory firstCategory, StrCategory secondCategory)
+        public static bool operator ==(StrintTableCategory firstCategory, StrintTableCategory secondCategory)
         {
             if (firstCategory.CategoryName != secondCategory.CategoryName) return false;
 
@@ -122,7 +122,7 @@ namespace mah_boi.Tools
 
             return true;
         }
-        public static bool operator !=(StrCategory firstCategory, StrCategory secondCategory)
+        public static bool operator !=(StrintTableCategory firstCategory, StrintTableCategory secondCategory)
             =>
                 !(firstCategory == secondCategory);
         public override bool Equals(object obj)

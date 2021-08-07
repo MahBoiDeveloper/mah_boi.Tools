@@ -64,7 +64,7 @@ namespace mah_boi.Tools
     ///     end
     class StrFile : StringTable, IStrFile
     {
-        private List<StrCategory> categoriesOfFile;
+        private List<StrintTableCategory> categoriesOfFile;
 
         #region Конструкторы
         /// <summary>
@@ -101,7 +101,7 @@ namespace mah_boi.Tools
             string stringName   = string.Empty;
             string stringValue  = string.Empty;
 
-            var tmpListOfCategory = new List<StrCategory>();
+            var tmpListOfCategory = new List<StrintTableCategory>();
 
             // Согласно https://modenc.renegadeprojects.com/CSF_File_Format
             // название строки состоит исключительно из ASCII символов
@@ -247,7 +247,7 @@ namespace mah_boi.Tools
                 // считанная строка - окончание строки
                 else if (searchStatus == (int)LineType.End && currentLine.Trim().ToLower() == "end")
                 {
-                    var tmpCategory = new StrCategory(categoryName);
+                    var tmpCategory = new StrintTableCategory(categoryName);
                     tmpCategory.AddString(stringName, stringValue);
                     tmpListOfCategory.Add(tmpCategory);
 
@@ -269,7 +269,7 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Сохранение данных класса в .str файл.
         /// </summary>
-        public void Save()
+        public override void Save()
         {
             using (StreamWriter sw = new StreamWriter(FileName))
                 sw.WriteLine(ToString());
@@ -312,7 +312,7 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Конвертор из .str в .csf из текущего отпарсенного файла.
         /// </summary>
-        public CsfFile ConvertToCsf()
+        public CsfFile ToCsf()
         {
             return new CsfFile();
         }
@@ -320,7 +320,7 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Конвертор из .str в .csf из файла с именем fileName.
         /// </summary>
-        public CsfFile ConvertToCsf(string fileName)
+        public CsfFile ToCsf(string fileName)
         {
             return new CsfFile();
         }
@@ -328,7 +328,7 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Конвертор из .str в .csf на основе указанного отпарсенного файла fileSample.
         /// </summary>
-        public CsfFile ConvertToCsf(StrFile fileSample)
+        public CsfFile ToCsf(StrFile fileSample)
         {
             return new CsfFile();
         }
@@ -351,7 +351,7 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Поиск категории по указанному названию. Возвращает первое вхождение.
         /// </summary>
-        public StrCategory GetCategory(string categoryName)
+        public StrintTableCategory GetCategory(string categoryName)
         {
             foreach (var tmp in categoriesOfFile)
                 if (tmp.CategoryName == categoryName) return tmp;
@@ -362,7 +362,7 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Поиск категории по указанному названию. Возвращает все вхождения.
         /// </summary>
-        public List<StrCategory> GetAllCategories(string categoryName) =>
+        public List<StrintTableCategory> GetAllCategories(string categoryName) =>
             categoriesOfFile.Where(category => category.CategoryName == categoryName).ToList();
 
         /// <summary>
@@ -408,7 +408,7 @@ namespace mah_boi.Tools
         ///     файле по указанному экземпляру категории.<br/>
         ///     При первом вхождении возвращает истину.
         /// </summary>
-        public bool CategoryExist(StrCategory categorySample)
+        public bool CategoryExist(StrintTableCategory categorySample)
         {
             foreach (var category in categoriesOfFile)
                 if (category == categorySample)
@@ -474,7 +474,7 @@ namespace mah_boi.Tools
         ///     Удаление категории вместе со строками по указанному экземпляру.
         ///     Удаляется только первое вхождение.
         /// </summary>
-        public void RemoveCategoryWithStrings(StrCategory categorySample) 
+        public void RemoveCategoryWithStrings(StrintTableCategory categorySample) 
             =>
                 categoriesOfFile.Remove(categorySample);
 
@@ -486,7 +486,7 @@ namespace mah_boi.Tools
         {
             if (!CategoryExist(categoryName)) return;
 
-            StrCategory NoCategoryStrings = GetCategory(NOCATEGORYSTRINGS);
+            StrintTableCategory NoCategoryStrings = GetCategory(NOCATEGORYSTRINGS);
 
             foreach (var category in categoriesOfFile)
                 if (category.CategoryName == categoryName)
@@ -516,9 +516,9 @@ namespace mah_boi.Tools
             if (!StringExist(oldParentCategoryName, stringName)) return;
 
             if (!CategoryExist(newParentCategoryName))
-                categoriesOfFile.Add(new StrCategory(newParentCategoryName));
+                categoriesOfFile.Add(new StrintTableCategory(newParentCategoryName));
 
-            List<StrCategory> list = categoriesOfFile.Where(elem => elem.CategoryName == oldParentCategoryName
+            List<StrintTableCategory> list = categoriesOfFile.Where(elem => elem.CategoryName == oldParentCategoryName
                                                                  || elem.CategoryName == newParentCategoryName).ToList();
 
             foreach (var category in list)
@@ -585,16 +585,16 @@ namespace mah_boi.Tools
         ///     с категориями, где у категорий имеется только по 1 строке, <br/>
         ///     в полноценные категории с множеством строк внутри себя.
         /// </summary>
-        private void CombineStringsIntoCategories(List<StrCategory> list)
+        private void CombineStringsIntoCategories(List<StrintTableCategory> list)
         {
-            List<StrCategory> bufferList = new List<StrCategory>();
-            StrCategory bufferCategory;
+            List<StrintTableCategory> bufferList = new List<StrintTableCategory>();
+            StrintTableCategory bufferCategory;
 
             for( ; list.Count != 0 ; )
             {
                 string categoryName = list[0].CategoryName;
                 // создаём категорию с названием, как у первого элемента списка, т.к. список отсортирован
-                bufferCategory = new StrCategory(categoryName);
+                bufferCategory = new StrintTableCategory(categoryName);
 
                 // выделяем из списка все категории с одним именем, и затем записываем значения из них в буфер
                 list.Where(elem => elem.CategoryName == categoryName).ToList()

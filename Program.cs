@@ -49,6 +49,12 @@ namespace mah_boi.Tools
             Console.WriteLine(new StrFile(tmp));
             */
             #endregion
+
+            StringTableString qq = new StringTableString("Hui", "Pizda");
+            StringTableString ww = new StringTableString("Hui", "Pizda");
+
+            Console.WriteLine(qq == ww);
+
         }
     }
 }

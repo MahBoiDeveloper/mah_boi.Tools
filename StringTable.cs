@@ -4,14 +4,14 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    abstract class StringTable
+    abstract class StringTable : IStringTable
     {
         public const string NOCATEGORYSTRINGS = ".NOCATEGORYSTRINGS";
 
-        public string FileName { get; set; }
+        public virtual string FileName { get; set; }
 
-        public virtual void Parse()
-        {
-        }
+        public abstract void Parse();
+
+        public abstract void Save();
     }
 }

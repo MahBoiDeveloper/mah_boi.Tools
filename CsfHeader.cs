@@ -24,7 +24,7 @@ namespace mah_boi.Tools
             Jabberwockie = 7,
             Korean       = 8,
             Chinese      = 9,
-            Unknown      = 0
+            Unknown      = 10
         };
 
         public char[] csf;
