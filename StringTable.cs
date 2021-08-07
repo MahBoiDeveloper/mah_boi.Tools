@@ -6,10 +6,11 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    abstract class StringTable : IStringTable
+    abstract class StringTable
     {
-        public const string NOCATEGORYSTRINGS = ".NOCATEGORYSTRINGS";
-        protected List<StrintTableCategory> categoriesOfFile;
+        public const string NO_CATEGORY_STRINGS = ".NOCATEGORYSTRINGS";
+        public const string STRING_TABLE_META_DATA = ".METADATA";
+        protected List<StringTableCategory> categoriesOfTable;
         public virtual string FileName { get; set; }
 
         #region Конструкторы
@@ -38,7 +39,7 @@ namespace mah_boi.Tools
         public StringTable(StringTable stFile)
         {
             FileName = stFile.FileName;
-            categoriesOfFile = stFile.categoriesOfFile;
+            categoriesOfTable = stFile.categoriesOfTable;
         }
         #endregion
 
@@ -50,16 +51,16 @@ namespace mah_boi.Tools
         public abstract void Save(string fileName);
 
         /// <summary>
-        ///     Метод формирует строку, равносильную .str файлу.
+        ///     Метод формирует строку, равносильную .str/.csf файлу.
         /// </summary>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 foreach (var _string in category.stringsOfCategory)
                 {
-                    if (category.CategoryName != NOCATEGORYSTRINGS)
+                    if (category.CategoryName != NO_CATEGORY_STRINGS)
                         sb.AppendLine(category.CategoryName + ":" + _string.StringName);
                     else
                         sb.AppendLine(_string.StringName);
@@ -81,7 +82,7 @@ namespace mah_boi.Tools
         {
             var tmp = new List<string>();
 
-            categoriesOfFile.ForEach(category => tmp.Add(category.CategoryName));
+            categoriesOfTable.ForEach(category => tmp.Add(category.CategoryName));
 
             return tmp;
         }
@@ -89,9 +90,9 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Поиск категории по указанному названию. Возвращает первое вхождение.
         /// </summary>
-        public StrintTableCategory GetCategory(string categoryName)
+        public StringTableCategory GetCategory(string categoryName)
         {
-            foreach (var tmp in categoriesOfFile)
+            foreach (var tmp in categoriesOfTable)
                 if (tmp.CategoryName == categoryName) return tmp;
 
             return null;
@@ -100,15 +101,15 @@ namespace mah_boi.Tools
         /// <summary>
         ///     Поиск категории по указанному названию. Возвращает все вхождения.
         /// </summary>
-        public List<StrintTableCategory> GetAllCategories(string categoryName) =>
-            categoriesOfFile.Where(category => category.CategoryName == categoryName).ToList();
+        public List<StringTableCategory> GetAllCategories(string categoryName) =>
+            categoriesOfTable.Where(category => category.CategoryName == categoryName).ToList();
 
         /// <summary>
         ///     Поиск значения по указанному названию категории и строки. Возвращает первое вхождение.
         /// </summary>
         public string GetStringValue(string categoryName, string stringName)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.CategoryName == categoryName)
                     return category.GetStringValue(stringName);
 
@@ -120,7 +121,7 @@ namespace mah_boi.Tools
         /// </summary>
         public List<StringTableString> GetCategoryStrings(string categoryName)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.CategoryName == categoryName)
                     return category.stringsOfCategory;
 
@@ -134,7 +135,7 @@ namespace mah_boi.Tools
         /// </summary>
         public bool CategoryExist(string categoryName)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.CategoryName == categoryName)
                     return true;
 
@@ -146,9 +147,9 @@ namespace mah_boi.Tools
         ///     файле по указанному экземпляру категории.<br/>
         ///     При первом вхождении возвращает истину.
         /// </summary>
-        public bool CategoryExist(StrintTableCategory categorySample)
+        public bool CategoryExist(StringTableCategory categorySample)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category == categorySample)
                     return true;
 
@@ -160,7 +161,7 @@ namespace mah_boi.Tools
         /// </summary>
         public bool StringExist(string stringName)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.StringExist(stringName))
                     return true;
 
@@ -174,7 +175,7 @@ namespace mah_boi.Tools
         /// </summary>
         public bool StringExist(string categoryName, string stringName)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.CategoryName == categoryName)
                     if (category.StringExist(stringName))
                         return true;
@@ -189,7 +190,7 @@ namespace mah_boi.Tools
         /// </summary>
         public bool StringExist(string categoryName, StringTableString stringSample)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.CategoryName == categoryName)
                     if (category.StringExist(stringSample))
                         return true;
@@ -203,18 +204,18 @@ namespace mah_boi.Tools
         /// </summary>
         public void RemoveCategoryWithStrings(string categoryName)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.CategoryName == categoryName)
-                    categoriesOfFile.Remove(GetCategory(categoryName));
+                    categoriesOfTable.Remove(GetCategory(categoryName));
         }
 
         /// <summary>
         ///     Удаление категории вместе со строками по указанному экземпляру.
         ///     Удаляется только первое вхождение.
         /// </summary>
-        public void RemoveCategoryWithStrings(StrintTableCategory categorySample)
+        public void RemoveCategoryWithStrings(StringTableCategory categorySample)
             =>
-                categoriesOfFile.Remove(categorySample);
+                categoriesOfTable.Remove(categorySample);
 
         /// <summary>
         ///     Удаление категории и перемещение строк в из удаляемой категории в буффер пустых строк.<br/>
@@ -224,15 +225,15 @@ namespace mah_boi.Tools
         {
             if (!CategoryExist(categoryName)) return;
 
-            StrintTableCategory NoCategoryStrings = GetCategory(NOCATEGORYSTRINGS);
+            StringTableCategory NoCategoryStrings = GetCategory(NO_CATEGORY_STRINGS);
 
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.CategoryName == categoryName)
                 {
                     category.stringsOfCategory.ForEach(elem => NoCategoryStrings.AddString(elem));
-                    categoriesOfFile.Remove(category);
-                    categoriesOfFile.Remove(GetCategory(NOCATEGORYSTRINGS));
-                    categoriesOfFile.Add(NoCategoryStrings);
+                    categoriesOfTable.Remove(category);
+                    categoriesOfTable.Remove(GetCategory(NO_CATEGORY_STRINGS));
+                    categoriesOfTable.Add(NoCategoryStrings);
                 }
         }
 
@@ -241,7 +242,7 @@ namespace mah_boi.Tools
         /// </summary>
         public void RenameCategory(string oldCategoryName, string newCategoryName)
         {
-            foreach (var category in categoriesOfFile)
+            foreach (var category in categoriesOfTable)
                 if (category.CategoryName == oldCategoryName)
                     category.CategoryName = newCategoryName;
         }
@@ -254,9 +255,9 @@ namespace mah_boi.Tools
             if (!StringExist(oldParentCategoryName, stringName)) return;
 
             if (!CategoryExist(newParentCategoryName))
-                categoriesOfFile.Add(new StrintTableCategory(newParentCategoryName));
+                categoriesOfTable.Add(new StringTableCategory(newParentCategoryName));
 
-            List<StrintTableCategory> list = categoriesOfFile.Where(elem => elem.CategoryName == oldParentCategoryName
+            List<StringTableCategory> list = categoriesOfTable.Where(elem => elem.CategoryName == oldParentCategoryName
                                                                  || elem.CategoryName == newParentCategoryName).ToList();
 
             foreach (var category in list)
@@ -284,10 +285,10 @@ namespace mah_boi.Tools
         {
             if (firstFile.FileName != secondFile.FileName) return false;
 
-            if (firstFile.categoriesOfFile.Count != secondFile.categoriesOfFile.Count) return false;
+            if (firstFile.categoriesOfTable.Count != secondFile.categoriesOfTable.Count) return false;
 
-            for (int i = 0; i < firstFile.categoriesOfFile.Count; i++)
-                if (firstFile.categoriesOfFile[i] != secondFile.categoriesOfFile[i])
+            for (int i = 0; i < firstFile.categoriesOfTable.Count; i++)
+                if (firstFile.categoriesOfTable[i] != secondFile.categoriesOfTable[i])
                     return false;
 
             return true;
@@ -308,16 +309,16 @@ namespace mah_boi.Tools
         ///     с категориями, где у категорий имеется только по 1 строке, <br/>
         ///     в полноценные категории с множеством строк внутри себя.
         /// </summary>
-        protected void CombineStringsIntoCategories(List<StrintTableCategory> list)
+        protected void CombineStringsIntoCategories(List<StringTableCategory> list)
         {
-            List<StrintTableCategory> bufferList = new List<StrintTableCategory>();
-            StrintTableCategory bufferCategory;
+            List<StringTableCategory> bufferList = new List<StringTableCategory>();
+            StringTableCategory bufferCategory;
 
             for (; list.Count != 0;)
             {
                 string categoryName = list[0].CategoryName;
                 // создаём категорию с названием, как у первого элемента списка, т.к. список отсортирован
-                bufferCategory = new StrintTableCategory(categoryName);
+                bufferCategory = new StringTableCategory(categoryName);
 
                 // выделяем из списка все категории с одним именем, и затем записываем значения из них в буфер
                 list.Where(elem => elem.CategoryName == categoryName).ToList()
@@ -329,7 +330,7 @@ namespace mah_boi.Tools
                 list.RemoveAll(elem => elem.CategoryName == categoryName); // очищаем строку от уже скомбинированных строк
             }
 
-            categoriesOfFile = bufferList;
+            categoriesOfTable = bufferList;
         }
         #endregion
     }

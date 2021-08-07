@@ -106,7 +106,7 @@ namespace mah_boi.Tools
             string stringName   = string.Empty;
             string stringValue  = string.Empty;
 
-            var tmpListOfCategory = new List<StrintTableCategory>();
+            var tmpListOfCategory = new List<StringTableCategory>();
 
             // Согласно https://modenc.renegadeprojects.com/CSF_File_Format
             // название строки состоит исключительно из ASCII символов
@@ -187,7 +187,7 @@ namespace mah_boi.Tools
                     if (stringName == string.Empty)
                     {
                         stringName = categoryName;
-                        categoryName = NOCATEGORYSTRINGS;
+                        categoryName = NO_CATEGORY_STRINGS;
                     }
 
                     searchStatus = (int)LineType.Value;
@@ -252,7 +252,7 @@ namespace mah_boi.Tools
                 // считанная строка - окончание строки
                 else if (searchStatus == (int)LineType.End && currentLine.Trim().ToLower() == "end")
                 {
-                    var tmpCategory = new StrintTableCategory(categoryName);
+                    var tmpCategory = new StringTableCategory(categoryName);
                     tmpCategory.AddString(stringName, stringValue);
                     tmpListOfCategory.Add(tmpCategory);
 

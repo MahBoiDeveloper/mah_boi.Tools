@@ -4,7 +4,7 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    class StringTableString : IStringTableString
+    class StringTableString
     {
         public string StringName { get; set; }
         public string StringValue { get; set; }
@@ -67,9 +67,9 @@ namespace mah_boi.Tools
         public static bool operator !=(StringTableString firstString, StringTableString secondString)
             =>
                 !(firstString == secondString);
-        public override bool Equals(object stString)
+        public override bool Equals(object obj)
             =>
-                (StringTableString)stString == this;
+                (StringTableString)obj == this;
         public override int GetHashCode()
             =>
                 base.GetHashCode();
