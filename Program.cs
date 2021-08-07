@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace mah_boi.Tools
         {
             // Код для тестов
             //string path = @"..\..\..\DataSamples\gamestrings.csf";
-            string path = @"..\..\..\DataSamples\ra3_original_gamestrings.csf";
+            //string path = @"..\..\..\DataSamples\generals.csf";
+            string path = @"..\..\..\DataSamples\test.csf";
             if (File.Exists(path)) Console.WriteLine("File exists? " + File.Exists(path));
 
             CsfFile csf = new CsfFile(path);
