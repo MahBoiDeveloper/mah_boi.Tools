@@ -23,6 +23,41 @@ namespace mah_boi.Tools
             StringValue = stringValue;
         }
 
+        /// <summary>
+        ///     Проверка на то, состоит ли строка только из ASCII символов.
+        /// </summary>
+        public static bool IsACIIString(string str)
+        {
+            // Создание байтового массива на основе символов строки
+            byte[] bytesArray = Encoding.UTF8.GetBytes(str);
+
+            // Если символ имеет номер больше 126, то он не является символом ASCII
+            foreach (var tmp in bytesArray)
+                if (tmp >= 127) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Проверка на то, состоит ли название строки только из ASCII символов.
+        /// </summary>
+        public bool IsACIIStringName()
+        {
+            if (IsACIIString(StringName)) return true;
+            
+            return false;
+        }
+
+        /// <summary>
+        ///     Проверка на то, состоит ли значение строки только из ASCII символов.
+        /// </summary>
+        public bool IsACIIStringValue()
+        {
+            if (IsACIIString(StringValue)) return true;
+
+            return false;
+        }
+
         public static bool operator ==(StringTableString firstString, StringTableString secondString)
         {
             if (firstString.StringName != secondString.StringName) return false;

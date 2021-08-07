@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,11 +9,328 @@ namespace mah_boi.Tools
     abstract class StringTable : IStringTable
     {
         public const string NOCATEGORYSTRINGS = ".NOCATEGORYSTRINGS";
-
+        protected List<StrintTableCategory> categoriesOfFile;
         public virtual string FileName { get; set; }
 
+        #region Конструкторы
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StringTable(string fileName)
+        {
+            if (!File.Exists(fileName))
+                throw new StringTableParseException("Файл для парсинга не существует");
+
+            FileName = fileName;
+        }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StringTable(StringTable stFile)
+        {
+            FileName = stFile.FileName;
+            categoriesOfFile = stFile.categoriesOfFile;
+        }
+        #endregion
+
+        #region Парсинг
         public abstract void Parse();
 
         public abstract void Save();
+
+        public abstract void Save(string fileName);
+
+        /// <summary>
+        ///     Метод формирует строку, равносильную .str файлу.
+        /// </summary>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var category in categoriesOfFile)
+                foreach (var _string in category.stringsOfCategory)
+                {
+                    if (category.CategoryName != NOCATEGORYSTRINGS)
+                        sb.AppendLine(category.CategoryName + ":" + _string.StringName);
+                    else
+                        sb.AppendLine(_string.StringName);
+
+                    sb.AppendLine("\t\"" + _string.StringValue + "\"")
+                      .AppendLine("END")
+                      .AppendLine(string.Empty);
+                }
+
+            return sb.ToString();
+        }
+        #endregion
+
+        #region Методы работы с категориями и строками
+        /// <summary>
+        ///     Метод выдаёт список названий всех строк.
+        /// </summary>
+        public List<string> GetCategoriesNames()
+        {
+            var tmp = new List<string>();
+
+            categoriesOfFile.ForEach(category => tmp.Add(category.CategoryName));
+
+            return tmp;
+        }
+
+        /// <summary>
+        ///     Поиск категории по указанному названию. Возвращает первое вхождение.
+        /// </summary>
+        public StrintTableCategory GetCategory(string categoryName)
+        {
+            foreach (var tmp in categoriesOfFile)
+                if (tmp.CategoryName == categoryName) return tmp;
+
+            return null;
+        }
+
+        /// <summary>
+        ///     Поиск категории по указанному названию. Возвращает все вхождения.
+        /// </summary>
+        public List<StrintTableCategory> GetAllCategories(string categoryName) =>
+            categoriesOfFile.Where(category => category.CategoryName == categoryName).ToList();
+
+        /// <summary>
+        ///     Поиск значения по указанному названию категории и строки. Возвращает первое вхождение.
+        /// </summary>
+        public string GetStringValue(string categoryName, string stringName)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == categoryName)
+                    return category.GetStringValue(stringName);
+
+            return null;
+        }
+
+        /// <summary>
+        ///     Возвращает все строки первой найденной категории.
+        /// </summary>
+        public List<StringTableString> GetCategoryStrings(string categoryName)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == categoryName)
+                    return category.stringsOfCategory;
+
+            return null;
+        }
+
+        /// <summary>
+        ///     Проверка на наличие определённой категории с<br/>
+        ///     файле по указанному названию категории.<br/>
+        ///     При первом вхождении возвращает истину.
+        /// </summary>
+        public bool CategoryExist(string categoryName)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == categoryName)
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
+        ///     Проверка на наличие определённой категории с<br/>
+        ///     файле по указанному экземпляру категории.<br/>
+        ///     При первом вхождении возвращает истину.
+        /// </summary>
+        public bool CategoryExist(StrintTableCategory categorySample)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category == categorySample)
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
+        ///     Проверка существовании строки в .str файле.
+        /// </summary>
+        public bool StringExist(string stringName)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.StringExist(stringName))
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
+        ///     Проверка существовании строки в .str файле.<br/>
+        ///     При нахождении первого вхождения выходит, <br/>
+        ///     выдавая положительный результат.
+        /// </summary>
+        public bool StringExist(string categoryName, string stringName)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == categoryName)
+                    if (category.StringExist(stringName))
+                        return true;
+
+            return false;
+        }
+
+        /// <summary>
+        ///     Проверка существовании строки в .str файле.<br/>
+        ///     При нахождении первого вхождения выходит, <br/>
+        ///     выдавая положительный результат.
+        /// </summary>
+        public bool StringExist(string categoryName, StringTableString stringSample)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == categoryName)
+                    if (category.StringExist(stringSample))
+                        return true;
+
+            return false;
+        }
+
+        /// <summary>
+        ///     Удаление категории вместе со строками по указанному названию.
+        ///     Удаляется только первое вхождение.
+        /// </summary>
+        public void RemoveCategoryWithStrings(string categoryName)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == categoryName)
+                    categoriesOfFile.Remove(GetCategory(categoryName));
+        }
+
+        /// <summary>
+        ///     Удаление категории вместе со строками по указанному экземпляру.
+        ///     Удаляется только первое вхождение.
+        /// </summary>
+        public void RemoveCategoryWithStrings(StrintTableCategory categorySample)
+            =>
+                categoriesOfFile.Remove(categorySample);
+
+        /// <summary>
+        ///     Удаление категории и перемещение строк в из удаляемой категории в буффер пустых строк.<br/>
+        ///     Удаляется только первое вхождение.
+        /// </summary>
+        public void RemoveCategoryWithoutStrings(string categoryName)
+        {
+            if (!CategoryExist(categoryName)) return;
+
+            StrintTableCategory NoCategoryStrings = GetCategory(NOCATEGORYSTRINGS);
+
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == categoryName)
+                {
+                    category.stringsOfCategory.ForEach(elem => NoCategoryStrings.AddString(elem));
+                    categoriesOfFile.Remove(category);
+                    categoriesOfFile.Remove(GetCategory(NOCATEGORYSTRINGS));
+                    categoriesOfFile.Add(NoCategoryStrings);
+                }
+        }
+
+        /// <summary>
+        ///     Переименовка категории. Переименовывает первую категорию, попавшую под условие поиска.
+        /// </summary>
+        public void RenameCategory(string oldCategoryName, string newCategoryName)
+        {
+            foreach (var category in categoriesOfFile)
+                if (category.CategoryName == oldCategoryName)
+                    category.CategoryName = newCategoryName;
+        }
+
+        /// <summary>
+        ///     Перемещает все подходящие строки из одной категории в другую. Нет учёта повторений.
+        /// </summary>
+        public void MoveToCategory(string stringName, string oldParentCategoryName, string newParentCategoryName)
+        {
+            if (!StringExist(oldParentCategoryName, stringName)) return;
+
+            if (!CategoryExist(newParentCategoryName))
+                categoriesOfFile.Add(new StrintTableCategory(newParentCategoryName));
+
+            List<StrintTableCategory> list = categoriesOfFile.Where(elem => elem.CategoryName == oldParentCategoryName
+                                                                 || elem.CategoryName == newParentCategoryName).ToList();
+
+            foreach (var category in list)
+            {
+                if (category.CategoryName == oldParentCategoryName)
+                {
+                    foreach (var str in category.stringsOfCategory)
+                    {
+                        if (str.StringName == stringName)
+                        {
+                            foreach (var _category in list)
+                            {
+                                _category.AddString(str.StringName, str.StringValue);
+                                category.RemoveString(str.StringName, str.StringValue);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Вспомогательные методы
+        public static bool operator ==(StringTable firstFile, StringTable secondFile)
+        {
+            if (firstFile.FileName != secondFile.FileName) return false;
+
+            if (firstFile.categoriesOfFile.Count != secondFile.categoriesOfFile.Count) return false;
+
+            for (int i = 0; i < firstFile.categoriesOfFile.Count; i++)
+                if (firstFile.categoriesOfFile[i] != secondFile.categoriesOfFile[i])
+                    return false;
+
+            return true;
+        }
+        public static bool operator !=(StringTable firstFile, StringTable secondFile)
+        {
+            return !(firstFile == secondFile);
+        }
+        public override bool Equals(object obj)
+            =>
+                (StringTable)obj == this;
+        public override int GetHashCode()
+            =>
+                base.GetHashCode();
+
+        /// <summary>
+        ///     Вынесенная логика из метода <see cref="Parse"></see>. Метод комбинирует список<br/>
+        ///     с категориями, где у категорий имеется только по 1 строке, <br/>
+        ///     в полноценные категории с множеством строк внутри себя.
+        /// </summary>
+        protected void CombineStringsIntoCategories(List<StrintTableCategory> list)
+        {
+            List<StrintTableCategory> bufferList = new List<StrintTableCategory>();
+            StrintTableCategory bufferCategory;
+
+            for (; list.Count != 0;)
+            {
+                string categoryName = list[0].CategoryName;
+                // создаём категорию с названием, как у первого элемента списка, т.к. список отсортирован
+                bufferCategory = new StrintTableCategory(categoryName);
+
+                // выделяем из списка все категории с одним именем, и затем записываем значения из них в буфер
+                list.Where(elem => elem.CategoryName == categoryName).ToList()
+                    .ForEach(elem => bufferCategory.AddString(elem.stringsOfCategory[0].StringName,
+                                                              elem.stringsOfCategory[0].StringValue));
+
+                bufferList.Add(bufferCategory); // получив категорию с собранными вместе строками, записываем в буферный список
+
+                list.RemoveAll(elem => elem.CategoryName == categoryName); // очищаем строку от уже скомбинированных строк
+            }
+
+            categoriesOfFile = bufferList;
+        }
+        #endregion
     }
 }

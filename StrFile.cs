@@ -64,7 +64,12 @@ namespace mah_boi.Tools
     ///     end
     class StrFile : StringTable, IStrFile
     {
-        private List<StrintTableCategory> categoriesOfFile;
+        private enum LineType
+        {
+            Label = 0,
+            Value = 1,
+            End = 2
+        }
 
         #region Конструкторы
         /// <summary>
@@ -74,20 +79,20 @@ namespace mah_boi.Tools
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public StrFile(string fileName)
+        public StrFile(string fileName) : base(fileName)
         {
-            if (!File.Exists(fileName))
-                throw new StringTableParseException("Файл для парсинга не существует");
-
-            FileName = fileName;
-
             Parse();
         }
 
-        public StrFile(StrFile strFile)
+        /// <summary>
+        ///     Класс для парсинга <u>.str</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StrFile(StrFile strFile) : base(strFile)
         {
-            FileName = strFile.FileName;
-            categoriesOfFile = strFile.categoriesOfFile;
         }
         #endregion
 
@@ -153,9 +158,9 @@ namespace mah_boi.Tools
                 // считанная строка - лейбл
                 else if
                 (
-                    searchStatus == (int)LineType.Label      // анализируемая строка является лейблом
-                    && !currentLine.Trim().StartsWith("\"")  // строка не является значением
-                    && IsACIIString(currentLine)             // символы исключительно в кодировке ASCII
+                    searchStatus == (int)LineType.Label            // анализируемая строка является лейблом
+                    && !currentLine.Trim().StartsWith("\"")        // строка не является значением
+                    && StringTableString.IsACIIString(currentLine) // символы исключительно в кодировке ASCII
                 )
                 {
                     // если у нас не закрытая строка, то мы очищаем все заполненные поля
@@ -271,40 +276,22 @@ namespace mah_boi.Tools
         /// </summary>
         public override void Save()
         {
-            using (StreamWriter sw = new StreamWriter(FileName))
+            using (StreamWriter sw = new StreamWriter(File.OpenWrite(FileName)))
                 sw.WriteLine(ToString());
         }
 
         /// <summary>
         ///     Сохранение данных класса в .str файл с указанным именем.
         /// </summary>
-        public void Save(string fileName)
+        public override void Save(string fileName)
         {
-            using (StreamWriter sw = new StreamWriter(fileName))
+            using (StreamWriter sw = new StreamWriter(File.OpenWrite(fileName)))
                 sw.WriteLine(ToString());
         }
 
-        /// <summary>
-        ///     Метод формирует строку, равносильную .str файлу.
-        /// </summary>
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (var category in categoriesOfFile)
-                foreach (var _string in category.stringsOfCategory)
-                {
-                    if (category.CategoryName != NOCATEGORYSTRINGS)
-                        sb.AppendLine(category.CategoryName + ":" + _string.StringName);
-                    else
-                        sb.AppendLine(_string.StringName);
-
-                    sb.AppendLine("\t\"" + _string.StringValue + "\"")
-                      .AppendLine("END")
-                      .AppendLine(string.Empty);
-                }
-
-            return sb.ToString();
+            return base.ToString();
         }
         #endregion
 
@@ -314,7 +301,7 @@ namespace mah_boi.Tools
         /// </summary>
         public CsfFile ToCsf()
         {
-            return new CsfFile();
+            return null;
         }
 
         /// <summary>
@@ -322,7 +309,7 @@ namespace mah_boi.Tools
         /// </summary>
         public CsfFile ToCsf(string fileName)
         {
-            return new CsfFile();
+            return null;
         }
 
         /// <summary>
@@ -330,291 +317,23 @@ namespace mah_boi.Tools
         /// </summary>
         public CsfFile ToCsf(StrFile fileSample)
         {
-            return new CsfFile();
+            return null;
         }
         #endregion
 
-        #region Методы работы с категориями и строками
-
-        /// <summary>
-        ///     Метод выдаёт список названий всех строк.
-        /// </summary>
-        public List<string> GetCategoriesNames()
-        {
-            var tmp = new List<string>();
-
-            categoriesOfFile.ForEach(category => tmp.Add(category.CategoryName));
-
-            return tmp;
-        }
-
-        /// <summary>
-        ///     Поиск категории по указанному названию. Возвращает первое вхождение.
-        /// </summary>
-        public StrintTableCategory GetCategory(string categoryName)
-        {
-            foreach (var tmp in categoriesOfFile)
-                if (tmp.CategoryName == categoryName) return tmp;
-
-            return null;
-        }
-
-        /// <summary>
-        ///     Поиск категории по указанному названию. Возвращает все вхождения.
-        /// </summary>
-        public List<StrintTableCategory> GetAllCategories(string categoryName) =>
-            categoriesOfFile.Where(category => category.CategoryName == categoryName).ToList();
-
-        /// <summary>
-        ///     Поиск значения по указанному названию категории и строки. Возвращает первое вхождение.
-        /// </summary>
-        public string GetStringValue(string categoryName, string stringName)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category.CategoryName == categoryName)
-                    return category.GetStringValue(stringName);
-
-            return null;
-        }
-
-        /// <summary>
-        ///     Возвращает все строки первой найденной категории.
-        /// </summary>
-        public List<StringTableString> GetCategoryStrings(string categoryName)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category.CategoryName == categoryName)
-                    return category.stringsOfCategory;
-
-            return null;
-        }
-
-        /// <summary>
-        ///     Проверка на наличие определённой категории с<br/>
-        ///     файле по указанному названию категории.<br/>
-        ///     При первом вхождении возвращает истину.
-        /// </summary>
-        public bool CategoryExist(string categoryName)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category.CategoryName == categoryName)
-                    return true;
-
-            return false;
-        }
-
-        /// <summary>
-        ///     Проверка на наличие определённой категории с<br/>
-        ///     файле по указанному экземпляру категории.<br/>
-        ///     При первом вхождении возвращает истину.
-        /// </summary>
-        public bool CategoryExist(StrintTableCategory categorySample)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category == categorySample)
-                    return true;
-
-            return false;
-        }
-
-        /// <summary>
-        ///     Проверка существовании строки в .str файле.
-        /// </summary>
-        public bool StringExist(string stringName)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category.StringExist(stringName))
-                    return true;
-
-            return false;
-        }
-
-        /// <summary>
-        ///     Проверка существовании строки в .str файле.<br/>
-        ///     При нахождении первого вхождения выходит, <br/>
-        ///     выдавая положительный результат.
-        /// </summary>
-        public bool StringExist(string categoryName, string stringName)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category.CategoryName == categoryName)
-                    if (category.StringExist(stringName))
-                        return true;
-
-            return false;
-        }
-
-        /// <summary>
-        ///     Проверка существовании строки в .str файле.<br/>
-        ///     При нахождении первого вхождения выходит, <br/>
-        ///     выдавая положительный результат.
-        /// </summary>
-        public bool StringExist(string categoryName, StringTableString stringSample)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category.CategoryName == categoryName)
-                    if (category.StringExist(stringSample))
-                        return true;
-
-            return false;
-        }
-
-        /// <summary>
-        ///     Удаление категории вместе со строками по указанному названию.
-        ///     Удаляется только первое вхождение.
-        /// </summary>
-        public void RemoveCategoryWithStrings(string categoryName)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category.CategoryName == categoryName)
-                    categoriesOfFile.Remove(GetCategory(categoryName));
-        }
-
-        /// <summary>
-        ///     Удаление категории вместе со строками по указанному экземпляру.
-        ///     Удаляется только первое вхождение.
-        /// </summary>
-        public void RemoveCategoryWithStrings(StrintTableCategory categorySample) 
-            =>
-                categoriesOfFile.Remove(categorySample);
-
-        /// <summary>
-        ///     Удаление категории и перемещение строк в из удаляемой категории в буффер пустых строк.<br/>
-        ///     Удаляется только первое вхождение.
-        /// </summary>
-        public void RemoveCategoryWithoutStrings(string categoryName)
-        {
-            if (!CategoryExist(categoryName)) return;
-
-            StrintTableCategory NoCategoryStrings = GetCategory(NOCATEGORYSTRINGS);
-
-            foreach (var category in categoriesOfFile)
-                if (category.CategoryName == categoryName)
-                {
-                    category.stringsOfCategory.ForEach(elem => NoCategoryStrings.AddString(elem));
-                    categoriesOfFile.Remove(category);
-                    categoriesOfFile.Remove(GetCategory(NOCATEGORYSTRINGS));
-                    categoriesOfFile.Add(NoCategoryStrings);
-                }
-        }
-
-        /// <summary>
-        ///     Переименовка категории. Переименовывает первую категорию, попавшую под условие поиска.
-        /// </summary>
-        public void RenameCategory(string oldCategoryName, string newCategoryName)
-        {
-            foreach (var category in categoriesOfFile)
-                if (category.CategoryName == oldCategoryName)
-                    category.CategoryName = newCategoryName;
-        }
-
-        /// <summary>
-        ///     Перемещает все подходящие строки из одной категории в другую. Нет учёта повторений.
-        /// </summary>
-        public void MoveToCategory(string stringName, string oldParentCategoryName, string newParentCategoryName)
-        {
-            if (!StringExist(oldParentCategoryName, stringName)) return;
-
-            if (!CategoryExist(newParentCategoryName))
-                categoriesOfFile.Add(new StrintTableCategory(newParentCategoryName));
-
-            List<StrintTableCategory> list = categoriesOfFile.Where(elem => elem.CategoryName == oldParentCategoryName
-                                                                 || elem.CategoryName == newParentCategoryName).ToList();
-
-            foreach (var category in list)
-            {
-                if(category.CategoryName == oldParentCategoryName)
-                {
-                    foreach(var str in category.stringsOfCategory)
-                    {
-                        if(str.StringName == stringName)
-                        {
-                            foreach(var _category in list)
-                            {
-                                _category.AddString(str.StringName, str.StringValue);
-                                category.RemoveString(str.StringName, str.StringValue);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        #region Вспомогательные методы
         public static bool operator ==(StrFile firstFile, StrFile secondFile)
-        {
-            if (firstFile.FileName != secondFile.FileName) return false;
-
-            if (firstFile.categoriesOfFile.Count != secondFile.categoriesOfFile.Count) return false;
-
-            for (int i = 0; i < firstFile.categoriesOfFile.Count; i++)
-                if (firstFile.categoriesOfFile[i] != secondFile.categoriesOfFile[i])
-                    return false;
-
-            return true;
-        }
+            =>
+                (StringTable)firstFile == (StringTable)secondFile;
         public static bool operator !=(StrFile firstFile, StrFile secondFile)
-        {
-            return !(firstFile == secondFile);
-        }
+            =>
+                !(firstFile == secondFile);
         public override bool Equals(object obj)
             =>
-                obj == (object)this;
+                (StrFile)obj == this;
         public override int GetHashCode()
             =>
                 base.GetHashCode();
-        #endregion
-
-        #region Вспомогательные методы и данные
-        /// <summary>
-        ///     Проверка на то, состоит ли строка только из ASCII символов.
-        /// </summary>
-        private bool IsACIIString(string str)
-        {
-            // Создание байтового массива на основе символов строки
-            byte[] bytesArray = Encoding.UTF8.GetBytes(str);
-
-            // Если символ имеет номер больше 126, то он не является символом ASCII
-            foreach (var tmp in bytesArray)
-                if (tmp >= 127) return false;
-
-            return true;
-        }
-        
-        /// <summary>
-        ///     Вынесенная логика из метода <see cref="Parse"></see>. Метод комбинирует список<br/>
-        ///     с категориями, где у категорий имеется только по 1 строке, <br/>
-        ///     в полноценные категории с множеством строк внутри себя.
-        /// </summary>
-        private void CombineStringsIntoCategories(List<StrintTableCategory> list)
-        {
-            List<StrintTableCategory> bufferList = new List<StrintTableCategory>();
-            StrintTableCategory bufferCategory;
-
-            for( ; list.Count != 0 ; )
-            {
-                string categoryName = list[0].CategoryName;
-                // создаём категорию с названием, как у первого элемента списка, т.к. список отсортирован
-                bufferCategory = new StrintTableCategory(categoryName);
-
-                // выделяем из списка все категории с одним именем, и затем записываем значения из них в буфер
-                list.Where(elem => elem.CategoryName == categoryName).ToList()
-                    .ForEach(elem => bufferCategory.AddString(elem.stringsOfCategory[0].StringName,
-                                                              elem.stringsOfCategory[0].StringValue));
-
-                bufferList.Add(bufferCategory); // получив категорию с собранными вместе строками, записываем в буферный список
-
-                list.RemoveAll(elem => elem.CategoryName == categoryName); // очищаем строку от уже скомбинированных строк
-            }
-
-            categoriesOfFile = bufferList;
-        }
-
-        private enum LineType
-        {
-            Label  = 0,
-            Value  = 1,
-            End    = 2
-        }
         #endregion
     }
 }
