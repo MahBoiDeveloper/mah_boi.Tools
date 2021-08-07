@@ -10,7 +10,7 @@ namespace mah_boi.Tools
         static void Main(string[] args)
         {
             
-            CsfHeader header = new CsfHeader();
+            CsfFile.CsfFileHeader header = new CsfFile.CsfFileHeader();
 
             // Код для тестов
             //string path = @"..\..\..\DataSamples\gamestrings.csf";
@@ -51,7 +51,7 @@ namespace mah_boi.Tools
             #endregion
 
             StringTableString qq = new StringTableString("Hui", "Pizda");
-            StringTableString ww = new StringTableString("Hui", "Pizda");
+            StringTableString ww = new StringTableString("Hui", "---");
 
             Console.WriteLine(qq == ww);
 
