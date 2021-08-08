@@ -62,7 +62,7 @@ namespace mah_boi.Tools
     ///     Some text for string
     ///     ""
     ///     end
-    class StrFile : StringTable, IStrFile
+    class StrFile : StringTable
     {
         private enum LineType
         {
@@ -72,6 +72,7 @@ namespace mah_boi.Tools
         }
 
         #region Конструкторы
+        
         /// <summary>
         ///     Класс для парсинга <u>.str</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
@@ -92,6 +93,17 @@ namespace mah_boi.Tools
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
         public StrFile(StrFile strFile) : base(strFile)
+        {
+        }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StrFile(string fileName, List<StringTableCategory> stCategories) : base(fileName, stCategories)
         {
         }
         #endregion
@@ -325,15 +337,23 @@ namespace mah_boi.Tools
         public static bool operator ==(StrFile firstFile, StrFile secondFile)
             =>
                 (StringTable)firstFile == (StringTable)secondFile;
+
         public static bool operator !=(StrFile firstFile, StrFile secondFile)
             =>
                 !(firstFile == secondFile);
+
         public override bool Equals(object obj)
             =>
                 (StrFile)obj == this;
+
         public override int GetHashCode()
             =>
                 base.GetHashCode();
+
+        protected override bool IsConvertable(List<StringTableCategory> stCategories)
+        {
+            return true;
+        }
         #endregion
     }
 }

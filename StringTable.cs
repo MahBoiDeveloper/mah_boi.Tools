@@ -41,6 +41,19 @@ namespace mah_boi.Tools
             FileName = stFile.FileName;
             categoriesOfTable = stFile.categoriesOfTable;
         }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StringTable(string fileName, List<StringTableCategory> stCategoties)
+        {
+            FileName = fileName;
+            categoriesOfTable = stCategoties;
+        }
         #endregion
 
         #region Парсинг
@@ -332,6 +345,8 @@ namespace mah_boi.Tools
 
             categoriesOfTable = bufferList;
         }
+
+        protected abstract bool IsConvertable(List<StringTableCategory> stCategories);
         #endregion
     }
 }
