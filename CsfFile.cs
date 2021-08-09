@@ -16,17 +16,17 @@ namespace mah_boi.Tools
 
             public enum LanguagesCodes : UInt32
             {
-                US = 0,
-                UK = 1,
-                German = 2,
-                French = 3,
-                Spanish = 4,
-                Italian = 5,
-                Japanese = 6,
+                US           = 0,
+                UK           = 1,
+                German       = 2,
+                French       = 3,
+                Spanish      = 4,
+                Italian      = 5,
+                Japanese     = 6,
                 Jabberwockie = 7,
-                Korean = 8,
-                Chinese = 9,
-                Unknown = 10
+                Korean       = 8,
+                Chinese      = 9,
+                Unknown      = 10
             };
 
             public char[] Csf { get; set; }
@@ -259,7 +259,7 @@ namespace mah_boi.Tools
                         LabelValue.ExtraValueLength = br.ReadUInt32();
                         LabelValue.ExtraValue       = br.ReadChars((int)LabelValue.ExtraValueLength);
                     }
-                    DecodeByteArray(LabelValue.Value, LabelValue.ValueLength);
+                    //DecodeByteArray(LabelValue.Value, LabelValue.ValueLength);
 
                     // печать отладки
                     /*
@@ -336,10 +336,9 @@ namespace mah_boi.Tools
 
                             byte[] byteValue = new byte[lengthValue];
                             for (int j = 0; j < lengthValue; j++)
-                                byteValue[j] = byte.Parse(str.StringValue[j].ToString());
+                                byteValue[j] = Convert.ToByte(str.StringValue[j]);
 
-                            CodeByteArray(byteValue, lengthValue);
-
+                            //CodeByteArray(byteValue, lengthValue);
 
                             bw.Write(CsfLabelValue.STR_REVERSED);
                             bw.Write(lengthValue);
@@ -438,7 +437,7 @@ namespace mah_boi.Tools
         {
             if (array == null) return;
 
-            length = length >> 1;
+            length = length << 1;
 
             for (int i = 0; i < length; i++)
                 array[i] = (byte)~(array[i]);

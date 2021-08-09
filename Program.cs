@@ -16,12 +16,13 @@ namespace mah_boi.Tools
             //string path = @"..\..\..\DataSamples\gamestrings.csf";
             //string path = @"..\..\..\DataSamples\generals.csf";
             //string path = @"..\..\..\DataSamples\test.csf";
-            if (File.Exists(path)) Console.WriteLine("File exists? " + File.Exists(path));
 
             CsfFile csf = new CsfFile(path);
 
             csf.Save(_path);
-            Console.WriteLine(csf.ToString());
+
+            Console.WriteLine(new CsfFile(_path).ToString());
+            //Console.WriteLine(csf.ToString());
         }
     }
 }
