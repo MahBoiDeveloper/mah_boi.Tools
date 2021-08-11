@@ -325,11 +325,14 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
-        ///     Конвертор из .str в .csf на основе указанного отпарсенного файла fileSample.
+        ///     Конвертор из <u>.str</u> в <u>.csf</u> на основе указанного отпарсенного файла fileSample.
         /// </summary>
-        public CsfFile ToCsf(StrFile fileSample)
+        public static CsfFile ToCsf(StrFile fileSample)
         {
-            return null;
+            if (!fileSample.IsConvertable())
+                throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в .csf");
+
+            return new CsfFile(fileSample.FileName, fileSample.categoriesOfTable);
         }
         #endregion
 
@@ -350,9 +353,9 @@ namespace mah_boi.Tools
             =>
                 base.GetHashCode();
 
-        protected override bool IsConvertable(List<StringTableCategory> stCategories)
+        protected override bool IsConvertable()
         {
-            return true;
+            return false;
         }
         #endregion
     }

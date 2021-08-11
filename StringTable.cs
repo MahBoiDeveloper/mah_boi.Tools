@@ -11,7 +11,7 @@ namespace mah_boi.Tools
         public const string NO_CATEGORY_STRINGS = ".NOCATEGORYSTRINGS";
         public const string STRING_TABLE_META_DATA = ".METADATA";
         protected List<StringTableCategory> categoriesOfTable;
-        public virtual string FileName { get; set; }
+        public string FileName { get; set; }
 
         #region Конструкторы
         /// <summary>
@@ -346,7 +346,7 @@ namespace mah_boi.Tools
             categoriesOfTable = bufferList;
         }
 
-        protected abstract bool IsConvertable(List<StringTableCategory> stCategories);
+        protected abstract bool IsConvertable();
         #endregion
     }
 }

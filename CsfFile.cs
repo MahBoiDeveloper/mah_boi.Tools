@@ -181,12 +181,33 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Невозможно перевести указанную строковую таблицу в .csf формат, " +
                                                     "т.к. имеются пробелы в названии строки");
 
+            FileName = fileName;
+            categoriesOfTable = stCategories;
+
             Header = new CsfFileHeader();
             UInt32 countOfString = 0;
 
             stCategories.ForEach(category => countOfString += Convert.ToUInt32(category.stringsOfCategory.Count));
 
             Header.NumberOfLabels = Header.NumberOfStrings = countOfString;
+        }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public CsfFile(string fileName, CsfFileHeader header, List<StringTableCategory> stCategories) : base(fileName, stCategories)
+        {
+            if (!IsConvertable(stCategories))
+                throw new StringTableParseException("Невозможно перевести указанную строковую таблицу в .csf формат, " +
+                                                    "т.к. имеются пробелы в названии строки");
+            
+            FileName = fileName;
+            Header = header;
+            categoriesOfTable = stCategories;
         }
         #endregion
 
@@ -374,7 +395,7 @@ namespace mah_boi.Tools
             return null;
         }
         
-        public StrFile ToStr(CsfFile fileSample)
+        public static StrFile ToStr(CsfFile fileSample)
         {
             return null;
         }
