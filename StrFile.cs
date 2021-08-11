@@ -309,19 +309,14 @@ namespace mah_boi.Tools
 
         #region Конверторы
         /// <summary>
-        ///     Конвертор из .str в .csf из текущего отпарсенного файла.
+        ///     Конвертор из <u>.str</u> в <u>.csf</u> из текущего отпарсенного файла.
         /// </summary>
         public CsfFile ToCsf()
         {
-            return null;
-        }
+            if (!IsConvertable())
+                throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
-        /// <summary>
-        ///     Конвертор из .str в .csf из файла с именем fileName.
-        /// </summary>
-        public CsfFile ToCsf(string fileName)
-        {
-            return null;
+            return new CsfFile(FileName, categoriesOfTable);
         }
 
         /// <summary>
@@ -330,7 +325,7 @@ namespace mah_boi.Tools
         public static CsfFile ToCsf(StrFile fileSample)
         {
             if (!fileSample.IsConvertable())
-                throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в .csf");
+                throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             return new CsfFile(fileSample.FileName, fileSample.categoriesOfTable);
         }
@@ -353,7 +348,7 @@ namespace mah_boi.Tools
             =>
                 base.GetHashCode();
 
-        protected override bool IsConvertable()
+        public override bool IsConvertable()
         {
             return false;
         }

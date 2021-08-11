@@ -346,7 +346,8 @@ namespace mah_boi.Tools
             categoriesOfTable = bufferList;
         }
 
-        protected abstract bool IsConvertable();
+        public abstract bool IsConvertable();
+        public abstract bool IsConvertable(List<StringTableCategory> stListOfCategories);
         #endregion
     }
 }

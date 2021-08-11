@@ -384,20 +384,26 @@ namespace mah_boi.Tools
         #endregion
 
         #region Конверторы
-
+        /// <summary>
+        ///     Конвертор из <u>.csf</u> в <u>.str</u> из текущего отпарсенного файла.
+        /// </summary>
         public StrFile ToStr()
         {
-            return null;
+            if (!IsConvertable())
+                throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
+
+            return new StrFile(FileName, categoriesOfTable);
         }
-        
-        public StrFile ToStr(string fileName)
-        {
-            return null;
-        }
-        
+
+        /// <summary>
+        ///     Конвертор из <u>.csf</u> в <u>.str</u> на основе указанного отпарсенного файла fileSample.
+        /// </summary>
         public static StrFile ToStr(CsfFile fileSample)
         {
-            return null;
+            if (!fileSample.IsConvertable())
+                throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
+
+            return new StrFile(fileSample.FileName, fileSample.categoriesOfTable);
         }
         #endregion
 
@@ -464,10 +470,10 @@ namespace mah_boi.Tools
                 array[i] = (byte)~(array[i]);
         }
 
-        protected override bool IsConvertable(List<StringTableCategory> stCategories)
+        public override bool IsConvertable()
         {
             // основной критерий конвертируемости - отсутствие пробелов в названиях строк и категорий
-            if (stCategories.Where
+            if (categoriesOfTable.Where
                             (
                                 category => 
                                     category.CategoryName.Contains(' ')
