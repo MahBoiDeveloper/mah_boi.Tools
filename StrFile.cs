@@ -332,6 +332,17 @@ namespace mah_boi.Tools
         #endregion
 
         #region Вспомогательные методы
+        /// <summary>
+        ///     Проверка конвертируемости текущего формата строковой таблицы в другой в <u>.csf</u>.
+        /// </summary>
+        public override bool IsConvertable()
+            =>
+                StringTable.IsConvertableTo((Object)this, StringTableFormats.csf);
+
+        public override bool IsConvertable(List<StringTableCategory> stCategories)
+            =>
+                StringTable.IsConvertableTo((Object)(new CsfFile(string.Empty, stCategories)), StringTableFormats.str);
+
         public static bool operator ==(StrFile firstFile, StrFile secondFile)
             =>
                 (StringTable)firstFile == (StringTable)secondFile;
@@ -347,11 +358,6 @@ namespace mah_boi.Tools
         public override int GetHashCode()
             =>
                 base.GetHashCode();
-
-        public override bool IsConvertable()
-        {
-            return false;
-        }
         #endregion
     }
 }

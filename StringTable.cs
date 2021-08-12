@@ -8,6 +8,11 @@ namespace mah_boi.Tools
 {
     abstract class StringTable
     {
+        public enum StringTableFormats
+        {
+            csf,
+            str
+        }
         public const string NO_CATEGORY_STRINGS = ".NOCATEGORYSTRINGS";
         public const string STRING_TABLE_META_DATA = ".METADATA";
         protected List<StringTableCategory> categoriesOfTable;
@@ -294,6 +299,55 @@ namespace mah_boi.Tools
         #endregion
 
         #region Вспомогательные методы
+        /// <summary>
+        ///     Проверка конвертируемости текущего формата строковой таблицы в другой (из <u>.csf</u> в <u>.str</u> и наоборот).
+        /// </summary>
+        public abstract bool IsConvertable();
+
+        /// <summary>
+        ///     Проверка конвертируемости указанного списка категорий в текущую реализацию формата строковой таблицы.
+        /// </summary>
+        public abstract bool IsConvertable(List<StringTableCategory> stListOfCategories);
+
+        /// <summary>
+        ///     Проверка конвертируемости различных форматов строковых таблиц между собой.<br/>
+        ///     Поддерживаются проверки конвертируемости:<br/>
+        ///     1) <u>.csf</u> → <u>.str</u> <br/>
+        ///     2) <u>.str</u> → <u>.csf</u>
+        /// </summary>
+        public static bool IsConvertableTo(Object stFormated, StringTableFormats format)
+        {
+            if (format == StringTableFormats.csf && stFormated is StrFile)
+            {
+                // основной критерий конвертируемости в .csf - отсутствие пробелов в названиях строк и категорий
+                if ((stFormated as StrFile).categoriesOfTable.Where
+                                (
+                                    category =>
+                                        category.CategoryName.Contains(' ')
+                                        || category.stringsOfCategory.Where(str => str.StringName.Contains(' ')).ToList().Count > 0
+
+                                )
+                                .ToList().Count > 0)
+                    return false;
+
+                return true;
+            }
+            else if (format == StringTableFormats.str && stFormated is CsfFile)
+            {
+                // основной критерий конвертируемости в .str - отсутствие ковычек " в значении строки
+                if ((stFormated as CsfFile).categoriesOfTable.Select
+                                     (
+                                         category =>
+                                             category.stringsOfCategory.Where(str => str.StringValue.Contains("\""))
+                                     ).ToList().Count > 0) 
+                    return false;
+                return true;
+            }
+            else { }
+
+            return false;
+        }
+
         public static bool operator ==(StringTable firstFile, StringTable secondFile)
         {
             if (firstFile.FileName != secondFile.FileName) return false;
@@ -345,9 +399,6 @@ namespace mah_boi.Tools
 
             categoriesOfTable = bufferList;
         }
-
-        public abstract bool IsConvertable();
-        public abstract bool IsConvertable(List<StringTableCategory> stListOfCategories);
         #endregion
     }
 }

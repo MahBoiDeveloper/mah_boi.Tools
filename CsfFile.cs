@@ -389,7 +389,7 @@ namespace mah_boi.Tools
         /// </summary>
         public StrFile ToStr()
         {
-            if (!IsConvertable())
+            if (!IsConvertableTo((Object)this, StringTableFormats.str))
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
 
             return new StrFile(FileName, categoriesOfTable);
@@ -408,21 +408,16 @@ namespace mah_boi.Tools
         #endregion
 
         #region Вспомогательные методы
-        public static bool operator ==(CsfFile firstFile, CsfFile secondFile)
+        /// <summary>
+        ///     Проверка конвертируемости текущего формата строковой таблицы в другой в <u>.str</u>.
+        /// </summary>
+        public override bool IsConvertable()
             =>
-                (StringTable)firstFile == (StringTable)secondFile;
+                StringTable.IsConvertableTo((Object)this, StringTableFormats.str);
 
-        public static bool operator !=(CsfFile firstFile, CsfFile secondFile)
+        public override bool IsConvertable(List<StringTableCategory> stCategories)
             =>
-                !(firstFile == secondFile);
-
-        public override bool Equals(object obj)
-            =>
-                (CsfFile)obj == this;
-
-        public override int GetHashCode()
-            =>
-                base.GetHashCode();
+                StringTable.IsConvertableTo((Object)(new StrFile(string.Empty, stCategories)), StringTableFormats.csf);
 
         private string CharArrayToString(char[] array)
         {
@@ -470,21 +465,22 @@ namespace mah_boi.Tools
                 array[i] = (byte)~(array[i]);
         }
 
-        public override bool IsConvertable()
-        {
-            // основной критерий конвертируемости - отсутствие пробелов в названиях строк и категорий
-            if (categoriesOfTable.Where
-                            (
-                                category => 
-                                    category.CategoryName.Contains(' ')
-                                    || category.stringsOfCategory.Where(str => str.StringName.Contains(' ')).ToList().Count > 0
 
-                            )
-                            .ToList().Count > 0)
-                    return false;
+        public static bool operator ==(CsfFile firstFile, CsfFile secondFile)
+            =>
+                (StringTable)firstFile == (StringTable)secondFile;
 
-            return true;
-        }
+        public static bool operator !=(CsfFile firstFile, CsfFile secondFile)
+            =>
+                !(firstFile == secondFile);
+
+        public override bool Equals(object obj)
+            =>
+                (CsfFile)obj == this;
+
+        public override int GetHashCode()
+            =>
+                base.GetHashCode();
         #endregion
     }
 }
