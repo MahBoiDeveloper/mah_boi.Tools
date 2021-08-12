@@ -10,20 +10,25 @@ namespace mah_boi.Tools
     {
         static void Main(string[] args)
         {
-            // Код для тестов
-            string path_str = @"..\..\..\DataSamples\map.str";
+            // Кодировки
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Encoding cp1251 = Encoding.GetEncoding("windows-1251");
+            Encoding unicode = Encoding.Unicode;
+            Encoding uft8 = Encoding.UTF8;
+            Encoding ascii = Encoding.ASCII;
+
+            // Переменные
+            string path_str = @"..\..\..\DataSamples\_test.str";
             string path_csf = @"..\..\..\DataSamples\_test.csf";
             string tmp = @"..\..\..\DataSamples\_tmp.csf";
             //string path = @"..\..\..\DataSamples\gamestrings.csf";
             //string path = @"..\..\..\DataSamples\generals.csf";
             //string path = @"..\..\..\DataSamples\test.csf";
 
-            CsfFile csf = new CsfFile(path_csf, Encoding.Unicode);
-
-            csf.Save(tmp);
-
-            //Console.WriteLine(new CsfFile(_path).ToString());
-            //Console.WriteLine(new StrFile(path_str).ToString());
+            CsfFile csf = new CsfFile(path_csf, cp1251);
+            //csf.Save(tmp);
+            //CsfFile _csf = new CsfFile(tmp, cp1251);
+            //Console.WriteLine(csf == _csf);
         }
     }
 }

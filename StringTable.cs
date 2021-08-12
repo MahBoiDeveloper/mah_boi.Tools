@@ -360,21 +360,18 @@ namespace mah_boi.Tools
                                         category.CategoryName.Contains(' ')
                                         || category.stringsOfCategory.Where(str => str.StringName.Contains(' ')).ToList().Count > 0
 
-                                )
-                                .ToList().Count > 0)
+                                ).Any())
                     return false;
 
                 return true;
             }
-            else if (format == StringTableFormats.str && stFormated is CsfFile)
+            else if (format == StringTableFormats.str && stFormated is CsfFile csfFile)
             {
                 // основной критерий конвертируемости в .str - отсутствие ковычек " в значении строки
-                if ((stFormated as CsfFile).categoriesOfTable.Select
-                                     (
-                                         category =>
-                                             category.stringsOfCategory.Where(str => str.StringValue.Contains("\""))
-                                     ).ToList().Count > 0) 
-                    return false;
+                foreach (var category in csfFile.categoriesOfTable)
+                    if (category.stringsOfCategory.Where(str => str.StringValue.Contains('\"')).Any())
+                        return false;
+
                 return true;
             }
             else { }
@@ -387,6 +384,8 @@ namespace mah_boi.Tools
             if (firstFile.FileName != secondFile.FileName) return false;
 
             if (firstFile.categoriesOfTable.Count != secondFile.categoriesOfTable.Count) return false;
+
+            if (firstFile.FileEncoding != secondFile.FileEncoding) return false;
 
             for (int i = 0; i < firstFile.categoriesOfTable.Count; i++)
                 if (firstFile.categoriesOfTable[i] != secondFile.categoriesOfTable[i])

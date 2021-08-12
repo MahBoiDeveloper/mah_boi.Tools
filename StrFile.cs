@@ -153,7 +153,7 @@ namespace mah_boi.Tools
             int searchStatus = (int)LineType.Label;
 
             // красиво-ленивый способ пробежаться по всем строкам файла. Имхо, но это лучше, чем просто считывать
-            foreach (var currentLine in new StreamReader(FileName).ReadToEnd().Split(Environment.NewLine))
+            foreach (var currentLine in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(Environment.NewLine))
             {
                 // считанная строка - комментарий или пустая строка
                 if (currentLine.StartsWith("//") || currentLine.Trim() == string.Empty)
@@ -295,7 +295,7 @@ namespace mah_boi.Tools
                     searchStatus = (int)LineType.Label;
                 }
 
-                // на случай непредвиденных проблем
+                // на случай не предвиденных проблем
                 else
                 {
                     throw new StringTableParseException("Неизвестная ошибка форматирования."
@@ -312,7 +312,7 @@ namespace mah_boi.Tools
         /// </summary>
         public override void Save()
         {
-            using (StreamWriter sw = new StreamWriter(File.OpenWrite(FileName)))
+            using (StreamWriter sw = new StreamWriter(File.OpenWrite(FileName), FileEncoding))
                 sw.WriteLine(ToString());
         }
 
@@ -321,7 +321,7 @@ namespace mah_boi.Tools
         /// </summary>
         public override void Save(string fileName)
         {
-            using (StreamWriter sw = new StreamWriter(File.OpenWrite(fileName)))
+            using (StreamWriter sw = new StreamWriter(File.OpenWrite(fileName), FileEncoding))
                 sw.WriteLine(ToString());
         }
 
@@ -340,7 +340,7 @@ namespace mah_boi.Tools
         /// </summary>
         public CsfFile ToCsf()
         {
-            if (!StringTable.IsConvertableTo((Object)this, StringTableFormats.str))
+            if (!StringTable.IsConvertableTo((Object)this, StringTableFormats.csf))
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки

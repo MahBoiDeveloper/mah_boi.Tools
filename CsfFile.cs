@@ -261,7 +261,6 @@ namespace mah_boi.Tools
                 //Console.WriteLine("Число строк-значений    : " + Header.NumberOfStrings);
                 //Console.WriteLine("Неиспользованные байты  : " + Header.UnusedBytes);
                 //Console.WriteLine("Код языка               : " + Header.LanguageCode);
-
                 //Console.WriteLine("================================================================================");
                 //Console.WriteLine();
 
@@ -280,7 +279,7 @@ namespace mah_boi.Tools
                     // если у нас строка не является ' LBL', то движок игры считает сл-щие 4 бита для поиска слова ' LBL'
                     if (CharArrayToString(LabelHeader.Lbl) != CsfLabelHeader.LBL)
                     {
-                        i--;
+                        //i--;
                         continue;
                     }
                             
@@ -307,9 +306,6 @@ namespace mah_boi.Tools
                     }
 
                     InvertAllBytesInArray(LabelValue.Value);
-
-                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-                    Console.WriteLine(new string(FileEncoding.GetChars(LabelValue.Value)));
 
                     // печать отладки
                     //Console.WriteLine("Строка со словом ' RTS' или 'WRTS' : [" + CharArrayToString(LabelValue.RtsOrWrts) + "]");
@@ -350,7 +346,7 @@ namespace mah_boi.Tools
                     }
 
                     StringTableCategory category = new StringTableCategory(categoryName);
-                    category.AddString(stringName, CharArrayToString(LabelValue.Value));
+                    category.AddString(stringName, new string(FileEncoding.GetChars(LabelValue.Value)));
 
                     bufferList.Add(category);
                 }
@@ -361,7 +357,8 @@ namespace mah_boi.Tools
 
         public override void Save()
         {
-            using (BinaryWriter bw = new BinaryWriter(File.Open(FileName, FileMode.OpenOrCreate)))
+            if (File.Exists(FileName)) File.Delete(FileName);
+            using (BinaryWriter bw = new BinaryWriter(File.Open(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
             {
                 bw.Write(Header.Csf);
                 bw.Write(Header.CsfVersion);
@@ -376,27 +373,24 @@ namespace mah_boi.Tools
                     {
                         foreach (var str in category.stringsOfCategory)
                         {
-                            counterOfLables++;
-
                             string tmp = category.CategoryName + ":" + str.StringName;
-                            UInt32 lengthValue = Convert.ToUInt32(str.StringValue.Length);
 
-                            bw.Write(CsfLabelHeader.LBL);
+                            bw.Write(CsfLabelHeader.LBL.ToCharArray());
                             bw.Write((uint)1);
                             bw.Write(tmp.Length);
                             bw.Write(tmp.ToCharArray());
 
-                            byte[] byteValue = new byte[lengthValue];
-                            for (int j = 0; j < lengthValue; j++)
-                                byteValue[j] = Convert.ToByte(str.StringValue[j]);
+                            bw.Write(CsfLabelValue.STR_REVERSED.ToCharArray());
+                            bw.Write(Convert.ToUInt32(str.StringValue.Length));
 
+                            byte[] byteValue = FileEncoding.GetBytes(str.StringValue);
                             InvertAllBytesInArray(byteValue);
 
-                            bw.Write(CsfLabelValue.STR_REVERSED);
-                            bw.Write(lengthValue);
                             bw.Write(byteValue);
                             bw.Write((uint)0);
                             bw.Write((uint)0);
+
+                            counterOfLables++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
                         }
                     }
                 }
@@ -426,7 +420,7 @@ namespace mah_boi.Tools
         public StrFile ToStr()
         {
             if (!StringTable.IsConvertableTo((Object)this, StringTableFormats.str))
-                throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
+                throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат .str");
 
             // в str нет символов переводы на новую строку заменяются на \n
             List<StringTableCategory> tmp = categoriesOfTable;
