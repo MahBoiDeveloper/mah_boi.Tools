@@ -389,10 +389,17 @@ namespace mah_boi.Tools
         /// </summary>
         public StrFile ToStr()
         {
-            if (!IsConvertableTo((Object)this, StringTableFormats.str))
+            if (!StringTable.IsConvertableTo((Object)this, StringTableFormats.str))
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
 
-            return new StrFile(FileName, categoriesOfTable);
+            // в str нет символов переводы на новую строку заменяются на \n
+            List<StringTableCategory> tmp = categoriesOfTable;
+            foreach (var category in tmp)
+                foreach (var str in category.stringsOfCategory)
+                    if (str.StringValue.IndexOf("\n") > -1)
+                        str.StringValue.Replace("\n", "\\n");
+
+            return new StrFile(FileName, tmp);
         }
 
         /// <summary>
@@ -403,7 +410,14 @@ namespace mah_boi.Tools
             if (!fileSample.IsConvertable())
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
 
-            return new StrFile(fileSample.FileName, fileSample.categoriesOfTable);
+            // в str нет символов переводы на новую строку заменяются на \n
+            List<StringTableCategory> tmp = fileSample.categoriesOfTable;
+            foreach (var category in tmp)
+                foreach (var str in category.stringsOfCategory)
+                    if (str.StringValue.IndexOf("\n") > -1)
+                        str.StringValue.Replace("\n", "\\n");
+
+            return new StrFile(fileSample.FileName, tmp);
         }
         #endregion
 

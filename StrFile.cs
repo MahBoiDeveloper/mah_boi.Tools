@@ -313,10 +313,17 @@ namespace mah_boi.Tools
         /// </summary>
         public CsfFile ToCsf()
         {
-            if (!IsConvertable())
+            if (!StringTable.IsConvertableTo((Object)this, StringTableFormats.str))
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
-            return new CsfFile(FileName, categoriesOfTable);
+            // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
+            List<StringTableCategory> tmp = categoriesOfTable;
+            foreach(var category in tmp)
+                foreach(var str in category.stringsOfCategory)
+                    if (str.StringValue.IndexOf("\\n") > -1)
+                        str.StringValue.Replace("\\n", "\n");
+
+            return new CsfFile(FileName, tmp);
         }
 
         /// <summary>
@@ -327,7 +334,14 @@ namespace mah_boi.Tools
             if (!fileSample.IsConvertable())
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
-            return new CsfFile(fileSample.FileName, fileSample.categoriesOfTable);
+            // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
+            List<StringTableCategory> tmp = fileSample.categoriesOfTable;
+            foreach (var category in tmp)
+                foreach (var str in category.stringsOfCategory)
+                    if (str.StringValue.IndexOf("\\n") > -1)
+                        str.StringValue.Replace("\\n", "\n");
+
+            return new CsfFile(fileSample.FileName, tmp);
         }
         #endregion
 
