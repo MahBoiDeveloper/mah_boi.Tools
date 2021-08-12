@@ -86,6 +86,18 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StrFile(string fileName, Encoding encoding) : base(fileName, encoding)
+        {
+            Parse();
+        }
+
+        /// <summary>
         ///     Класс для парсинга <u>.str</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
         ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
@@ -106,6 +118,18 @@ namespace mah_boi.Tools
         public StrFile(string fileName, List<StringTableCategory> stCategories) : base(fileName, stCategories)
         {
         }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StrFile(string fileName, Encoding encoding, List<StringTableCategory> stCategoties) : base(fileName, encoding, stCategoties)
+        {
+        }
+
         #endregion
 
         #region Парсинг
@@ -301,6 +325,9 @@ namespace mah_boi.Tools
                 sw.WriteLine(ToString());
         }
 
+        /// <summary>
+        ///     Метод формирует строку, равносильную .str/.csf файлу.
+        /// </summary>
         public override string ToString()
         {
             return base.ToString();

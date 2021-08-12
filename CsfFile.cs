@@ -157,6 +157,19 @@ namespace mah_boi.Tools
             Parse();
         }
 
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public CsfFile(string fileName, Encoding encoding) : base(fileName, encoding)
+        {
+            Parse();
+        }
+
         /// <summary>
         ///     Класс для парсинга <u>.csf</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
@@ -209,6 +222,17 @@ namespace mah_boi.Tools
             Header = header;
             categoriesOfTable = stCategories;
         }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public CsfFile(string fileName, Encoding encoding, List<StringTableCategory> stCategoties) : base(fileName, encoding, stCategoties)
+        {
+        }
         #endregion
 
         #region Парсинг
@@ -231,17 +255,15 @@ namespace mah_boi.Tools
                     throw new StringTableParseException("Ошибка чтения .csf файла: заголовок не содержит строку ' FSC'");
 
                 // печать отладки
-                /*
-                Console.WriteLine("Строка со словом ' FSC' : [" + CharArrayToString(Header.Csf) + "]");
-                Console.WriteLine("Версия формата          : " + Header.CsfVersion);
-                Console.WriteLine("Число лейблов           : " + Header.NumberOfLabels);
-                Console.WriteLine("Число строк-значений    : " + Header.NumberOfStrings);
-                Console.WriteLine("Неиспользованные байты  : " + Header.UnusedBytes);
-                Console.WriteLine("Код языка               : " + Header.LanguageCode);
+                //Console.WriteLine("Строка со словом ' FSC' : [" + CharArrayToString(Header.Csf) + "]");
+                //Console.WriteLine("Версия формата          : " + Header.CsfVersion);
+                //Console.WriteLine("Число лейблов           : " + Header.NumberOfLabels);
+                //Console.WriteLine("Число строк-значений    : " + Header.NumberOfStrings);
+                //Console.WriteLine("Неиспользованные байты  : " + Header.UnusedBytes);
+                //Console.WriteLine("Код языка               : " + Header.LanguageCode);
 
-                Console.WriteLine("================================================================================");
-                Console.WriteLine();
-                */
+                //Console.WriteLine("================================================================================");
+                //Console.WriteLine();
 
                 for (UInt32 i = 0; i < Header.NumberOfLabels || br.PeekChar() > -1; i++)
                 {
@@ -249,8 +271,12 @@ namespace mah_boi.Tools
                     CsfLabelValue  LabelValue  = new CsfLabelValue();
 
                     // чтение лейбла
-                    LabelHeader.Lbl                 = br.ReadChars(4); // записывает строку ' LBL'
-                    
+                    //try
+                    //{
+                        LabelHeader.Lbl = br.ReadChars(4); // записывает строку ' LBL'
+                    //}
+                    //catch
+                    //{ }
                     // если у нас строка не является ' LBL', то движок игры считает сл-щие 4 бита для поиска слова ' LBL'
                     if (CharArrayToString(LabelHeader.Lbl) != CsfLabelHeader.LBL)
                     {
@@ -263,34 +289,35 @@ namespace mah_boi.Tools
                     LabelHeader.LabelName           = br.ReadChars((int)LabelHeader.LabelNameLength); // само название лейбла
 
                     // печать отладки 
-                    /*
-                    Console.WriteLine("Строка со словом ' LBL'           : [" + CharArrayToString(LabelHeader.Lbl) + "]");
-                    Console.WriteLine("Число строк                       : " + LabelHeader.NumberOfStringPairs);
-                    Console.WriteLine("Длина названия лейбла             : " + LabelHeader.LabelNameLength);
-                    Console.WriteLine("Название лейбла                   : [" + CharArrayToString(LabelHeader.LabelName) + "]");
-                    Console.WriteLine();
-                    */
+                    //Console.WriteLine("Строка со словом ' LBL'           : [" + CharArrayToString(LabelHeader.Lbl) + "]");
+                    //Console.WriteLine("Число строк                       : " + LabelHeader.NumberOfStringPairs);
+                    //Console.WriteLine("Длина названия лейбла             : " + LabelHeader.LabelNameLength);
+                    //Console.WriteLine("Название лейбла                   : [" + CharArrayToString(LabelHeader.LabelName) + "]");
+                    //Console.WriteLine();
 
                     // чтение значения лейбла
                     LabelValue.RtsOrWrts   = br.ReadChars(4);
                     LabelValue.ValueLength = br.ReadUInt32();
                     LabelValue.Value       = br.ReadBytes((int)(LabelValue.ValueLength * 2));
+
                     if(CharArrayToString(LabelValue.RtsOrWrts) == CsfLabelValue.STRW_REVERSED)
                     {
                         LabelValue.ExtraValueLength = br.ReadUInt32();
                         LabelValue.ExtraValue       = br.ReadChars((int)LabelValue.ExtraValueLength);
                     }
-                    //DecodeByteArray(LabelValue.Value, LabelValue.ValueLength);
+
+                    InvertAllBytesInArray(LabelValue.Value);
+
+                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+                    Console.WriteLine(new string(FileEncoding.GetChars(LabelValue.Value)));
 
                     // печать отладки
-                    /*
-                    Console.WriteLine("Строка со словом ' RTS' или 'WRTS' : [" + CharArrayToString(LabelValue.RtsOrWrts) + "]");
-                    Console.WriteLine("Длина значения                     : " + LabelValue.ValueLength);
-                    Console.WriteLine("Само значение                      : [" + CharArrayToString(LabelValue.Value) + "]");
-                    Console.WriteLine("Длина допа                         : " + LabelValue.ExtraValueLength);
-                    Console.WriteLine("Значение допа                      : [" + CharArrayToString(LabelValue.ExtraValue) + "]");
-                    Console.WriteLine();
-                    */
+                    //Console.WriteLine("Строка со словом ' RTS' или 'WRTS' : [" + CharArrayToString(LabelValue.RtsOrWrts) + "]");
+                    //Console.WriteLine("Длина значения                     : " + LabelValue.ValueLength);
+                    //Console.WriteLine("Само значение                      : [" + CharArrayToString(LabelValue.Value) + "]");
+                    //Console.WriteLine("Длина допа                         : " + LabelValue.ExtraValueLength);
+                    //Console.WriteLine("Значение допа                      : [" + CharArrayToString(LabelValue.ExtraValue) + "]");
+                    //Console.WriteLine();
 
                     string categoryName = string.Empty;
                     string stringName = string.Empty;
@@ -343,10 +370,14 @@ namespace mah_boi.Tools
                 bw.Write(Header.UnusedBytes);
                 bw.Write(Header.LanguageCode);
 
-                foreach(var category in categoriesOfTable)
-                    foreach(var str in category.stringsOfCategory)
-                        for(UInt32 i = 0; i < Header.NumberOfLabels; i++)
+                for (UInt32 counterOfLables = 0; counterOfLables < Header.NumberOfLabels; counterOfLables++)
+                {
+                    foreach (var category in categoriesOfTable)
+                    {
+                        foreach (var str in category.stringsOfCategory)
                         {
+                            counterOfLables++;
+
                             string tmp = category.CategoryName + ":" + str.StringName;
                             UInt32 lengthValue = Convert.ToUInt32(str.StringValue.Length);
 
@@ -359,7 +390,7 @@ namespace mah_boi.Tools
                             for (int j = 0; j < lengthValue; j++)
                                 byteValue[j] = Convert.ToByte(str.StringValue[j]);
 
-                            //CodeByteArray(byteValue, lengthValue);
+                            InvertAllBytesInArray(byteValue);
 
                             bw.Write(CsfLabelValue.STR_REVERSED);
                             bw.Write(lengthValue);
@@ -367,6 +398,8 @@ namespace mah_boi.Tools
                             bw.Write((uint)0);
                             bw.Write((uint)0);
                         }
+                    }
+                }
             }
         }
 
@@ -378,6 +411,9 @@ namespace mah_boi.Tools
             FileName = tmp;
         }
 
+        /// <summary>
+        ///     Метод формирует строку, равносильную .str/.csf файлу.
+        /// </summary>
         public override string ToString()
             =>
                 base.ToString();
@@ -458,27 +494,18 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
-        ///     Особая уличная магия от pd. Декодер байтового массива в массив символов Unicode
+        ///     Согласно описанию формата на <a href="https://modenc.renegadeprojects.com/CSF_File_Format">modenc</a>, 
+        ///     все байты строки-значения необходимо<br/>
+        ///     инвертировать перед тем, как записывать данные в переменные.<br/>
+        ///     Отдельное спасибо человеку с никнеймом <b>pd</b> за подсказку.
         /// </summary>
-        private void DecodeByteArray(byte[] array, UInt32 length)
+        private void InvertAllBytesInArray(byte[] array)
         {
             if (array == null) return;
 
-            length = length << 1;
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < array.Length; i++)
                 array[i] = (byte)~(array[i]);
         }
-
-        private void CodeByteArray(byte[] array, UInt32 length)
-        {
-            if (array == null) return;
-
-            length = length << 1;
-
-            for (int i = 0; i < length; i++)
-                array[i] = (byte)~(array[i]);
-        }
-
 
         public static bool operator ==(CsfFile firstFile, CsfFile secondFile)
             =>

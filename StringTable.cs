@@ -13,10 +13,11 @@ namespace mah_boi.Tools
             csf,
             str
         }
+        public Encoding FileEncoding { get; set; }
+        public string FileName { get; set; }
         public const string NO_CATEGORY_STRINGS = ".NOCATEGORYSTRINGS";
         public const string STRING_TABLE_META_DATA = ".METADATA";
         protected List<StringTableCategory> categoriesOfTable;
-        public string FileName { get; set; }
 
         #region Конструкторы
         /// <summary>
@@ -31,7 +32,24 @@ namespace mah_boi.Tools
             if (!File.Exists(fileName))
                 throw new StringTableParseException("Файл для парсинга не существует");
 
-            FileName = fileName;
+            FileEncoding = Encoding.Unicode;
+            FileName     = fileName;
+        }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StringTable(string fileName, Encoding encoding)
+        {
+            if (!File.Exists(fileName))
+                throw new StringTableParseException("Файл для парсинга не существует");
+
+            FileEncoding = encoding;
+            FileName     = fileName;
         }
 
         /// <summary>
@@ -43,7 +61,8 @@ namespace mah_boi.Tools
         /// </summary>
         public StringTable(StringTable stFile)
         {
-            FileName = stFile.FileName;
+            FileEncoding      = Encoding.Unicode;
+            FileName          = stFile.FileName;
             categoriesOfTable = stFile.categoriesOfTable;
         }
 
@@ -56,7 +75,22 @@ namespace mah_boi.Tools
         /// </summary>
         public StringTable(string fileName, List<StringTableCategory> stCategoties)
         {
-            FileName = fileName;
+            FileEncoding      = Encoding.Unicode;
+            FileName          = fileName;
+            categoriesOfTable = stCategoties;
+        }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StringTable(string fileName, Encoding encoding, List<StringTableCategory> stCategoties)
+        {
+            FileEncoding      = encoding;
+            FileName          = fileName;
             categoriesOfTable = stCategoties;
         }
         #endregion

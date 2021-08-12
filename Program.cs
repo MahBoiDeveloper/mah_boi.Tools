@@ -11,18 +11,19 @@ namespace mah_boi.Tools
         static void Main(string[] args)
         {
             // Код для тестов
-            string path = @"..\..\..\DataSamples\test.csf";
-            string _path = @"..\..\..\DataSamples\_tmp.csf";
+            string path_str = @"..\..\..\DataSamples\map.str";
+            string path_csf = @"..\..\..\DataSamples\_test.csf";
+            string tmp = @"..\..\..\DataSamples\_tmp.csf";
             //string path = @"..\..\..\DataSamples\gamestrings.csf";
             //string path = @"..\..\..\DataSamples\generals.csf";
             //string path = @"..\..\..\DataSamples\test.csf";
 
-            CsfFile csf = new CsfFile(path);
+            CsfFile csf = new CsfFile(path_csf, Encoding.Unicode);
 
-            csf.Save(_path);
+            csf.Save(tmp);
 
-            Console.WriteLine(new CsfFile(_path).ToString());
-            //Console.WriteLine(csf.ToString());
+            //Console.WriteLine(new CsfFile(_path).ToString());
+            //Console.WriteLine(new StrFile(path_str).ToString());
         }
     }
 }
