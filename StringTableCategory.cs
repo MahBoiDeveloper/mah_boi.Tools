@@ -12,7 +12,7 @@ namespace mah_boi.Tools
 
         public StringTableCategory(string categoryName)
         {
-            CategoryName = categoryName;
+            CategoryName      = categoryName;
             stringsOfCategory = new List<StringTableString>();
         }
 
@@ -47,6 +47,13 @@ namespace mah_boi.Tools
                 stringsOfCategory.Add(new StringTableString(stringName, stringValue));
 
         /// <summary>
+        ///     Добавление в категорию строки с указанным названием, значением и экстра значением.
+        /// </summary>
+        public void AddString(string stringName, string stringValue, string extraStringValue)
+            =>
+                stringsOfCategory.Add(new StringTableString(stringName, stringValue, extraStringValue));
+
+        /// <summary>
         ///     Добавление в категорию заранее сформированной строки.
         /// </summary>
         public void AddString(StringTableString stringSample)                       
@@ -54,18 +61,18 @@ namespace mah_boi.Tools
                 stringsOfCategory.Add(stringSample);
 
         /// <summary>
-        ///     Удалении из категории строк с указанным названием.
+        ///     Удалении из категории строк с указанным названием (без учёта экстра значения).
         /// </summary>
         public void RemoveString(string stringName, string stringValue)      
             => 
                 stringsOfCategory.Remove(new StringTableString(stringName, stringValue));
 
         /// <summary>
-        ///     Удалении из категории строк, совпадающих со строкой, указанной в параметрах.
+        ///     Удалении из категории всех строк, совпадающих со строкой, указанной в параметрах.
         /// </summary>
         public void RemoveString(StringTableString stringSample)                     
             => 
-                stringsOfCategory.RemoveAll(elem => elem == stringSample);
+                stringsOfCategory.RemoveAll(str => str == stringSample);
 
         /// <summary>
         ///     Переименование строки, подходящей под указанное название.
@@ -94,6 +101,9 @@ namespace mah_boi.Tools
             }
         }
 
+        /// <summary>
+        ///     Проверка существования строки по указанному её названию.
+        /// </summary>
         public bool StringExist(string stringName)
         {
             if (stringsOfCategory.Where(elem => elem.StringName == stringName).ToList().Count > 0)
@@ -102,9 +112,12 @@ namespace mah_boi.Tools
                 return false;
         }
 
+        /// <summary>
+        ///     Проверка существования строки по указанному экземпляру.
+        /// </summary>
         public bool StringExist(StringTableString stringSample)
         {
-            if (stringsOfCategory.Where(elem => elem == stringSample).ToList().Count > 0)
+            if (stringsOfCategory.Where(str => str == stringSample).ToList().Count > 0)
                 return true;
             else
                 return false;

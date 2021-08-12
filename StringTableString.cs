@@ -8,19 +8,30 @@ namespace mah_boi.Tools
     {
         public string StringName { get; set; }
         public string StringValue { get; set; }
+        public string ExtraStringValue { get; set; }
 
         public StringTableString()
         {
         }
 
         public StringTableString(string stringName)
-            =>
-                StringName = stringName;
+        {
+            StringName       = stringName;
+            StringValue      = string.Empty;
+            ExtraStringValue = string.Empty;
+        }
 
         public StringTableString(string stringName, string stringValue)
         {
-            StringName = stringName;
-            StringValue = stringValue;
+            StringName       = stringName;
+            StringValue      = stringValue;
+            ExtraStringValue = string.Empty;
+        }
+        public StringTableString(string stringName, string stringValue, string extraStringValue)
+        {
+            StringName       = stringName;
+            StringValue      = stringValue;
+            ExtraStringValue = extraStringValue;
         }
 
         /// <summary>
@@ -60,8 +71,9 @@ namespace mah_boi.Tools
 
         public static bool operator ==(StringTableString firstString, StringTableString secondString)
         {
-            if (firstString.StringName != secondString.StringName) return false;
-            if (firstString.StringValue != secondString.StringValue) return false;
+            if (firstString.StringName       != secondString.StringName)       return false;
+            if (firstString.StringValue      != secondString.StringValue)      return false;
+            if (firstString.ExtraStringValue != secondString.ExtraStringValue) return false;
             return true;
         }
         public static bool operator !=(StringTableString firstString, StringTableString secondString)
