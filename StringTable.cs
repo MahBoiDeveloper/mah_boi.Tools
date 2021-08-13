@@ -330,6 +330,20 @@ namespace mah_boi.Tools
                 }
             }
         }
+
+        /// <summary>
+        ///     Метод подсчёта количества строк в файле.
+        /// </summary>
+        public int Count()
+        {
+            int count = 0;
+
+            foreach (var category in categoriesOfTable)
+                foreach (var str in category.stringsOfCategory)
+                    count++;
+
+            return count;
+        }
         #endregion
 
         #region Вспомогательные методы
