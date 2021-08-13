@@ -157,7 +157,6 @@ namespace mah_boi.Tools
             Parse();
         }
 
-
         /// <summary>
         ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
@@ -254,16 +253,6 @@ namespace mah_boi.Tools
                 if (CharArrayToString(Header.Csf) != CsfFileHeader.CSF_REVERSED)
                     throw new StringTableParseException("Ошибка чтения .csf файла: заголовок не содержит строку ' FSC'");
 
-                // печать отладки
-                //Console.WriteLine("Строка со словом ' FSC' : [" + CharArrayToString(Header.Csf) + "]");
-                //Console.WriteLine("Версия формата          : " + Header.CsfVersion);
-                //Console.WriteLine("Число лейблов           : " + Header.NumberOfLabels);
-                //Console.WriteLine("Число строк-значений    : " + Header.NumberOfStrings);
-                //Console.WriteLine("Неиспользованные байты  : " + Header.UnusedBytes);
-                //Console.WriteLine("Код языка               : " + Header.LanguageCode);
-                //Console.WriteLine("================================================================================");
-                //Console.WriteLine();
-
                 for (UInt32 i = 0; i < Header.NumberOfLabels || br.PeekChar() > -1; i++)
                 {
                     CsfLabelHeader LabelHeader = new CsfLabelHeader();
@@ -287,16 +276,10 @@ namespace mah_boi.Tools
                     LabelHeader.LabelNameLength     = br.ReadUInt32(); // длина названия лейбла
                     LabelHeader.LabelName           = br.ReadChars((int)LabelHeader.LabelNameLength); // само название лейбла
 
-                    // печать отладки 
-                    //Console.WriteLine("Строка со словом ' LBL'           : [" + CharArrayToString(LabelHeader.Lbl) + "]");
-                    //Console.WriteLine("Число строк                       : " + LabelHeader.NumberOfStringPairs);
-                    //Console.WriteLine("Длина названия лейбла             : " + LabelHeader.LabelNameLength);
-                    //Console.WriteLine("Название лейбла                   : [" + CharArrayToString(LabelHeader.LabelName) + "]");
-                    //Console.WriteLine();
-
                     // чтение значения лейбла
                     LabelValue.RtsOrWrts   = br.ReadChars(4);
                     LabelValue.ValueLength = br.ReadUInt32();
+                    Console.WriteLine(LabelValue.ValueLength);
                     LabelValue.Value       = br.ReadBytes((int)(LabelValue.ValueLength * 2));
 
                     if(CharArrayToString(LabelValue.RtsOrWrts) == CsfLabelValue.STRW_REVERSED)
@@ -306,14 +289,6 @@ namespace mah_boi.Tools
                     }
 
                     InvertAllBytesInArray(LabelValue.Value);
-
-                    // печать отладки
-                    //Console.WriteLine("Строка со словом ' RTS' или 'WRTS' : [" + CharArrayToString(LabelValue.RtsOrWrts) + "]");
-                    //Console.WriteLine("Длина значения                     : " + LabelValue.ValueLength);
-                    //Console.WriteLine("Само значение                      : [" + CharArrayToString(LabelValue.Value) + "]");
-                    //Console.WriteLine("Длина допа                         : " + LabelValue.ExtraValueLength);
-                    //Console.WriteLine("Значение допа                      : [" + CharArrayToString(LabelValue.ExtraValue) + "]");
-                    //Console.WriteLine();
 
                     string categoryName = string.Empty;
                     string stringName = string.Empty;
@@ -381,14 +356,21 @@ namespace mah_boi.Tools
                             bw.Write(tmp.ToCharArray());
 
                             bw.Write(CsfLabelValue.STR_REVERSED.ToCharArray());
-                            bw.Write(Convert.ToUInt32(str.StringValue.Length));
 
+                            UInt32 length = Convert.ToUInt32(Encoding.Convert(Encoding.Unicode, Encoding.ASCII, Encoding.Unicode.GetBytes(str.StringValue)).Length);
+                            if (FileEncoding != Encoding.Unicode && FileEncoding != Encoding.UTF32)
+                                length /= 2;
+                            Console.WriteLine(length);
+
+                            bw.Write(length);
+
+                            //byte[] byteValue = Encoding.Convert(FileEncoding, Encoding.Unicode, FileEncoding.GetBytes(str.StringValue));
                             byte[] byteValue = FileEncoding.GetBytes(str.StringValue);
                             InvertAllBytesInArray(byteValue);
 
                             bw.Write(byteValue);
-                            bw.Write((uint)0);
-                            bw.Write((uint)0);
+                            //bw.Write((uint)0);
+                            //bw.Write((uint)0);
 
                             counterOfLables++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
                         }
