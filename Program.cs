@@ -8,28 +8,33 @@ namespace mah_boi.Tools
 {
     class Program
     {
+        // Кодировки
+        static Encoding cp1251;
+        static Encoding unicode = Encoding.Unicode;
+        static Encoding uft8 = Encoding.UTF8;
+        static Encoding ascii = Encoding.ASCII;
+
+        // Переменные
+        static string path_str = @"..\..\..\DataSamples\test.str";
+        static string path_csf = @"..\..\..\DataSamples\test.csf";
+        static string tmp = @"..\..\..\DataSamples\_tmp.csf";
+        //string path = @"..\..\..\DataSamples\gamestrings.csf";
+        //string path = @"..\..\..\DataSamples\generals.csf";
+        //string path = @"..\..\..\DataSamples\test.csf";
         static void Main(string[] args)
         {
-            // Кодировки
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            Encoding cp1251 = Encoding.GetEncoding("windows-1251");
-            Encoding unicode = Encoding.Unicode;
-            Encoding uft8 = Encoding.UTF8;
-            Encoding ascii = Encoding.ASCII;
+            cp1251 = Encoding.GetEncoding("windows-1251");
 
-            // Переменные
-            string path_str = @"..\..\..\DataSamples\_test.str";
-            string path_csf = @"..\..\..\DataSamples\_test.csf";
-            string tmp = @"..\..\..\DataSamples\_tmp.csf";
-            //string path = @"..\..\..\DataSamples\gamestrings.csf";
-            //string path = @"..\..\..\DataSamples\generals.csf";
-            //string path = @"..\..\..\DataSamples\test.csf";
+            SaveTest();
+        }
 
-            CsfFile csf = new CsfFile(path_csf, unicode);
-            Console.WriteLine("=============================");
+        static void SaveTest()
+        {
+            CsfFile csf = new CsfFile(path_csf, cp1251);
             csf.Save(tmp);
-            //CsfFile _csf = new CsfFile(tmp, cp1251);
-            //Console.WriteLine(csf == _csf);
+            Console.WriteLine("Вывод строки с значением в кодировке : " + csf.GetStringValue("Version", "Format2"));
+            Console.WriteLine($"Проверка в SaveTest() окончена. Проверьте файл {tmp}");
         }
     }
 }

@@ -279,14 +279,14 @@ namespace mah_boi.Tools
                     // чтение значения лейбла
                     LabelValue.RtsOrWrts   = br.ReadChars(4);
                     LabelValue.ValueLength = br.ReadUInt32();
-                    Console.WriteLine(LabelValue.ValueLength);
                     LabelValue.Value       = br.ReadBytes((int)(LabelValue.ValueLength * 2));
 
-                    if(CharArrayToString(LabelValue.RtsOrWrts) == CsfLabelValue.STRW_REVERSED)
-                    {
-                        LabelValue.ExtraValueLength = br.ReadUInt32();
-                        LabelValue.ExtraValue       = br.ReadChars((int)LabelValue.ExtraValueLength);
-                    }
+                    // зачатки кода по чтению дополнительных значений
+                    //if(CharArrayToString(LabelValue.RtsOrWrts) == CsfLabelValue.STRW_REVERSED)
+                    //{
+                    //    LabelValue.ExtraValueLength = br.ReadUInt32();
+                    //    LabelValue.ExtraValue       = br.ReadChars((int)LabelValue.ExtraValueLength);
+                    //}
 
                     InvertAllBytesInArray(LabelValue.Value);
 
@@ -332,9 +332,12 @@ namespace mah_boi.Tools
 
         public override void Save()
         {
+            // если файл существует, то стираем его
             if (File.Exists(FileName)) File.Delete(FileName);
+
             using (BinaryWriter bw = new BinaryWriter(File.Open(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
             {
+                // записываем хедер файла
                 bw.Write(Header.Csf);
                 bw.Write(Header.CsfVersion);
                 bw.Write(Header.NumberOfLabels);
@@ -342,35 +345,34 @@ namespace mah_boi.Tools
                 bw.Write(Header.UnusedBytes);
                 bw.Write(Header.LanguageCode);
 
+                // записываем построчно значения из строковой таблицы в файл
                 for (UInt32 counterOfLables = 0; counterOfLables < Header.NumberOfLabels; counterOfLables++)
                 {
                     foreach (var category in categoriesOfTable)
                     {
                         foreach (var str in category.stringsOfCategory)
                         {
-                            string tmp = category.CategoryName + ":" + str.StringName;
+                            string labelName = category.CategoryName + ":" + str.StringName;
 
-                            bw.Write(CsfLabelHeader.LBL.ToCharArray());
-                            bw.Write((uint)1);
-                            bw.Write(tmp.Length);
-                            bw.Write(tmp.ToCharArray());
+                            bw.Write(CsfLabelHeader.LBL.ToCharArray()); // строка со значением ' LBL'
+                            bw.Write((uint)1);                          // количество строк для дополнительного значения
+                            bw.Write(labelName.Length);                 // длина названия
+                            bw.Write(labelName.ToCharArray());          // само название
 
-                            bw.Write(CsfLabelValue.STR_REVERSED.ToCharArray());
+                            bw.Write(CsfLabelValue.STR_REVERSED.ToCharArray()); // проигнорируем на данный момент расширенное форматирование строк
 
+                            // получение значения длины строки символов в байтах
                             UInt32 length = Convert.ToUInt32(Encoding.Convert(Encoding.Unicode, Encoding.ASCII, Encoding.Unicode.GetBytes(str.StringValue)).Length);
+                            // если у нас кодировка - это реализация Unicode, то количество символов должно быть сокращено в двое
                             if (FileEncoding != Encoding.Unicode && FileEncoding != Encoding.UTF32)
                                 length /= 2;
-                            Console.WriteLine(length);
 
-                            bw.Write(length);
+                            bw.Write(length); // запись длины значения
 
-                            //byte[] byteValue = Encoding.Convert(FileEncoding, Encoding.Unicode, FileEncoding.GetBytes(str.StringValue));
-                            byte[] byteValue = FileEncoding.GetBytes(str.StringValue);
-                            InvertAllBytesInArray(byteValue);
+                            byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
+                            InvertAllBytesInArray(byteValue); // инвертирование полученного массива
 
-                            bw.Write(byteValue);
-                            //bw.Write((uint)0);
-                            //bw.Write((uint)0);
+                            bw.Write(byteValue); // запись в файл инвертированных байтов значения строки
 
                             counterOfLables++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
                         }
@@ -470,7 +472,7 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
-        ///     Согласно описанию формата на <a href="https://modenc.renegadeprojects.com/CSF_File_Format">modenc</a>, 
+        ///     Согласно описанию формата <u>.csf</u> на <a href="https://modenc.renegadeprojects.com/CSF_File_Format">modenc</a>, 
         ///     все байты строки-значения необходимо<br/>
         ///     инвертировать перед тем, как записывать данные в переменные.<br/>
         ///     Отдельное спасибо человеку с никнеймом <b>pd</b> за подсказку.
