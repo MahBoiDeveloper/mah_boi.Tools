@@ -8,6 +8,7 @@ namespace mah_boi.Tools
 {
     abstract class StringTable
     {
+        protected StringTableParseException stParseErrorsAndWarnings;
         public enum StringTableFormats
         {
             csf,

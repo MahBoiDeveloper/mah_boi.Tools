@@ -150,7 +150,7 @@ namespace mah_boi.Tools
             // комментарии, которые подобны комментариям из FORTRAN 66
             // т.е. комментрии должны начинаться с 1-ой буквы строки.
             // Комметрий создаётся за счёт символов //, как в C-подобных языках
-            int searchStatus = (int)LineType.Label;
+            LineType searchStatus = LineType.Label;
 
             // красиво-ленивый способ пробежаться по всем строкам файла. Имхо, но это лучше, чем просто считывать
             foreach (var currentLine in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(Environment.NewLine))
@@ -159,37 +159,32 @@ namespace mah_boi.Tools
                 if (currentLine.StartsWith("//") || currentLine.Trim() == string.Empty)
                     continue;
 
-                // считанная строка содержит ошибку, т.к. несколько двоеточий
-                else if
-                (
-                    searchStatus == (int)LineType.Label
-                    && currentLine.IndexOf(':') > -1
-                    && currentLine.IndexOf(':', currentLine.IndexOf(':') + 1) > -1
-                )
-                    throw new StringTableParseException("Ошибка форматирования: указано несколько двоеточий в названии лейбла"
-                                                + Environment.NewLine
-                                                + Environment.NewLine
-                                                + $"Ошибка в строке: \"{currentLine}\"");
-
                 // считанная строка содержит ошибку, т.к. несколько значений
                 else if
                 (
-                    searchStatus == (int)LineType.End && currentLine.Trim().ToLower() != "end"
+                    searchStatus == LineType.End && currentLine.Trim().ToLower() != "end"
                 )
-                    throw new StringTableParseException("Ошибка форматирования: после значения лейбла идёт другая строка со значением"
-                                                + Environment.NewLine
-                                                + Environment.NewLine
-                                                + $"Ошибка в строке: \"{currentLine}\"");
+                {
+                    stParseErrorsAndWarnings.AddMessage("Ошибка форматирования: после значения лейбла идёт другая строка со значением"
+                                                       + Environment.NewLine
+                                                       + Environment.NewLine
+                                                       + $"\tОшибка в строке: \"{currentLine}\"", StringTableParseException.MessageType.Error);
+                    searchStatus = LineType.Label;
+                }
 
                 // считанная строка содержит ошибку, т.к. нет значения
-                else if (currentLine.Trim().ToLower() == "end" && searchStatus == (int)LineType.Value)
-                    throw new StringTableParseException("Ошибка форматирования: после названия лейбла идёт закрытие строки, а не значение"
-                                                + Environment.NewLine
-                                                + Environment.NewLine
-                                                + "Воспользуйтесь ковычками \"\" для обозначения пустой строки"
-                                                + Environment.NewLine
-                                                + Environment.NewLine
-                                                + $"Ошибка в строке: \"{currentLine}\"");
+                else if (currentLine.Trim().ToLower() == "end" && searchStatus == LineType.Value)
+                {
+                    stParseErrorsAndWarnings.AddMessage("Ошибка форматирования: после названия лейбла идёт закрытие строки, а не значение"
+                                                       + Environment.NewLine
+                                                       + Environment.NewLine
+                                                       + "\tВоспользуйтесь ковычками \"\" для обозначения пустой строки"
+                                                       + Environment.NewLine
+                                                       + Environment.NewLine
+                                                       + $"\tОшибка в строке: \"{currentLine}\"", StringTableParseException.MessageType.Error);
+
+                    searchStatus = LineType.Label;
+                }
 
                 // считанная строка - лейбл
                 else if
@@ -216,37 +211,40 @@ namespace mah_boi.Tools
                             case 2: // вторая часть строки после ":" - [:SOMETHING]
                                 stringName = str.ToUpper();
                                 break;
+                            default: // на тот случай, если имеется несколько двоеточий
+                                stringName += stringName + ":" + str;
+                                break;
                         }
                     }
 
                     // если не было двоеточия, то всё название лейбла - это название строки
                     if (stringName == string.Empty)
                     {
-                        stringName = categoryName;
+                        stringName   = categoryName;
                         categoryName = NO_CATEGORY_STRINGS;
                     }
 
-                    searchStatus = (int)LineType.Value;
+                    searchStatus = LineType.Value;
                 }
 
                 // считанная строка - полное значение
                 else if
                 (
-                    searchStatus == (int)LineType.Value    // анализируемая строка - значение
+                    searchStatus == LineType.Value         // анализируемая строка - значение
                     && currentLine.Trim().StartsWith("\"") // значения всегда начинаются с таба+ковычка
                     && currentLine.Trim().EndsWith("\"")   // и оканчиваются ковычкой
                 )
                 {
-                    stringValue = currentLine.Trim().Replace("\"", string.Empty);
-                    searchStatus = (int)LineType.End;
+                    stringValue  = currentLine.Trim().Replace("\"", string.Empty);
+                    searchStatus = LineType.End;
                 }
 
                 // считанная строка - это частичное значение
                 else if
                 (
-                    searchStatus == (int)LineType.Value     // анализируемая строка - значение
-                    && currentLine.Trim().StartsWith("\"")  // значение частичное, т.к. в строке только 1 ковычка, и стоит она в начале
-                    && !currentLine.Trim().EndsWith("\"")   // и нет ковычки в конце
+                    searchStatus == LineType.Value         // анализируемая строка - значение
+                    && currentLine.Trim().StartsWith("\"") // значение частичное, т.к. в строке только 1 ковычка, и стоит она в начале
+                    && !currentLine.Trim().EndsWith("\"")  // и нет ковычки в конце
                 )
                 {
                     stringValue += currentLine.Trim().Replace("\"", string.Empty);
@@ -254,7 +252,7 @@ namespace mah_boi.Tools
 
                 else if
                 (
-                    searchStatus == (int)LineType.Value     // анализируемая строка - значение
+                    searchStatus == LineType.Value          // анализируемая строка - значение
                     && currentLine.Trim().StartsWith("\\n") // значение частичное, т.к. в начале строки \n
                     && !currentLine.Trim().EndsWith("\"")   // и нет ковычки в конце
                 )
@@ -264,29 +262,29 @@ namespace mah_boi.Tools
 
                 else if
                 (
-                    searchStatus == (int)LineType.Value     // анализируемая строка - значение
+                    searchStatus == LineType.Value          // анализируемая строка - значение
                     && currentLine.Trim().StartsWith("\\n") // значение частичное, т.к. в начале строки \n
                     && currentLine.Trim().EndsWith("\"")    // и в строке только 1 ковычка, и стоит она в конце
                 )
                 {
                     stringValue += currentLine.Trim().Replace("\"", string.Empty);
-                    searchStatus = (int)LineType.End;
+                    searchStatus = LineType.End;
                 }
 
                 else if
                 (
-                    searchStatus == (int)LineType.Value
-                    && !currentLine.Trim().StartsWith("\\n")
+                    searchStatus == LineType.Value           // если мы ищем значение
+                    && !currentLine.Trim().StartsWith("\\n") // а текущая строка не начинается с \n, когда мы ищем значение
                 )
                 {
-                    throw new StringTableParseException("Ошибка форматирования: отсутствие символов \"\\n\" в начале составной строки."
-                                                + Environment.NewLine
-                                                + Environment.NewLine
-                                                + $"Ошибка в строке: \"{currentLine}\"");
+                    stParseErrorsAndWarnings.AddMessage("Ошибка форматирования: отсутствие символов \"\\n\" в начале составной строки."
+                                                       + Environment.NewLine
+                                                       + Environment.NewLine
+                                                       + $"\tОшибка в строке: \"{currentLine}\"", StringTableParseException.MessageType.Error);
                 }
 
                 // считанная строка - окончание строки
-                else if (searchStatus == (int)LineType.End && currentLine.Trim().ToLower() == "end")
+                else if (searchStatus == LineType.End && currentLine.Trim().ToLower() == "end")
                 {
                     var tmpCategory = new StringTableCategory(categoryName);
                     tmpCategory.AddString(stringName, stringValue);
@@ -298,10 +296,10 @@ namespace mah_boi.Tools
                 // на случай не предвиденных проблем
                 else
                 {
-                    throw new StringTableParseException("Неизвестная ошибка форматирования."
-                                                + Environment.NewLine
-                                                + Environment.NewLine
-                                                + $"Ошибка в строке: \"{currentLine}\"");
+                    stParseErrorsAndWarnings.AddMessage("Неизвестная ошибка форматирования, не предусмотренная парсером."
+                                                       + Environment.NewLine
+                                                       + Environment.NewLine
+                                                       + $"\tОшибка в строке: \"{currentLine}\"", StringTableParseException.MessageType.Error);
                 }
             }
             CombineStringsIntoCategories(tmpListOfCategory);

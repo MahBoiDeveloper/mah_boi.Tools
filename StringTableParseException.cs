@@ -71,31 +71,29 @@ namespace mah_boi.Tools
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            int i = 0;
 
+            int i = 0;
             if (InfoList.Count > 0)
                 foreach (var str in InfoList)
                 {
                     i++;
-                    sb.Append($"Информация №{i}: \n\t" + str);
+                    sb.Append($"Информация №{i}: " + Environment.NewLine + "\t" + str);
                 }
 
             i = 0;
-
             if (WarningList.Count > 0)
                 foreach (var str in WarningList)
                 {
                     i++;
-                    sb.Append($"Предупреждение №{i}: \n\t" + str);
+                    sb.Append($"Предупреждение №{i}: " + Environment.NewLine + "\t" + str);
                 }
 
             i = 0;
-
             if (ErrorList.Count > 0)
                 foreach (var str in ErrorList)
                 {
                     i++;
-                    sb.Append($"Ошибка №{i}: \n\t" + str);
+                    sb.Append($"Ошибка №{i}: " + Environment.NewLine + "\t" + str);
                 }
 
             return sb.ToString();

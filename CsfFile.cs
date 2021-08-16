@@ -73,16 +73,6 @@ namespace mah_boi.Tools
         /// </summary>
         public CsfFile(string fileName, List<StringTableCategory> stCategories) : base(fileName, stCategories)
         {
-            if (!IsConvertable(stCategories))
-                throw new StringTableParseException("Невозможно перевести указанную строковую таблицу в .csf формат, " +
-                                                    "т.к. имеются пробелы в названии строки");
-
-            FileName = fileName;
-            categoriesOfTable = stCategories;
-
-            UInt32 countOfString = 0;
-
-            stCategories.ForEach(category => countOfString += Convert.ToUInt32(category.stringsOfCategory.Count));
         }
 
         /// <summary>
@@ -108,14 +98,16 @@ namespace mah_boi.Tools
                 char[] csf             = br.ReadChars(4); // по факту эта строка обязана всегда быть " FSC"
 
                 if (new string(csf) != new string(FSC))
-                    throw new StringTableParseException("Ошибка чтения .csf файла: заголовок не содержит строку ' FSC'");
+                    stParseErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: заголовок не содержит строку ' FSC'. "
+                                                      + "Игра не прилинкует указанный .csf файл", StringTableParseException.MessageType.Error);
 
                 br.ReadUInt32(); // у игр серии ЦНЦ это число всегда равно 3. по факту ни на что не влияет
                 UInt32 numberOfLabels  = br.ReadUInt32(); // количество лейблов
                 UInt32 numberOfStrings = br.ReadUInt32(); // количество строк
 
                 if (numberOfLabels != numberOfStrings)
-                    throw new StringTableParseException("Ошибка чтения .csf файла: имеются не пустые поля дополнительных значений строк (класс CsfFile не умеет обрабатывать)");
+                    stParseErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: имеются не пустые поля дополнительных " +
+                                                        "значений строк (класс CsfFile не умеет обрабатывать)", StringTableParseException.MessageType.Info);
 
                 br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует (и этот класс пока что тоже не использует)
                 br.ReadUInt32(); // код языка (подробнее в LanguagesCodes)
