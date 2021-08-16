@@ -26,6 +26,8 @@ namespace mah_boi.Tools
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             cp1251 = Encoding.GetEncoding("windows-1251");
 
+
+
             SaveTest();
         }
 
@@ -34,6 +36,7 @@ namespace mah_boi.Tools
             CsfFile csf = new CsfFile(path_csf, cp1251);
             csf.Save(tmp);
             Console.WriteLine("Вывод строки с значением в кодировке : " + csf.GetStringValue("Version", "Format2"));
+            Console.WriteLine(csf.GetParsingMessages());
             Console.WriteLine($"Проверка в SaveTest() окончена. Проверьте файл {tmp}");
         }
     }

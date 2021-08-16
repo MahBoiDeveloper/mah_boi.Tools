@@ -8,7 +8,7 @@ namespace mah_boi.Tools
 {
     abstract class StringTable
     {
-        protected StringTableParseException stParseErrorsAndWarnings;
+        protected StringTableParseException ParsingErrorsAndWarnings = new StringTableParseException();
         public enum StringTableFormats
         {
             csf,
@@ -33,8 +33,8 @@ namespace mah_boi.Tools
             if (!File.Exists(fileName))
                 throw new StringTableParseException("Файл для парсинга не существует");
 
-            FileEncoding = Encoding.Unicode;
-            FileName     = fileName;
+            FileEncoding             = Encoding.Unicode;
+            FileName                 = fileName;
         }
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace mah_boi.Tools
             if (!File.Exists(fileName))
                 throw new StringTableParseException("Файл для парсинга не существует");
 
-            FileEncoding = encoding;
-            FileName     = fileName;
+            FileEncoding             = encoding;
+            FileName                 = fileName;
         }
 
         /// <summary>
@@ -62,9 +62,9 @@ namespace mah_boi.Tools
         /// </summary>
         public StringTable(StringTable stFile)
         {
-            FileEncoding      = Encoding.Unicode;
-            FileName          = stFile.FileName;
-            categoriesOfTable = stFile.categoriesOfTable;
+            FileEncoding             = Encoding.Unicode;
+            FileName                 = stFile.FileName;
+            categoriesOfTable        = stFile.categoriesOfTable;
         }
 
         /// <summary>
@@ -348,6 +348,13 @@ namespace mah_boi.Tools
         #endregion
 
         #region Вспомогательные методы
+        /// <summary>
+        ///     Получить все сообщения ошибок при парсинге файла определённого формата.
+        /// </summary>
+        public string GetParsingMessages()
+            =>
+                ParsingErrorsAndWarnings.GetExceptions();
+
         /// <summary>
         ///     Проверка конвертируемости текущего формата строковой таблицы в другой (из <u>.csf</u> в <u>.str</u> и наоборот).
         /// </summary>

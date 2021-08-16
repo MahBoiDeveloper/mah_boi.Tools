@@ -98,7 +98,7 @@ namespace mah_boi.Tools
                 char[] csf             = br.ReadChars(4); // по факту эта строка обязана всегда быть " FSC"
 
                 if (new string(csf) != new string(FSC))
-                    stParseErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: заголовок не содержит строку ' FSC'. "
+                    ParsingErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: заголовок не содержит строку ' FSC'. "
                                                       + "Игра не прилинкует указанный .csf файл", StringTableParseException.MessageType.Error);
 
                 br.ReadUInt32(); // у игр серии ЦНЦ это число всегда равно 3. по факту ни на что не влияет
@@ -106,8 +106,8 @@ namespace mah_boi.Tools
                 UInt32 numberOfStrings = br.ReadUInt32(); // количество строк
 
                 if (numberOfLabels != numberOfStrings)
-                    stParseErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: имеются не пустые поля дополнительных " +
-                                                        "значений строк (класс CsfFile не умеет обрабатывать)", StringTableParseException.MessageType.Info);
+                    ParsingErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: имеются не пустые поля дополнительных " +
+                                                        "значений строк (класс CsfFile не умеет их обрабатывать)", StringTableParseException.MessageType.Error);
 
                 br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует (и этот класс пока что тоже не использует)
                 br.ReadUInt32(); // код языка (подробнее в LanguagesCodes)

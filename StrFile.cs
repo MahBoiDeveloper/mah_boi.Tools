@@ -152,9 +152,11 @@ namespace mah_boi.Tools
             // Комметрий создаётся за счёт символов //, как в C-подобных языках
             LineType searchStatus = LineType.Label;
 
-            // красиво-ленивый способ пробежаться по всем строкам файла. Имхо, но это лучше, чем просто считывать
+            // красиво-ленивый способ пробежаться по всем строкам файла.
+            UInt32 currentLineNumber = 0;
             foreach (var currentLine in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(Environment.NewLine))
             {
+                currentLineNumber++;
                 // считанная строка - комментарий или пустая строка
                 if (currentLine.StartsWith("//") || currentLine.Trim() == string.Empty)
                     continue;
@@ -165,23 +167,17 @@ namespace mah_boi.Tools
                     searchStatus == LineType.End && currentLine.Trim().ToLower() != "end"
                 )
                 {
-                    stParseErrorsAndWarnings.AddMessage("Ошибка форматирования: после значения лейбла идёт другая строка со значением"
-                                                       + Environment.NewLine
-                                                       + Environment.NewLine
-                                                       + $"\tОшибка в строке: \"{currentLine}\"", StringTableParseException.MessageType.Error);
+                    ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                                                       + "После значения лейбла идёт другая строка со значением", StringTableParseException.MessageType.Error);
                     searchStatus = LineType.Label;
                 }
 
                 // считанная строка содержит ошибку, т.к. нет значения
                 else if (currentLine.Trim().ToLower() == "end" && searchStatus == LineType.Value)
                 {
-                    stParseErrorsAndWarnings.AddMessage("Ошибка форматирования: после названия лейбла идёт закрытие строки, а не значение"
-                                                       + Environment.NewLine
-                                                       + Environment.NewLine
-                                                       + "\tВоспользуйтесь ковычками \"\" для обозначения пустой строки"
-                                                       + Environment.NewLine
-                                                       + Environment.NewLine
-                                                       + $"\tОшибка в строке: \"{currentLine}\"", StringTableParseException.MessageType.Error);
+                    ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                                                       + "После названия лейбла идёт закрытие строки, а не значение. "
+                                                       + "Воспользуйтесь ковычками \"\" для обозначения пустой строк", StringTableParseException.MessageType.Error);
 
                     searchStatus = LineType.Label;
                 }
@@ -277,10 +273,8 @@ namespace mah_boi.Tools
                     && !currentLine.Trim().StartsWith("\\n") // а текущая строка не начинается с \n, когда мы ищем значение
                 )
                 {
-                    stParseErrorsAndWarnings.AddMessage("Ошибка форматирования: отсутствие символов \"\\n\" в начале составной строки."
-                                                       + Environment.NewLine
-                                                       + Environment.NewLine
-                                                       + $"\tОшибка в строке: \"{currentLine}\"", StringTableParseException.MessageType.Error);
+                    ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                                                       + "Отсутствие символов \"\\n\" в начале составной строки.", StringTableParseException.MessageType.Error);
                 }
 
                 // считанная строка - окончание строки
@@ -296,10 +290,8 @@ namespace mah_boi.Tools
                 // на случай не предвиденных проблем
                 else
                 {
-                    stParseErrorsAndWarnings.AddMessage("Неизвестная ошибка форматирования, не предусмотренная парсером."
-                                                       + Environment.NewLine
-                                                       + Environment.NewLine
-                                                       + $"\tОшибка в строке: \"{currentLine}\"", StringTableParseException.MessageType.Error);
+                    ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                                                       + "Неизвестная ошибка", StringTableParseException.MessageType.Error);
                 }
             }
             CombineStringsIntoCategories(tmpListOfCategory);
