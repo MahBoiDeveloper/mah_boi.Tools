@@ -1,6 +1,6 @@
 SCRIPT:Destroy the final boss. No cheating. Wave 
-"Destroy the final boss.
-\w Typed another text for test.
+"Destroy the final boss."
+\n Typed another text for test.
 \n No cheating.  Wave "
 END
 
@@ -61,7 +61,7 @@ SCRIPT:Wave
 END
 
 SCRIPT:Kill Counter
-"Kill Counter"
+															"Kill Counter"
 END
 
 SCRIPT:Destroy the boss to proceed to the next wave. No cheating. Wave 

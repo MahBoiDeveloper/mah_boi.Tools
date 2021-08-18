@@ -77,7 +77,8 @@ namespace mah_boi.Tools
                 foreach (var str in InfoList)
                 {
                     i++;
-                    sb.Append($"Информация №{i}: " + Environment.NewLine + "\t" + str);
+                    sb.AppendLine($"Информация №{i}: " + Environment.NewLine + "\t" + str);
+                    sb.AppendLine();
                 }
 
             i = 0;
@@ -85,7 +86,8 @@ namespace mah_boi.Tools
                 foreach (var str in WarningList)
                 {
                     i++;
-                    sb.Append($"Предупреждение №{i}: " + Environment.NewLine + "\t" + str);
+                    sb.AppendLine($"Предупреждение №{i}: " + Environment.NewLine + "\t" + str);
+                    sb.AppendLine();
                 }
 
             i = 0;
@@ -93,7 +95,8 @@ namespace mah_boi.Tools
                 foreach (var str in ErrorList)
                 {
                     i++;
-                    sb.Append($"Ошибка №{i}: " + Environment.NewLine + "\t" + str);
+                    sb.AppendLine($"Ошибка №{i}: " + Environment.NewLine + "\t" + str);
+                    sb.AppendLine();
                 }
 
             return sb.ToString();

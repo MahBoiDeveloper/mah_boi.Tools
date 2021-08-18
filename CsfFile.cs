@@ -95,7 +95,7 @@ namespace mah_boi.Tools
                 List<StringTableCategory> bufferList = new List<StringTableCategory>();
 
                 // читаем заголовок файла, который нам укажет количество считываний далее
-                char[] csf             = br.ReadChars(4); // по факту эта строка обязана всегда быть " FSC"
+                char[] csf = br.ReadChars(4); // по факту эта строка обязана всегда быть " FSC"
 
                 if (new string(csf) != new string(FSC))
                     ParsingErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: заголовок не содержит строку ' FSC'. "
@@ -105,10 +105,6 @@ namespace mah_boi.Tools
                 UInt32 numberOfLabels  = br.ReadUInt32(); // количество лейблов
                 UInt32 numberOfStrings = br.ReadUInt32(); // количество строк
 
-                if (numberOfLabels != numberOfStrings)
-                    ParsingErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: имеются не пустые поля дополнительных " +
-                                                        "значений строк (класс CsfFile не умеет их обрабатывать)", StringTableParseException.MessageType.Error);
-
                 br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует (и этот класс пока что тоже не использует)
                 br.ReadUInt32(); // код языка (подробнее в LanguagesCodes)
 
@@ -117,12 +113,7 @@ namespace mah_boi.Tools
                     // чтение лейбла
 
                     // чтение иногда даёт ошибку при попадании на некоторые пустые строки. чтение generals.csf уж точно даст исключение
-                    //try
-                    //{
-                        char[] lbl = br.ReadChars(4); // записывает строку ' LBL'
-                    //}
-                    //catch
-                    //{ }
+                    char[] lbl = br.ReadChars(4); // записывает строку ' LBL'
 
                     // если у нас строка не является ' LBL', то движок игры считает сл-щие 4 бита для поиска слова ' LBL'
                     if (new string(lbl) != new string(LBL))
@@ -130,26 +121,34 @@ namespace mah_boi.Tools
                         i--;
                         continue;
                     }
-                            
-                    br.ReadUInt32();                                             // количество строк в значении. почти всегда равно 1
-                                                                                 // а если не равно 1, то имеется дополнительные значения у строки,
-                                                                                 // которые на данный момент класс не умеет обрабатывать
+
+                    UInt32 countOfStrings = br.ReadUInt32();                     // количество строк в значении. почти всегда равно 1
+                                                                                 // а если больше 1, то имеется дополнительные значения у строки,
+                                                                                 // которые на данный момент класс не умеет обрабатывать.
+                                                                                 // если 0, то значения нет
+
                     UInt32 labelNameLength = br.ReadUInt32();                    // длина названия лейбла
                     char[] labelName       = br.ReadChars((int)labelNameLength); // само название лейбла
 
-                    // чтение значения лейбла
-                    char[] rtsOrWrts   = br.ReadChars(4);                      // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
-                    UInt32 valueLength = br.ReadUInt32();                      // длина строки юникода, укороченная вдвое
-                    byte[] stringValue = br.ReadBytes((int)(valueLength * 2)); // строка, конвертированная в интертированные байты
+                    byte[] stringValue = FileEncoding.GetBytes(string.Empty);
+                    char[] extraStringValue = new string("").ToCharArray();
 
-                    // зачатки кода по чтению дополнительных значений
-                    //if(CharArrayToString(LabelValue.RtsOrWrts) == CsfLabelValue.STRW_REVERSED)
-                    //{
-                    //    LabelValue.ExtraValueLength = br.ReadUInt32();
-                    //    LabelValue.ExtraValue       = br.ReadChars((int)LabelValue.ExtraValueLength);
-                    //}
+                    if(countOfStrings != 0)
+                    {
+                        // чтение значения лейбла
+                        char[] rtsOrWrts = br.ReadChars(4);                 // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
+                        UInt32 valueLength = br.ReadUInt32();               // длина строки юникода, укороченная вдвое
+                        stringValue = br.ReadBytes((int)(valueLength * 2)); // строка, конвертированная в интертированные байты
 
-                    InvertAllBytesInArray(stringValue);
+                        InvertAllBytesInArray(stringValue);
+
+                        // чтение дополнительного значения лейбла
+                        if (new string(rtsOrWrts) == new string(WRTS))
+                        {
+                            UInt32 extraValueLength = br.ReadUInt32();              // длина доп. значения
+                            extraStringValue = br.ReadChars((int)extraValueLength); // само доп значение (проблема поддержки кодировки отличной от Unicode)
+                        }
+                    }
 
                     // преобразование считанных данных во внутренний формат представления стоковой таблицы
                     string categoryName = string.Empty;
@@ -157,18 +156,18 @@ namespace mah_boi.Tools
 
                     StringBuilder sb = new StringBuilder();
                     int j = 0;
-                    foreach(var str in new string(labelName).Split(':'))
+                    foreach (var str in new string(labelName).Split(':'))
                     {
                         j++;
-                        switch(j)
+                        switch (j)
                         {
-                            case 1:
+                            case 1: // если двоеточие было одно, и текст перед двоеточием, то это текст является названием категории
                                 categoryName = str;
                                 break;
-                            case 2:
+                            case 2: // если текст после двоеточия - название строки
                                 sb.Append(str);
                                 break;
-                            default:
+                            default: // если больше 1 двоеточия - прибавляем текст к названию строки
                                 sb.Append(":" + str);
                                 break;
                         }
@@ -176,14 +175,18 @@ namespace mah_boi.Tools
 
                     stringName = sb.ToString();
 
-                    if (j == 1)
+                    if (j == 1) // если двоеточий не было вообще
                     {
                         stringName = categoryName;
                         categoryName = NO_CATEGORY_STRINGS;
                     }
 
                     StringTableCategory category = new StringTableCategory(categoryName);
-                    category.AddString(stringName, new string(FileEncoding.GetChars(stringValue)));
+
+                    if(new string(extraStringValue) != string.Empty)
+                        category.AddString(stringName, new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue));
+                    else
+                        category.AddString(stringName, new string(FileEncoding.GetChars(stringValue)));
 
                     bufferList.Add(category);
                 }

@@ -16,7 +16,7 @@ namespace mah_boi.Tools
 
         // Переменные
         static string path_str = @"..\..\..\DataSamples\test.str";
-        static string path_csf = @"..\..\..\DataSamples\test.csf";
+        static string path_csf = @"..\..\..\DataSamples\clean_zh.csf";
         static string tmp = @"..\..\..\DataSamples\_tmp.csf";
         //string path = @"..\..\..\DataSamples\gamestrings.csf";
         //string path = @"..\..\..\DataSamples\generals.csf";
@@ -26,14 +26,17 @@ namespace mah_boi.Tools
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             cp1251 = Encoding.GetEncoding("windows-1251");
 
-
+            //StrFile str = new StrFile(path_str, uft8);
+            //Console.WriteLine(str.GetParsingMessages());
+            //Console.WriteLine("===========================");
+            //Console.WriteLine(str.ToString());
 
             SaveTest();
         }
 
         static void SaveTest()
         {
-            CsfFile csf = new CsfFile(path_csf, cp1251);
+            CsfFile csf = new CsfFile(path_csf, unicode);
             csf.Save(tmp);
             Console.WriteLine("Вывод строки с значением в кодировке : " + csf.GetStringValue("Version", "Format2"));
             Console.WriteLine(csf.GetParsingMessages());
