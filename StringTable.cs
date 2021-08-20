@@ -375,7 +375,7 @@ namespace mah_boi.Tools
         {
             if (format == StringTableFormats.csf && stFormated is StrFile)
             {
-                // основной критерий конвертируемости в .csf - отсутствие пробелов в названиях строк и категорий
+                // основные критерии конвертируемости в .csf - отсутствие пробелов в названиях строк и категорий
                 if ((stFormated as StrFile).categoriesOfTable.Where
                                 (
                                     category =>
@@ -389,10 +389,15 @@ namespace mah_boi.Tools
             }
             else if (format == StringTableFormats.str && stFormated is CsfFile csfFile)
             {
-                // основной критерий конвертируемости в .str - отсутствие ковычек " в значении строки
+                // основной критерий конвертируемости в .str:
+                // 1. отсутствие ковычек " в значении строки
+                // 2. нет дополнительных значений
                 foreach (var category in csfFile.categoriesOfTable)
-                    if (category.stringsOfCategory.Where(str => str.StringValue.Contains('\"')).Any())
-                        return false;
+                    foreach(var str in category.stringsOfCategory)
+                    {
+                        if (str.StringValue.Contains('\"')) return false;
+                        if (str.ExtraStringValue != string.Empty) return false;
+                    }
 
                 return true;
             }
