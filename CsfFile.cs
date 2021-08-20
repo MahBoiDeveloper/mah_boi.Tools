@@ -98,12 +98,35 @@ namespace mah_boi.Tools
                 char[] csf = br.ReadChars(4); // по факту эта строка обязана всегда быть " FSC"
 
                 if (new string(csf) != new string(FSC))
-                    ParsingErrorsAndWarnings.AddMessage("Ошибка чтения .csf файла: заголовок не содержит строку ' FSC'. "
-                                                      + "Игра не прилинкует указанный .csf файл", StringTableParseException.MessageType.Error);
+                    ParsingErrorsAndWarnings.AddMessage("Ошибка чтения .csf заголовка файла: заголовок не содержит строку ' FSC'. "
+                                                      + "Игра не прилинкует указанный .csf файл.", StringTableParseException.MessageType.Error);
 
-                br.ReadUInt32(); // у игр серии ЦНЦ это число всегда равно 3. по факту ни на что не влияет
-                UInt32 numberOfLabels  = br.ReadUInt32(); // количество лейблов
-                UInt32 numberOfStrings = br.ReadUInt32(); // количество строк
+                UInt32 csfFormatVersion = br.ReadUInt32(); // у игр серии ЦНЦ это число всегда равно 3. по факту ни на что не влияет
+
+                if(csfFormatVersion != 3)
+                {
+                    ParsingErrorsAndWarnings.AddMessage("Версия формата, указанная в заголовке, не соответствует версии, "
+                                                      + "используемой в играх серии C&C. При следующем сохранении изменений "
+                                                      + "версия формата будет выставлена в соответствии с версией формата в "
+                                                      + "играх серии C&C.", StringTableParseException.MessageType.Warning);
+                }
+
+                UInt32 numberOfLabels   = br.ReadUInt32(); // количество лейблов
+                UInt32 numberOfStrings  = br.ReadUInt32(); // количество строк
+                if(numberOfLabels > numberOfStrings)
+                {
+                    ParsingErrorsAndWarnings.AddMessage("В файле используются строки с 0 значений. При следующем сохранении "
+                                                      + "эти строки будут изменены так, чтобы они содержали значение."
+                                                      , StringTableParseException.MessageType.Warning);
+                }
+                else if(numberOfLabels < numberOfStrings)
+                {
+                    ParsingErrorsAndWarnings.AddMessage("В файле используются строки с дополнительным значением. "
+                                                      + "Конвертирование данного .csf файла в .str файл невозможно! "
+                                                      + "Советуем удалить все дополнительные значения."
+                                                      , StringTableParseException.MessageType.Warning);
+                }
+
 
                 br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует (и этот класс пока что тоже не использует)
                 br.ReadUInt32(); // код языка (подробнее в LanguagesCodes)
@@ -111,14 +134,12 @@ namespace mah_boi.Tools
                 for (UInt32 i = 0; i < numberOfLabels || br.PeekChar() > -1; i++)
                 {
                     // чтение лейбла
-
-                    // чтение иногда даёт ошибку при попадании на некоторые пустые строки. чтение generals.csf уж точно даст исключение
                     char[] lbl = br.ReadChars(4); // записывает строку ' LBL'
 
                     // если у нас строка не является ' LBL', то движок игры считает сл-щие 4 бита для поиска слова ' LBL'
                     if (new string(lbl) != new string(LBL))
                     {
-                        i--;
+                        if (i > 0) i--;
                         continue;
                     }
 
@@ -138,7 +159,7 @@ namespace mah_boi.Tools
                         // чтение значения лейбла
                         char[] rtsOrWrts = br.ReadChars(4);                 // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
                         UInt32 valueLength = br.ReadUInt32();               // длина строки юникода, укороченная вдвое
-                        stringValue = br.ReadBytes((int)(valueLength * 2)); // строка, конвертированная в интертированные байты
+                        stringValue = br.ReadBytes(Convert.ToInt32(valueLength * 2)); // строка, конвертированная в интертированные байты
 
                         InvertAllBytesInArray(stringValue);
 
@@ -146,7 +167,7 @@ namespace mah_boi.Tools
                         if (new string(rtsOrWrts) == new string(WRTS))
                         {
                             UInt32 extraValueLength = br.ReadUInt32();              // длина доп. значения
-                            extraStringValue = br.ReadChars((int)extraValueLength); // само доп значение (проблема поддержки кодировки отличной от Unicode)
+                            extraStringValue = br.ReadChars(Convert.ToInt32(extraValueLength)); // само доп значение (проблема поддержки кодировки отличной от Unicode)
                         }
                     }
 
@@ -202,7 +223,7 @@ namespace mah_boi.Tools
 
             using (BinaryWriter bw = new BinaryWriter(File.Open(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
             {
-                UInt32 countOfLables = (UInt32)Count();
+                UInt32 countOfLables = Convert.ToUInt32(Count());
 
                 // записываем хедер файла
                 bw.Write(FSC);
@@ -213,7 +234,7 @@ namespace mah_boi.Tools
                 bw.Write((UInt32)0);
 
                 // записываем построчно значения из строковой таблицы в файл
-                UInt32 counterOfLables = 0;
+                UInt32 labelCounter = 0;
                 do
                 {
                     foreach (var category in categoriesOfTable)
@@ -227,26 +248,28 @@ namespace mah_boi.Tools
                             bw.Write(labelName.Length);        // длина названия
                             bw.Write(labelName.ToCharArray()); // само название
 
-                            // проигнорируем на данный момент расширенное форматирование строк
-                            bw.Write(RTS); // строка со значением ' RTS'
+                            if (str.ExtraStringValue == string.Empty)
+                                bw.Write(RTS); // строка со значением ' RTS'
+                            else
+                                bw.Write(WRTS); // строка со значением 'WRTS'
 
-                            // получение значения длины строки символов в байтах
-                            UInt32 labelValueLength = Convert.ToUInt32(Encoding.Convert(Encoding.Unicode, Encoding.ASCII, Encoding.Unicode.GetBytes(str.StringValue)).Length);
-                            // если у нас кодировка - это реализация Unicode, то количество символов должно быть сокращено в двое
-                            if (FileEncoding != Encoding.Unicode && FileEncoding != Encoding.UTF32)
-                                labelValueLength /= 2;
-
-                            bw.Write(labelValueLength); // запись длины значения
+                            bw.Write(Convert.ToUInt32(str.StringValue.Length)); // запись длины значения
 
                             byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
                             InvertAllBytesInArray(byteValue); // инвертирование полученного массива
 
                             bw.Write(byteValue); // запись в файл инвертированных байтов значения строки
 
-                            counterOfLables++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
+                            if (str.ExtraStringValue != string.Empty)
+                            {
+                                bw.Write(Convert.ToUInt32(str.ExtraStringValue.Length));
+                                bw.Write(str.ExtraStringValue.ToCharArray());
+                            }
+
+                            labelCounter++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
                         }
                     }
-                } while (counterOfLables < countOfLables);
+                } while (labelCounter < countOfLables);
             }
         }
 
