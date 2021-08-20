@@ -41,6 +41,7 @@ namespace mah_boi.Tools
             Console.WriteLine($"Вывод строки с значением в кодировке из файла {path_csf} : " + csf.GetStringValue("Version", "Format2"));
             Console.WriteLine(csf.GetParsingMessages());
             Console.WriteLine($"Вывод строки с значением в кодировке из файла {tmp} : " + new CsfFile(tmp, unicode).GetStringValue("Version", "Format2"));
+            Console.WriteLine(new CsfFile(tmp, unicode).GetParsingMessages());
             Console.WriteLine($"Проверка в SaveTest() окончена. Проверьте файл {tmp}");
         }
     }
