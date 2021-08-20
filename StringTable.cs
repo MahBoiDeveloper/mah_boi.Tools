@@ -155,7 +155,7 @@ namespace mah_boi.Tools
         ///     Поиск категории по указанному названию. Возвращает все вхождения.
         /// </summary>
         public List<StringTableCategory> GetAllCategories(string categoryName) =>
-            categoriesOfTable.Where(category => category.CategoryName == categoryName).ToList();
+            categoriesOfTable.AsParallel().Where(category => category.CategoryName == categoryName).ToList();
 
         /// <summary>
         ///     Поиск значения по указанному названию категории и строки. Возвращает первое вхождение.
@@ -448,7 +448,7 @@ namespace mah_boi.Tools
                 bufferCategory = new StringTableCategory(categoryName);
 
                 // выделяем из списка все категории с одним именем, и затем записываем значения из них в буфер
-                list.Where(elem => elem.CategoryName == categoryName).ToList()
+                list.AsParallel().Where(elem => elem.CategoryName == categoryName).ToList()
                     .ForEach(elem => bufferCategory.AddString(elem.stringsOfCategory[0].StringName,
                                                               elem.stringsOfCategory[0].StringValue));
 
