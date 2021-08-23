@@ -303,7 +303,12 @@ namespace mah_boi.Tools
                     {
                         foreach (var str in category.stringsOfCategory)
                         {
-                            string labelName = category.CategoryName + ":" + str.StringName;
+                            string labelName = string.Empty;
+
+                            if (category.CategoryName != NO_CATEGORY_STRINGS)
+                                labelName = category.CategoryName + ":" + str.StringName;
+                            else
+                                labelName = str.StringName;
 
                             bw.Write(LBL);                     // строка со значением ' LBL'
                             bw.Write((uint)1);                 // количество строк для дополнительного значения
