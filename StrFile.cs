@@ -17,26 +17,24 @@ namespace mah_boi.Tools
     //     
     //     Используемый формат .str файлов основывается в основном на формате mod.str
     //     модов на игру Red Alert 3. Тем не менее, он поддерживает и не только формат .str Red Alert 3, 
-    //     но и TW, и KW, и GZH. Применяемая при написании кода терминалогия немного отличается от 
-    //     общепринятой с сайта-вики modenc.renegadeprojects.com, т.к. она более структурированная.
+    //     но форматы и TW, и KW, и GZH. Применяемая при написании кода терминалогия немного отличается от 
+    //     общепринятой с сайта-вики modenc.renegadeprojects.com, т.к. она более структурированная и расширена.
     //     
-    //     .str файл состоит из лейблов, которые имеют значение.
-    //     Лейблы являются сочетанием категорий и строк, разделяемыми через двоеточие.
-    //     Лейблы регистронезависимы, т.к. писать можно их в любом регистре.
-    //     Лейблы могут повторяться.
+    //     .str файл состоит из лейблов aka строк, которые имеют значение.
+    //     Лейблы регистронезависимы, т.к. писать можно их в любом регистре. Лейблы могут повторяться.
     //     Названия лейблов состоят исключительно из символов ASCII и могут содержать пробелы.
     //     
-    //     Приведу пример более подробно то, что описал текстом:
+    //     Пример лейбла
     //     
     //                          Лейбл
     //                            ^
     //            *---------------^----------------*
-    //            |HOTKEYNAME:SIDEBARWATERCRAFTPAGE|
+    //            |HOTKEYNAME_SIDEBARWATERCRAFTPAGE|
     //            *----^-----^-----------v---------*
     //                 ^     ^           v
     //             Категория ^           v
     //                       ^         Строка
-    //                  Разделитель
+    //                  Разделитель (условный; по факту разделителем может быть что угодно, но WW и EA использвали в основном двоеточие)
     //     
     //     У лейблов ВСЕГДА имеется значение, которое указывается между ковычками "".
     //     Пустое значение обозначается в друг за другом идущих ковычках.
@@ -114,7 +112,7 @@ namespace mah_boi.Tools
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public StrFile(string fileName, List<StringTableCategory> stCategories) : base(fileName, stCategories)
+        public StrFile(string fileName, List<StringTableString> stStringsList) : base(fileName, stStringsList)
         {
         }
 
@@ -125,7 +123,7 @@ namespace mah_boi.Tools
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public StrFile(string fileName, Encoding encoding, List<StringTableCategory> stCategoties) : base(fileName, encoding, stCategoties)
+        public StrFile(string fileName, Encoding encoding, List<StringTableString> stStringsList) : base(fileName, encoding, stStringsList)
         {
         }
 
@@ -137,11 +135,8 @@ namespace mah_boi.Tools
         /// </summary>
         public override void Parse()
         {
-            string categoryName = string.Empty;
             string stringName   = string.Empty;
             string stringValue  = string.Empty;
-
-            var tmpListOfCategory = new List<StringTableCategory>();
 
             // Согласно https://modenc.renegadeprojects.com/CSF_File_Format
             // название строки состоит исключительно из ASCII символов
@@ -189,36 +184,7 @@ namespace mah_boi.Tools
                     && StringTableString.IsACIIString(currentLine) // символы исключительно в кодировке ASCII
                 )
                 {
-                    // если у нас не закрытая строка, то мы очищаем все заполненные поля
-                    categoryName = string.Empty;
-                    stringName   = string.Empty;
-                    stringValue  = string.Empty;
-
-                    int i = 0;
-                    foreach (var str in currentLine.Split(':'))
-                    {
-                        i++;
-                        switch (i)
-                        {
-                            case 1: // первая часть строки до ":" - [SOMETHING:]
-                                categoryName = str.ToUpper();
-                                break;
-                            case 2: // вторая часть строки после ":" - [:SOMETHING]
-                                stringName = str.ToUpper();
-                                break;
-                            default: // на тот случай, если имеется несколько двоеточий
-                                stringName += stringName + ":" + str;
-                                break;
-                        }
-                    }
-
-                    // если не было двоеточия, то всё название лейбла - это название строки
-                    if (stringName == string.Empty)
-                    {
-                        stringName   = categoryName;
-                        categoryName = NO_CATEGORY_STRINGS;
-                    }
-
+                    stringName   = currentLine.Trim();
                     searchStatus = LineType.Value;
                 }
 
@@ -279,10 +245,7 @@ namespace mah_boi.Tools
                 // считанная строка - окончание строки
                 else if (searchStatus == LineType.End && currentLine.Trim().ToLower() == "end")
                 {
-                    var tmpCategory = new StringTableCategory(categoryName);
-                    tmpCategory.AddString(stringName, stringValue);
-                    tmpListOfCategory.Add(tmpCategory);
-
+                    stStrings.Add(new StringTableString(stringName, stringValue));
                     searchStatus = (int)LineType.Label;
                 }
 
@@ -293,7 +256,6 @@ namespace mah_boi.Tools
                                                        + "Неизвестная ошибка", StringTableParseException.MessageType.Error);
                 }
             }
-            CombineStringsIntoCategories(tmpListOfCategory);
         }
 
         /// <summary>
@@ -333,11 +295,10 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
-            List<StringTableCategory> tmp = categoriesOfTable;
-            foreach(var category in tmp)
-                foreach(var str in category.stringsOfCategory)
-                    if (str.StringValue.IndexOf("\\n") > -1)
-                        str.StringValue.Replace("\\n", "\n");
+            List<StringTableString> tmp = stStrings;
+            foreach (var str in tmp)
+                if (str.StringValue.IndexOf("\\n") > -1)
+                    str.StringValue.Replace("\\n", "\n");
 
             return new CsfFile(FileName, tmp);
         }
@@ -351,11 +312,10 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
-            List<StringTableCategory> tmp = fileSample.categoriesOfTable;
-            foreach (var category in tmp)
-                foreach (var str in category.stringsOfCategory)
-                    if (str.StringValue.IndexOf("\\n") > -1)
-                        str.StringValue.Replace("\\n", "\n");
+            List<StringTableString> tmp = fileSample.stStrings;
+            foreach (var str in tmp)
+                if (str.StringValue.IndexOf("\\n") > -1)
+                    str.StringValue.Replace("\\n", "\n");
 
             return new CsfFile(fileSample.FileName, tmp);
         }
@@ -369,9 +329,12 @@ namespace mah_boi.Tools
             =>
                 StringTable.IsConvertableTo((Object)this, StringTableFormats.csf);
 
-        public override bool IsConvertable(List<StringTableCategory> stCategories)
+        /// <summary>
+        ///     Проверка конвертируемости текущего формата строковой таблицы в другой в <u>.csf</u>.
+        /// </summary>
+        public override bool IsConvertable(List<StringTableString> strings)
             =>
-                StringTable.IsConvertableTo((Object)(new CsfFile(string.Empty, stCategories)), StringTableFormats.str);
+                StringTable.IsConvertableTo((Object)(new CsfFile(string.Empty, strings)), StringTableFormats.str);
 
         public static bool operator ==(StrFile firstFile, StrFile secondFile)
             =>

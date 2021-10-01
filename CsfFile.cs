@@ -133,7 +133,7 @@ namespace mah_boi.Tools
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public CsfFile(string fileName, List<StringTableCategory> stCategories) : base(fileName, stCategories)
+        public CsfFile(string fileName, List<StringTableString> strings) : base(fileName, strings)
         {
         }
 
@@ -144,7 +144,7 @@ namespace mah_boi.Tools
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public CsfFile(string fileName, Encoding encoding, List<StringTableCategory> stCategoties) : base(fileName, encoding, stCategoties)
+        public CsfFile(string fileName, Encoding encoding, List<StringTableString> strings) : base(fileName, encoding, strings)
         {
         }
         #endregion
@@ -154,8 +154,6 @@ namespace mah_boi.Tools
         {
             using (BinaryReader br = new BinaryReader(File.Open(FileName, FileMode.Open)))
             {
-                List<StringTableCategory> bufferList = new List<StringTableCategory>();
-
                 // читаем заголовок файла, который нам укажет количество считываний далее
                 char[] csf = br.ReadChars(4); // по факту эта строка обязана всегда быть " FSC"
 
@@ -163,7 +161,7 @@ namespace mah_boi.Tools
                     ParsingErrorsAndWarnings.AddMessage("Ошибка чтения .csf заголовка файла: заголовок не содержит строку ' FSC'. "
                                                       + "Игра не прилинкует указанный .csf файл.", StringTableParseException.MessageType.Error);
 
-                UInt32 csfFormatVersion = br.ReadUInt32(); // у игр серии ЦНЦ это число всегда равно 3. по факту ни на что не влияет
+                UInt32 csfFormatVersion = br.ReadUInt32(); // у игр серии ЦНЦ это число всегда равно 3. по факту оно ни на что не влияет
 
                 if(csfFormatVersion != 3)
                 {
@@ -190,7 +188,7 @@ namespace mah_boi.Tools
                 }
 
 
-                br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует (и этот класс пока что тоже не использует)
+                br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует
                 br.ReadUInt32(); // код языка (подробнее в CSFLanguageCodes). Нигде не используются.
 
                 for (UInt32 i = 0; i < numberOfLabels || br.PeekChar() > -1; i++)
@@ -214,67 +212,27 @@ namespace mah_boi.Tools
                     char[] labelName       = br.ReadChars((int)labelNameLength); // само название лейбла
 
                     byte[] stringValue = FileEncoding.GetBytes(string.Empty);
-                    char[] extraStringValue = new string("").ToCharArray();
+                    char[] extraStringValue = string.Empty.ToCharArray();
 
                     if(countOfStrings != 0) // отбрасывание пустых строк
                     {
                         // чтение значения лейбла
-                        char[] rtsOrWrts = br.ReadChars(4);                 // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
-                        UInt32 valueLength = br.ReadUInt32();               // длина строки юникода, укороченная вдвое
-                        stringValue = br.ReadBytes(Convert.ToInt32(valueLength * 2)); // строка, конвертированная в интертированные байты
+                        char[] rtsOrWrts   = br.ReadChars(4);                                // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
+                        UInt32 valueLength = br.ReadUInt32();                                // длина строки юникода, укороченная вдвое
+                        stringValue        = br.ReadBytes(Convert.ToInt32(valueLength * 2)); // строка, конвертированная в интертированные байты
 
                         InvertAllBytesInArray(stringValue);
 
                         // чтение дополнительного значения лейбла
                         if (new string(rtsOrWrts) == new string(WRTS))
                         {
-                            UInt32 extraValueLength = br.ReadUInt32();              // длина доп. значения
-                            extraStringValue = br.ReadChars(Convert.ToInt32(extraValueLength)); // само доп значение (проблема поддержки кодировки отличной от Unicode)
+                            UInt32 extraValueLength = br.ReadUInt32();                                 // длина доп. значения
+                            extraStringValue        = br.ReadChars(Convert.ToInt32(extraValueLength)); // само доп значение (проблема поддержки кодировки отличной от Unicode)
                         }
                     }
 
-                    // преобразование считанных данных во внутренний формат представления стоковой таблицы
-                    string categoryName = string.Empty;
-                    string stringName = string.Empty;
-
-                    StringBuilder sb = new StringBuilder();
-                    int j = 0;
-                    foreach (var str in new string(labelName).Split(':'))
-                    {
-                        j++;
-                        switch (j)
-                        {
-                            case 1: // если двоеточие было одно, и текст перед двоеточием, то это текст является названием категории
-                                categoryName = str;
-                                break;
-                            case 2: // если текст после двоеточия - название строки
-                                sb.Append(str);
-                                break;
-                            default: // если больше 1 двоеточия - прибавляем текст к названию строки
-                                sb.Append(":" + str);
-                                break;
-                        }
-                    }
-
-                    stringName = sb.ToString();
-
-                    if (j == 1) // если двоеточий не было вообще
-                    {
-                        stringName = categoryName;
-                        categoryName = NO_CATEGORY_STRINGS;
-                    }
-
-                    StringTableCategory category = new StringTableCategory(categoryName);
-
-                    if(new string(extraStringValue) != string.Empty)
-                        category.AddString(stringName, new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue));
-                    else
-                        category.AddString(stringName, new string(FileEncoding.GetChars(stringValue)));
-
-                    bufferList.Add(category);
+                    stStrings.Add(new StringTableString(new string(labelName), new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue)));
                 }
-
-                CombineStringsIntoCategories(bufferList);
             }
         }
 
@@ -299,42 +257,34 @@ namespace mah_boi.Tools
                 UInt32 labelCounter = 0;
                 do
                 {
-                    foreach (var category in categoriesOfTable)
+                    foreach (var str in stStrings)
                     {
-                        foreach (var str in category.stringsOfCategory)
+                        string labelName = str.StringName;
+
+                        bw.Write(LBL);                     // строка со значением ' LBL'
+                        bw.Write((uint)1);                 // количество строк для дополнительного значения
+                        bw.Write(labelName.Length);        // длина названия
+                        bw.Write(labelName.ToCharArray()); // само название
+
+                        if (str.ExtraStringValue == string.Empty)
+                            bw.Write(RTS);  // строка со значением ' RTS'
+                        else
+                            bw.Write(WRTS); // строка со значением 'WRTS'
+
+                        bw.Write(Convert.ToUInt32(str.StringValue.Length));        // запись длины значения
+
+                        byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
+                        InvertAllBytesInArray(byteValue);                          // инвертирование полученного массива
+
+                        bw.Write(byteValue);                                       // запись в файл инвертированных байтов значения строки
+
+                        if (str.ExtraStringValue != string.Empty)
                         {
-                            string labelName = string.Empty;
-
-                            if (category.CategoryName != NO_CATEGORY_STRINGS)
-                                labelName = category.CategoryName + ":" + str.StringName;
-                            else
-                                labelName = str.StringName;
-
-                            bw.Write(LBL);                     // строка со значением ' LBL'
-                            bw.Write((uint)1);                 // количество строк для дополнительного значения
-                            bw.Write(labelName.Length);        // длина названия
-                            bw.Write(labelName.ToCharArray()); // само название
-
-                            if (str.ExtraStringValue == string.Empty)
-                                bw.Write(RTS); // строка со значением ' RTS'
-                            else
-                                bw.Write(WRTS); // строка со значением 'WRTS'
-
-                            bw.Write(Convert.ToUInt32(str.StringValue.Length)); // запись длины значения
-
-                            byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
-                            InvertAllBytesInArray(byteValue); // инвертирование полученного массива
-
-                            bw.Write(byteValue); // запись в файл инвертированных байтов значения строки
-
-                            if (str.ExtraStringValue != string.Empty)
-                            {
-                                bw.Write(Convert.ToUInt32(str.ExtraStringValue.Length));
-                                bw.Write(str.ExtraStringValue.ToCharArray());
-                            }
-
-                            labelCounter++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
+                            bw.Write(Convert.ToUInt32(str.ExtraStringValue.Length));
+                            bw.Write(str.ExtraStringValue.ToCharArray());
                         }
+
+                        labelCounter++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
                     }
                 } while (labelCounter < countOfLables);
             }
@@ -366,11 +316,10 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат .str");
 
             // в str нет символов переводы на новую строку заменяются на \n
-            List<StringTableCategory> tmp = categoriesOfTable;
-            foreach (var category in tmp)
-                foreach (var str in category.stringsOfCategory)
-                    if (str.StringValue.IndexOf("\n") > -1)
-                        str.StringValue.Replace("\n", "\\n");
+            List<StringTableString> tmp = stStrings;
+            foreach (var str in tmp)
+                if (str.StringValue.IndexOf("\n") > -1)
+                    str.StringValue.Replace("\n", "\\n");
 
             return new StrFile(FileName, tmp);
         }
@@ -384,11 +333,10 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
 
             // в str нет символов переводы на новую строку заменяются на \n
-            List<StringTableCategory> tmp = fileSample.categoriesOfTable;
-            foreach (var category in tmp)
-                foreach (var str in category.stringsOfCategory)
-                    if (str.StringValue.IndexOf("\n") > -1)
-                        str.StringValue.Replace("\n", "\\n");
+            List<StringTableString> tmp = fileSample.stStrings;
+            foreach (var str in tmp)
+                if (str.StringValue.IndexOf("\n") > -1)
+                    str.StringValue.Replace("\n", "\\n");
 
             return new StrFile(fileSample.FileName, tmp);
         }
@@ -402,9 +350,9 @@ namespace mah_boi.Tools
             =>
                 StringTable.IsConvertableTo((Object)this, StringTableFormats.str);
 
-        public override bool IsConvertable(List<StringTableCategory> stCategories)
+        public override bool IsConvertable(List<StringTableString> strings)
             =>
-                StringTable.IsConvertableTo((Object)(new StrFile(string.Empty, stCategories)), StringTableFormats.csf);
+                StringTable.IsConvertableTo((Object)(new StrFile(string.Empty, strings)), StringTableFormats.csf);
 
         /// <summary>
         ///     Согласно описанию формата <u>.csf</u> на <a href="https://modenc.renegadeprojects.com/CSF_File_Format">modenc</a>, 
