@@ -87,10 +87,21 @@ namespace mah_boi.Tools
             Jabberwockie = 7,
             Korean       = 8,
             Chinese      = 9,
-            Unknown      = 10
+            Russian      = 17
         }
 
         #region Конструкторы
+        /// <summary>
+        ///     Класс для парсинга <u>.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public CsfFile() : base()
+        {
+        }
+
         /// <summary>
         ///     Класс для парсинга <u>.csf</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
@@ -173,13 +184,8 @@ namespace mah_boi.Tools
 
                 UInt32 numberOfLabels   = br.ReadUInt32(); // количество лейблов
                 UInt32 numberOfStrings  = br.ReadUInt32(); // количество строк
-                if(numberOfLabels > numberOfStrings)
-                {
-                    ParsingErrorsAndWarnings.AddMessage("В файле используются строки с 0 значений. При следующем сохранении "
-                                                      + "эти строки будут изменены так, чтобы они содержали значение."
-                                                      , StringTableParseException.MessageType.Warning);
-                }
-                else if(numberOfLabels < numberOfStrings)
+
+                if(numberOfLabels < numberOfStrings)
                 {
                     ParsingErrorsAndWarnings.AddMessage("В файле используются строки с дополнительным значением. "
                                                       + "Конвертирование данного .csf файла в .str файл невозможно! "
@@ -187,16 +193,16 @@ namespace mah_boi.Tools
                                                       , StringTableParseException.MessageType.Warning);
                 }
 
-
                 br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует
-                br.ReadUInt32(); // код языка (подробнее в CSFLanguageCodes). Нигде не используются.
+                br.ReadUInt32(); // код языка (подробнее в CSFLanguageCodes)
 
+                // читать файл, пока не закончатся строки или не будет ошибки чтения
                 for (UInt32 i = 0; i < numberOfLabels || br.PeekChar() > -1; i++)
                 {
                     // чтение лейбла
                     char[] lbl = br.ReadChars(4); // записывает строку ' LBL'
 
-                    // если у нас строка не является ' LBL', то движок игры считает сл-щие 4 бита для поиска слова ' LBL'
+                    // если у нас строка не является ' LBL', то движок игры считает следующие 4 бита для поиска слова ' LBL'
                     if (new string(lbl) != new string(LBL))
                     {
                         if (i > 0) i--;
@@ -211,10 +217,10 @@ namespace mah_boi.Tools
                     UInt32 labelNameLength = br.ReadUInt32();                    // длина названия лейбла
                     char[] labelName       = br.ReadChars((int)labelNameLength); // само название лейбла
 
-                    byte[] stringValue = FileEncoding.GetBytes(string.Empty);
+                    byte[] stringValue      = FileEncoding.GetBytes(string.Empty);
                     char[] extraStringValue = string.Empty.ToCharArray();
 
-                    if(countOfStrings != 0) // отбрасывание пустых строк
+                    if(countOfStrings != 0) // отбрасывание строк с пустыми значениями, а то падения проги не избежать
                     {
                         // чтение значения лейбла
                         char[] rtsOrWrts   = br.ReadChars(4);                                // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
@@ -298,6 +304,10 @@ namespace mah_boi.Tools
             FileName = tmp;
         }
 
+        public void ParseWithoutHeaderReading()
+        {
+        }
+
         /// <summary>
         ///     Метод формирует строку, равносильную .str/.csf файлу.
         /// </summary>
@@ -324,6 +334,20 @@ namespace mah_boi.Tools
             return new StrFile(FileName, tmp);
         }
 
+        public bool Safe_ToStr(out StrFile returnParam)
+        {
+            try
+            {
+                returnParam = this.ToStr();
+            }
+            catch (StringTableParseException)
+            {
+                returnParam = new StrFile();
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         ///     Конвертор из <u>.csf</u> в <u>.str</u> на основе указанного отпарсенного файла fileSample.
         /// </summary>
@@ -339,6 +363,20 @@ namespace mah_boi.Tools
                     str.StringValue.Replace("\n", "\\n");
 
             return new StrFile(fileSample.FileName, tmp);
+        }
+
+        public static bool Safe_ToStr(CsfFile fileSample, out StrFile returnParam)
+        {
+            try
+            {
+                returnParam = fileSample.ToStr();
+            }
+            catch (StringTableParseException)
+            {
+                returnParam = new StrFile();
+                return false;
+            }
+            return true;
         }
         #endregion
 

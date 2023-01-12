@@ -1,0 +1,5217 @@
+//-----------------New AI-----------------
+
+Personality:OptimalTE
+"ESSENCE"
+END
+
+Personality:NodOptimalTE
+"Nod Optimal TE"
+END
+
+
+Personality:GdiOptimalTE
+"Gdi Optimal TE"
+END
+
+
+Personality:AlienOptimalTE
+"Alien Optimal TE"
+END
+
+//-----------------New Maps--------------
+
+Map:DuelingIslands
+"Tiberian Sun:Firestorm classic turnament map remake by Carnius \n Players - 2 \n Game mode - 1v1"
+END
+
+Map:InfestedZone
+"Original Tiberium essence map by Carnius \n Players - 4 \n Game mode - 2v2"
+END
+
+Map:TiberiumWasteland
+"Original Tiberium essence map by Carnius \n Players - 4 \n Game mode - Free For All"
+END
+
+
+Map:FrozenRiver
+"Original Tiberium essence map by Carnius \n Players - 2 \n Game mode - 1v1"
+END
+
+Map:ArcticDesolation
+"Original Tiberium essence map by Carnius. \n Players - 4 \n Game mode - Free For All"
+END
+
+Map:XcapadesRedux
+"Tiberian Sun:Firestorm classic turnament map remake by Carnius \n Players - 4 \n Game mode - Free For All"
+END
+
+
+//----------------- Intel DB --------------
+
+
+SCRIPT:NOD_3_1_Bonus_Objective_3_Detail
+"Avatars are manifestation of Kanes will. Avatar inpiring presence helps to increase the overall effectiveness of the units the Avatar commands."
+END
+
+IDB:009_Nod_Weaponry_211_Nod_Disruption_Tower_title
+"Stealth Generator"
+END
+
+IDB:009_Nod_Weaponry_211_Nod_Disruption_Tower_header
+"From "Rites of War""
+END
+
+IDB:009_Nod_Weaponry_211_Nod_Disruption_Tower_body
+"GDI's dominance of space has complicated our lives.  Their ability to leverage their space-based weapon and sensor platform"
+END
+
+IDB:003_GDI_Weaponry_113_GDI_Grenadier_Intro_title
+"Disk Thrower"
+END
+
+IDB:003_GDI_Weaponry_113_GDI_Grenadier_Intro_header
+"TACOPS Field Guide: Disk Thrower Squad"
+END
+
+IDB:003_GDI_Weaponry_113_GDI_Grenadier_Intro_body
+"Disk Throwers are trained to quickly clear out enemy-occupied buildings through the use of lightweight, aerodynamic, discus-shaped grenades. Supplemented with bionic-assisted arms which allow these high-tech grenadiers to reach offensive ranges greater than those of traditional hand grenades, Disk Throwers are designed to destroy targets in fortified positions, including threats on the uppermost floors of tall buildings. The disk grenade is equipped with an onboard ballistics computer which calculates the distance to the target and spins in a given direction as the grenade travels along its flight path, making adjustments in speed and trajectory until impact. The ballistics computer can be preset to have the grenade airburst at a given distance and altitude to increase their effectiveness against fortified positions and minimize collateral damage in urban engagements. Secondly, the grenade can bounce across the ground if it does not initially strike its target, increasing its maximum range, but also increasing the possibility of collateral damage from ‘wild’ disks. In this regard, care must be exercised when deploying Disk Thrower squads into populated combat zones."
+END
+
+IDB:000_GDI_Internal_Memos_212_GDI_Nod_Aircraft_body
+"Nod aircraft have been revolutionized considerably since the Second Tiberium War. In addition to the Banshee, Nod has since fielded the Venom VTOL, Vertigo Bomber, Carryall, and Armageddon Bomber. \n  Venoms are vertical-takeoff-and-landing scouting craft which operate similarly to Orcas. They are lightly armed and armored, but can be equipped with versatile loadouts to engage multiple threats, including Orcas. \n Vertigo Bombers are batwing-shaped stealth bombers armed with high-explosive bombs and equipped with a tail gun for aerial defense. Their stealth systems can evade detection by defensive sensors only until they move right on top of the detection equipment. During payload delivery, the Vertigo’s cloaking system is neutralized for a few seconds, allowing the Vertigo to be engaged by antiaircraft systems. \n  Carryalls are similar in shape, appearance, and purpose to the Orca Carryalls deployed by GDI during the Second Tiberium War. The counterpart to the V-35 Ox Transport, Carryalls service the purpose of transporting Nod troops and vehicles to any location on the battlefield. \n The Armageddon Bomber is a multirole, high-altitude, long-range support aircraft which acts as an ordnance delivery aircraft and a reconnaissance scout. Armageddon Bombers have been observed airdropping landmines, scouting terrain, and delivering troops and equipment to Nod positions. \n Since the Second Tiberium War, little has changed in terms of the Nod Banshee. It continually maintains its crescent moon-shaped airframe, as well as superior capabilities in speed and maneuverability. The Banshee is heavily armored and armed with two plasma cannons capable of burning through the thickest of armor plating, even the armor on the Mammoth Mk. II. Intelligence has also confirmed that with upgraded avionics packages, the Banshee can dogfight with enemy aircraft."
+END
+
+
+IDB:003_GDI_Weaponry_142_GDI_Predator_Tank_Intro_title
+"Predator Tank"
+END
+
+IDB:003_GDI_Weaponry_142_GDI_Predator_Tank_Intro_header
+"Weapons of the World 2047: GDI Armored Vehicles"
+END
+
+IDB:003_GDI_Weaponry_142_GDI_Predator_Tank_Intro_body
+"Since the First Tiberium War, GDI has been renowned for its dominance of the battlefield through the deployment of high-tech and sophisticated armored vehicles, from the M1A1 Abrams Tank of yesteryear to the mechanized walkers of today. Reluctantly, treaded and wheeled vehicles have been all but phased out from GDI’s arsenal (with some notable exceptions) due to the drastic deformation of the earth’s terrain, of which Tiberium-infested environments have become the modern battlefields. In the Second Tiberium War, GDI activated its Battle Mechanized Walker Program, deploying a number of armored all-terrain walking vehicles, most notably the Wolverine, Titan, Mammoth Mk. II, and Juggernaut. \n When compared to wheeled and treaded vehicles, walking mechanized systems offer a number of advantages. The increased height of the walkers (especially the Titan and Mammoth Mk. II) allows them to scan further into the distance to detect targets. Mechanized walkers can also field greater levels of armor plating and high-powered weaponry without significantly impacting speed or performance, the elevated height of the weaponry allows for an extension of its effective and maximum range, their ability to maneuver quickly in difficult terrain surpasses that of their treaded ancestors, and the angle at which their ordnance is discharged allows them to strike the most vulnerable and weakest armored point on an enemy vehicle: its rooftop. \n The superior fighting capabilities of the mechanized walkers, especially the Titan and Mammoth Mk. II, are thought to have played a significant role leading to GDI’s total victory at the end of the second war. \n There are drawbacks to the use of mechanized walkers in combat, however. Most notably, their increased height allows enemy forces to easily spot oncoming walkers from great distances, and damage to the leg mechanisms can immobilize a walker, leaving it vulnerable to sustained attacks. Since the Second Tiberium War concluded, measures have been taken to increase the amount of armor protection fielded on the walkers, and all Titans have been configured for the installation of rail guns. These upgrades have preserved the fighting capabilities of all weapons fielded under the Battle Mechanized Walker Program. \n  However, the demilitarization of GDI following the end of the second conflict’s hostilities brought about the deactivated of the Battle Mechanized Walker Program in an effort to retain additional funding for further high-tech research. Afterwards, many mechanized walker crews were reassigned to crews of GDI’s newer ground-based vehicles. With Nod broken in several splintered factions and fanatical cells, the Brotherhood resumed its time-honored tactics of executing urban bombings and attacks on GDI-sympathetic civilian habitats. This prompted the institution of GDI rapid response policies to counter Nod terrorist activity. Most of the time, Nod terrorist attacks were executed in densely populated areas with little room to maneuver or space for colossal Dropships to deploy the mechanized walkers, which would have presented nightmarish conditions for Titans. This justified the fielding of treaded and wheeled vehicles which could be airlifted at a moment’s notice as a means of maintaining security in cities where Nod activity was frequent and devastating. Though Hover MLRS vehicles possessed the speed necessary for quick response counterattacks, their vulnerability to ion storms forced them into an artillery support role. \n At this stage, the Predator Tank was introduced. The Predator Tank offered to GDI a fast and maneuverable ground weapon which could inflict great damage upon armored Nod targets. However, the Predator Tank’s initial version was plagued by design flaws. The treads on the track shoes were almost completely exposed due to weight reduction concerns and a lack of track guards, the tank lacked a coaxial-mounted machine gun and a tank commander’s gun, plans to install a TOW Missile Launcher were discarded, and the engine was downgraded out of concern for weight reduction, which resulted in a loss of maximum speed. Veteran Predator crews known as Warhounds have attempted to address these drawbacks by custom-installing 20mm M61 Vulcan Cannons to their turret rooftops, but further Predator Tank production was halted upon the installment of ion atmospheric interference guards on all Hover MLRS. \n Despite the Predator Tank and mechanized walkers having ceased mainstream production, their design plans are still available for assembly at GDI War Factories should battle conditions necessitate their deployment. Secondly, Warhound crews stand ready for immediate deployment into combat to honor GDI’s traditions of armored battlefield dominance."
+END
+
+IDB:000_GDI_Internal_Memos_213_GDI_Nod_New_Flametank_title
+"Nod Flame Tank"
+END
+
+IDB:000_GDI_Internal_Memos_213_GDI_Nod_New_Flametank_header
+"For Immediate Release: Nod Deploys New Weapon of Terror"
+END
+
+IDB:000_GDI_Internal_Memos_213_GDI_Nod_New_Flametank_body
+"GDI Intelligence has confirmed that individual Nod cells are coming into possession of Devil’s Tongue Flame Tanks. However, we have confirmed that several changes have been made to the weapon. While the tank’s principle as an anti-infantry platform remains constant, additional armor plating has been installed to the vehicle. Secondly, the flame cannons are no longer mounted to the side. Instead, they are positioned at the front and base of the tank and supplied by fuel tanks mounted directly inside the vehicle. Intelligence has noticed, however, that initial models of the Devil’s Tongue are missing their duel roller drills, which enable them to burrow underground to launch subterranean attacks, and we have confirmed that such upgrades are reserved for veteran Devil’s Tongue crews as per by authorization of the local Nod cell commander. \n Nevertheless, the weaknesses of the Devil’s Tongue are also apparent: a lack of armor and limited range. All commanders are advised to uphold traditional antitank tactics when encountering Devil’s Tongues: fire first, fire fast, fire accurately."
+END
+
+
+IDB:001_GDI_News_Alert_221_Mammoth_MKII_Discontinued_title
+"Discontinuation of the Battle Mechanized Walker Program"
+END
+
+IDB:001_GDI_News_Alert_221_Mammoth_MKII_Discontinued_header
+"Excerpt from W3N Press Release, March 12th, 2039"
+END
+
+IDB:001_GDI_News_Alert_221_Mammoth_MKII_Discontinued_body2
+"According to sources inside the Global Defense Initiative, GDI’s Security Council has voted to discontinue funding for the Battle Mechanized Walker Program. This severance of funds has resulted in the discontinued production of several mechanized walker weapons platforms fielded by GDI, including the Wolverine, Titan, and most notably the Mammoth Mark II. \n The decision by the Security Council was met with praise by council members hoping to divert renewed funds to other costly high-tech projects, but protest by several GDI veterans and officers. Among the critics was Colonel Nicholas “Havoc” Parker, a commando and Special Operations commander, as well as an outspoken critic of recent changes agreed upon by Security Council members. \n “The suits behind their desks have again decided what the soldiers on the front line get to use,” Parker said. “Back in the old days, it was ‘Get the job done, Havoc, no matter what it takes,’ and nobody complained whenever their EVA units screamed out ‘Mission Accomplished’ afterwards. Now that we have the best toys on the planet and just won the [Second Tiberium] war with them, our mamas and papas on Sec-Count say we can’t play with them anymore because it costs too damn much to pay for them!” \n With rumors abound of walking Nod heavy mechanized weapons, Colonel Parkers hopes that the GDI Security Council will reconsider its decision to revoke the Battle Mechanized Walker Program’s continuality. \n “Nod’s still out there and they aren’t going away anytime soon,” Havoc warned. “One of these days, we’re going to need our walkers back. To go to war without them covering our a**es is a big mistake.” \n Colonel Parker is currently in the process of organizing a petition to retain design plans for continued production of GDI’s mechanized walkers. Short of that, he hopes the manufacturing plans will be retained in GDI’s War Factories and on individual GDI space stations so as to allow for Wolverines, Titans, and even Mammoth Mk. IIs to be deployed at the request of individual base commanders. \n Though the Battle Mechanized Walker Program has been deactivated due to the level of expenses paid to have the program maintained, Juggernaut artillery walkers are still being maintained and actively produced as GDI’s primary self-propelled artillery system."
+END
+
+
+IDB:003_GDI_Weaponry_143_GDI_Base_Defenses_Intro_body
+"GDI field bases have access to three basic static defenses based on the Modular Design Program’s Component Towers. Each tower or platform is designed to counter a specific type of threat, and are listed as follows: the Vulcan Tower, RPG Tower, and AA Battery. Vulcan Towers are equipped with dual 20mm Gatling Guns and are very effective against enemy infantry and light vehicles. Rocket-Propelled Grenade Towers are effective against light and heavy vehicles and are able to fire two guided rounds before having to reload. AA Batteries are ball turrets which operate independently of a Component Tower. They are equipped with twin four-barreled 30mm antiaircraft guns. Each defensive tower’s ballistics computer is able to account for speed, distance, and direction of the target, making them lethal and effective base defensive measures in all scenarios. However, defensive towers operate efficiently only when sufficient power is available. A loss of power will deactivate all defensive towers and leave a GDI position vulnerable to attack."
+END
+
+
+
+//----------------- GDI:Units and Structures-------------------
+
+
+NAME:GDIDiscThrower
+"Disc Thrower Squad"
+END
+
+TYPE:GDIDiscThrower
+"Light Infantry. Strong vs. Infantry, Structures."
+END
+
+DESC:GDIDiscThrower
+"Abilities: \n     » Clear Garrisoned Structure \n     » Call for Transport (Orbital Deployment Center) \n Upgrades: \n     » Advanced Combat Armor (Armory)"
+END
+
+NAME:GDIMissileSquad
+"Missile Squad"
+END
+
+TYPE:GDIMissileSquad
+"Light Infantry. Strong vs. Vehicles, Aircraft."
+END
+
+DESC:GDIMissileSquad
+"Abilities: \n     » Call for Transport (Orbital Deployment Center) \n Upgrades: \n     » Advanced Combat Armor (Armory)"
+END
+
+NAME:GDIRiflemanSquad
+"Rifleman Squad"
+END
+
+TYPE:GDIRiflemanSquad
+"Light Infantry. Strong vs. Infantry."
+END
+
+DESC:GDIRiflemanSquad
+"Abilities: \n     » Dig In \n     » Call for Transport (Orbital Deployment Center) \n Upgrades: \n     » Advanced Combat Armor (Armory)"
+END
+
+TYPE:GDIEngineer
+"Light Infantry. Weaponless."
+END
+
+DESC:GDIEngineer
+"Abilities: \n     » Heal when idle \n     » Capture Structure \n     » Capture Walker Husk \n     » Repair Structure \n     » Repair Bridge \n     » Call for Transport (Orbital Deployment Center)"
+END
+
+
+NAME:GDISniperTeam
+"Sniper Team"
+END
+
+TYPE:GDISniperTeam
+"Light Infantry. Strong vs. Infantry."
+END
+
+DESC:GDISniperTeam
+"Abilities: \n     » Cloaked when immobile \n     » Spots Target for Juggernauts \n     » Call for Transport (Orbital Deployment Center) \n Upgrades: \n     » Scanner Packs (Armory) \n     » Advanced Combat Armor (Armory)"
+END
+
+NAME:GDIZoneTrooper
+"Zone Trooper"
+END
+
+TYPE:GDIZoneTrooper
+"Heavy Infantry. Strong vs. Vehicles."
+END
+
+DESC:GDIZoneTrooper
+"Abilities: \n     » Jump Jets \n     » Call for Transport (Orbital Deployment Center) \n     » Pulse Scan (upgrade) \n Upgrades:\n     » Autoinjectors Pack (Armory) \n     » Scanner Packs (Armory)"
+END
+
+NAME:GDIZoneCommando
+"Zone Commando"
+END
+
+TYPE:GDIZoneCommando
+"Special Infantry. Strong vs. Infantry, Structures."
+END
+
+DESC:GDIZoneCommando
+"Abilities: \n     » Heal when idle \n     » Jump Jets \n     » Orbital Strike (Destroy Structure) \n     » Call for Transport (Orbital Deployment Center) \n \n Only one Zone Commando may be trained at a time"
+END
+
+NAME:GDICommando
+"Commando"
+END
+
+TYPE:GDICommando
+"Special Infantry. Strong vs. Infantry, Structures."
+END
+
+DESC:GDICommando
+"Abilities: \n     » Jump Jets \n     » Destroy Structure \n     » Destroy Walker \n     » Call for Transport (Orbital Deployment Center) \n \n Only one Commando may be trained at a time"
+END
+
+NAME:GDIMedic
+"Field Medic Squad"
+END
+
+TYPE:GDIMedic
+"Light Infantry, Weaponless"
+END
+
+DESC:GDIMedic
+"Abilities: \n      » Heal Nearby Infantry \n      » Deploys in to Combat Support Hospital \n     » Call for Transport (Orbital Deployment Center)"
+END
+
+NAME:GDIMedicCSH
+"Combat Support Hospital"
+END
+
+TYPE:GDIMedicCSH
+"Support Structure"
+END
+
+DESC:GDIMedicCSH
+"Abilities: \n      » Heals Infantry and Replenish Squads \n      » Selfreapair"
+END
+
+NAME:GDIJumpJetTrooper
+"Jetpack Trooper"
+END
+
+TYPE:GDIJumpJetTrooper
+"Special Infantry. Strong vs. Infantry, Aircraft."
+END
+
+DESC:GDIJumpJetTrooper
+"Abilities: \n      » Switch Altitude \n \n Upgrades: \n      » Autoinjectors Pack (Armory) \n      » Sub-Calibre Rounds (Command Post)"
+END
+
+NAME:GDIMobileEMP
+"Mobile EMP Cannon"
+END
+
+TYPE:GDIMobileEMP
+"Medium Vehicle, Weaponless"
+END
+
+DESC:GDIMobileEMP
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n      » EMP blast (disable vehicles and structures in small area) \n \n Only one Mobile EMP may be deployed at a time"
+END
+
+NAME:GDISurveyor
+"Surveyor"
+END
+
+TYPE:GDISurveyor
+"Light vehicle. Weaponless."
+END
+
+DESC:GDISurveyor
+"Unpacks into Outpost \n      » Outpost provides Ground Control to place structures and detect stealth units.   \n \n Abilities: \n      » Call for Transport (Orbital Deployment Center)"
+END
+
+DESC:GDIOutpost
+"Outpost provides Ground Control to place structures. \n Abilities: \n      » Detect Stealth"
+END
+
+NAME:GDIConstructionYard
+"Construction Yard"
+END
+
+TYPE:GDIConstructionYard
+"Production Structure."
+END
+
+DESC:GDIConstructionYard
+"Provides structure production queues"
+END
+
+NAME:GDIMSA
+"Mobile Sensor Array"
+END
+
+TYPE:GDIMSA
+"Light Vehicle, Weaponless "
+END
+
+DESC:GDIMSA
+"Deploys in to immobile Sensor Array. \n Sensor Array detects stealth in wide area. \n Only one Mobile Sensor Array may be deployed at a time"
+END
+
+DESC:GDIMSADeployed
+"Detects stealth in wide area. \n Undeploys in to mobile vehicle."
+END
+
+NAME:GDIAPCEA
+"APC"
+END
+
+TYPE:GDIAPCEA
+"Light Vehicle. Strong vs. Infantry, Aircraft."
+END
+
+DESC:GDIAPCEA
+"Abilities: \n     » Transports Infantry"
+END
+
+NAME:GDIAPC
+"Goliath APC"
+END
+
+TYPE:GDIAPC
+"Medium Vehicle. Strong vs. Infantry, Aircraft."
+END
+
+DESC:GDIAPC
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n     » Transports Infantry \n     » Place Emp Mines \n \n Upgrades: \n      » Sub-Calibre Rounds (Command Post)"
+END
+
+NAME:GDIWolverine
+"Wolverine"
+END
+
+TYPE:GDIWolverine
+"Light Walker, Strong vs. Infantry."
+END
+
+DESC:GDIWolverine
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n Upgrades: \n      » Reactive Armor (Command Post) \n      » Sub-Calibre Rounds (Command Post)"
+END
+
+NAME:GDITitan
+"Titan"
+END
+
+TYPE:GDITitan
+"Medium Walker, Strong vs. Vehicles."
+END
+
+DESC:GDITitan
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n       » Can shoot over walls \n       » Crush Heavy Infantry \n Upgrades: \n      » Rail Guns (Tech Center) \n      » Reactive Armor (Command Post)"
+END
+
+TYPE:GDIJuggernaut
+"Heavy Walker, Strong vs. Structures."
+END
+
+DESC:GDIJuggernaut
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n       » Crush vehicles under feet \n     » Bombard Spotted Target \n Upgrades: \n      » Advanced Fire Control (Tech Center)"
+END
+
+NAME:HoverMLRS
+"Tempest MLRS"
+END
+
+TYPE:HoverMLRS
+"Medium vehicle. Strong vs. Vehicles, Aircraft, Structures."
+END
+
+DESC:HoverMLRS
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n      » Amphibious Propulsion \n Upgrades: \n      » Reactive Armor (Command Post) \n       » Advanced Fire Control (Tech Center)"
+END
+
+NAME:GDIFalcon
+"Falcon"
+END
+
+TYPE:GDIFalcon
+"Light vehicle. Strong vs. Vehicles, Structures. \n Detector"
+END
+
+DESC:GDIFalcon
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n      » Detects Stealth \n      » Amphibious Propulsion  \n      » Sensor Pod (Upgrade) \n Upgrades: \n      » Shockwave Warheads (Tech Center)  \n      » Sensor Pod (Command Post)"
+END
+
+TYPE:GDIRig
+"Unarmed utility vehicle"
+END
+
+DESC:GDIRig
+"Abilities: \n      » Unpack into Battle Base \n      » Battle Base can defend an area and repair nearby vehicles."
+END
+
+NAME:GDIBattleBase
+"Battle Base"
+END
+
+NAME:GDIForwardBattleBase
+"Forward Battle Base"
+END
+
+TYPE:GDIForwardBattleBase
+"Structure. Strong vs. Vehicles, Aircraft."
+END
+
+DESC:GDIForwardBattleBase
+"Detect Stealth \n Abilities:     » Repairs nearby vehicles \n     » Can repack into Rig"
+END
+
+NAME:GDIKodiak
+"Kodiak II"
+END
+
+TYPE:GDIKodiak
+"Superheavy Aircraft. Strong vs. Aircraft, Structure"
+END
+
+DESC:GDIKodiak
+"Gdi command ship dedicated to fight tiberium. \n Abilities: \n     » Stratofighter \n      » Terraforming Torpedo \n     » Advanced Leadership - improved experience gain and defence capabilities of Gdi units +10%  \n \n Only one Kodiak II may be deployed at a time"
+END
+
+NAME:GDIFirehawk
+"Firehawk"
+END
+
+TYPE:GDIFirehawk
+"Aircraft. Strong vs. Aircraft, Vehicle, Structure"
+END
+
+DESC:GDIFirehawk
+"Abilities: \n      » Versatile Loadout (Anti-Air Missiles, Shockwave Missiles) \n     » Stratofighter (upgrade) \n Upgrades: \n      » ECM Container (Tech Center) \n      » Stratofighter Booster (Command Post)"
+END
+
+NAME:GDIOrca
+"Orca Fighter"
+END
+
+DESC:GDIOrca
+"Abilities: \n      » Versatile Loadout (Hellfire Missiles, Minigun) \n     » Pulse Scan \n Upgrades: \n      » ECM Container (Tech Center)"
+END
+
+TYPE:GDIOrca
+"Aircraft. Strong vs. Vehicles, Structures"
+END
+
+NAME:GDIOrcaBomber
+"Orca Bomber"
+END
+
+TYPE:GDIOrcaBomber
+"Heavy Aircraft. Strong vs. Structures."
+END
+
+DESC:GDIOrcaBomber
+"Abilities: \n      » Versatile Loadout (Carpet Bombs, Smart Bombs) \n Upgrades: \n      » ECM Container (Tech Center)"
+END
+
+NAME:GDIOrcaCarryall
+"Orca Carryall"
+END
+
+DESC:GDIOrcaCarryall
+"Transports vehicles"
+END
+
+TYPE:GDIOrcaCarryall
+"Aircraft. Weaponless"
+END
+
+NAME:GDIOrcaTransport
+"Condor Transport"
+END
+
+DESC:GDIOrcaTransport
+"Transports Infantry \n Abilities: \n      » Gun ports (contained infantry can attack)"
+END
+
+TYPE:GDIOrcaTransport
+"Aircraft. Weaponless"
+END
+
+NAME:GDIOrcaRepair
+"Orca Rig"
+END
+
+TYPE:GDIOrcaRepair
+"Aircraft. Weaponless \n Detector"
+END
+
+DESC:GDIOrcaRepair
+"Abilities: \n      » Detect Stealth \n      » Repairs Aircrafts \n      » Deploys into Support Battlebase"
+END
+
+
+NAME:GDIOrcaRepairGround
+"Support Battlebase"
+END
+
+TYPE:GDIOrcaRepairGround
+"Structure, Strong vs. Vehicle, Aircraft \n Detector"
+END
+
+DESC:GDIOrcaRepairGround
+"Abilities: \n      » Detect Stealth \n      » Repair Vehicles \n      » Repack into Rig"
+END
+
+NAME:GDIDisruptor
+"Disruptor"
+END
+
+TYPE:GDIDisruptor
+"Heavy Vehicle. Strong vs. Infantry, Structures."
+END
+
+DESC:GDIDisruptor
+"Fires weaponized sound waves in a straight line \n Ignores line of sight \n Abilities: \n      » Call for Transport (Orbital Deployment Center) \n      » Focused Sonic Beam (Clear Garrison) \n      » Disrupt Ion Storms"
+END
+
+NAME:GDIMammothTank
+"Mammoth Tank"
+END
+
+TYPE:GDIMammothTank
+"Heavy Vehicle. Strong vs. Vehicles, Structures, Aircraft."
+END
+
+DESC:GDIMammothTank
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n       » Crush vehicles under tracks \n \n Upgrades: \n     » Rail Guns (Tech Center)"
+END
+
+NAME:GDIMammothMech
+"Mammoth Walker Mark II"
+END
+
+TYPE:GDIMammothMech
+"Superheavy Walker. Strong vs. All Targets."
+END
+
+DESC:GDIMammothMech
+"Can be upgraded with additional weapons. \n Abilities: \n      » Self Repair \n       » Crush vehicles under feet \n       » Can shood over structures and walls \n \n Only one Mammoth Walker Mark II may be deployed at a time"
+END
+
+DESC:GDIPitbull
+"Detects Stealth"
+END
+
+
+NAME:GDIPredatorTank
+"Predator Tank"
+END
+
+TYPE:GDIPredatorTank
+"Medium vehicle. Strong vs. Vehicles, Structures."
+END
+
+DESC:GDIPredatorTank
+""
+END
+
+
+TYPE:GDIBarracks
+"Production Structure."
+END
+
+DESC:GDIBarracks
+"Trains GDI infantry \n Abilities: \n      » Can heal wounded infantry and replenish squads"
+END
+
+TYPE:GDIWarFactory
+"Production Structure."
+END
+
+DESC:GDIWarFactory
+"Deploys GDI Vehicles \n Abilities: \n      » Repair vehicles"
+END
+
+TYPE:GDIPowerPlant
+"Tech Structure."
+END
+
+DESC:GDIPowerPlant
+"Provides Power + 20 \n Upgrades:\n     » Advanced Turbines (Command Post) +15 Power"
+END
+
+TYPE:GDIRefinery
+"Resource Structure."
+END
+
+DESC:GDIArmory
+"Unlocks advanced infantry  \n Researches Upgrades: \n      » Infantry Advanced Armor \n      » Scanner Packs \n      » Autoinjectors Pack \n \n Provides Support Powers: \n     » Advanced Pilot Training"
+END
+
+DESC:GDICommandPost
+"Unlocks advanced units and structures \n Enables radar \n Researches Upgrades: \n      » Sensor Pod \n      » Sub-Calibre Rounds \n      » Reactive Armor  \n Unlocks Upgrades: \n      » Power Plant Advanced Turbines \n \n Provides Support Powers: \n      » Radar Scan \n      » Sharpshooter Team"
+END
+
+DESC:GDITechCenter
+"Unlocks high-tech units and structures \n Researches Upgrades: \n      » Rail Guns \n      » ECM Container \n      » Advanced Fire Control \n      » Shockwave Warheads  \n \n Provides Support Powers: \n      » Terraforming Torpedo"
+END
+
+NAME:GDIDropShipBay
+"Orbital Deployment Center"
+END
+
+TYPE:GDIDropShipBay
+"Tech Structure"
+END
+
+DESC:GDIDropShipBay
+"Advanced support structure, grants access to advanced orbital-deployed technology \n Deploys Mammoth Walker Mark II \n \n Enables Support Powers \n      » Zone Trooper Drop Pods \n      » Shockwave Artillery \n \n Only one Orbital Deployment Center may be built at a time"
+END
+
+NAME:GDITerraformingStation
+"Sonic Emitter"
+END
+
+TYPE:GDITerraformingStation
+"Defensive Structure. Strong vs. Vehicles."
+END
+
+DESC:GDITerraformingStation
+"Fires weaponised sound waves. Damages everything in straight line from firing position. \n Abilities: \n      » Detects Stealth \n      » Interupt Ion storms"
+END
+
+NAME:GDIAABattery
+"AA Battery"
+END
+
+TYPE:GDIAABattery
+"Defensive Structure. Strong vs Aircraft. \n Detector"
+END
+
+DESC:GDIAABattery
+"Abilities: \n      » Detects Stealth  \n       » Can shoot over walls \n Upgrades: \n      » Rail Guns (Tech Center)"
+END
+
+NAME:GDIWallHub
+"Wall Hub"
+END
+
+TYPE:GDIWallHub
+"Defensive Structure."
+END
+
+DESC:GDIWallHub
+"Enables wall construction"
+END
+
+NAME:GDIVulcanTower
+"Vulcan Tower"
+END
+
+TYPE:GDIVulcanTower
+"Defensive Structure. Strong vs. Infantry. \n Detector"
+END
+
+DESC:GDIVulcanTower
+"Abilities: \n      » Detects Stealth  \n       » Can shoot over walls \n Upgrades: \n      » Sub-Calibre Rounds (Command Post)"
+END
+
+NAME:GDIRPGTOWER
+"RPG Tower"
+END
+
+TYPE:GDIRPGTOWER
+"Defensive Structure. Strong vs. Vehicles. \n Detector"
+END
+
+DESC:GDIRPGTOWER
+"Abilities: \n      » Detects Stealth  \n       » Can shoot over walls \n Upgrades: \n      » Shockwave Warhead (Tech Center)"
+END
+
+NAME:GDIRepairTower
+"Repair Tower"
+END
+
+TYPE:GDIRepairTower
+"Support structure."
+END
+
+DESC:GDIRepairTower
+"Repairs nearby vehicles"
+END
+
+DESC:GDIRefinery
+"Comes with a Harvester to allow the gathering of resources \n Processes and stores Tiberium"
+END
+
+DESC:GDITiberiumSilo
+"Stores Tiberium, allowing for a greater maximum reserve"
+END
+
+NAME:GDIFirestormGenerator
+"Firestorm Shield Generator"
+END
+
+TYPE:GDIFirestormGenerator
+"Defensive Structure."
+END
+
+DESC:GDIFirestormGenerator
+"Can create temporaly shield that makes allied units and structures invulnerable to physical damage and EMP damage \n Also all enemy units within shield radius suffer heavy damage  \n Shield last 15 seconds \n Shield do not deflect superweapon attack \n \n Firestorm Generator is immune to EMP, Statis field and Mind control"
+END
+
+DESC:GDIFirestormGeneratorAura
+"Energize armor of surrounded GDI vehicles and structures with Firestorm plasma shielding. \n Improves armor + 25% \n Absorbs EMP damage \n \n Only Gdi vehicles and structures benefits from Firestorm shield."
+END
+
+NAME:GDIWallGate
+"Gate"
+END
+
+TYPE:GDIWallGate
+"Defensive structure."
+END
+
+DESC:GDIWallGate
+"Impassable barrier to all units. Can be manually lowered to allow units pass trough."
+END
+
+
+
+//-----------------Abilities:Gdi------------------------
+
+
+NAME:GateUnpackAbility
+"Lower Gate"
+END
+
+DESC:GateUnpackAbility
+"Gate become passable to all units. \n \n Left-click to activate"
+END
+
+NAME:MSAUnpackAbility
+"Unpack MSA"
+END
+
+DESC:MSAUnpackAbility
+"Unpack the MSA into an Sensor Array. \n Detect Stealth in large area. \n \n Left-click to activate"
+END
+
+NAME:MSAPackAbility
+"Pack Up MSA"
+END
+
+DESC:MSAPackAbility
+"Pack Up to Mobile Vehicle"
+END
+
+Name:UpgradeSensorPod
+"Sensor Pod Upgrade"
+END
+
+UpgradeDesc:OrcaSensorPod
+"Allows the Falcon to launch a sensor that reveals the nearby shroud and stealth"
+END
+
+Desc:UpgradeSensorPod
+"Allows Falcons to launch a Sensor Pod revealing the nearby shroud and stealth \n \n Left-click to begin researching"
+END
+
+NAME:AbilitySensorPod
+"Deploy Sensor Pod"
+END
+
+DESCRIPTION:AbilitySensorPod
+"Launch a sensor that reveals the nearby shroud and stealth \n \n Left-click icon then left-click on target"
+END
+
+NAME:DisruptorAntiGarrisonAttack
+"Focused Sonic Beam"
+END
+
+TYPE:DisruptorAntiGarrisonAttack
+""
+END
+
+DESC:DisruptorAntiGarrisonAttack
+"Disruptor focuses fire to clear out garrisoned buildings \n \n Left-click icon then left-click on garrisoned structure"
+END
+
+
+NAME:DisruptorAntiTiberiumAbility
+"Clear Sky"
+END
+
+TYPE:DisruptorAntiTiberiumAbility
+""
+END
+
+DESC:DisruptorAntiTiberiumAbility
+"Activate weaponized supersonic sound waves to rezonate and disrupt ion storms. \n » Remove ion storms within near proximity. \n \n Left-click icon to activate"
+END
+
+NAME:GdiCommandoOrbitalStrike
+"Orbital Strike"
+END
+
+DESC:GdiCommandoOrbitalStrike
+"Pinpoint structure for orbital bombardment. Targeted structure is destroyed right afterwards. \n \n Left-click icon then left-click on target structure"
+END
+
+NAME:AbilityUnpackCondorAir
+"Take off"
+END
+
+DESC:AbilityUnpackCondorAir
+"Rig repacks and returns to flight altitude \n \n Left-click icon to activate"
+END
+
+NAME:AbilityUnpackCondorGround
+"Ground Support"
+END
+
+DESC:AbilityUnpackCondorGround
+"Rig lands on ground and deploys into support battlebase \n \n Left-click icon to activate"
+END
+
+NAME:AbilityjumpJetUp
+"Flight Altitude"
+END
+
+DESC:AbilityjumpJetUp
+"Jetpack Infantryman returns to high-level altitude, flying at full speed \n \n Left-click icon to activate"
+END
+
+
+NAME:AbilityjumpJetDown
+"Close Support Altitude"
+END
+
+DESC:AbilityjumpJetDown
+"Jetpack Infantryman descends to low altitude to provide close air support, hovering above the ground at reduced speed.  \n \n Left-click icon then left-click target location"
+END
+
+NAME:AbilitySwitchToAmphibious
+"Amphibious Mode"
+END
+
+DESC:AbilitySwitchToAmphibious
+"Vehicle adopt propulsion to water surface conditions. \n Can move over water at reduced speed. \n \n Left-click icon to activate"
+END
+
+
+NAME:AbilitySwitchToNormal
+"Land Mode"
+END
+
+DESC:AbilitySwitchToNormal
+"Vehicle adopt propulsion to land conditions. \n Hovering above the ground at full speed.  \n \n Left-click icon then left-click target location"
+END
+
+NAME:AbilityMedicCSH
+"Combat Support Hospital"
+END
+
+DESC:AbilityMedicCSH
+"Field Medics deploy Combat Support Hospital \n \n Left-click to activate"
+END
+
+NAME:AbilityUnpackMedicCSH
+"Pack Up"
+END
+
+DESC:AbilityUnpackMedicCSH
+"Structure pack up in to Field Medics Squad \n \n Left-click to activate"
+END
+
+NAME:AbilityEgineerFlashbang
+"EMP Grenade"
+END
+
+DESC:AbilityEgineerFlashbang
+"Disable vehicles and structures in small area for 7 seconds. \n \n Left-click icon then left-click on target"
+END
+
+NAME:AbilityRigEmpWeapon
+"EMP Blast"
+END
+
+DESC:AbilityRigEmpWeapon
+"Disable vehicles and structures in small area for 5 seconds. \n \n Left-click icon then left-click on target"
+END
+
+NAME:AbilityGDICallForTransportVehicle
+"Call for Transport"
+END
+
+DESC:AbilityGDICallForTransportVehicle
+"Calls a Orca Carryall to immediately pick up the Vehicle \n The Vehicle can then be transported anywhere on the battlefield \n \n Requires Orbital Deployment Center \n Left-click to activate"
+END
+
+NAME:AbilityGDICallForTransportInfantry
+"Call for Transport"
+END
+
+DESC:AbilityGDICallForTransportInfantry
+"Calls a Condor Transport to immediately pick up the Infantry \n The Infantry can then be transported anywhere on the battlefield \n \n Requires Orbital Deployment Center \n Left-click to activate"
+END
+
+NAME:KodiakTerraformingTorpedo
+"Terraforming torpedo"
+END
+
+DESC:KodiakTerraformingTorpedo
+"Kodiak launches a Terraforming Torpedo that causes a destructive chain reaction when contacting Tiberium \n Destroys tiberium and tiberium processing structures in small radius \n Do not affect blue tiberium \n \n Left-click icon then left-click on target location"
+END
+
+
+
+//-----------------Upgrades:Gdi--------------------------
+
+
+
+
+UPGRADE:GDICompositeArmor
+"Advanced Infantry Armor"
+END
+
+UpgradeName:GDICompositeArmor
+"Advanced Infantry Armor"
+END
+
+UpgradePrereq:GDICompositeArmor
+"Research at Armory"
+END
+
+UpgradeType:GDICompositeArmor
+"Armor Upgrade"
+END
+
+UpgradeDesc:GDICompositeArmor
+"Increases armor +50% \n Enable 75% resistance to tiberium radiation"
+END
+
+Name:PurchaseUpgradeCompositeArmor
+"Composite Armor upgrade"
+END
+
+DESC:PurchaseUpgradeCompositeArmor
+"Upgrades all Riflemen, Missile Squads and Disk Throwers with Advanced Infantry Armor \n Increases armor +50% and enable 75% resistance to tiberium radiation \n \n Left-click to begin researching"
+END
+
+UPGRADE:ZoneTrooperAutoInjectors
+"AutoInjectors Pack"
+END
+
+UpgradeName:ZoneTrooperAutoInjectors
+"AutoInjectors Pack"
+END
+
+UpgradePrereq:ZoneTrooperAutoInjectors
+"Research at Armory"
+END
+
+UpgradeType:ZoneTrooperAutoInjectors
+"Armor Upgrade"
+END
+
+UpgradeDesc:ZoneTrooperAutoInjectors
+"Increases hit points +25% \n Heals the unit while idle"
+END
+
+NAME:PurchaseAutoInjectors
+"AutoInjectors Pack"
+END
+
+DESC:PurchaseAutoInjectors
+"Upgrades the Zone Troopers and The Jetpack Troopers with AutoInjectors Pack \n Increases hit points +25% \n Heals the squad while idle \n \n Left-click to begin researching"
+END
+
+UPGRADE:ZoneTrooperScannerPack
+"Scanner Packs"
+END
+
+UPGRADENAME:ZoneTrooperScannerPack
+"Scanner Packs"
+END
+
+UPGRADEPREREQ:ZoneTrooperScannerPack
+"Research at Armory"
+END
+
+UPGRADETYPE:ZoneTrooperScannerPack
+"Intelligence Upgrade"
+END
+
+UPGRADEDESC:ZoneTrooperScannerPack
+"Increases weapon range and sight range +10% \n Detects stealth in a small radius"
+END
+
+
+NAME:PurchaseScannerPacks
+"Scanner Packs"
+END
+
+DESC:PurchaseScannerPacks
+"Upgrades the Zone Troopers and The Snipers with Scanner Packs \n Increases weapon range and sight range +10% \n Detects stealth in a small radius \n \n Left-click to begin researching"
+END
+
+
+UpgradePrereq:UpgradeAPAmmo
+"Research at Command Post"
+END
+
+UpgradeName:UpgradeAPAmmo
+"Sub-Calibre Rounds"
+END
+
+UpgradeTYPE:UpgradeAPAmmo
+"Weapon upgrade"
+END
+
+UpgradeDESC:UpgradeAPAmmo
+"Increases attack damage +50% \n Increases maximum weapons range +10%"
+END
+
+Name:UpgradeAPAmmo
+"Sub-Calibre Rounds"
+END
+
+TYPE:UpgradeAPAmmo
+"Weapon upgrade"
+END
+
+DESC:UpgradeAPAmmo
+"Upgrades Wolverine, Goliath APC, Jump Jet Trooper, and Vulcan Tower with Sub-Calibre Rounds \n Increases 50% attack damage and 10% maximum weapon range."
+END
+
+
+UPGRADE:SelectBomberWeapon01
+"Switched to Carpet Bombs Loadout"
+END
+
+
+DESC:SelectBomberWeapon01
+"Switched to Carpet Bombs Loadout"
+END
+
+NAME:SelectBomberWeapon01
+"Carpet Bombs"
+END
+
+UPGRADE:SelectBomberWeapon02
+"Switched to Guided Smart Bombs Loadout"
+END
+
+NAME:SelectBomberWeapon02
+"Smart Bombs"
+END
+
+DESC:SelectBomberWeapon02
+"Switched to Guided Smart Bombs Loadout"
+END
+
+UPGRADE:SelectOrcaLoad02
+"Switched to Minigun"
+END
+
+DESC:SelectOrcaLoad02
+"Switch to Minigun. Can engage ground and air targets"
+END
+
+NAME:SelectOrcaLoad02
+"Minigun"
+END
+
+UPGRADE:SelectOrcaLoad01
+"Switched to Anti-Ground Missiles"
+END
+
+NAME:SelectOrcaLoad01
+"Hellfire Missiles"
+END
+
+DESC:SelectOrcaLoad01
+"Switch to Anti-Ground Missiles"
+END
+
+NAME:SelectBomberWeapon02
+"EMP Shockwave Missiles"
+END
+
+DESC:SelectBomberWeapon02
+"Switched to Anti-ground EMP Shockwave Missiles"
+END
+
+
+UPGRADE:GDIExtraArmor
+"Reactive Armor"
+END
+
+UpgradeName:GDIExtraArmor
+"Reactive Armor"
+END
+
+UpgradePrereq:GDIExtraArmor
+"Research at Command Post"
+END
+
+UpgradeType:GDIExtraArmor
+"Armor upgrade"
+END
+
+UpgradeDesc:GDIExtraArmor
+"Increases maximum health + 20%"
+END
+
+Name:GDIExtraArmor
+"Reactive Armor"
+END
+
+DESC:GDIExtraArmor
+"Upgrades all Wolwerines, Titans and Tempest MLRS with Reactive Armor. Increases maximum health + 20% \n \n Left-click to begin researching"
+END
+
+
+UPGRADE:GDIShockWaveUpgrade
+"Shockwave EMP Warhead"
+END
+
+UpgradeName:GDIShockWaveUpgrade
+"Shockwave EMP Warhead"
+END
+
+UpgradePrereq:GDIShockWaveUpgrade
+"Research at Tech Center"
+END
+
+UpgradeType:GDIShockWaveUpgrade
+"Weapon upgrade"
+END
+
+UpgradeDesc:GDIShockWaveUpgrade
+"Increases attack damage +20% \n Enable EMP damage that disable vehicles and structures for 2 seconds"
+END
+
+Name:GDIShockWaveUpgrade
+"Shockwave EMP Warhead"
+END
+
+DESC:GDIShockWaveUpgrade
+"Upgrades all Falcons and RPG Turrets weapons with Shockwave EMP Warheads \n Increases attack damage +20% and enable EMP damage that disable vehicles and structures for 2 seconds \n \n Left-click to begin researching"
+END
+
+
+DESCRIPTION:PurchaseRailgun
+"Upgrades all Titans, Mammoth Tanks and AA Batteries with Rail Guns \n Increases attack damage + 50% \n \n Left-click to begin researching"
+END
+
+UpgradeDesc:GDIRailGuns
+"Increases attack damage +50%"
+END
+
+
+UpgradePrereq:PitbullMortars
+"Research at Tech Center"
+END
+
+
+UpgradePrereq:OrcaSensorPod
+"Research at Command Post"
+END
+
+UpgradePrereq:GDIUpgradeAFC
+"Research at Tech Center"
+END
+
+
+UpgradeName:GDIUpgradeAFC
+"Advanced Fire Control"
+END
+
+UpgradeTYPE:GDIUpgradeAFC
+"Weapons upgrade"
+END
+
+UpgradeDESC:GDIUpgradeAFC
+"Improves rate of fire + 25% \n Reduces splash damage taken by allies to 25%"
+END
+
+Name:GDIUpgradeAFC
+"Advanced Fire Control"
+END
+
+
+TYPE:GDIUpgradeAFC
+"Weapons upgrade"
+END
+
+DESC:GDIUpgradeAFC
+"Upgade Tempest and Juggernaut with Advanced Fire Control System. Improves rate of fire + 25% and reduces splash damage taken by allies to 25% \n \n Left-click to begin researching"
+END
+
+UpgradeName:GDIUpgradeMinigun
+"Minigun Turret"
+END
+
+UpgradeTYPE:GDIUpgradeMinigun
+"Weapons upgrade"
+END
+
+UpgradeDESC:GDIUpgradeMinigun
+"Enable attack air and ground targets. \n Good vs Infantry"
+END
+
+Name:GDIUpgradeMinigun
+"Minigun Turret"
+END
+
+
+TYPE:GDIUpgradeMinigun
+"Weapons upgrade"
+END
+
+DESC:GDIUpgradeMinigun
+"Upgrade Orca with minigun turret. \n Enable attack air and ground targets. \n \n Left-click to begin researching"
+END
+
+UpgradePrereq:CeramicArmor
+"Research at Tech Center"
+END
+
+UpgradeName:CeramicArmor
+"ECM Container"
+END
+
+UpgradePrereq:CeramicArmor
+"Research at Tech Center"
+END
+
+UpgradeType:CeramicArmor
+"Armor Upgrade"
+END
+
+UpgradeDesc:CeramicArmor
+"Increases armor + 20%"
+END
+
+DESC:CeramicArmor
+"Upgrades all Orca Fighters, Orca Bombers and Firehawks with Electronic Counter-Mesure sytems - ECM Container. Improve defensive capabilities of aircrafts. Increases armor + 20% \n \n Left-click to begin researching"
+END
+
+NAME:UpgradeAdvancedTurbines
+"Advanced Turbines Upgrade"
+END
+
+DESC:UpgradeAdvancedTurbines
+"Increases the power output of this Power Plant +15 Power \n \n Left-click to begin upgrading"
+END
+
+
+
+//-----------------Support Powers:Gdi----------------------------
+
+NAME:PlayerPowerFirestormShield
+"Firestorm Shield"
+END
+
+TYPE:PlayerPowerFirestormShield
+"Defensive Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerFirestormShield
+"Activates temporal shield around generator that protects units and structures inside from incoming fire \n Shield last 15 seconds \n \n Left-click to activate"
+END
+
+NAME:PlayerPowerTerraformingTorpedo
+"Terraforming torpedo"
+END
+
+TYPE:PlayerPowerTerraformingTorpedo
+"Offensive Power \n 5 minute Cooldown"
+END
+
+DESC:PlayerPowerTerraformingTorpedo
+"Launches a Terraforming Torpedo that causes a destructive chain reaction when contacting Tiberium \n Destroys tiberium and tiberium processing structures in small radius \n Do not affect blue tiberium \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerVeteranPilots
+"Veteran Training"
+END
+
+TYPE:PlayerPowerVeteranPilots
+"Utility power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerVeteranPilots
+"Train several vehicles crew to veterans \n Training do not stack \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerBloodhound
+"Warhounds Team"
+END
+
+TYPE:PlayerPowerBloodhound
+"Reinforcement power \n  3 minute Cooldown"
+END
+
+DESC:PlayerPowerBloodhound
+"Deploys two Veteran Wolverines and two Veteran Falcons to the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerHunterKillerTeam
+"Sharpshooter Team"
+END
+
+TYPE:PlayerPowerHunterKillerTeam
+"Reinforcement Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerHunterKillerTeam
+"Deploys three Veteran Sniper Teams to the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerDropPods
+"Zone Trooper Drop Pods"
+END
+
+TYPE:PlayerPowerDropPods
+"Reinforcement Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerDropPods
+"Deploys two squads of Veteran Zone Troopers to the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerBombingRun
+"Orca Strike"
+END
+
+TYPE:PlayerPowerBombingRun
+"Offensive Power \n 5 minute Cooldown"
+END
+
+DESC:PlayerPowerBombingRun
+"Orders several Orca Strike Fighters to bombard a location on the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+Name:PlayerPowerShockwaveArtillery
+"Shockwave Bombardment"
+END
+
+Type:PlayerPowerShockwaveArtillery
+"Offensive Power \n 5 minute Cooldown"
+END
+
+Desc:PlayerPowerShockwaveArtillery
+"Shockwave bombs launched from a orbital station bombard an area for Blast and EMP damage \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerRadarScan
+"Radar Scan"
+END
+
+TYPE:PlayerPowerRadarScan
+"Intelligence Power \n 2 minute Cooldown"
+END
+
+DESC:PlayerPowerRadarScan
+"Removes the shroud and reveals stealthed units for 30 seconds \n \n Left-click icon then left-click on target location"
+END
+
+
+
+
+
+//----------------- Obsolete:Gdi - Do not delete for now---------------------
+
+
+
+NAME:GDIPredatorTank2
+"Predator Tank Mark II"
+END
+
+TYPE:GDIPredatorTank2
+"Medium vehicle. Strong vs. Infantry, Vehicles, Structures."
+END
+
+DESC:GDIPredatorTank2
+"Abilities: \n      » Call for Transport (Airfield) \n Upgrades: \n      » Sub-Calibre Rounds (Armory) \n      » Rail Guns (Tech Center)"
+END
+
+NAME:GDIColossus
+"Colossus"
+END
+
+TYPE:GDIColossus
+"Heavy Walker, Strong vs. Vehicles."
+END
+
+DESC:GDIColossus
+"Abilities: \n      » Call for Transport (Orbital Deployment Center) \n       » Crush vehicles under feet \n       » Can shoot over walls \n Upgrades: \n      » Rail Guns (Tech Center) \n      » Sub-Calibre Rounds (Armory)"
+END
+
+NAME:GDIZoneDefender
+"Zone Defender Squad"
+END
+
+TYPE:GDIZoneDefender
+"Heavy Infantry. Strong vs. Vehicle, Structure, Aircraft."
+END
+
+DESC:GDIZoneDefender
+"Armed with ion weapon \n \n Upgrades: \n      » Power Packs (Armory)"
+END
+
+NAME:PlayerPowerGDIAirborne
+"GDI Airborne"
+END
+
+TYPE:PlayerPowerGDIAirborne
+"Reinforcement Power \n Cooldown Time 3 minutes"
+END
+
+DESC:PlayerPowerGDIAirborne
+"Deploys several Veteran Rifleman and Missile Squads to the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerTitanStrike
+"Mech Spearhead"
+END
+
+TYPE:PlayerPowerTitanStrike
+"Reinforcement"
+END
+
+DESC:PlayerPowerTitanStrike
+"Deploys two Veteran Titans and two Veteran Wolverines to Orbital Deployment Center"
+END
+
+NAME:PlayerPowerMammothMech
+"Mammoth Stomp"
+END
+
+TYPE:PlayerPowerMammothMech
+"Reinforcement"
+END
+
+DESC:PlayerPowerMammothMech
+"Deploys two Veteran Mammoth Tanks to Orbital Deployment Center"
+END
+
+NAME:PlayerPowerSiegeTeam
+"Siege Team"
+END
+
+TYPE:PlayerPowerSiegeTeam
+"Reinforcement"
+END
+
+DESC:PlayerPowerSiegeTeam
+"Deploys one Veteran Juggernaut and one Veteran Disruptor to Orbital Deployment Center"
+END
+
+NAME:PlayerPowerAircraftHunters
+"Light Armor Company"
+END
+
+TYPE:PlayerPowerAircraftHunters
+"Reinforcement"
+END
+
+DESC:PlayerPowerAircraftHunters
+"Deploys one Veteran Goliath APC, one Veteran Hover MLRS, and one Veteran Falcon to Orbital Deployment Center"
+END
+
+NAME:AbilityTurboBoost
+"Jump Jet Boost"
+END
+
+DESC:AbilityTurboBoost
+"Engage Jump Jet Boosters to rapidly relocate to a nearby location \n \n Left-click icon then left-click target location"
+END
+
+NAME:AbilityJuggDeploy
+"Deploy"
+END
+
+DESC:AbilityJuggDeploy
+"Unit deploys in to firing position \n Unit is immobilized while deployed"
+END
+
+NAME:AbilityJuggUnDeploy
+"Undeploy"
+END
+
+DESC:AbilityJuggUnDeploy
+"Unit undeploys from firing position"
+END
+
+NAME:GDITitanHusk
+"Titan Husk"
+END
+
+UPGRADE:GDIWolverineDiscLauncher
+"Disc Launcher"
+END
+
+UpgradeName:GDIWolverineDiscLauncher
+"Disc Launcher"
+END
+
+UpgradePrereq:GDIWolverineDiscLauncher
+"Research at Armory"
+END
+
+UpgradeType:GDIWolverineDiscLauncher
+"Weapon upgrade"
+END
+
+UpgradeDesc:GDIWolverineDiscLauncher
+"Upgrades all Wolverines with Disc Launchers \n Increases Wolverine combat effectivness and enable clear garrison ability."
+END
+
+Name:GDIWolverineDiscLauncher
+"Disc Launcher"
+END
+
+DESC:GDIWolverineDiscLauncher
+"Upgrades all Wolverines with Disc Launchers \n Increases Wolverine combat effectivness and enable clear garrison ability. \n \n Left-click to begin researching"
+END
+
+DESC:GDITitanHusk
+"Engineers, Saboteurs, and Assimilators can capture this husk to reactivate the Titan under their control"
+END
+
+UPGRADE:GDIMedicsUpgrade
+"Field Medic"
+END
+
+UpgradeName:GDIMedicsUpgrade
+"Field Medic"
+END
+
+UpgradePrereq:GDIMedicsUpgrade
+"Research at Armory"
+END
+
+UpgradeType:GDIMedicsUpgrade
+"Squad upgrade"
+END
+
+UpgradeDesc:GDIMedicsUpgrade
+"Add Medics to Riflemen Squads, Missile Squads, and Disk Thrower Squads \n Replenishes squad when out of combat"
+END
+
+Name:GDIMedicsUpgrade
+"Field Medic"
+END
+
+DESC:GDIMedicsUpgrade
+"Add Medics to Riflemen Squads, Missile Squads, and Disc Thrower Squads \n Replenishes squad when out of combat \n \n Left-click to begin researching"
+END
+
+NAME:GDIMammothMechHusk
+"Mammoth Mark II Wreckage"
+END
+
+DESC:GDIMammothMechHusk
+""
+END
+
+DESC:GDIOxBuildable
+"This V-35 Ox class is utilized to transport infantry only"
+END
+
+TYPE:GDIOxBuildable
+""
+END
+
+Name:UpgradeMammothMechDisc
+"Disc Launcher Turret"
+END
+
+
+TYPE:UpgradeMammothMechDisc
+"Weapon upgrade"
+END
+
+DESC:UpgradeMammothMechDisc
+"Upgrades Mammoth Mark II with Disc Launcher Turret."
+END
+
+Name:UpgradeMammothMechAARailgun
+"Anti-Aircraft Railgun Turret"
+END
+
+
+TYPE:UpgradeMammothMechAARailgun
+"Weapon upgrade"
+END
+
+DESC:UpgradeMammothMechAARailgun
+"Upgrades Mammoth Mark II with Anti-Aircraft Railgun Turret"
+END
+
+
+NAME:AbilityMlrsMissileLoadout
+"Versatile Missiles"
+END
+
+DESC:AbilityMlrsMissileLoadout
+"Hover MLRS fires two missiles per salvo \n Can target both ground and air units"
+END
+
+NAME:AbilityMlrsBarrageLoadout
+"Missile Barrage"
+END
+
+DESC:AbilityMlrsBarrageLoadout
+"Hover MLRS fires six missiles per salvo \n Can target only ground units"
+END
+
+
+
+//-----------------Nod:Units and structures------------------
+
+
+
+NAME:NODConstructionYard
+"Construction Yard"
+END
+
+TYPE:NODConstructionYard
+"Production Structure."
+END
+
+DESC:NODConstructionYard
+"Provides structure production queues"
+END
+
+NAME:NODShadow
+"Shadow Squad"
+END
+
+TYPE:NODShadow
+"Light Infantry. Strong vs. Infantry."
+END
+
+DESC:NODShadow
+"Detect Stealth in small radius \n Abilities: \n      » Stealthed \n      » Glider Pack \n      » Explosive Charge \n      » Micro bombs"
+END
+
+NAME:NODMilitantRifle
+"Militant Rifle Squad"
+END
+
+TYPE:NODMilitantRifle
+"Light Infantry. Strong vs. Infantry."
+END
+
+DESC:NODMilitantRifle
+"Abilities: \n      » Call for Transport (Air Tower)  \n      » Hallucinogenic Grenade (Black Hand Elite) Upgrades: \n      » Black Hand Elite (Secret Shrine) \n      » Forced Evolution (Secret Shrine)"
+END
+
+NAME:NODMilitantRocket
+"Militant Rocket Squad"
+END
+
+TYPE:NODMilitantRocket
+"Light Infantry. Strong vs. Vehicles, Aircraft."
+END
+
+DESC:NODMilitantRocket
+"Abilities: \n      » Hallucinogenic Grenade (Black Hand Elite) \n Upgrades: \n      » Black Hand Elite (Secret Shrine) \n      » Forced Evolution (Secret Shrine)"
+END
+
+NAME:NODSaboteur
+"Saboteur"
+END
+
+TYPE:NODSaboteur
+"Light Infantry. Weaponless."
+END
+
+DESC:NODSaboteur
+"Abilities: \n      » Stealthed while standing still \n      » Capture Building \n      » Booby Trap \n      » Repair Bridge \n      » Repair Building "
+END
+
+NAME:NODConfessor
+"Black Hand Elite"
+END
+
+NAME:NODBlackHand
+"Black Hand Squad"
+END
+
+TYPE:NODBlackHand
+"Light Infantry. Strong vs. Infantry, Structures."
+END
+
+DESC:NODBlackHand
+"Abilities: \n      » Clear Garrisoned Structure \n      » Tiberium-Proof Armor \n      » Hallucinogenic Grenade (Black Hand Elite) \n \n Upgrades: \n      » Black Hand Elite (Secret Shrine)"
+END
+
+TYPE:NODConfessor
+"Light Infantry. Strong vs. Infantry, Airborne Infantry."
+END
+
+DESC:NODConfessor
+"Abilities: \n      » Hallucinogenic Grenade \n      » Increases Nod squads combat effectiveness \n      » Stealthed while standing still"
+END
+
+
+NAME:NODChemTrooper
+"Toxin Trooper Squad"
+END
+
+TYPE:NODChemTrooper
+"Heavy Infantry. Strong vs. Infantry, Structures."
+END
+
+DESC:NODChemTrooper
+"Abilities: \n      » Hallucinogenic Shot \n      » Tiberium-Proof Armor \n      » Weapon Spawn Visceroids"
+END
+
+NAME:NODCyborg
+"Cyborg Squad"
+END
+
+TYPE:NODCyborg
+"Heavy Infantry. Strong vs. Infantry, Light Vehicles"
+END
+
+DESC:NODCyborg
+"Abilities: \n      » Heals in Tiberium \n Upgrades: \n      » Tiberium Beam (Secret Shirne)"
+END
+
+NAME:NODCybComm
+"Cyborg Commando"
+END
+
+TYPE:NODCybComm
+"Special Infantry. Strong vs. Infantry, Vehicles, Structures."
+END
+
+DESC:NODCybComm
+"Abilities: \n      » Heals in Tiberium  \n      » Super Charged Projectile \n \n Only one Cyborg Commando may be trained at a time"
+END
+
+NAME:NODCommando
+"Black Hand Commando"
+END
+
+TYPE:NODCommando
+"Special Infantry. Strong vs. Infantry, Structures."
+END
+
+DESC:NODCommando
+"Abilities: \n      » Stealthed while standing still \n     » Destroy Structure \n     » Destroy Walker \n \n Only one Commando may be trained at a time"
+END
+
+NAME:NODHijacker
+"Cyborg Hijacker"
+END
+
+TYPE:NODHijacker
+"Special Infantry. Weaponless"
+END
+
+DESC:NODHijacker
+"Abilities: \n      » Stealthed \n      » Capture Vehicle \n      » Heals in Tiberium \n \n Only one Cyborg Hacker may be trained at a time"
+END
+
+NAME:NODCarryall
+"Nightwind"
+END
+
+TYPE:NODCarryall
+"Aircraft. Weaponless"
+END
+
+DESC:NODCarryall
+"Abilities: \n      » Transports Vehicle \n      » Stealthed"
+END
+
+NAME:NODCarryallInfantry
+"Nightwind Transport"
+END
+
+DESC:NodCarryallInfantry
+"This Carryall is utilized to transport infantry only"
+END
+
+TYPE:NODEmissary
+"Light Vehicle. Weaponless."
+END
+
+DESC:NODEmissary
+"Unpacks into Outpost \n Outpost provides Ground Control to place structures and transmits Nod propaganda to increase combat efectiveness of Nod units."
+END
+
+NAME:NODRaiderBuggy
+"Raider Buggy"
+END
+
+TYPE:NODRaiderBuggy
+"Light Vehicle. Strong vs. Infantry, Aircraft"
+END
+
+DESC:NODRaiderBuggy
+"Upgrades \n      » Tiberium Beam (Secret Shirne) \n      » EMP Coils (Operations Center)"
+END
+
+NAME:NODAttackBike
+"Attack Bike"
+END
+
+TYPE:NodAttackBike
+"Light Vehicle. Strong vs. Vehicles, Aircraft. \n Detector"
+END
+
+DESC:NODAttackBike
+"Detects Stealth \n \n Upgrades: \n      » Tiberium Missile (Tech Lab)"
+END
+
+NAME:NODAPC
+"Scarab APC"
+END
+
+TYPE:NODAPC
+"Light Vehicle. Strong vs. Infantry."
+END
+
+DESC:NODAPC
+"Abilities: \n      » Transport Infantry \n      » Place Minefield \n      » Subterranean Move (upgrade) \n Upgrades: \n      » Drilling Mechanism (Tech Lab)" 
+END
+
+NAME:NODScorpionTank
+"Scorpion Tank"
+END
+
+TYPE:NODScorpionTank
+"Medium vehicle. Strong vs. Vehicles."
+END
+
+DESC:NODScorpionTank
+"Abilities: \n      » Dig In \n Upgrades: \n      » Laser Cappacitor (Operations Center) \n      » Tiberium Power Pack (Tech Lab)"
+END
+
+NAME:NODScorpionTankEA
+"Roach Tank"
+END
+
+TYPE:NODScorpionTankEA
+"Medium vehicle. Strong vs. Vehicles."
+END
+
+DESC:NODScorpionTankEA
+""
+END
+
+NAME:NODBeamCannon
+"Basilisk Beam Cannon"
+END
+
+TYPE:NODBeamCannon
+"Light Vehicle. Strong vs. Light Vehicles, Structures."
+END
+
+DESC:NODBeamCannon
+"Abilities: \n      » Charge Defenses \n Upgrades: \n      » Tiberium Power Pack (Tech Lab)"
+END
+
+NAME:NODBeamCannonEA
+"Beam Cannon"
+END
+
+TYPE:NODBeamCannonEA
+"Light Vehicle. Strong vs. Structures."
+END
+
+DESC:NODBeamCannonEA
+""
+END
+
+NAME:NODDevil
+"Devil´s Tongue"
+END
+
+TYPE:NODDevil
+"Medium vehicle. Strong vs. Infantry, Structures."
+END
+
+DESC:NODDevil
+"Abilities: \n      » Clear Garrisoned Structure \n      » Subterranean Move \n Upgrades: \n      » Drilling Mechanism (Tech Lab)"
+END
+
+NAME:NODARTY
+"Cobra Artillery"
+END
+
+TYPE:NODARTY
+"Medium Vehicle. Strong vs. Structures."
+END
+
+DESC:NODARTY
+"Abilities: \n     » Stealthed"
+END
+
+NAME:NODReaper
+"Cyborg Reaper"
+END
+
+TYPE:NODReaper
+"Light Walker, Strong vs. Aircraft, Vehicles"
+END
+
+DESC:NODReaper
+"Abilities: \n      » Heal in Tiberium \n      » Artificial Web Launcher \n      » Crush light infantry \n \n Upgrades: \n      » Tiberium Missile (Tech Lab)"
+End
+
+NAME:NODHeavyReaper
+"Cyborg Obliterator"
+END
+
+TYPE:HeavyReaper
+"Medium Walker, Strong vs. All targets"
+END
+
+DESC:NODHeavyReaper
+"Abilities: \n      » Heal in Tiberium \n      » Crush Heavy Infantry \n \n Upgrades: \n      » Tiberium Power Pack (Tech Lab)"
+End
+
+NAME:NODStealthTank
+"Stealth Tank"
+END
+
+TYPE:NODStealthTank
+"Medium Vehicle. Strong vs. Vehicles, Aircraft."
+END
+
+DESC:NODStealthTank
+"Abilities: \n      » Stealthed \n \n Upgrades: \n      » Tiberium Missiles (Tech Lab)"
+END
+
+NAME:NODVenom
+"Harpy"
+END
+
+TYPE:NODVenom
+"Aircraft. Strong vs Infantry, Aircraft \n Detector"
+END
+
+DESC:NODVenom
+"Abilities: \n      » Detects Stealth \n      » Signature Generator \n \n Upgrades: \n      » Laser Capacitor (Operations Center) \n      » Microwave Pulse Generator (Operations Center)"
+END
+
+NAME:NODHarpy
+"Venom"
+END
+
+TYPE:NODHarpy
+"Aircraft. Strong vs Aircraft, Infantry, Structure"
+END
+
+DESC:NODHarpy
+"Abilities: \n      » Supersonic booster \n \n Upgrades: \n      » Laser Capacitor (Operations Center)"
+END
+
+NAME:NODPhantom
+"Phantom"
+END
+
+TYPE:NODPhantom
+"Light vehicle. Weaponless"
+END
+
+DESC:NODPhantom
+"Abilities: \n      » Repairs nearby vehicles \n      » Unpacks into Phantom Stealth Generator"
+END
+
+DESC:NODPhantomDeployed
+"Abilities: \n      » Cloaks nearby units and structures \n      » Repairs nearby vehicles \n      » Can repack into a Phantom Repair Vehicle"
+END
+
+Name:NODOutpost
+"Outpost"
+END
+
+DESC:NODOutpost
+"Provides ground control to place structures. \n Transmits Nod propaganda to increase combat effectiveness of Nod faction units \n      » + 10% bonus to speed and firepower."
+END 
+
+NAME:NODBanshee
+"Banshee"
+END
+
+TYPE:NODBanshee
+"Aircraft. Strong vs. Vehicles, Structures, Aircraft."
+END
+
+DESC:NODBanshee
+"Abilities: \n      » Supersonic booster  \n Upgrades: \n      » Tiberium Fuel (Tech Lab)"
+END
+
+NAME:NODVertigo
+"Vertigo Bomber"
+END
+
+TYPE:NODVertigo
+"Aircraft. Strong vs. Structures."
+END
+
+DESC:NODVertigo
+"Abilities: \n      » Stealthed"
+END
+
+NAME:NODAvatarWarmech
+"Avatar Prototype"
+END
+
+TYPE:NODAvatarWarmech
+"Medium walker. Strong vs. Vehicles, Structures."
+END
+
+DESC:NODAvatarWarmech
+""
+END
+
+NAME:NODAvatarTE
+"Avatar"
+END
+
+TYPE:NODAvatarTE
+"Medium walker. Strong vs. Vehicles, Structures."
+END
+
+DESC:NODAvatarTE
+"Can be modified with extra upgrades to improve firepower or support other units \n Only one extra upgrade may be installed at a time \n \n Upgrades: \n      » Tiberium Power Pack (Tech Lab)"
+END
+
+NAME:NODMontauk
+"Montauk"
+END
+
+TYPE:NODMontauk
+"Superheavy Vehicle. Strong vs. Infantry, Structures, Aircraft."
+END
+
+DESC:NODMontauk
+"Abilities: \n      » Transmits Nod propaganda - all Nod units gain + 10% bonus to speed and firepower. \n       » Call for Reinforcements - deploys additional units into battlefield \n      » Subterranean Move \n       » Crush vehicles under tracks  \n \n Only one Montauk may be deployed at a time"
+END 
+
+NAME:NODDisruptionTower
+"Stealth Generator"
+END
+
+TYPE:NODDisruptionTower
+"Defensive Structure."
+END
+
+DESC:NODDisruptionTower
+"Stealths nearby units and structures"
+END
+
+NAME:NODRepairTower
+"Propaganda Tower"
+END
+
+TYPE:NODRepairTower
+"Support structure."
+END
+
+DESC:NODRepairTower
+"Increases combat effectiveness of surrounding nod units"
+END
+
+NAME:NODDropZone
+"War Factory"
+END
+
+TYPE:NODDropZone
+"Production Structure."
+END
+
+DESC:NODDropZone
+"Deploys Nod vehicles  \n Abilities \n     » Repairs nearby vehicles"
+END
+
+NAME:NODLaserFenceWall
+"Laser Fence Section"
+END
+
+NAME:NODLaserFenceHub
+"Laser Fence Hub"
+END
+
+DESC:NODHandofNod
+"Trains Nod infantry \n Abilities: \n      » Can heal wounded infantry and replenish squads. Do not support cyborgs."
+END
+
+DESC:NODOperationsCenter
+"Unlocks advanced units and structures \n Researches Upgrades: \n      » Raider Buggy EMP Coils \n     » Microwave Pulse Generator \n      » Laser Capacitors \n Provides Support Powers: \n      » EMP Missile \n      » Network Espionage"
+END
+
+DESC:NODSecretShrine
+"Support and research center. Produces and heal Cyborgs \n Researches Upgrades:  \n      » Black Hand Elite \n      » Forced Evolution \n      » Tiberium Beam \n Unlocks Upgrades: \n      » Power Plant Liquid Tiberium Core \n \n Provides Support Powers: \n      » Shadow Strike Team"
+END
+
+DESC:NODTechAssemblyPlant
+"Unlocks high-tech units and structures \n Researches Upgrades: \n      » Tiberium Fuel \n      » Drilling Mechanism \n      » Tiberium Missiles \n      » Tiberium Power Pack  \n \n Provides Support Powers:      » Portable Stealth Generators \n      » Subterranean Strike"
+END
+
+NAME:NODObelisk
+"Obelisk of Light"
+END
+
+TYPE:NODObelisk
+"Advanced Base Defense. Strong vs. Vehicles. \n Detector"
+END
+
+DESC:NODObelisk
+"Detects Stealth \n Can be charged by Basilisk beam cannon \n Gain 10% bonus to weapon range and attack damage for every supporting Basilisk beam cannon \n Max 3 beam cannons will stack"
+END
+
+NAME:NODRocketBunker
+"SAM Turret"
+END
+
+TYPE:NODRocketBunker
+"Structure. Strong vs. Aircraft. \n Detector"
+END
+
+DESC:NODRocketBunker
+"Detects Stealth \n \n Upgrades: \n      » Tiberium Missile (Tech Lab)"
+END
+
+NAME:NODFlamerTurret
+"Shredder Turret"
+END
+
+TYPE:NODFlamerTurret
+"Structure. Strong vs. Infantry.\n Detector"
+END
+
+DESC:NODFlamerTurret
+"Detects Stealth \n Place hub and then remote controlled turret \n \n Upgrades: \n      » Tiberium Beam (Secret Shrine)"
+END
+
+NAME:NODGunTurret
+"Sting Turret"
+END
+
+TYPE:NODGunTurret
+"Structure. Strong vs. Vehicles.\n Detector"
+END
+
+DESC:NODGunTurret
+"Detects Stealth \n Place hub and then remote controlled turret \n \n Upgrades: \n      » Laser Capacitors (Operations Center)"
+END
+
+NAME:NODTiberiumLiquidationFacility
+"Tiberium Chemical Plant"
+END
+
+TYPE:NODTiberiumLiquidationFacility
+"Tech Structure."
+END
+
+DESC:NODTiberiumLiquidationFacility
+"Provides Support Powers: \n      » Seed Tiberium \n      » Chemical Missile \n \n Only one Tiberium Chemical Plant may be built at a time"
+END
+
+NAME:NODPowerPlant
+"Power Plant"
+END
+
+TYPE:NODPowerPlant
+"Tech Structure."
+END
+
+DESC:NODPowerPlant
+"Provides Power +15 \n Upgrade:\n     » Liquid Tiberium Core +25 Power"
+END
+
+Desc:NODRefinery
+"Comes with a Harvester to allow the gathering of resources \n Processes and stores Tiberium"
+END
+
+Desc:NODTiberiumSilo
+"Stores Tiberium, allowing for a greater maximum reserve"
+END
+
+NAME:NODSubwayStation
+"Tunel Network Center"
+END
+
+TYPE:NODSubwayStation
+"Support Structure."
+END
+
+DESC:NODSubwayStation
+"Enable Nod tunel network construction."
+END
+
+NAME:NODSubwayNode
+"Tunel Network Entrance"
+END
+
+TYPE:NODSubwayNode
+"Support Structure."
+END
+
+DESC:NODSubwayNode
+"Can transport up to 3 units at once in between other tunel entrances. \n Requires Nod Tunel Network Center to work. \n \n If all entrances are destroyed all units inside tunel network are lost."
+END
+
+
+//-----------------Abilities:Nod---------------------
+
+
+NAME:AbilityNodMontaukSummonTanks
+"Scorpions Sting"
+END
+
+DESC:AbilityNodMontaukSummonTanks
+"Deploys several scorpion tanks on target location  \n \n Left-click icon then left-click on target location"
+END
+
+NAME:AbilityNodMontaukSummonInfantry
+"Sweeping Advance"
+END
+
+DESC:AbilityNodMontaukSummonBikes
+"Deploys several Militants and Rocket Militants on target location  \n \n Left-click icon then left-click on target location"
+END
+
+NAME:AbilityNodMontaukSummonBikes
+"Raiding Party"
+END
+
+DESC:AbilityNodMontaukSummonInfantry
+"Deploys several Raider Buggies and Attack Bikes on target location  \n \n Left-click icon then left-click on target location"
+END
+
+Name:AbilityChargeDefenses
+"Charge Defenses"
+END
+
+Type:AbilityChargeDefenses
+"Targeted Ability"
+END
+
+DESC:AbilityChargeDefenses
+"Focuses the beam on an Obelisk of Light \n  » Increases Obelisk's firepower +10% \n  » Increases Obelisk's range +10% \n \n Left-click icon then left-click on target Obelisk"
+END
+
+NAME:AbilityFanaticsSelfDestruct
+"Detonate!"
+END
+
+DESC:AbilityFanaticsSelfDestruct
+"Unit blow up on trigger"
+END
+
+NAME:AbilityNodApcDigIn
+"Subterranean Move"
+END
+
+DESC:AbilityNodApcDigIn
+"Vehicle executes subterranean movement and emerges at designated location  \n \n Left-click icon then left-click on target location"
+END
+
+NAME:AbilityScorpionDigIn
+"Dig In"
+END
+
+DESC:AbilityScorpionDigIn
+"Scorpion Tank digs in to assume a fortified position \n Improves Scorpion Tank maximum range and armor \n Scorpion Tank is immobilized while dug-in"
+END
+
+NAME:AbilityScorpionDigOut
+"Dig Out"
+END
+
+DESC:AbilityScorpionDigOut
+"Digs out Scorpion Tank from fortified position"
+END
+
+NAME:AbilityCobraDeploy
+"Deploy"
+END
+
+DESC:AbilityCobraDeploy
+"Unit deploys in to firing position \n Unit is immobilized while deployed"
+END
+
+NAME:AbilityCobraUnDeploy
+"Undeploy"
+END
+
+DESC:AbilityCobraUnDeploy
+"Unit undeploys from firing position"
+END
+
+NAME:BasiliskOverCharge
+"Overcharge"
+END
+
+TYPE:BasiliskOverCharge
+""
+END
+
+DESC:BasiliskOverCharge
+"Basilisk crew diverts maximum power to weapons to unleash devastating laser blast \n Basilisk must shutdown all systems for a while after fire \n \n Left-click icon then left-click on target"
+END
+
+NAME:CCrippleHit
+"Microwave Pulse"
+END
+
+TYPE:CCrippleHit
+""
+END
+
+DESC:CCrippleHit
+"Harpy uses high energy microwave pulse to overload and damage enemy aircraft´s systems. \n Resulting damage temporaly slows movement and decreases rate of fire  \n \n Left-click icon then left-click on target."
+END
+
+NAME:CCMegaBlast
+"Super Charged Projectile"
+END
+
+TYPE:CCMegaBlast
+""
+END
+
+DESC:CCMegaBlast
+"Unleash large plasma explosion on target location, effective vs light vehicles, infantry and structures. \n \n Left-click icon then left-click on target area"
+END
+
+
+NAME:CCMiniNuke
+"Liquid Tiberium Demo Charge"
+END
+
+TYPE:CCMiniNuke
+""
+END
+
+DESC:CCMiniNuke
+"Cyborg Commando deploys timed Liquid Tiberium Demo Charge on near spot. 10 seconds until detonation. \n \n Left-click icon then left-click on location"
+END
+
+NAME:NodHalGrenadeAbility
+"Hallucinogenic Grenade"
+END
+
+DESC:NodHalGrenadeAbility
+"Throws Hallucinogenic Grenades on enemy infantry \n Affected unit loose control and immediately attack any unit around incuding allies and are considered as enemy by allied units. \n \n Left-click icon then left-click on target"
+END
+
+NAME:NodShadowBombAbility
+"Micro bombs"
+END
+
+DESC:NodShadowBombAbility
+"Drop several miniature bombs. \n Can only be used in flight mode \n \n Left-click icon then left-click on target location"
+END
+
+NAME:NodWebAttack
+"Web Missile"
+END
+
+TYPE:NodWebAttack
+"Attack power"
+END
+
+DESC:NodWebAttack
+"Creates artificial web that entangle infantry inside target location. \n Entangled units are immobile and cannot fire. \n \n Left-click icon then left-click on target location"
+END
+
+NAME:NodPhantomUnpack
+"Unpack Phantom"
+END
+
+DESC:NodPhantomUnpack
+"Unpack the Phantom into an Stealth Generator. \n Cloaks all units around Phantom. \n \n Left-click to activate"
+END
+
+NAME:NodPhantomPack
+"Pack Up Phantom"
+END
+
+DESC:NodPhantomPack
+"Pack up the Phantom Stealth Generator into an mobile Vehicle \n \n Left-click to activate"
+END
+
+NAME:NodPhantomShredPodAbility
+"Shredder Sentry Gun"
+END
+
+DESC:NodPhantomShredPodAbility
+"Deploy stealthed anti-infantry turret \n \n Left-click icon then left-click on target location"
+END
+
+NAME:UpgradeSignatureGenerator
+"Signature Generators"
+END
+
+DESC:UpgradeSignatureGenerator
+"Enables Signature Generator on all Harpies \n Causes the Harpy to appear as a large force on the enemy radar \n \n Left-click to begin researching"
+END
+
+
+
+
+//-----------------Upgrades:Nod---------------------------
+
+
+
+Name:EnhencedAvionicsAbility
+"Supersonic Booster"
+END
+
+DESC:EnhencedAvionicsAbility 
+"Engage supersonic speed. Banshee move twice as fast for 5 seconds. \n Banshee cannot attack during supersonic speed. \n \n Left-click to activate"
+END
+
+NAME:UpgradeLiquidTiberiumCore
+"Liquid Tiberium Core"
+END
+
+DESC:UpgradeLiquidTiberiumCore
+"Increases the power output of this Power Plant \n + 25 Power \n \n Left-click to begin upgrading"
+END
+
+
+UPGRADE:NODConfessor
+"Black Hand Elite"
+END
+
+UpgradePrereq:NODConfessor
+"Research at Secret Shrine"
+END
+
+UpgradeType:NODConfessor
+"Squad upgrade"
+END
+
+UpgradeName:NODConfessor
+"Black Hand Elite"
+END
+
+UpgradeDesc:NODConfessor
+"Increases resistance to supressive fire + 100% \n Throws Hallucinogenic Grenades \n Can engage Airborne Infantry"
+END
+
+NAME:UpgradeConfessor
+"Black Hand Elite"
+END
+
+DESC:UpgradeConfessor
+"Upgrades all Militants and Black Hand Enforcers Squads with a Black Hand Elite \n Increases Nod squads’ morale and resistance to supressive fire + 100% \n Throws Hallucinogenic Grenades \n Can engage Airborne Infantry \n \n Left-click to begin researching"
+END
+
+UPGRADE:TiberiumInfusion
+"Forced Evolution"
+END
+
+UpgradeName:NODTiberiumInfusion
+"Forced Evolution"
+END
+
+UpgradePrereq:NODTiberiumInfusion
+"Research at Secret Shrine"
+END
+
+UpgradeType:NODTiberiumInfusion
+"Armor upgrade"
+END
+
+UpgradeDesc:NODTiberiumInfusion
+"Increases movement speed + 25% \n Increases hit points + 10% \n Provides full resistance to Tiberium crystals poisoning"
+END
+
+Name:UpgradeTiberiumInfusion
+"Forced Evolution"
+END
+
+DESC:UpgradeTiberiumInfusion
+"Utilize Tiberium to enhance combat performance and improve survival of all Militants in Tiberium-contaminated areas \n Increases movement speed +25% and hit points + 10% \n Provides full resistance to Tiberium radiation \n \n Left-click to begin researching"
+END
+
+UPGRADE:NodFlamerTurret
+"Tiberium Beam"
+END
+
+UpgradeName:NodFlamerTurret
+"Tiberium Beam"
+END
+
+UpgradePrereq:NodFlamerTurret
+"Research at Secret Shirne"
+END
+
+UpgradeType:NodFlamerTurret
+"Weapon upgrade"
+END
+
+UpgradeDesc:NodFlamerTurret
+"Increases attack damage + 25%"
+END
+
+Name:NodFlamerTurretUpgrade
+"Tiberium Beam"
+END
+
+DESC:NodFlamerTurretUpgrade
+"Upgrades all Shredder Turrets, Cyborg Squads and Raider Buggies  with Tiberium based beam weapons. Increases attack damage + 25% \n \n Left-click to begin researching"
+END
+
+UpgradePrereq:NODTiberiumWarhead
+"Research at Tech Lab"
+END
+
+UpgradeName:NODTiberiumWarhead
+"Tiberium Missile"
+END
+
+UpgradeTYPE:NODTiberiumWarhead
+"Weapon upgrade"
+END
+
+UpgradeDESC:NODTiberiumWarhead
+"Increases attack damage + 50% \n Increases missile speed + 33%"
+END
+
+Name:NODTiberiumWarhead
+"Tiberium Missile"
+END
+
+TYPE:NODTiberiumWarhead
+"Weapon upgrade"
+END
+
+DESC:NODTiberiumWarhead
+"Upgrades all Sam Turrets, Attack Bikes, Reapers and Stealth Tanks with Tiberium Missiles \n Increases attack damage + 50% \n Increases missile speed + 33% \n \n Left-click to begin researching"
+END
+
+UpgradeName:DrillingMechanism
+"Drilling Mechanism"
+END
+
+UpgradeTYPE:DrillingMechanism
+"Ability upgrade"
+END
+
+UpgradeDESC:DrillingMechanism
+"Unlocks Scarab and Devil’s Tongue Subterranean Attack \n Once researched Scarab APCs and Devils Tongues can crush Heavy Infantry and remove landmines."
+END
+
+Name:DrillingMechanism
+"Drilling Mechanism"
+END
+
+TYPE:DrillingMechanism
+"Ability upgrade"
+END
+
+DESC:DrillingMechanism
+"Unlocks Scarab and Devil’s Tongue Subterranean Attack \n Once researched Scarab APCs and Devils Tongues can crush Heavy Infantry and remove landmines. \n \n Left-click to begin researching"
+END
+
+UpgradePrereq:DrillingMechanism
+"Research at Tech Lab"
+END
+
+UpgradePrereq:NODEMPBurst
+"Research at Operations Center"
+END
+
+UpgradePrereq:VenomSignatureGenerator
+"Research at Operations Center"
+END
+
+UPGRADE:NODSignatureGenerator
+"Microwave Pulse Generator"
+END
+
+UpgradeName:VenomSignatureGenerator
+"Microwave Pulse Generator"
+END
+
+UpgradePrereq:VenomSignatureGenerator
+"Research at Operations Centre"
+END
+
+UpgradeType:VenomSignatureGenerator
+"Ability Upgrade"
+END
+
+UpgradeDesc:VenomSignatureGenerator
+"Enable extra anti-aircraft microwave attack every 10 seconds. \n » Enemy aircraft takes 250 points of damage and its speed is reduced to 50%"
+END
+
+NAME:UpgradeSignatureGenerator
+"Microwave Pulse Generator"
+END
+
+DESC:UpgradeSignatureGenerator
+"Upgrade all Harpies with high energy Microwave Pulse Generator. \n Enable special anti-aircraft attack that overloads and damage enemy aircraft systems. Enemy aircraft takes 250 points of damage and its speed is reduced to 50%  \n \n Left-click to begin researching"
+END
+
+UpgradeName:EnhencedAvionics
+"Tiberium Fuel"
+END
+
+UpgradePrereq:EnhencedAvionics
+"Research at Tech Lab"
+END
+
+UpgradeTYPE:EnhencedAvionics
+"Mobility upgrade"
+END
+
+UpgradeDESC:EnhencedAvionics
+"Enable Banshees supersonic ability"
+END
+
+Name:EnhencedAvionics
+"Tiberium Fuel"
+END
+
+TYPE:EnhencedAvionics
+"Mobility upgrade"
+END
+
+DESC:EnhencedAvionics
+"Upgrade Banshee with tiberium based fuel derivatives. Enable Banshees supersonic ability. \n \n Left-click to begin researching"
+END
+
+UpgradePrereq:NODLaserCapacitor
+"Research at Operations Centre"
+END
+
+NAME:UpgradeLaserCapacitor
+"Laser Capacitors"
+END
+
+DESC:UpgradeLaserCapacitor
+"Upgrades all Scorpion Tanks, Shadow Squads, Harpies and Sting Cannons with Spitfire Lasers \n Increases attack damage + 25% \n \n Left-click to begin researching"
+END
+
+UpgradeDesc:NODLaserCapacitor
+"Increases attack damage + 25%"
+END
+
+UpgradePrereq:NodVehicleReactor
+"Research at Tech Lab"
+END
+
+UpgradeDesc:NodVehicleReactor
+"Increases rate of fire + 20% \n Increases maximum speed + 20%"
+END
+
+NAME:UpgradeNodVehicleReactor
+"Tiberium Power Pack"
+END
+
+TYPE:UpgradeNodVehicleReactor
+"Mobility upgrade"
+END
+
+DESC:UpgradeNodVehicleReactor
+"Upgrades all Scorpion Tanks, Basilisks and Avatars with tiberium based power pack that power up vehicle weapons and engine. \n Increases rate of fire + 20% and maximum speed + 20% \n \n Left-click to begin researching"
+END
+
+
+Name:AvatarInvisibility2
+"Stealth Generator"
+END
+
+TYPE:AvatarInvisibility2
+"Ability upgrade"
+END
+
+DESC:AvatarInvisibility2
+"Upgrades Unit with Stealth Generator  \n     » Unit is cloaked unless fire \n \n Left-click to begin upgrading"
+END
+
+Name:AvatarFlamer2
+"Purifier Cannon"
+END
+
+TYPE:AvatarFlamer2
+"Weapon upgrade"
+END
+
+DESC:AvatarFlamer2
+"Upgrades Avatar with napalm launcher \n Enable Avatar extra area of effect ranged attack. \n » Good vs infantry and structures \n \n Left-click to begin upgrading"
+END
+
+Name:AvatarStealthDetect2
+"Voice of Kane"
+END
+
+TYPE:AvatarStealthDetect2
+"Ability upgrade"
+END
+
+DESC:AvatarStealthDetect2
+"Upgrades Avatar with Propaganda Tower \n Transmits Nod propaganda to increase combat efectiveness of Nod units around Avatar \n » Increases firepower +10% \n \n Left-click to begin upgrading"
+END
+
+Name:AvatarBeamCannon2
+"Tiberium Particle Beam"
+END
+
+TYPE:AvatarBeamCannon2
+"Weapon upgrade"
+END
+
+DESC:AvatarBeamCannon2
+"Replace Avatar lasers with tiberium particle beam cannons \n » Increases attack damage vs vehicles +50%. \n \n Left-click to begin upgrading"
+END
+
+Name:NodDropshipReplace
+"Infantry Compartment"
+END
+
+DESC:NodDropshipReplace
+"Upgrades Nightwind cargo space with infantry compartment. \n Enable transport infantry instead vehicles. \n Any cargo is forfeit during upgrade!  \n \n Left-click to begin upgrading"
+END
+
+
+//-----------------Support Powers:Nod-----------------------
+
+
+
+NAME:PlayerPowerMicrowavefield
+"EMP Missile"
+END
+
+TYPE:PlayerPowerMicrowavefield
+"Offensive Power \n 5 minute Cooldown"
+END
+
+DESC:PlayerPowerMicrowavefield
+"Disable all enemy structures and vehicles in small area for 15 seconds \n \n Left-click on icon then left-click on target area"
+END
+
+NAME:PlayerPowerCloakingField
+"Portable Stealth Generators"
+END
+
+TYPE:PlayerPowerCloakingField
+"Utility power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerCloakingField
+"Upgrades several Nod vehicles with Portable Stealth Generators \n \n Left-click on icon then left-click on target area"
+END
+
+NAME:PlayerPowerRadarSpy
+"Network Espionage"
+END
+
+TYPE:PlayerPowerRadarSpy
+"Inteligence power \n 2 minute Cooldown"
+END
+
+DESC:PlayerPowerRadarSpy
+"Hack in to enemy comunication network. Reveal enemy production and tech structures for 10 seconds \n \n Left-click icon to activate"
+END
+
+NAME:CallSupportCyborgs
+"Subterranean Strike"
+END
+
+TYPE:CallSupportCyborgs
+"Reinforcement power\n 3 minute Cooldown"
+END
+
+DESC:CallSupportCyborgs
+"Subterranean APC deploys two squads of Fanatics on the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerBurrowMines
+"Mine Drop"
+END
+
+TYPE:PlayerPowerBurrowMines
+"Defensive Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerBurrowMines
+"Places a stealthed minefield on the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerCatalystMissile
+"Chemical Missile"
+END
+
+Type:PlayerPowerCatalystMissile
+"Offensive Power \n 5 minute Cooldown"
+END
+
+DESC:PlayerPowerCatalystMissile
+"Launches a Chemical Missile containing tiberium based toxic gas \n Central blast inficts heavy damage to structures then toxic gas cause aditional continuous damage to structures and infantry in large area \n Killed infantry spawn visceroids \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerSeedTiberium
+"Seed Tiberium"
+END
+
+TYPE:PlayerPowerSeedTiberium
+"Utility Power \n 4 minute Cooldown"
+END
+
+DESC:PlayerPowerSeedTiberium
+"Sprays an area with Tiberium spores. Creates small tiberium field. \n Be advised that certain terrain type such as concrete, rock or similar, do not support tiberium growth. \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerComputerCounterMeasures
+"Master Computer Countermeasures"
+END
+
+TYPE:PlayerPowerComputerCounterMeasures
+"Defensive Power \n 2 minute Cooldown"
+END
+
+DESC:PlayerPowerComputerCounterMeasures
+"The radar and all EMP affected buildings are returned to normal status \n \n Left-click icon to activate"
+END
+
+NAME:PlayerPowerShadowStrikeTeam
+"Shadow Strike Team"
+END
+
+TYPE:PlayerPowerShadowStrikeTeam
+"Reinforcement Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerShadowStrikeTeam
+"Deploys two squads of Veteran Shadows to the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+
+//-----------------Obsolete:Nod-----------------
+
+
+
+
+NAME:PlayerPowerNodTunel
+"Tunel Subway"
+END
+
+TYPE:PlayerPowerNodTunel
+"Mobility power"
+END
+
+DESC:PlayerPowerNodTunel
+"Construct subway in between two selected locations on map. \n \n Left-click icon then left-click on target location one and then target location two"
+END
+
+
+UpgradeName:EnhencedServo
+"Improved Servomechanism"
+END
+
+UpgradeTYPE:EnhencedServo
+"Cyborg mobility upgrade"
+END
+
+UpgradeDESC:EnhencedServo
+"Increases speed"
+END
+
+Name:EnhencedServo
+"Improved Servomechanism"
+END
+
+TYPE:EnhencedServo
+"Cyborg mobility upgrade"
+END
+
+DESC:EnhencedServo
+"Upgrades Cyborgs, Reapers, and Cyborg Commando with Improved Servomechanism \n Increases speed"
+END
+
+NAME:NODStealthGenerator
+"Stealth Generator"
+END
+
+DESC:NODStealthGenerator
+"Cloak units in surrounding area"
+END
+
+NAME:NODDeployStealthGenerator
+"Stealth Generator"
+END
+
+DESC:NODDeployStealthGenerator
+"Deploys Stealth Generator"
+END
+
+NAME:NodStealthCyborg
+"Chameleon Spy"
+END
+
+TYPE:NodStealthCyborg
+"Infantry. Strong vs. Vehicles, Structures"
+END
+
+DESC:NodStealthCyborg
+"Abilities: \n      » Cloaked \n      » Eye of Nod"
+END
+
+
+
+
+
+
+//-----------------Scrin: units and structures -------------------------------
+
+
+
+NAME:ALIENAssimilator
+"Assimilator"
+END
+
+TYPE:ALIENAssimilator
+"Utility Infantry. Weaponless."
+END
+
+DESC:ALIENAssimilator
+"Abilities: \n     » Blink Pack \n     » Capture Structure \n     » Capture Walker Husk \n     » Repair Structure \n     » Repair Bridge"
+END
+
+NAME:ALIENMindDrone
+"Dominator"
+END
+
+TYPE:ALIENMindDrone
+"Heavy Infantry. Weaponless \n Detector"
+END
+
+DESC:ALIENMindDrone
+"Heal in Tiberium \n Abilities: \n      » Mind Control \n      » Replenish Squads (Teleport Beacon) \n      » Detects Stealth \n Upgrades: \n      » Teleport Beacon (Stasis Chamber)"
+END
+
+NAME:ALIENRazorDrones
+"Disintegrators"
+END
+
+TYPE:ALIENRazorDrones
+"Light infantry. Strong vs. Vehicles"
+END
+
+DESC:ALIENRazorDrones
+"Heal in Tiberium \n Abilities: \n      » Explodes when crushed \n Upgrades: \n      » Tiberium Integration (Stasis Chamber) \n      » Particle Accelerator (Nerve Center)"
+END
+
+NAME:ALIENCorrupter
+"Corrupter"
+END
+
+TYPE:ALIENCorrupter
+"Medium Walker. Strong vs. Infantry, Structures."
+END
+
+DESC:ALIENCorrupter
+"Heal in Tiberium \n Attack has chance that killed infantry spawn Contaminators \n Abilities: \n      » Combine with Buzzers \n      » Corrupt \n      » Attack Clear Garrison \n \n Upgrades: \n      » Heavy Forcefield (Technology Assembler)"
+END
+
+NAME:CorruptAreaProp
+"Ichor spore pod"
+END
+
+TYPE:CorruptAreaProp
+"Structure"
+END
+
+DESC:CorruptAreaProp
+"Tiberium Radiation: \n      » Heal nearby Scrin units, mutants and cyborgs \n      » Damage human infantry"
+END
+
+NAME:AlienContaminator
+"Contaminator"
+END
+
+TYPE:AlienContaminator
+"Light Infantry. Strong vs. Infantry"
+END
+
+DESC:AlienContaminator
+"Attack has chance that killed infantry spawn Contaminators"
+END
+
+NAME:ALIENDevourerTank
+"Devourer"
+END
+
+TYPE:ALIENDevourerTank
+"Light Vehicle. Strong vs. Vehicles, Structures."
+END
+
+DESC:ALIENDevourerTank
+"Heal in Tiberium \n Abilities: \n      » Combine with Buzzers \n      » Conversion beam \n      » Amphibious propulsion \n Upgrades: \n      » Particle Accelerator (Nerve Center) \n      » Vehicle Force Field (Technology Assembler)"
+END
+
+
+NAME:AlienArachnid
+"Arachnid"
+END
+
+TYPE:AlienArachnid
+"Medium Walker. Strong vs. Vehicles."
+END
+
+DESC:AlienArachnid
+"Heal in Tiberium"
+END
+
+NAME:ALIENGunWalker
+"Razorback"
+END
+
+TYPE:ALIENGunWalker
+"Light vehicle. Strong vs. Infantry, Aircraft."
+END
+
+DESC:ALIENGunWalker
+"Heal in Tiberium \n Abilities: \n      » Combine with Buzzers \n      » Amphibious propulsion \n Upgrades: \n      » Tiberium Enhancement (Technology Assembler) \n      » Light Forcefield (Nerve Centre)"
+END
+
+TYPE:ALIENSeekerTank
+"Light vehicle. Strong vs. Vehicles, Aircraft. \n Detector"
+END
+
+DESC:ALIENSeekerTank
+"Heal in Tiberium \n Abilities: \n      » Combine with Buzzers \n      » Amphibious propulsion \n Upgrades: \n      » Tiberium Enhancement (Technology Assembler) \n      » Light Forcefield (Nerve Centre)"
+END
+
+NAME:AlienStingray
+"Manta"
+END
+
+TYPE:AlienStingray
+"Medium Vehicle. Strong vs. Infantry, Vehicles."
+END
+
+DESC:AlienStingray
+"Heal in Tiberium \n Abilities: \n      » Combine with Buzzers \n      » Deploy Ion Storm (Ion Storm Generator) \n      » Amphibious propulsion \n Upgrades: \n      » Ion Storm Generator (Technology Assembler) \n      » Light Forcefield (Nerve Centre)"
+END
+
+NAME:AlienReaver
+"Reaver"
+END
+
+TYPE:AlienReaver
+"Light Vehicle. Strong vs. Structures."
+END
+
+DESC:AlienReaver
+"Heal in Tiberium \n Abilities: \n      » Combine with Buzzers \n      » Blink Pack \n      » Amphibious propulsion \n Upgrades: \n      » Heavy Forcefield (Technology Assembler)"
+END
+
+NAME:AlienTrooper
+"Stalwart"
+END
+
+TYPE:AlienTrooper
+"Heavy Infantry. Strong vs. Infantry, Structures."
+END
+
+DESC:AlienTrooper
+"Heal in Tiberium \n Abilities: \n      » Close Combat Assault \n » Blink Pack (Upgrade) \n Upgrades: \n      » Tiberium Integration (Stasis Chamber) \n      » Blink Pack (Stasis Chamber)"
+END
+
+NAME:AlienSniperTrooper
+"Eradicators"
+END
+
+TYPE:AlienSniperTrooper
+"Heavy Infantry. Strong vs. Infantry, Vehicles."
+END
+
+DESC:AlienSniperTrooper
+"Heal in Tiberium \n Abilities: \n      » Blink Pack"
+END
+
+
+NAME:AlienMegatripod
+"Conqueror"
+END
+
+TYPE:AlienMegatripod
+"Super Heavy Walker. Strong vs. Vehicles, Structures."
+END
+
+DESC:AlienMegatripod
+"Abilities: \n      » Seed Ichor \n      » Assimilate Technology \n      » Tiberium Radiation (Heals Scrin ground units) \n Only one Conqueror may be trained at a time"
+END
+
+NAME:AlienMegatripodHusk
+"Conqueror Wreckage"
+END
+
+DESC:AlienMegatripodHusk
+""
+END
+
+NAME:ALIENMothership
+"Exterminator Mothership"
+END
+
+TYPE:ALIENMothership
+"Superheavy Aircraft. Strong vs. Ground Targets."
+END
+
+DESC:ALIENMothership
+"Armed with the Catalyst Cannon which sends a destructive shockwave out from the center point of firing. \n \n Only one Mothership of any type may be deployed at a time"
+END
+
+NAME:ALIENMothership2
+"Leviathan Mothership"
+END
+
+TYPE:ALIENMothership2
+"Superheavy Aircraft. Strong vs. Strong vs. Ground Targets"
+END
+
+DESC:ALIENMothership2
+"Gain +10% Armor and Attack bonus in Ion Storms \n Heals in Ion Storm \n Has Forcefield generator \n Abilities: \n      » Deploy Ion Storm \n      » Seed Tiberium \n \n Only one Mothership may be deployed at a time"
+END
+
+NAME:ALIENStormrider
+"Stormrider"
+END
+
+TYPE:ALIENStormrider
+"Aircraft. Strong vs. Vehicles, Aircraft."
+END
+
+DESC:ALIENStormrider
+"Gain +10% Armor and Attack bonus in Ion Storms  \n Heals in Ion Storm \n Upgrades: \n      » Light Force Field (Technology Assembler)"
+END
+
+NAME:ALIENDevastatorWarship
+"Devastator Warship"
+END
+
+TYPE:ALIENDevastatorWarship
+"Heavy Aircraft. Strong vs. Structures, Infantry."
+END
+
+DESC:ALIENDevastatorWarship
+"Gain +10% Armor and Attack bonus in Ion Storms \n Long range artillery platform \n Upgrades: \n      » Heavy Forcefield Generator (Technology Assembler)"
+END
+
+NAME:ALIENPlanetaryAssaultCarrier
+"Planetary Assault Carrier"
+END
+
+TYPE:ALIENPlanetaryAssaultCarrier
+"Heavy Aircraft. Strong vs. Vehicles, Structures."
+END
+
+DESC:ALIENPlanetaryAssaultCarrier
+"Gain +10% Armor and Attack bonus in Ion Storms \n Heals in Ion Storm  \n Abilities: \n      » Create Ion Storm (Ion Storm Generator) \n Upgrades: \n      » Heavy Forcefield Generator (Technology Assembler) \n      » Ion Storm Generator (Technology Assembler)"
+END
+
+NAME:ALIENBomber
+"Scourge"
+END
+
+TYPE:ALIENBomber
+"Aircraft. Strong Vs. Vehicles, Aircraft"
+END
+
+DESC:ALIENBomber
+"Gain +10% Armor and Attack bonus in Ion Storms \n Heals in Ion Storm \n Abilities: \n      » Blink Pack"
+END
+
+NAME:ALIENGunship
+"Ravage Gunship"
+END
+
+TYPE:ALIENGunship
+"Aircraft. Strong Vs. Infantry \n Detector"
+END
+
+DESC:ALIENGunship
+"Gain +10% Armor and Attack bonus in Ion Storms \n Heals in Ion Storm \n Abilities: \n      » Transports Infantry \n      » Detects Stealth \n Upgrades: \n      » Heavy Forcefield Generator (Technology Assembler) \n      » Tiberium Enhancement (Technology Assembler)""
+END
+
+DESC:ALIENExplorer
+"Heal in Tiberium \n Abilities: \n      » Amphibious propulsion  \n      » Unpacks into Outpost \n      » Outpost provides Ground Control to place structures and heals Scrin units"
+END
+
+NAME:ALIENAnnihilatorTripod
+"Annihilator"
+END
+
+DESC:ALIENAnnihilatorTripod
+"Heal in Tiberium \n Abilities: \n      » Combine with Buzzers \n Upgrades: \n      » Heavy Forcefield Generator (Technology Assembler) \n      » Tiberium Enhancement (Technology Assembler)"
+END
+
+NAME:ALIENShockTrooper
+"Shock Trooper"
+END
+
+TYPE:ALIENShockTrooper
+"Heavy infantry. Strong vs. Vehicles, Aircraft."
+END
+
+DESC:ALIENShockTrooper
+"Heal in Tiberium  \n Abilities: \n »     Blink Pack (Upgrade) \n Upgrades: \n      » Tiberium Integration (Stasis Chamber) \n      » Blink Pack (Stasis Chamber)"
+END
+
+NAME:ALIENHarvester
+"Harvester"
+END
+
+TYPE:ALIENHarvester
+"Resource Vehicle. Weaponless."
+END
+
+DESC:ALIENHarvester
+"Heal in Tiberium \n Abilities:\n      » Gathers Tiberium \n      » Amphibious propulsion"
+END
+
+NAME:ALIENMastermind
+"Mastermind"
+END
+
+TYPE:ALIENMastermind
+"Elite Infantry. Strong vs. Infantry."
+END
+
+DESC:ALIENMastermind
+"Heal in Tiberium \n Abilities:\n      » Teleport Allies \n      » Mind Control \n      » Mind Blast  \n \n Only one Mastermind may be trained at a time"
+END
+
+NAME:ALIENBuzzers
+"Buzzers"
+END
+
+TYPE:ALIENBuzzers
+"Swarm. Strong vs. Infantry."
+END
+
+DESC:ALIENBuzzers
+"Heal in Tiberium \n Abilities: \n      » Clear garrisoned structures \n      » Combine with Alien vehicles \n \n Upgrades: \n      » Tiberium Hive (Nerve Center)"
+END
+
+NAME:ALIENBuzzerHive
+"Buzzer Hive"
+END
+
+TYPE:ALIENBuzzerHive
+"Structure. Strong vs. Infantry. \n Detector"
+END
+
+DESC:ALIENBuzzerHive
+"Abilities: \n      » Detect Stealth \n      » Clear garrisoned structures \n Upgrades: \n      » Tiberium Hive (Nerve Center)"
+END
+
+NAME:ALIENPowerProjector
+"Ichor Reactor"
+END
+
+TYPE:ALIENPowerProjector
+"Tech Structure."
+END
+
+NAME:ALIENLightningSpike
+"Lightning Spike"
+END
+
+TYPE:AlienLightningSpike
+"Structure. Strong vs. Vehicle. \n Detector"
+END
+
+DESC:AlienLightningSpike
+"Abilities: \n      » Detect Stealth \n      » Can shoot over walls"
+END
+
+
+NAME:ALIENPlasmaMissileBattery
+"Plasma Missile Battery"
+END
+
+TYPE:ALIENPlasmaMissileBattery
+"Structure. Strong vs. Aircraft. \n Detector"
+END
+
+DESC:ALIENPlasmaMissileBattery
+"Abilities: \n      » Detect Stealth \n Upgrades: \n      » Tiberium Enhancement (Technology Assembler)"
+END
+
+
+DESC:ALIENPowerProjector
+"Provides power + 10 \n Abilities: \n » Tiberium Radiation - Heals Scrin ground units (Tiberium Addition) \n \n Available Upgrades:\n     » Tiberium Addition (Extractor) + 30 Power"
+END
+
+DESC:ALIENTiberiumTower
+"Comes with a Harvester to allow the gathering of resources \n Processes and stores Tiberium. \n » Infinite storage capacity."
+END
+
+NAME:ALIENDronePlatform
+"Drone Platform"
+END
+
+TYPE:ALIENDronePlatform
+"Production Structure."
+END
+
+DESC:ALIENDronePlatform
+"Enable Radar \n Provides structure production queues"
+END
+
+NAME:ALIENControlCenter
+"Nerve Center"
+END
+
+TYPE:ALIENControlCenter
+"Tech Structure."
+END
+
+DESC:ALIENControlCenter
+"Unlocks advanced units and structures  \n Researches Upgrades: \n  \n     » Tiberium Hive \n     » Light Forcefield Generator \n     » Particle Accelerator \n \n Provides Support Powers: \n     » Tiberium Vibration Scan  \n     » Decoy Army"
+END
+
+NAME:ALIENSignalTransmitter
+"Signal Transmitter"
+END
+
+TYPE:ALIENSignalTransmitter
+"Tech Structure."
+END
+
+DESC:ALIENSignalTransmitter
+"Allows access to advanced aircrafts \n Provides Support Powers: \n      » Deploy Mothership \n      » Wormhole \n \n Only one Signal Transmitter may be constructed at a time"
+END
+
+DESC:ALIENSignalTransmitter_TE
+"Allows access to advanced aircrafts \n Provides Support Powers: \n      » Tiberium Meteorite \n      » Wormhole \n \n Only one Signal Transmitter may be constructed at a time"
+END
+
+DESC:ALIENTechnologyAssembler
+"Unlocks high-tech units and structures \n Researches Upgrades: \n      » Heavy Forcefield Generator \n      » Ion Storm Generator \n      » Tiberium Enhancement \n \n Provides Support Powers: \n      » Phase Field"
+END
+
+DESC:ALIENPortal
+"Produces infantry"
+END
+
+NAME:ALIENOutpost
+"Alien Outpost"
+END
+
+TYPE:ALIENOutpost
+"Production structure"
+END
+
+DESC:ALIENOutpost
+"Provides additional Ground Control. Abilities: \n      » Tiberium Radiation (Heals Scrin units)"
+END
+
+NAME:ALIENStasisChamber
+"Stasis Chamber"
+END
+
+TYPE:ALIENStasisChamber
+"Tech Structure."
+END
+
+DESC:ALIENStasisChamber
+"Abilities: \n      » Resurrection field (Replenish Scrin squads) \n Researches Upgrades: \n      » Blink Pack \n      » Tiberium Integration \n      » Teleport Beacon \n \n Provides Support Powers: \n      » Swarm \n      » Stasis Shield"
+END
+
+
+DESC:ALIENGateway
+"Deploys Alien Vehicles"
+END
+
+
+DESC:ALIENWarpBeacon
+"Deploys Alien Aircraft \n Abilities \n     » Generate Ion Storm (Heals nearby aircrafts) Support Powers: \n     » Ion Storm"
+END
+
+
+
+
+
+Abilities:Scrin
+""
+End
+
+NAME:AbilityDevourerTankConversionBeam
+"Conversion Beam"
+END
+
+DESC:AbilityDevourerTankConversionBeam
+"Absorb Tiberium from the environment or Resource Structures to supercharge the tank's primary laser \n A supercharged laser will deal extra damage +50% \n \n Left-click on icon then left-click on target Tiberium or Resource Structure"
+END
+
+NAME:PlayerPowerRiftGenerator
+"Rift"
+END
+
+TYPE:PlayerPowerRiftGenerator
+"Superweapon"
+END
+
+Desc:PlayerPowerRiftGenerator
+"Opens a Tiberium Rift that damages everything over time in a large radius \n \n Left-click icon then left-click on target location"
+END
+
+NAME:StalwartCCAttack
+"Close Combat Assault"
+END
+
+TYPE:StalwartCCAttack
+""
+END
+
+DESC:StalwartCCAttack
+"Stalwarts assault enemy with powerful close combat weaponry \n Inflicts heavy damage to enemy infantry and vehicles and kills garrisoned infantry \n \n Left-click icon then left-click on target"
+END
+
+
+NAME:MastermindMindBlast
+"Mind Blast"
+END
+
+TYPE:MastermindMindBlast
+""
+END
+
+DESC:MastermindMindBlast
+"Mastermind uses psychic attack to destroy enemy infantry inside a small radius \n \n Left-click icon then left-click on target"
+END
+
+NAME:CorruptAbility
+"Corrupt"
+END
+
+DESC:CorruptAbility
+"Corruptor poisons area with tiberium radiation. \n » Tiberium radiation heals scrin ground units but damages human infantry. \n \n Left-click icon then left-click on target"
+END
+
+NAME:CorruptorSporePod
+"Parasitic Drone"
+END
+
+DESC:CorruptorSporePod
+"Ravage releases Parasitic drone that attach on enemy vehicle. \n Drone spy on enemy and detect stealth. \n Drone is removed when is unit repaired \n \n Left-click icon then left-click on target"
+END
+
+NAME:AbilityIonStorm
+"Ion Storm"
+END
+
+DESC:AbilityIonStorm
+"Create an Ion Storm at the unit´s current location \n » Ion Storm heals scrin aircrafts \n » Improve armor and firepower of scrin aircrafts + 20% \n » Damage enemy units and structures \n \n Left-click icon to activate"
+END
+
+DESC:AbilityBlinkPack
+"Teleport to a new location on the battlefield \n \n Left-click icon then left-click on target location"
+END
+
+NAME:AbilityCommandeerWeapon
+"Assimilate Technology"
+END
+
+DESC:AbilityCommandeerWeapon
+"Kill enemy unit to gain upgrade \n      » Falcon or Bike – Enable detect stealth  \n      » Titan or Scorpion Tank – Adds anti-vehicle beam cannon \n      » Disruptor – Adds Sonic weapon \n      » Stealth Tank – Enable Stealth Generator \n      » Cobra – Adds Plasma Cannon"
+END
+
+NAME:AlienIchorSeed
+"Ichor Seed"
+END
+
+TYPE:AlienIchorSeed
+""
+END
+
+DESC:AlienIchorSeed
+"Creates small Tiberium field on designated area"
+END
+
+
+Upgrades:Scrin
+""
+End
+
+
+UpgradePrereq:ALIENBlinkPack
+"Research at Stasis Chamber"
+END
+
+UpgradeDesc:ALIENBlinkPack
+"Allows Shock Troopers and Stalwarts to teleport to a new location on the battlefield"
+END
+
+DESC:UpgradeBlinkPack
+"Upgrades Shock Troopers and Stalwarts with Blink Packs \n Allows Shock Troopers and Stalwarts to teleport to a new location on the battlefield \n \n Left-click icon to begin researching"
+END
+
+UpgradePrereq:AlienLightShield
+"Research at Nerve Center"
+END
+
+UpgradeDesc:AlienLightShield
+"Absorbs a portion of damage and one EMP blast. \n Forcefield hitpoits is worth of 25% health of its wearer \n Recharge when depleted requires 90 seconds"
+END
+
+UpgradeType:AlienLightShield
+"Armor upgrade"
+END
+
+NAME:AlienLightShield
+"Light Forcefield Generator"
+END
+
+TYPE:AlienLightShield
+"Armor upgrade"
+END
+
+DESC:AlienLightShield
+"Upgrades Razorback, Seeker, Devourer, Manta and Stromrider with Light Forcefields \n Absorbs a portion of damage and one EMP blast. Forcefield hitpoits is worth of 25% health of its wearer \n \n Left-click to begin researching"
+END
+
+UpgradeName:ALIENForcefieldGenerators
+"Heavy Forcefield Generators"
+END
+
+UpgradeDesc:ALIENForcefieldGenerators
+"Absorbs a portion of damage and one EMP blast \n Forcefield hitpoits is worth of 33% healt of its wearer \n Recharge when depleted requires 120 seconds"
+END
+
+UpgradePrereq:ALIENForcefieldGenerators
+"Research at Technology Assembler"
+END
+
+UpgradeType:ALIENForcefieldGenerators
+"Armor Upgrade"
+END
+
+NAME:UpgradeForcefieldGenerator
+"Heavy Forcefield Generators"
+END
+
+DESC:UpgradeForcefieldGenerator
+"Upgrades Corrupter, Annihilator Tripod, Reaver, Ravage gunship, Devastator warship and Planetary Assault Carrier  with heavy Forcefields \n Absorbs a portion of damage and one EMP blast. Forcefield hitpoits is worth of 33% healt of its wearer \n \n Left-click to begin researching"
+END
+
+UpgradePrereq:AlienInfantryEnhancement
+"Research at Stasis Chamber"
+END
+
+UpgradeType:AlienInfantryEnhancement
+"Armor upgrade"
+END
+
+UpgradeDesc:AlienInfantryEnhancement
+"Increases attack damage +25% \n Increases maximum health +20% \n Increases maximum speed +10%"
+END
+
+NAME:AlienInfantryEnhancement
+"Tiberium Integration"
+END
+
+TYPE:AlienInfantryEnhancement
+"Armor upgrade"
+END
+
+DESC:AlienInfantryEnhancement
+"Enhances all Disintegrators, Shock Troopers and Stalwarts with Tiberium \n Increases maximum health +20, attack damage +25% and speed +10%. \n \n Left-click icon to begin researching"
+END
+
+UpgradePrereq:AlienBuzzerHiveEnhanced
+"Research at Nerve Centre"
+END
+
+UpgradeType:AlienBuzzerHiveEnhanced
+"Armor upgrade"
+END
+
+UpgradeDesc:AlienBuzzerHiveEnhanced
+"Increases maximum health +50% \n Increases speed of Buzzers +50%"
+END
+
+NAME:AlienBuzzerHiveEnhanced
+"Tiberium Hive"
+END
+
+TYPE:AlienBuzzerHiveEnhanced
+"Armor upgrade"
+END
+
+DESC:AlienBuzzerHiveEnhanced
+"Enhances all Buzzers and Buzzer Hives with Tiberium \n Increases maximum health + 50% and speed of Buzzers +50% \n \n Left-click icon to begin researching"
+END
+
+UpgradeName:ALIENIonStormUpgrade
+"Ion Storm Generator"
+END
+
+UpgradeTYPE:ALIENIonStormUpgrade
+"Ability upgrade"
+END
+
+UpgradeDESC:ALIENIonStormUpgrade
+"Ion Storm heals scrin aircrafts \n Improve armor and firepower of scrin aircrafts + 10% \n Damage enemy units and structures"
+END
+
+Name:ALIENIonStormUpgrade
+"Ion Storm Generator"
+END
+
+TYPE:ALIENIonStormUpgrade
+"Ability upgrade"
+END
+
+DESC:ALIENIonStormUpgrade
+"Upgrades Manta and Planetary Assault Carrier with Ion Storm Generator \n Ion Storms heals and improve armor and firepower of scrin aircraft + 20% and damage enemy units and structures\n \n Left-click icon to begin researching"
+END
+
+UpgradeName:AlienTiberiumShards
+"Tiberium Enhancement"
+END
+
+UpgradeTYPE:AlienTiberiumShards
+"Weapon upgrade"
+END
+
+UpgradeDESC:AlienTiberiumShards
+"Increases attack damage +20% \n Increases maximum health +12%"
+END
+
+Name:AlienTiberiumShards
+"Tiberium Enhancement"
+END
+
+TYPE:AlienTiberiumShards
+"Weapon upgrade"
+END
+
+DESC:AlienTiberiumShards
+"Enhances all Seekers, Razorbacks, Stormriders, Ravages and Tripods with Tiberium \n Increases attack damage +20% \n Increases maximum health +12% \n \n Left-click icon to begin researching"
+END
+
+UPGRADE:PlasmaDiskLauncher
+"Particle Accelerator"
+END
+
+
+NAME:UpgradePlasmaDiskLauncher
+"Particle Accelerator"
+END
+
+DESC:UpgradePlasmaDiskLauncher
+"Upgrades all Disintegrators and Devourer Tanks with Particle Accelerator. \n Increases maximum weapon range +25% \n \n Left-click icon to begin researching"
+END
+
+UpgradePrereq:ALIENPlasmaDiscLauncher
+"Research at Nerve Center"
+END
+
+UpgradeName:ALIENPlasmaDiscLauncher
+"Particle Accelerator"
+END
+
+UpgradeDesc:ALIENPlasmaDiscLauncher
+"Increases maximum weapon range +25%"
+END
+
+UPGRADE:AlienFusionCore
+"Tiberium Addition"
+END
+
+NAME:UpgradeFusionCore
+"Tiberium Addition"
+END
+
+DESC:UpgradeFusionCore
+"Increases maximum power output of this reactor +30 power \n Enable tiberium radiation - heals scrin units \n \n Left-click to begin upgrading"
+END
+
+
+NAME:UpgradeALIENTeleportHomer
+"Teleport Beacon"
+END
+
+DESC:UpgradeALIENTeleportHomer
+"Upgrades all Pacifiers with teleport homing beacon. Replenish fallen squad members. \n \n Left-click icon to begin researching"
+END
+
+UpgradePrereq:ALIENTeleportHomer
+"Research at Stasis Chamber"
+END
+
+UpgradeName:ALIENTeleportHomer
+"Teleport Beacon"
+END
+
+UpgradeDesc:ALIENTeleportHomer
+"Replenish fallen squad members"
+END
+
+
+
+Support Powers:Scrin
+""
+End
+
+NAME:PlayerPowerSummonMothership
+"Mothership"
+END
+
+TYPE:PlayerPowerSummonMothership
+"Reinforcement Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerSummonMothership
+"Deploys the Mothership to the battlefield \n Only one Mothership may be deployed at a time \n \n Left-click icon to activate"
+END
+
+NAME:PlayerPowerAlienAsteroid
+"Meteor Strike"
+END
+
+TYPE:PlayerPowerAlienAsteroid
+"Offensive power \n 5 minute Cooldown"
+END
+
+DESC:PlayerPowerAlienAsteroid
+"Deploys artificial tiberium meteorite on target area \n Impact inflicts heavy damage to structures and leave a tiberium cluster in its wake \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerLightningSpike
+"Ion Storm"
+END
+
+TYPE:PlayerPowerLightningSpike
+"Offensive Power \n 5 minute Cooldown"
+END
+
+DESC:PlayerPowerLightningSpike
+"Creates a localised Ion Storm at the desired location \n Damage enemy units and structures \n Heals scrin aircrafts and improve their armor and firepower + 10% for duration of ion storm \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerDecoyArmy
+"Decoy Army"
+END
+
+TYPE:PlayerPowerDecoyArmy
+"Intelligence Power \n 2 minute Cooldown"
+END
+
+DESC:PlayerPowerDecoyArmy
+"Creates a purely visual cloned army of units \n Cloned units can see but cannot attack \n Can only be used on ground units \n \n Left-click icon then left-click on units to clone, then left-click on target location to deploy"
+END
+
+NAME:PlayerPowerSwarm
+"The Swarm"
+END
+
+TYPE:PlayerPowerSwarm
+"Reinforcement Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerSwarm
+"Spawns a swarm of Buzzers that engulfs the targeted area \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerTiberiumVibrationScan
+"Tiberium Vibration Scan"
+END
+
+TYPE:PlayerPowerTiberiumVibrationScan
+"Intelligence Power \n 2 minute Cooldown"
+END
+
+DESC:PlayerPowerTiberiumVibrationScan
+"Reveals on the radar all Tiberium fields, Tiberium based structures, and Harvesters across the battlefield \n \n Left-click to activate"
+END
+
+NAME:PlayerPowerWormHole
+"Wormhole"
+END
+
+TYPE:PlayerPowerWormHole
+"Utility Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerWormHole
+"Creates two portals on the battlefield \n Both allied and enemy units can travel instantly between the two portals \n \n Left-click icon then left-click on target locations"
+END
+
+NAME:PlayerPowerPhaseField
+"Phase Field"
+END
+
+TYPE:PlayerPowerPhaseField
+"Defensive Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerPhaseField
+"Phases ground units so they are partially in another dimension and cannot attack \n Armor of phased units increased substantially \n \n Left-click icon then left-click on target units"
+END
+
+NAME:PlayerPowerCrystalShield
+"Stasis Shield"
+END
+
+TYPE:PlayerPowerCrystalShield
+"Defensive Power \n 5 minute Cooldown"
+END
+
+DESC:PlayerPowerCrystalShield
+"Creates a shield over an area that disables and protects any units inside \n \n Left-click icon then left-click on target location"
+END
+
+
+
+
+Obsolete:Scrin
+""
+END
+
+NAME:ALIENShieldGenerator
+"Stasis Shield Generator"
+END
+
+TYPE:ALIENShieldGenerator
+"Defensive Structure."
+END
+
+DESC:ALIENShieldGenerator
+"Provides Support Powers: \n      » Stasis Shield"
+END
+
+NAME:PlayerPowerAlienRepairDrones
+"Reconstruction Drones"
+END
+
+TYPE:PlayerPowerAlienRepairDrones
+"Utility Power \n Cooldown time 2 minutes"
+END
+
+DESC:PlayerPowerAlienRepairDrones
+"Repairs units over time around the target location \n \n Left-click icon then left-click on target units"
+END
+
+NAME:ALIENTiberiumLab
+"Ichor Processing Plant"
+END
+
+TYPE:ALIENTiberiumLab
+"Tech Structure."
+END
+
+DESC:ALIENTiberiumLab
+"Allows access to advanced tiberium based units and abilities \n Provides Support Powers: \n      » Tiberium Meteorite  \n \n Only one Tiberium Cultivator may be constructed at a time \n Can´t be constructed when Signal Transmitter is constructed."
+END
+
+NAME:AlienGunDrones
+"Razor Drone"
+END
+
+TYPE:AlienGunDrones
+"Light infantry. Strong vs. Infantry, Aircraft"
+END
+
+DESC:AlienGunDrones
+"Upgrades: /n      » Tiberium Infusion"
+END
+
+NAME:UpgradeMegatripodshield
+"Defender Status"
+END
+
+TYPE:UpgradeMegatripodshield
+"Defensive upgrade"
+END
+
+DESC:UpgradeMegatripodshield
+"Upgrade Overlord Tripod with extra force field"
+END
+
+NAME:UpgradeMegatripodWeapon
+"Warlord Status"
+END
+
+TYPE:UpgradeMegatripodWeapon
+"Offensive upgrade"
+END
+
+DESC:UpgradeMegatripodWeapon
+"Upgrade Overlord Tripod with lightning spike \n Enables the Tripod to attack air units"
+END
+
+
+NAME:UpgradeMegatripodSupport
+"Recultivator Status"
+END
+
+TYPE:UpgradeMegatripodSupport
+"Support Upgrade"
+END
+
+DESC:UpgradeMegatripodSupport
+"Unlocks Seed Ichor ability"
+END
+
+
+INI:ForgottenFaction
+"Forgotten"
+END
+
+NAME:ForgottenScrapPile
+"Scrap Pile"
+END
+
+DESC:ForgottenScrapPile
+"This scrap pile can be harvested for reasouces"
+END
+
+
+NAME:ForgottenMRJ
+"Prospector"
+END
+
+TYPE:ForgottenMRJ
+"Light Vehicle, Detector \n Weaponless"
+END
+
+DESC:ForgottenMRJ
+"Unpacks into Armored Outpost \n      » Outpost provides Ground Control to place structures and repair Vehicles. \n Abilities: \n      » Detects Stealth"
+END
+
+DESC:ForgottenOutpost
+"Outpost provides Ground Control to place structures. \n Abilities: \n      » Repair Vehicles \n      » Detects Stealth"
+END
+
+NAME:ForgottenHumwee
+"Humvee"
+END
+
+TYPE:ForgottenHumwee
+"Light Vehicle \n Strong vs. Vehicle, Aircraft"
+END
+
+DESC:ForgottenHumwee
+"Abilities: \n      » Extra Upgrades \n      » Transports Infantry \n Upgrades: \n      » More Weapons (Scrap Yard) \n      » Blue Tiberium Warheads (Vault Of Knowledge)"
+END
+
+NAME:ForgottenPickup
+"Cougar"
+END
+
+TYPE:ForgottenPickup
+"Light Vehicle, Detector \n Strong vs. Infantry"
+END
+
+DESC:ForgottenPickup
+"Abilities: \n      » Extra Upgrades \n      » Detects Stealth \n Upgrades: \n      » More Weapons (Scrap Yard) \n      » Acid Shells (Sanctuary)"
+END
+
+NAME:ForgottenTrike
+"Striker"
+END
+
+TYPE:ForgottenTrike
+"Light Vehicle \n Strong vs. Infantry"
+END
+
+DESC:ForgottenTrike
+"Abilities: \n      » Extra Upgrades \n      » Clear mines (Upgrade) \n      » Repair Vehicles (Upgrade) \n Upgrades: \n      » More Weapons (Scrap Yard) \n      » Tools of trade (Scrap Yard)"
+END
+
+NAME:ForgottenQuad
+"Purifier"
+END
+
+TYPE:ForgottenQuad
+"Medium Vehicle \n Strong vs. Infantry, Structure"
+END
+
+DESC:ForgottenQuad
+"Abilities: \n      » Extra Upgrades \n      » Crush smaller vehicles \n      » Clear garrison \n Upgrades: \n      » Tiberium Fuel (Vault Of Knowledge) \n      » Improved Chem Sprayer (Vault Of Knowledge)"
+END
+
+NAME:ForgottenMLRS
+"Hydra"
+END
+
+TYPE:ForgottenMLRS
+"Light Vehicle \n Strong vs. Structure"
+END
+
+DESC:ForgottenMLRS
+""Abilities: \n      » Extra Upgrades \n      » Transports Infantry \n Upgrades: \n      » Living Metal (Vault Of Knowledge) \n      » Blue Tiberium Missiles (Vault Of Knowledge)""
+END
+
+NAME:ForgottenWarCamper
+"War Camper"
+END
+
+TYPE:ForgottenWarCamper
+"Light Vehicle \n Weaponless"
+END
+
+DESC:ForgottenWarCamper
+"Abilities: \n      » Unpacks into War Camp"
+END
+
+NAME:ForgottenMRV
+"Mobile Refinery"
+END
+
+TYPE:ForgottenMRV
+"Heavy Vehicle \n Weaponless"
+END
+
+DESC:ForgottenMRV
+"Abilities: \n      » Unpacks into Refinery"
+END
+
+NAME:ForgottenMortarTruck
+"Catapult"
+END
+
+TYPE:ForgottenMortarTruck
+"Medium Vehicle \n Strong vs. Structure"
+END
+
+DESC:ForgottenMortarTruck
+"Abilities: \n      » Transports Infantry \n      » Tremor shell"
+END
+
+
+NAME:ForgottenFlakTruck
+"Defender"
+END
+
+TYPE:ForgottenFlakTruck
+"Medium Vehicle \n Strong vs. Aircraft"
+END
+
+DESC:ForgottenFlakTruck
+"Abilities: \n      » Extra Upgrades \n      » Detects Stealth (upgrade) \n Upgrades: \n      » Acid Shells (Sanctuary) \n      » Improved sensors (Scrap Yard)"
+END
+
+NAME:ForgottenApc
+"Battle Bus"
+END
+
+TYPE:ForgottenApc
+"Heavy vehicle \n Weaponless"
+END
+
+DESC:ForgottenApc
+"Abilities: \n      » Extra Upgrades \n      » Transports Infantry \n Upgrades: \n      » Blue Tiberium Warheads (Vault Of Knowledge) \n      » Dozer blade (Scrap Yard)"
+END
+
+NAME:ForgottenTank
+"Punisher"
+END
+
+TYPE:ForgottenTank
+"Medium Tank \n Strong vs. Vehicle"
+END
+
+DESC:ForgottenTank
+"Abilities: \n      » Extra Upgrades \n      » Transports Infantry \n Upgrades: \n      » Blue Tiberium Warheads (Vault Of Knowledge) \n      » Tiberium Tanks (Vault Of Knowledge)"
+END
+
+NAME:ForgottenTankHunter
+"Vindicator"
+END
+
+TYPE:ForgottenTankHunter
+"Medium Tank \n Strong vs. Vehicle"
+END
+
+DESC:ForgottenTankHunter
+"Abilities: \n      » Extra Upgrades  \n Upgrades: \n      » Living Metal (Vault Of Knowledge)"
+END
+
+NAME:ForgottenChemTank
+"Purifier"
+END
+
+TYPE:ForgottenChemTank
+"Medium Tank \n Strong vs. Infantry, Structure."
+END
+
+DESC:ForgottenChemTank
+"Abilities: \n      » Clear Garrison \n      » Clear tiberium"
+END
+
+NAME:ForgottenReclamator
+"Reclamator"
+END
+
+TYPE:ForgottenReclamator
+"Superheavy Vehicle \n Strong vs. Infantry, Vehicle, Structure."
+END
+
+DESC:ForgottenReclamator
+"Abilities: \n      » Transport up to 3 Infantry Squads (Infantry cannot exit) \n      » Mass harvest (extracts tiberium from targeted tiberium field)"
+END
+
+NAME:ForgottenBrute
+"Brute"
+END
+
+TYPE:ForgottenBrute
+"Heavy Infantry \n Strong vs. Vehicle"
+END
+
+DESC:ForgottenBrute
+"Abilities: \n      » Heal in Tiberium \n    » Cloaked near Tiberium \n Upgrades: \n      » Blue Tiberium Infusion (Sanctuary)"
+END
+
+NAME:ForgottenFiendCombat
+"Combat Fiend Pack"
+END
+
+TYPE:ForgottenFiendCombat
+"Heavy Infantry, Detector \n Strong vs. Infantry, Vehicle."
+END
+
+
+DESC:ForgottenFiendCombat
+"Abilities: \n      » Detects Stealth \n      » Heal in Tiberium \n    » Cloaked near Tiberium \n Upgrades: \n      » Call To Arms (Sanctuary) \n      » Blue Tiberium Infusion (Vault Of Knowledge)"
+END
+
+NAME:ForgottenHarvester
+"Harvester"
+END
+
+TYPE:ForgottenHarvester
+"Medium Vehicle, Harvester, Transport \n Weaponless"
+END
+
+
+DESC:ForgottenHarvester
+"Abilities: \n      » Harvest tiberium \n      » Transports infantry (infantry can attack)"
+END
+
+NAME:ForgottenFeral
+"Ascended Squad"
+END
+
+TYPE:ForgottenFeral
+"Heavy Infantry \n Strong vs. Infantry, Vehicle."
+END
+
+
+DESC:ForgottenFeral
+"Abilities: \n      » Heal in Tiberium \n    » Cloaked near Tiberium \n    » Has EMP Attack \n Upgrades: \n      » Call To Arms (Sanctuary) \n      » Blue Tiberium Infusion (Vault Of Knowledge)"
+END
+
+NAME:ForgottenWitch
+"Witch Squad"
+END
+
+TYPE:ForgottenWitch
+"Infantry \n Strong vs. Infantry, Structure."
+END
+
+
+DESC:ForgottenWitch
+"Abilities: \n      » Aura decreases suffered damage of surrounded friendly units - 10% (Upgrade) \n      » Heal in Tiberium \n    » Cloaked near Tiberium \n Upgrades: \n      » Call To Arms (Sanctuary) \n      » Blue Tiberium Infusion (Vault Of Knowledge)"
+END
+
+NAME:ForgottenArchon
+"Archon"
+END
+
+TYPE:ForgottenArchon
+"Elite infantry, Strong vs. Everything"
+END
+
+DESC:ForgottenArchon
+"Abilities: \n      » Leader (add armor bonus to surrounded mutant units) \n      » Heal in Tiberium \n      » Shielded"
+END
+
+NAME:ForgottenEngineer
+"Mechanic"
+END
+
+TYPE:ForgottenEngineer
+"Infantry \n Weaponless"
+END
+
+DESC:ForgottenEngineer
+"Abilities:\n      » EMP grenade \n     » Heal in Tiberium \n    » Cloaked near Tiberium"
+END
+
+NAME:ForgottenRifleman
+"Guardian Squad"
+END
+
+TYPE:ForgottenRifleman
+"Infantry \n Strong vs. Infantry"
+END
+
+DESC:ForgottenRifleman
+"Abilities: \n    » Clear Garrison \n    » Heal in Tiberium \n    » Cloaked near Tiberium \n Upgrades: \n      » Call To Arms (Sanctuary) \n      » Combat Training (Sanctuary)"
+END
+
+NAME:ForgottenMarauder
+"Marauder Squad"
+END
+
+TYPE:ForgottenMarauder
+"Infantry \n Strong vs. Infantry"
+END
+
+DESC:ForgottenMarauder
+"Abilities: \n    » Heal in Tiberium \n    » Cloaked near Tiberium \n Upgrades: \n      » Call To Arms (Sanctuary) \n      » Combat Training (Sanctuary)"
+END
+
+
+NAME:ForgottenFlakTrooper
+"Flak Trooper Squad"
+END
+
+TYPE:ForgottenFlakTrooper
+"Infantry \n Strong vs. Vehicle, Aircraft"
+END
+
+DESC:ForgottenFlakTrooper
+"Abilities: \n     » Heal in Tiberium \n    » Cloaked near Tiberium \n Upgrades: \n      » Call To Arms (Sanctuary) \n      » Combat Training (Sanctuary)"
+END
+
+NAME:ForgottenFighter
+"Thunderbird"
+END
+
+TYPE:ForgottenFighter
+"Aircraft \n Strong vs. Infantry, Aircraft"
+END
+
+DESC:ForgottenFighter
+"Upgrades: \n      » Scrap Armor (Scrap Yard) \n      » Acid Shells (Vault Of Knowledge)"
+END
+
+NAME:ForgottenHind
+"Hind Gunship"
+END
+
+TYPE:ForgottenHind
+"Heavy Aircraft, Transport \n Strong vs. Infantry, Vehicle"
+END
+
+DESC:ForgottenHind
+"Abilities: \n      » Transport Infantry \n Upgrades: \n      » Scrap Armor (Scrap Yard) \n      » Blue Tiberium Warheads (Vault Of Knowledge) "
+END
+
+NAME:ForgottenFloater
+"War Floater"
+END
+
+TYPE:ForgottenFloater
+"Heavy Aircraft \n Strong vs. Aircraft, Structure"
+END
+
+DESC:ForgottenFloater
+"Abilities: \n      » Self Heal \n      » Transport up to 3 Infantry Squads (Infantry cannot exit) \n Upgrades: \n      » Blue Tiberium Infusion (Sanctuary)"
+END
+
+NAME:ForgottenComanche
+"Wyvern"
+END
+
+TYPE:ForgottenComanche
+"Aircraft \n Strong vs. Infantry, Structure"
+END
+
+DESC:ForgottenComanche
+"Abilities: \n      » Clear Garrison"
+END
+
+NAME:ForgottenConstructionYard
+"Construction Yard"
+END
+
+TYPE:ForgottenConstructionYard
+"Production Structure"
+END
+
+DESC:ForgottenConstructionYard
+"Provides structure production queues"
+END
+
+NAME:ForgottenPowerPlant
+"Tiberium Power Plant"
+END
+
+TYPE:ForgottenPowerPlant
+"Resource Structure."
+END
+
+DESC:ForgottenPowerPlant
+"Provides Power + 15"
+END
+
+NAME:ForgottenRefinery
+"Refinery"
+END
+
+TYPE:ForgottenRefinery
+"Resource Structure."
+END
+
+DESC:ForgottenRefinery
+"Comes with a Harvester to allow the gathering of resources \n Processes and stores Tiberium"
+END
+
+
+NAME:ForgottenBarracks
+"War Camp"
+END
+
+TYPE:ForgottenBarracks
+"Production Structure"
+END
+
+DESC:ForgottenBarracks
+"Produces infantry and heals infantry"
+END
+
+NAME:ForgottenWarfactory
+"Machineshop"
+END
+
+TYPE:ForgottenWarfactory
+"Production Structure"
+END
+
+DESC:ForgottenWarfactory
+"Produces vehicles"
+END
+
+NAME:ForgottenScrapyard
+"Scrap Yard"
+END
+
+TYPE:ForgottenScrapyard
+"Support Structure"
+END
+
+DESC:ForgottenScrapyard
+"Unlocks advanced vehicles. Provides basic upgrades. \n Repair vehicles"
+END
+
+NAME:ForgottenSanctuary
+"Sanctuary"
+END
+
+TYPE:ForgottenSanctuary
+"Support Structure, Radar"
+END
+
+DESC:ForgottenSanctuary
+"Provides infantry upgrades and unlocks advanced mutants \n Enables Radar"
+END
+
+NAME:ForgottenTechLab
+"Vault of Knowledge"
+END
+
+TYPE:ForgottenTechLab
+"Tech Structure"
+END
+
+DESC:ForgottenTechLab
+"Unlocks Hi-tech units and structures. \n Provides advanced upgrades"
+END
+
+NAME:ForgottenReclamatorHub
+"Reclamator Hub"
+END
+
+TYPE:ForgottenReclamatorHub
+"Tech Structure"
+END
+
+DESC:ForgottenReclamatorHub
+"Deploys Reclamator Command Vehicle"
+END
+
+NAME:ForgottenSuperReactor
+"Tiberium Resonator"
+END
+
+TYPE:ForgottenSuperReactor
+"Tech Structure"
+END
+
+DESC:ForgottenSuperReactor
+"Provides Special Powers and Abilities for units"
+END
+
+NAME:ForgottenHelipad
+"Helipad"
+END
+
+TYPE:ForgottenHelipad
+"Production Structure"
+END
+
+DESC:ForgottenHelipad
+"Produces Aircrafts"
+END
+
+
+NAME:ForgottenGuardtower
+"Pillbox"
+END
+
+TYPE:ForgottenGuardtower
+"Defensive Structure. Strong vs. Infantry"
+END
+
+DESC:ForgottenGuardtower
+"Abilities:  \n      » Detects Stealth \n       » Can shoot over walls \n Upgrades: \n      » Acid Shells (Sanctuary)"
+END
+
+
+NAME:ForgottenAATower
+"Flak Bunker"
+END
+
+TYPE:ForgottenAATower
+"Defensive Structure. Weaponless \n Detector"
+END
+
+DESC:ForgottenAATower
+"Abilities: \n      » Detects Stealth \n      » Garrison Vehicle"
+END
+
+NAME:ForgottenAGTower
+"Gun Bunker"
+END
+
+TYPE:ForgottenAGTower
+"Defensive Structure. Strong vs. Vehicle, Aircraft \n Detector"
+END
+
+DESC:ForgottenAGTower
+"Abilities: \n      » Detects Stealth \n Upgrades: \n      » Blue Tiberium Warheads (Vault Of Knowledge)"
+END
+
+NAME:ForgottenAdvDefTower
+"Impaler"
+END
+
+TYPE:ForgottenAdvDefTower
+"Defensive Structure. Strong vs. Vehicle, Infantry \n Detector"
+END
+
+DESC:ForgottenAdvDefTower
+"Abilities: \n      » Detects Stealth \n Upgrades: \n      » Tiberium Infusion (Sanctuary)"
+END
+
+NAME:ForgottenTankBunker
+"Tank Bunker"
+END
+
+TYPE:ForgottenTankBunker
+"Defensive Structure. Weaponless"
+END
+
+DESC:ForgottenTankBunker
+"Abilities: \n      » Garrison Vehicle"
+END
+
+NAME:ForgottenPSYTower
+"Guard Tower"
+END
+
+TYPE:ForgottenPSYTower
+"Defensive Structure. Weaponless"
+END
+
+DESC:ForgottenPSYTower
+"Abilities: \n       » Detector  \n      » Aura decreases suffered damage of surrounded friendly units - 10%"
+END
+
+
+NAME:PlayerPowerClusterMissile
+"Psy Storm"
+END
+
+TYPE:PlayerPowerClusterMissile
+"Superpower"
+END
+
+DESC:PlayerPowerClusterMissile
+"Unleash devastating psychic energy wave.  \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerDemoralize
+"Demoralize"
+END
+
+TYPE:PlayerPowerDemoralize
+"Offensive Power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerDemoralize
+"Forgotten use psykers to demoralize enemy ground units for 15 seconds in target area. Affected units movment and attack speed are reduced to 50%. \n \n Left-click on icon then left-click on target area"
+END
+
+NAME:PlayerPowerForgottenAreaRepair
+"Fast Repair"
+END
+
+TYPE:PlayerPowerForgottenAreaRepair
+"Support power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerForgottenAreaRepair
+"Repair all Forgotten vehicles on selected target area. \n Only Forgotten Vehicles are affected. \n \n Left-click icon then left click on target location"
+END
+
+NAME:PlayerPowerForgottenSuperShield
+"Tiberium Energy Boost"
+END
+
+TYPE:PlayerPowerForgottenSuperShield
+"Support power \n 5 minute Cooldown"
+END
+
+DESC:PlayerPowerForgottenSuperShield
+"Charges tiberium based weapons on forgotten vehicles in target area with powerfull energy. \n Increases firepower of Forgotten Vehicles for short time \n Only Forgotten Vehicles are affected. \n \n Left-click icon then left click on target location"
+END
+
+NAME:PlayerPowerForgottenTiberiumInhibitor
+"Tiberium Booster"
+END
+
+TYPE:PlayerPowerForgottenTiberiumInhibitor
+"Support power \n 3 minute Cooldown"
+END
+
+DESC:PlayerPowerForgottenTiberiumInhibitor
+"Upgrades tiberium field with blue tiberium. \n \n Left-click icon then left click on tiberium field"
+END
+
+NAME:PlayerPowerMapScan
+"Salvaged vehicles"
+END
+
+TYPE:PlayerPowerMapScan
+"Support power \n 2 minute Cooldown"
+END
+
+DESC:PlayerPowerMapScan
+"Deploy several salvaged vehicles from Scrapyard.  \n \n Left-click icon to activate"
+END
+
+
+NAME:PlayerPowerSpyPlane
+"Spy Plane"
+END
+
+TYPE:PlayerPowerSpyPlane
+"Support power \n 2 minute Cooldown"
+END
+
+DESC:PlayerPowerSpyPlane
+"Launch Spy plane. Scout target area on map. Detect cloaked units and structures. \n \n Left-click icon then left click on target location"
+END
+
+NAME:CallSupportWarpStrike
+"Mutant Power"
+END
+
+TYPE:CallSupportWarpStrike
+"Reinforcement power \n 3 minute Cooldown"
+END
+
+DESC:CallSupportWarpStrike
+"Summons several Fiends on target location. Fiends can be summoned only near tiberium field.  \n \n Left-click icon then left-click on target location"
+END
+
+NAME:CallSupportFloaterStrike
+"Natures Call"
+END
+
+TYPE:CallSupportFloaterStrike
+"Reinforcement power \n 3 minute Cooldown"
+END
+
+DESC:CallSupportFloaterStrike
+"Summons several feral Floaters on the battlefield. \n Floaters attack anything in tagret area and cannot be controled  \n \n Left-click icon then left-click on target location"
+END
+
+NAME:PlayerPowerRadarJammingMissile
+"Radar Jamming Missile"
+END
+
+TYPE:PlayerPowerRadarJammingMissile
+"Offensive Power \n Cooldown time 2 minutes"
+END
+
+DESC:PlayerPowerRadarJammingMissile
+"Shuts down all enemy radars for 10 seconds \n \n Left-click icon to activate"
+END
+
+NAME:ForgottenRepairToolkitAbility
+"Repair"
+END
+
+DESC:ForgottenRepairToolkitAbility
+"Repair single vehicle to full health \n \n Left-click icon then left-click on target"
+END
+
+NAME:ForgottenMarvMegablastAbility
+"Reclaim Area"
+END
+
+DESC:ForgottenMarvMegablastAbility
+"Destroy all tiberium lifeforms (including crystals) and tiberium based vehicles and structures \n \n Left-click icon then left-click on target location"
+END
+
+NAME:ForgottenCommandeerScrapAbility
+"Get Scrap Armor"
+END
+
+DESC:ForgottenCommandeerScrapAbility
+"Aquaire scrap from scrap pile to increase unit health \n \n Left-click icon then left-click on target"
+END
+
+
+
+INI:ForgottenUpgrades
+"Forgotten Upgrades--------------------------------"
+END
+
+UpgradeName:ForgottenScrapArmor
+"Scrap Armor"
+END
+
+UpgradeDesc:ForgottenScrapArmor
+"Increases Health +25% \n Decreases speed -25% \n \n Only one upgrade can be selected"
+END
+
+UpgradeName:ForgottenAmmoBox
+"Offensive Doctrine"
+END
+
+UpgradeDesc:ForgottenAmmoBox
+"Increases rate of fire +20% \n Decreases Health -10% \n \n Only one upgrade can be active"
+END
+
+UpgradeName:ForgottenSpeed
+"Disable Doctrines"
+END
+
+UpgradeDesc:ForgottenSpeed
+"Disable all activated doctrines \n Units stats are restored to dafault status"
+END
+
+UpgradeName:ForgottenPowerUpgrade
+"Blue Tiberium Crystals"
+END
+
+UpgradeDesc:ForgottenPowerUpgrade
+"Increases power output + 15"
+END
+
+UpgradeName:ForgottenSiloHealingOn
+"Open Tiberium Vents"
+END
+
+UpgradeDesc:ForgottenSiloHealingOn
+"Spread Tiberium radiation. \n \n Tiberium radiation heals mutant infantry, but is harmufull to ordinary human infantry"
+END
+
+UpgradeName:ForgottenSiloHealingOff
+"close Tiberium Vents"
+END
+
+UpgradeDesc:ForgottenSiloHealingOff
+"Disable Tiberium radiation"
+END
+
+
+UpgradeName:ForgottenBunkerInfantrySupport
+"Infantry Support"
+END
+
+UpgradeDesc:ForgottenBunkerInfantrySupport
+"Upgrades bunker with Tiberium crystals to heal mutant infantry. \n \n Tiberium radiation heals mutant infantry, but is harmufull to ordinary human infantry"
+END
+
+UpgradeName:ForgottenBunkerVehicleSupport
+"Vehicle Support"
+END
+
+UpgradeDesc:ForgottenBunkerVehicleSupport
+"Upgrades bunker with reapair tools to repair vehicles. \n \n Vehicles are automaticaly repaired inside the repair area"
+END
+
+UpgradeName:BlueTibWarhead
+"Blue Tiberium Warheads"
+END
+
+UpgradeType:BlueTibWarhead
+"Weapon Upgrade"
+END
+
+UpgradeDesc:BlueTibWarhead
+"Increases attack damage + 100%"
+END
+
+UpgradePrereq:BlueTibWarhead
+"Requires Vault of Knowledge"
+END
+
+Desc:BlueTibWarhead
+"Upgrade all Punishers, Hydras and Hind Gunships weapons with blue tiberium warheads  \n Increases attack damage + 100% \n \n Left-click icon to purchase upgrade"
+END
+
+
+UpgradeName:ForgottenMoreGuns
+"More guns"
+END
+
+UpgradeType:ForgottenMoreGuns
+"Weapon Upgrade"
+END
+
+UpgradeDesc:ForgottenMoreGuns
+"Increases attack damage + 50%"
+END
+
+UpgradePrereq:ForgottenMoreGuns
+"Requires Scrapyard"
+END
+
+Desc:ForgottenMoreGuns
+"Upgrade all Couguar and Warbuses with extra weapons  \n Increases attack damage + 50% \n \n Left-click icon to purchase upgrade"
+END
+
+UpgradeName:ForgottenChemsprayUpgrade
+"Tiberium Acid shells"
+END
+
+UpgradeType:ForgottenChemsprayUpgrade
+"Weapon Upgrade"
+END
+
+UpgradeDesc:ForgottenChemsprayUpgrade
+"Increases firepower +50%"
+END
+
+UpgradePrereq:ForgottenChemsprayUpgrade
+"Requires Sanctuary"
+END
+
+Desc:ForgottenChemsprayUpgrade
+"Upgrade all Defenders, Stormhawks and Flak Towers with tiberium Acid shells \n Increases attack damage + 50% \n \n Left-click icon to purchase upgrade"
+END
+
+UpgradeName:ForgottenMortarUpgrade
+"Viceroid larvae"
+END
+
+UpgradeType:ForgottenMortarUpgrade
+"Weapon Upgrade"
+END
+
+UpgradeDesc:ForgottenMortarUpgrade
+"Increases attack damage vs Vehicles + 50% \n Attack spawn viceroids"
+END
+
+UpgradePrereq:ForgottenMortarUpgrade
+"Requires Vault of Knowledge"
+END
+
+Desc:ForgottenMortarUpgrade
+"Upgrade all Mortar trucks tiberium waste projectiles with viceroids larvae.  \n Increases attack damage vs Vehicles + 50%  \n Attack spawn viceroids \n \n Left-click icon to purchase upgrade"
+END
+
+UpgradeName:ForgottenToolKit
+"EMP Charge"
+END
+
+UpgradeType:ForgottenToolKit
+"Utility Upgrade"
+END
+
+UpgradeDesc:ForgottenToolKit
+"Enable EMP attack"
+END
+
+UpgradePrereq:ForgottenToolKit
+"Requires Sanctuary"
+END
+
+Desc:ForgottenToolKit
+"Upgrades all Brutes with EMP charge. \n Enable EMP Attack \n \n Left-click icon to purchase upgrade"
+END
+
+UpgradeName:ForgottenSensorUpgrade
+"Precognition"
+END
+
+UpgradeType:ForgottenSensorUpgrade
+"Utility Upgrade"
+END
+
+UpgradeDesc:ForgottenSensorUpgrade
+"Enable stealth detection  \n Aura decreases suffered damage of surrounded friendly units - 10%"
+END
+
+UpgradePrereq:ForgottenSensorUpgrade
+"Requires Sanctuary"
+END
+
+Desc:ForgottenSensorUpgrade
+"Upgrade Witches with precognition. Enable stealth detection \n Aura decreases suffered damage of surrounded friendly units - 10% \n \n Left-click icon to purchase upgrade"
+END
+
+UpgradeName:ForgottenTibFuelUpgrade
+"Engine Refit"
+END
+
+UpgradeType:ForgottenTibFuelUpgrade
+"Mobility Upgrade"
+END
+
+UpgradeDesc:ForgottenTibFuelUpgrade
+"Increases speed +25%"
+END
+
+UpgradePrereq:ForgottenTibFuelUpgrade
+"Requires Scrap Yard"
+END
+
+Desc:ForgottenTibFuelUpgrade
+"Upgrade all Purifiers and Vindicators with new salvaged engine parts.  \n Increases maximum vehicle speed +25% \n \n Left-click icon to purchase upgrade"
+END
+
+
+UpgradeName:ForgottenTibArmorUpgrade
+"Scrap Armor"
+END
+
+UpgradeType:ForgottenTibArmorUpgrade
+"Armor Upgrade"
+END
+
+UpgradeDesc:ForgottenTibArmorUpgrade
+"Increases maximum health +20%"
+END
+
+UpgradePrereq:ForgottenTibArmorUpgrade
+"Requires Scarp Yard"
+END
+
+Desc:ForgottenTibArmorUpgrade
+"Upgrade all Forgotten combat vehicles and aircrafts with extra armor plates.  \n Increases armor +20% \n \n Left-click icon to purchase upgrade"
+END
+
+UpgradeName:ForgottenDozerBladesUpgrade
+"Tools of Trade"
+END
+
+UpgradeType:ForgottenDozerBladesUpgrade
+"Ability Upgrade"
+END
+
+UpgradeDesc:ForgottenDozerBladesUpgrade
+"Enable Repair Vehicle Ability \n Enable clear mines ability"
+END
+
+UpgradePrereq:ForgottenDozerBladesUpgrade
+"Requires Scrap Yard"
+END
+
+Desc:ForgottenDozerBladesUpgrade
+"Upgrade all Strikers with Dozerblade and Repair tools. \n Enable Repair Vehicle Ability \n Enable clear mines ability \n Enable crush heavy infantry ability \n \n Left-click icon to purchase upgrade"
+END
+
+UpgradeName:ForgottenTibInfusionUpgrade
+"Blue Tiberium Infusion"
+END
+
+UpgradeType:ForgottenTibInfusionUpgrade
+"Health Upgrade"
+END
+
+UpgradeDesc:ForgottenTibInfusionUpgrade
+"Increases health +20% \n Increases firepower +20%"
+END
+
+UpgradePrereq:ForgottenTibInfusionUpgrade
+"Requires Sanctuary"
+END
+
+Desc:ForgottenTibInfusionUpgrade
+"Upgrade all Fiends, Brutes and Floaters with blue tiberium extract.  \n Increases health +20% \n Increases firepower +20% \n \n Left-click icon to purchase upgrade"
+END
+
+
+UpgradeName:ForgottenCalltoArms
+"Call to Arms"
+END
+
+UpgradeType:ForgottenCalltoArms
+"Squad Upgrade"
+END
+
+UpgradeDesc:ForgottenCalltoArms
+"Increases squad size by 1"
+END
+
+UpgradePrereq:ForgottenCalltoArms
+"Requires Sanctuary"
+END
+
+Desc:ForgottenCalltoArms
+"Upgrade all forgotten infantry squads with additional squad member.  \n Increases squads overall health and firepower \n \n Left-click icon to purchase upgrade"
+END
+
+
+UpgradeName:ForgottenBattleFocus
+"Lifetime of War"
+END
+
+UpgradeType:ForgottenBattleFocus
+"Utility Upgrade"
+END
+
+UpgradeDesc:ForgottenBattleFocus
+"Upgrade Forgotten infantry to veterans"
+END
+
+UpgradePrereq:ForgottenBattleFocus
+"Requires Sanctuary"
+END
+
+Desc:ForgottenBattleFocus
+"Forgotten warriors are veterans of thousandth battles.  \n Upgrade Forgotten infantry to veterans. \n \n Left-click icon to purchase upgrade"
+END
+
+Mercenaries
+""
+END
+
+Name:TechBuildingMutantGarage
+"Mutant Garage"
+END
+
+DESC:TechBuildingMutantGarage
+"Produces Vehicles"
+END
+
+Name:NeutralMutantMarauder
+"Mutant Marauder"
+END
+
+Type:NeutralMutantMarauder
+"Light Infantry. Strong vs. Infantry"
+END
+
+Desc:NeutralMutantMarauder
+"Abilities: \n      » Heal in Tiberium"
+END
+
+Desc:NeutralMutantMarauderMP
+"Abilities: \n      » Heal in Tiberium"
+END
+
+NAME:TiberiumGrenade
+"Tiberium Mortar Shell"
+END
+
+DESC:TiberiumGrenade
+"Execute ranged mortar attack on garrisoned structure. \n » Clear Garrison. \n \n Left-click icon then left-click on target"
+END
+
+Name:MutantRocket
+"Mutant Flak Trooper Squad"
+END
+
+Type:MutantRocket
+"Heavy infantry. Strong vs. Vehicles, Aircraft."
+END
+
+DESC:MutantRocket
+"Abilities: \n      » Heal in Tiberium"
+END
+
+DESC:MutantRocketMP
+"Abilities: \n      » Heal in Tiberium \n \n Max 3 units of this type may be trained at a time"
+END
+
+NAME:GhostStalker
+"Ghost Stalker"
+END
+
+TYPE:GhostStalker
+"Special Infantry. Strong vs. Vehicles, Structures."
+END
+
+DESC:GhostStalker
+"Abilities: \n      » Destroy Structure \n      » Destroy Walker \n      » Heal in Tiberium \n \n Only one Ghost stalker may be trained at a time"
+END
+
+NAME:MutantSniper
+"Umagon"
+END
+
+TYPE:MutantSniper
+"Elite infantry. Strong vs. Infantry."
+END
+
+DESC:MutantSniper
+"Abilities: \n      » Clear Garrison \n      » Heal in Tiberium \n      » Permanently Cloaked \n \n Only one Hunter may be trained at a time"
+END
+
+NAME:MutantHijacker
+"Hijacker"
+END
+
+TYPE:MutantHijacker
+"Elite infantry, Weaponless"
+END
+
+DESC:MutantHijacker
+"Can capture enemy Vehicle \n Abilities: \n      » EMP blast \n      » Heal in Tiberium  \n \n Only one Hijacker may be trained at a time"
+END
+
+NAME:MutantPitbull
+"Looted Pitbull"
+END
+
+TYPE:MutantPitbull
+"Light Vehicle. Strong vs. Aircraft."
+END
+
+DESC:MutantPitbull
+"Abilities: \n      » Heal in Tiberium \n      » Tiberium Mortar Shell (Clear Garrison)"
+END
+
+DESC:MutantPitbull_MP
+"Abilities: \n      » Heal in Tiberium \n      » Tiberium Mortar Shell (Clear Garrison) \n \n Max 3 units of this type may be trained at a time"
+END
+
+NAME:MutantHumwee
+"Humvee"
+END
+
+TYPE:MutantHumwee
+"Light Vehicle. Strong vs. Aircraft."
+END
+
+DESC:MutantHumwee
+"Transports Infantry"
+END
+
+DESC:MutantHumweeMP
+"Transports Infantry \n \n Max 3 units of this type may be trained at a time"
+END
+
+NAME:MutantMammoth
+"Mastodon Tank"
+END
+
+TYPE:MutantMammoth
+"Heavy Tank. Strong vs. Vehicle, Structure."
+END
+
+DESC:MutantMammoth
+"Transports Infantry"
+END
+
+DESC:MutantMammothMP
+"Transports Infantry \n \n Max 3 units of this type may be trained at a time"
+END
+
+NAME:MutantMlrs
+"Medusa"
+END
+
+TYPE:MutantMlrs
+"Long Range Artillery. Strong vs. Structures."
+END
+
+DESC:MutantMlrs
+""
+END
+
+NAME:MutantFeral
+"Feral Mutant"
+END
+
+TYPE:MutantFeral
+"Heavy Infantry. Strong vs. Infantry, Vehicle."
+END
+
+DESC:MutantFeral
+"Abilities: \n      » Heal in Tiberium"
+END
+
+NAME:MutantFiend
+"Fiend"
+END
+
+TYPE:MutantFiend
+"Heavy Infantry. Strong vs. Infantry, Vehicle."
+END
+
+DESC:MutantFiend
+"Abilities: \n      » Heal in Tiberium"
+END
+
+NAME:MutantFiendCombat
+"Combat Fiend"
+END
+
+TYPE:MutantFiendCombat
+"Heavy Infantry. Detector. \n Strong vs. Infantry, Vehicle."
+END
+
+
+DESC:MutantFiendCombat
+"Abilities: \n      » Detects Stealth \n      » Heal in Tiberium"
+END
+
+DESC:MutantFiendCombatMP
+"Abilities: \n      » Detects Stealth \n      » Heal in Tiberium \n Max 3 units of this type may be trained at a time"
+END
+
+
+NAME:MutantFarseer
+"Tratos"
+END
+
+TYPE:MutantFarseer
+"Elite infantry, Weaponless"
+END
+
+DESC:MutantFarseer
+"Abilities: \n      » Leader (add armor bonus to surrounded mutant units) \n      » Heal in Tiberium"
+END
+
+NAME:AbilityMutantMindControl
+"Mindcontrol"
+END
+
+DESC:AbilityMutantMindControl
+"Takes control over of an enemy unit \n Can only control one unit at a time \n Excludes certain high tech units \n \n Left-click icon then left-click on target unit"
+END
+
+Name:NeutralTiberiumFona
+"Tiberium Lifeform"
+END
+
+Name:NeutralTiberiumWeins
+"Tiberium Weins"
+END
+
+Name:NeutralWeinholeMonster
+"Weinhole Monster"
+END
+
+Name:SurpriseCrate
+"Misterious Crate"
+END
+
+Desc:SurpriseCrate
+"This crate can contain one of following surprises \n » Remove shroud from entire map for 5 seconds \n » Small Tiberium field \n » Heal all units and structures on map \n » Devastating Explosion \n » EMP Blast"
+END
+
+Name:TechBuildingMercOutpost
+"Mutant Mercenary Outpost"
+END
+
+Desc:TechBuildingMercOutpost
+"Capturing this Tech Building allows the recruitment of Mutant Mercenary units"
+END
+
+Name:TechBuildingMutantHovel
+"Mutant Hovel"
+END
+
+Desc:TechBuildingMutantHovel
+"Capturing this Tech Building allows the recruitment of Mutant Infantry"
+END
+
+NAME:TechBuildingExpansionPoint
+"Tacitus Archive"
+END
+
+DESC:TechBuildingExpansionPoint
+"Capturing this Tech Building provides ground control and call special units reinforcement \n Ground control allows the placement of structures \n \n Provides Support Powers: \n      » Gdi Colossus Assault Team \n      » Nod Cyborg Destroyer Cadre \n      » Scrin Conqueror Deployment"
+END

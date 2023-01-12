@@ -26,6 +26,19 @@ namespace mah_boi.Tools
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
+        public StringTable()
+        {
+            FileEncoding = Encoding.Unicode;
+            FileName     = "TMP-" + DateTime.Now;
+        }
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
         public StringTable(string fileName)
         {
             if (!File.Exists(fileName))
@@ -384,10 +397,11 @@ namespace mah_boi.Tools
         {
             if (format == StringTableFormats.csf && stFormated is StrFile strFile)
             {
-                // основные критерии конвертируемости в .csf - отсутствие пробелов в названиях строк и категорий
-                if (strFile.stStrings.Where(str => str.StringName.Contains(' ')).Any())
-                    return false;
-
+                //// основные критерии конвертируемости в .csf - отсутствие пробелов в названиях строк и категорий
+                //// однако и без этого игры нормально воспринимают строки с пробелами в названиях
+                //if (strFile.stStrings.Where(str => str.StringName.Contains(' ')).Any())
+                //    return false;
+                
                 return true;
             }
             else if (format == StringTableFormats.str && stFormated is CsfFile csfFile)

@@ -69,7 +69,19 @@ namespace mah_boi.Tools
         }
 
         #region Конструкторы
-        
+
+        /// <summary>
+        ///     Класс для парсинга <u>.str</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
+        public StrFile() : base()
+        {
+        }
+
+
         /// <summary>
         ///     Класс для парсинга <u>.str</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
@@ -176,16 +188,25 @@ namespace mah_boi.Tools
                     searchStatus = LineType.Label;
                 }
 
-                // считанная строка - лейбл
+                // считанная строка - лейбл а-ля название строки
                 else if
                 (
-                    searchStatus == (int)LineType.Label            // анализируемая строка является лейблом
-                    && !currentLine.Trim().StartsWith("\"")        // строка не является значением
-                    && StringTableString.IsACIIString(currentLine) // символы исключительно в кодировке ASCII
+                    searchStatus == (int)LineType.Label              // анализируемая строка является лейблом
+                    && !currentLine.Trim().StartsWith("\"")          // строка не является значением
                 )
                 {
-                    stringName   = currentLine.Trim();
-                    searchStatus = LineType.Value;
+                    if (StringTableString.IsACIIString(currentLine)) // символы в значении исключительно в кодировке ASCII
+                    {
+                        stringName   = currentLine.Trim();
+                        searchStatus = LineType.Value;
+                    }
+                    else                                             // символы в значении не в кодировке ASCII
+                    {
+                        ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                                                           + "В названии строки содержатся не ASCII символы, что не является "
+                                                           + "допустимым. Замените их, чтобы строку можно было считать.",
+                                                            StringTableParseException.MessageType.Error);
+                    }
                 }
 
                 // считанная строка - полное значение
@@ -303,6 +324,20 @@ namespace mah_boi.Tools
             return new CsfFile(FileName, tmp);
         }
 
+        public bool Safe_ToCsf(out CsfFile returnParam)
+        {
+            try
+            {
+                returnParam = this.ToCsf();
+            }
+            catch(StringTableParseException)
+            {
+                returnParam = new CsfFile();
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         ///     Конвертор из <u>.str</u> в <u>.csf</u> на основе указанного отпарсенного файла fileSample.
         /// </summary>
@@ -318,6 +353,20 @@ namespace mah_boi.Tools
                     str.StringValue.Replace("\\n", "\n");
 
             return new CsfFile(fileSample.FileName, tmp);
+        }
+
+        public static bool Safe_ToCsf(StrFile fileSample, out CsfFile returnParam)
+        {
+            try
+            {
+                returnParam = fileSample.ToCsf();
+            }
+            catch (StringTableParseException)
+            {
+                returnParam = new CsfFile();
+                return false;
+            }
+            return true;
         }
         #endregion
 
