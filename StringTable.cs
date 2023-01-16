@@ -143,8 +143,10 @@ namespace mah_boi.Tools
                 stStrings.AddRange(stList.Where(x => x.IsACIIStringName()));
 
         public void AddString(StringTable stTable)
-            =>
+        {
+            if(stTable is CsfFile || stTable is StrFile)
                 stStrings.AddRange(stTable.stStrings);
+        }
 
         public void AddEmptyString(string stringName)
             =>
