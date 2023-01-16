@@ -77,17 +77,18 @@ namespace mah_boi.Tools
         private static UInt32 CNC_CSF_VERSION = 3;                   // стандартная версия формата CSF во всех играх C&C
         public enum CSFLanguageCodes : UInt32
         {
-            US           = 0,
-            UK           = 1,
-            German       = 2,
-            French       = 3,
-            Spanish      = 4,
-            Italian      = 5,
-            Japanese     = 6,
-            Jabberwockie = 7,
-            Korean       = 8,
-            Chinese      = 9,
-            Russian      = 17
+            US                        = 0,
+            UK                        = 1,
+            German                    = 2,
+            French                    = 3,
+            Spanish                   = 4,
+            Italian                   = 5,
+            Japanese                  = 6,
+            Jabberwockie              = 7,
+            Korean                    = 8,
+            Chinese                   = 9,
+            Russian                   = 17,
+            AresPrimaryLoadingFeature = 4294967295
         }
 
         #region Конструкторы

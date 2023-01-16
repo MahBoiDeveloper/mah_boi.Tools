@@ -31,7 +31,22 @@ namespace mah_boi.Tools
             //Console.WriteLine("===========================");
             //Console.WriteLine(str.ToString());
 
+            ReadTest();
             SaveTest();
+            ConvertTest();
+            AddTest();
+        }
+
+        static void ConvertTest()
+        {
+        }
+
+        static void ReadTest()
+        {
+        }
+
+        static void AddTest()
+        {
         }
 
         static void SaveTest()

@@ -131,7 +131,40 @@ namespace mah_boi.Tools
         }
         #endregion
 
+        #region Методы добавления строк
+        public void AddString(StringTableString stString)
+        {
+            if(stString.IsACIIStringName())
+                stStrings.Add(stString);
+        }
+
+        public void AddString(List<StringTableString> stList)
+            =>
+                stStrings.AddRange(stList.Where(x => x.IsACIIStringName()));
+
+        public void AddString(StringTable stTable)
+            =>
+                stStrings.AddRange(stTable.stStrings);
+
+        public void AddEmptyString(string stringName)
+            =>
+                stStrings.Add(new StringTableString(stringName));
+        #endregion
+
         #region Методы работы с категориями и строками
+
+        /// <summary>
+        ///     Поиск значения по указанному названию категории и строки. Возвращает первое вхождение.
+        /// </summary>
+        public string GetStringValue(string stringName)
+        {
+            foreach (var str in stStrings)
+                if (str.StringName == stringName)
+                    return str.StringValue;
+
+            return null;
+        }
+
         ///// <summary>
         /////     Метод выдаёт список названий всех строк.
         ///// </summary>
@@ -160,18 +193,6 @@ namespace mah_boi.Tools
         ///// </summary>
         //public List<StringTableCategory> GetAllCategories(string categoryName) =>
         //    categoriesOfTable.AsParallel().Where(category => category.CategoryName == categoryName).ToList();
-
-        /// <summary>
-        ///     Поиск значения по указанному названию категории и строки. Возвращает первое вхождение.
-        /// </summary>
-        public string GetStringValue(string stringName)
-        {
-            foreach (var str in stStrings)
-                if (str.StringName == stringName)
-                    return str.StringValue;
-
-            return null;
-        }
 
         ///// <summary>
         /////     Возвращает все строки первой найденной категории.
