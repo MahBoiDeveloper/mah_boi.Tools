@@ -153,6 +153,56 @@ namespace mah_boi.Tools
                 stStrings.Add(new StringTableString(stringName));
         #endregion
 
+        #region Методы модификации строк
+        public void ChangeStringName(string oldName, string newName)
+        {
+            if (!StringTableString.IsACIIString(oldName) || StringTableString.IsACIIString(newName)) return;
+
+            foreach(var str in stStrings)
+            {
+                if(str.StringName == oldName)
+                {
+                    str.StringName = newName;
+                    break;
+                }
+            }
+        }
+
+        public void ChangeStringNamesByMatch(string oldName, string newName)
+        {
+            if (!StringTableString.IsACIIString(oldName) || StringTableString.IsACIIString(newName)) return;
+
+            stStrings.Where(str => str.StringName == oldName).ToList().ForEach(str => str.StringName = newName);
+        }
+
+        public void ChangeStringValue(string stringName, string newValue)
+        {
+            if (!StringTableString.IsACIIString(stringName)) return;
+
+            foreach (var str in stStrings)
+            {
+                if (str.StringName == stringName)
+                {
+                    str.StringValue = newValue;
+                    break;
+                }
+            }
+        }
+
+        public void ChangeStringValueByMatch(string stringName, string newValue)
+        {
+            if (!StringTableString.IsACIIString(stringName)) return;
+
+            stStrings.Where(str => str.StringName == stringName).ToList().ForEach(str => str.StringValue = newValue);
+        }
+        #endregion
+
+        #region Методы удаления строк
+        #endregion
+
+        #region Методы выбора строк
+        #endregion
+
         #region Методы работы с категориями и строками
 
         /// <summary>
