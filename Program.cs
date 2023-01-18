@@ -82,7 +82,6 @@ namespace mah_boi.Tools
                 Console.WriteLine("!=");
 
             Console.WriteLine();
-            Console.WriteLine();
 
             Console.WriteLine($"Создание STR файла по пути {pathSaveTest_SourceStr}");
                 StrFile str = new StrFile(pathSaveTest_SourceStr);
@@ -110,6 +109,31 @@ namespace mah_boi.Tools
 
         static void ConvertTest()
         {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("НАЧАЛО ТЕСТИРОВАНИЯ КОНВЕРТАЦИИ");
+            Console.WriteLine("***************************************************************");
+            Console.WriteLine();
+
+            Console.WriteLine($"Парсинг CSF файла по пути {pathConvertTest_SourceCsf}");
+                CsfFile csf = new CsfFile(pathConvertTest_SourceCsf);
+            Console.WriteLine($"Конвертируем ли файл: {csf.IsConvertable()}");
+            Console.WriteLine($"Конвертация файла и сохранение его в {pathConvertTest_ResultStr}");
+                csf.ToStr().Save(pathConvertTest_ResultStr);
+
+            Console.WriteLine();
+
+            Console.WriteLine($"Парсинг STR файла по пути {pathConvertTest_SourceStr}");
+                StrFile str = new StrFile(pathConvertTest_SourceStr);
+            Console.WriteLine($"Конвертируем ли файл: {str.IsConvertable()}");
+            Console.WriteLine($"Конвертация файла и сохранение его в {pathConvertTest_ResultCsf}");
+                str.ToCsf().Save(pathConvertTest_ResultCsf);
+
+            Console.WriteLine();
+            Console.WriteLine("***************************************************************");
+            Console.WriteLine("КОНЕЦ ТЕСТИРОВАНИЯ КОНВЕРТАЦИИ");
+            Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }
