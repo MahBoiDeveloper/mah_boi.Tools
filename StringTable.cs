@@ -168,7 +168,7 @@ namespace mah_boi.Tools
             }
         }
 
-        public void ChangeStringNamesByMatch(string oldName, string newName)
+        public void ChangeStringNamesOnMatch(string oldName, string newName)
         {
             if (!StringTableString.IsACIIString(oldName) || StringTableString.IsACIIString(newName)) return;
 
@@ -189,7 +189,7 @@ namespace mah_boi.Tools
             }
         }
 
-        public void ChangeStringValueByMatch(string stringName, string newValue)
+        public void ChangeStringValueOnMatch(string stringName, string newValue)
         {
             if (!StringTableString.IsACIIString(stringName)) return;
 
@@ -198,9 +198,50 @@ namespace mah_boi.Tools
         #endregion
 
         #region Методы удаления строк
+        public void DeleteStringByName(string stringName)
+        { 
+            if(StringTableString.IsACIIString(stringName))
+            {
+                foreach (var str in stStrings)
+                {
+                    if (str.StringName == stringName)
+                    {
+                        stStrings.Remove(str);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void DeleteStringByNameOnMatch(string stringName)
+        {
+            if (StringTableString.IsACIIString(stringName))
+                stStrings.RemoveAll(str => str.StringName == stringName);
+        }
+
+        public void DeleteStringOnMatch(StringTableString deleteString)
+            =>
+                stStrings.RemoveAll(str => str == deleteString);
+
+        public void DeleteStringByValue(string stringValue)
+        { 
+            foreach(var str in stStrings)
+            {
+                if (str.StringValue == stringValue)
+                {
+                    stStrings.Remove(str);
+                    break;
+                }
+            }
+        }
+
+        public void DeleteStringByValueOnMatch(string stringValue)
+            =>
+                stStrings.RemoveAll(str => str.StringValue == stringValue);
+
         #endregion
 
-        #region Методы выбора строк
+        #region Методы выборки строк
         #endregion
 
         #region Методы работы с категориями и строками

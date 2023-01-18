@@ -12,7 +12,7 @@ namespace mah_boi.Tools
     ///     Подробнее про особенности парсинга 
     ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L16">здесь</see>
     /// </summary>
-    // 
+    #region Нюансы парсинга STR
     //     Это не войдёт в описание класса, но это необходимо упомянуть хотя бы в виде комментариев.
     //     
     //     Используемый формат .str файлов основывается в основном на формате mod.str
@@ -59,6 +59,7 @@ namespace mah_boi.Tools
     //     Some text for string
     //     ""
     //     end
+    #endregion
     class StrFile : StringTable
     {
         private enum LineType
