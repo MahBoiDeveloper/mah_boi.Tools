@@ -14,14 +14,7 @@ namespace mah_boi.Tools
         static Encoding uft8 = Encoding.UTF8;
         static Encoding ascii = Encoding.ASCII;
 
-        // Переменные
-        static string path_str = @"..\..\..\DataSamples\test.str";
-        static string path_csf = @"..\..\..\DataSamples\clean_zh.csf";
-        static string tmp = @"..\..\..\DataSamples\_tmp.csf";
-        //string path = @"..\..\..\DataSamples\gamestrings.csf";
-        //string path = @"..\..\..\DataSamples\generals.csf";
-        //string path = @"..\..\..\DataSamples\test.csf";
-
+        // Файлы для тестов
         static string pathSaveTest_SourceCsf = "";
         static string pathSaveTest_ResultCsf = "";
         static string pathSaveTest_SourceStr = "";
