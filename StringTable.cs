@@ -368,6 +368,13 @@ namespace mah_boi.Tools
             }
             return idList;
         }
+
+        public List<string> GetStringNames()
+        {
+            List<string> nameList = new List<string>();
+            stStrings.ForEach(str => nameList.Add(str.StringName));
+            return nameList;
+        }
         #endregion
 
         #region Вспомогательные методы
