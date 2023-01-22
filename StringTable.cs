@@ -375,6 +375,36 @@ namespace mah_boi.Tools
             stStrings.ForEach(str => nameList.Add(str.StringName));
             return nameList;
         }
+
+        public List<string> GetCategoryNames(char stringDelimiter)
+        {
+            List<string> categoryList = new List<string>();
+
+            foreach(var str in stStrings)
+            {
+                if(str.StringName.Contains(stringDelimiter))
+                {
+                    str.StringName.Substring(0, str.StringName.LastIndexOf(stringDelimiter));
+                }
+                else
+                {
+                    categoryList.Add(str.StringName);
+                }
+            }
+
+            return categoryList;
+        }
+
+        public List<string> GetStringsInCategory(char stringDelimiter, string categoryName)
+        {
+            List<string> stringList = new List<string>();
+
+            foreach(var str in stStrings)
+                if (str.StringName.Contains(categoryName))
+                    stringList.Add(str.StringName.Substring(str.StringName.LastIndexOf(stringDelimiter)+1));
+
+            return stringList;
+        }
         #endregion
 
         #region Вспомогательные методы
