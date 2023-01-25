@@ -305,7 +305,11 @@ namespace mah_boi.Tools
             FileName = tmp;
         }
 
-        public void ParseWithoutHeaderReading()
+        public void ParseWithoutHeader()
+        {
+        }
+
+        public void ParseHeader()
         {
         }
 
