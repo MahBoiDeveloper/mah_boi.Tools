@@ -75,6 +75,7 @@ namespace mah_boi.Tools
         private static readonly char[] RTS  = {' ', 'R', 'T', 'S' }; // с этих символов начинается значение лейбла
         private static readonly char[] WRTS = {'W', 'R', 'T', 'S' }; // с этих символов начинается значение лейбла, и у него имеется доп. значение
         private static UInt32 CNC_CSF_VERSION = 3;                   // стандартная версия формата CSF во всех играх C&C
+
         public enum CSFLanguageCodes : UInt32
         {
             US                        = 0,
@@ -90,6 +91,8 @@ namespace mah_boi.Tools
             Russian                   = 17,
             AresPrimaryLoadingFeature = 4294967295
         }
+
+        private StringTable extraTable;
 
         #region Конструкторы
         /// <summary>
