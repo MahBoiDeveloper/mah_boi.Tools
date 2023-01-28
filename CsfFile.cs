@@ -238,8 +238,15 @@ namespace mah_boi.Tools
                             extraStringValue        = br.ReadChars(Convert.ToInt32(extraValueLength)); // само доп значение (проблема поддержки кодировки отличной от Unicode)
                         }
                     }
+                    if (extraStringValue == string.Empty.ToCharArray())
+                    {
+                        ExtraTable.Add(new StringTableExtraString(new string(labelName), new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue)));
+                    }
+                    else
+                    {
+                        Table.Add(new StringTableString(new string(labelName), new string(FileEncoding.GetChars(stringValue))));
+                    }
 
-                    stStrings.Add(new StringTableString(new string(labelName), new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue)));
                 }
             }
         }
@@ -265,7 +272,26 @@ namespace mah_boi.Tools
                 UInt32 labelCounter = 0;
                 do
                 {
-                    foreach (var str in stStrings)
+                    foreach (var str in Table)
+                    {
+                        string labelName = str.StringName;
+
+                        bw.Write(LBL);                     // строка со значением ' LBL'
+                        bw.Write((uint)1);                 // количество строк для дополнительного значения
+                        bw.Write(labelName.Length);        // длина названия
+                        bw.Write(labelName.ToCharArray()); // само название
+                        
+                        bw.Write(RTS);  // строка со значением ' RTS'
+                        bw.Write(Convert.ToUInt32(str.StringValue.Length));        // запись длины значения
+                        byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
+                        InvertAllBytesInArray(byteValue);                          // инвертирование полученного массива
+
+                        bw.Write(byteValue);                                       // запись в файл инвертированных байтов значения строки
+
+                        labelCounter++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
+                    }
+
+                    foreach (var str in ExtraTable)
                     {
                         string labelName = str.StringName;
 
@@ -274,7 +300,7 @@ namespace mah_boi.Tools
                         bw.Write(labelName.Length);        // длина названия
                         bw.Write(labelName.ToCharArray()); // само название
 
-                        if (str.ExtraStringValue == string.Empty)
+                        if (str.StringExtraValue == string.Empty)
                             bw.Write(RTS);  // строка со значением ' RTS'
                         else
                             bw.Write(WRTS); // строка со значением 'WRTS'
@@ -286,13 +312,12 @@ namespace mah_boi.Tools
 
                         bw.Write(byteValue);                                       // запись в файл инвертированных байтов значения строки
 
-                        if (str.ExtraStringValue != string.Empty)
+                        if (str.StringExtraValue != string.Empty)
                         {
-                            bw.Write(Convert.ToUInt32(str.ExtraStringValue.Length));
-                            bw.Write(str.ExtraStringValue.ToCharArray());
+                            bw.Write(Convert.ToUInt32(str.StringExtraValue.Length));
+                            bw.Write(str.StringExtraValue.ToCharArray());
                         }
-
-                        labelCounter++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
+                        labelCounter++;
                     }
                 } while (labelCounter < countOfLables);
             }
@@ -332,12 +357,12 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат .str");
 
             // в str нет символов переводы на новую строку заменяются на \n
-            List<StringTableString> tmp = stStrings;
+            List<StringTableString> tmp = Table;
             foreach (var str in tmp)
                 if (str.StringValue.IndexOf("\n") > -1)
                     str.StringValue.Replace("\n", "\\n");
 
-            return new StrFile(FileName, tmp);
+            return new StrFile(FileName, tmp, ExtraTable);
         }
 
         public bool Safe_ToStr(out StrFile returnParam)
@@ -363,12 +388,12 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
 
             // в str нет символов переводы на новую строку заменяются на \n
-            List<StringTableString> tmp = fileSample.stStrings;
+            List<StringTableString> tmp = fileSample.Table;
             foreach (var str in tmp)
                 if (str.StringValue.IndexOf("\n") > -1)
                     str.StringValue.Replace("\n", "\\n");
 
-            return new StrFile(fileSample.FileName, tmp);
+            return new StrFile(fileSample.FileName, tmp, fileSample.ExtraTable);
         }
 
         public static bool Safe_ToStr(CsfFile fileSample, out StrFile returnParam)

@@ -140,6 +140,10 @@ namespace mah_boi.Tools
         {
         }
 
+        public StrFile(string fileName, List<StringTableString> stStringsList, List<StringTableExtraString> stExtraStringList) : base(fileName, stStringsList, stExtraStringList)
+        {
+        }
+
         #endregion
 
         #region Парсинг
@@ -267,7 +271,7 @@ namespace mah_boi.Tools
                 // считанная строка - окончание строки
                 else if (searchStatus == LineType.End && currentLine.Trim().ToLower() == "end")
                 {
-                    stStrings.Add(new StringTableString(stringName, stringValue));
+                    Table.Add(new StringTableString(stringName, stringValue));
                     searchStatus = (int)LineType.Label;
                 }
 
@@ -317,7 +321,7 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
-            List<StringTableString> tmp = stStrings;
+            List<StringTableString> tmp = Table;
             foreach (var str in tmp)
                 if (str.StringValue.IndexOf("\\n") > -1)
                     str.StringValue.Replace("\\n", "\n");
@@ -348,7 +352,7 @@ namespace mah_boi.Tools
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
-            List<StringTableString> tmp = fileSample.stStrings;
+            List<StringTableString> tmp = fileSample.Table;
             foreach (var str in tmp)
                 if (str.StringValue.IndexOf("\\n") > -1)
                     str.StringValue.Replace("\\n", "\n");

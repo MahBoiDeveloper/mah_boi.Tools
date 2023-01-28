@@ -95,6 +95,14 @@ namespace mah_boi.Tools
             Table = strings;
         }
 
+        public StringTable(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
+        {
+            FileEncoding = Encoding.Unicode;
+            FileName     = fileName;
+            Table        = strings;
+            ExtraTable   = extraStrings;
+        }
+
         /// <summary>
         ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
@@ -105,8 +113,16 @@ namespace mah_boi.Tools
         public StringTable(string fileName, Encoding encoding, List<StringTableString> strings)
         {
             FileEncoding = encoding;
-            FileName = fileName;
-            Table = strings;
+            FileName     = fileName;
+            Table        = strings;
+        }
+
+        public StringTable(string fileName, Encoding encoding, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
+        {
+            FileEncoding = encoding;
+            FileName     = fileName;
+            Table        = strings;
+            ExtraTable   = extraStrings;
         }
         #endregion
 
