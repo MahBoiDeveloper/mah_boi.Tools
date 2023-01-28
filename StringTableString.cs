@@ -8,7 +8,6 @@ namespace mah_boi.Tools
     {
         public string StringName { get; set; }
         public string StringValue { get; set; }
-        public string ExtraStringValue { get; set; }
 
         public StringTableString()
         {
@@ -18,20 +17,12 @@ namespace mah_boi.Tools
         {
             StringName       = stringName;
             StringValue      = string.Empty;
-            ExtraStringValue = string.Empty;
         }
 
         public StringTableString(string stringName, string stringValue)
         {
             StringName       = stringName;
             StringValue      = stringValue;
-            ExtraStringValue = string.Empty;
-        }
-        public StringTableString(string stringName, string stringValue, string extraStringValue)
-        {
-            StringName       = stringName;
-            StringValue      = stringValue;
-            ExtraStringValue = extraStringValue;
         }
 
         /// <summary>

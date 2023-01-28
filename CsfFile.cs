@@ -92,8 +92,6 @@ namespace mah_boi.Tools
             AresPrimaryLoadingFeature = 4294967295
         }
 
-        private StringTable extraTable;
-
         #region Конструкторы
         /// <summary>
         ///     Класс для парсинга <u>.csf</u> файлов<br/>
