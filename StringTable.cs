@@ -61,7 +61,7 @@ namespace mah_boi.Tools
             if (!File.Exists(fileName))
             {
                 FileEncoding = encoding;
-                FileName = fileName;
+                FileName     = fileName;
             }
         }
 
@@ -75,10 +75,9 @@ namespace mah_boi.Tools
         public StringTable(StringTable stFile)
         {
             FileEncoding = stFile.FileEncoding;
-            FileName = stFile.FileName;
-            Table = stFile.Table;
-            ExtraTable = stFile.ExtraTable;
-            ;
+            FileName     = stFile.FileName;
+            Table        = stFile.Table;
+            ExtraTable   = stFile.ExtraTable;
         }
 
         /// <summary>
@@ -91,8 +90,9 @@ namespace mah_boi.Tools
         public StringTable(string fileName, List<StringTableString> strings)
         {
             FileEncoding = Encoding.Unicode;
-            FileName = fileName;
-            Table = strings;
+            FileName     = fileName;
+            Table        = strings;
+            ExtraTable   = new List<StringTableExtraString>();
         }
 
         public StringTable(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
@@ -115,6 +115,7 @@ namespace mah_boi.Tools
             FileEncoding = encoding;
             FileName     = fileName;
             Table        = strings;
+            ExtraTable   = new List<StringTableExtraString>();
         }
 
         public StringTable(string fileName, Encoding encoding, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
