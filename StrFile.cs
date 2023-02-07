@@ -301,14 +301,6 @@ namespace mah_boi.Tools
             using (StreamWriter sw = new StreamWriter(File.OpenWrite(fileName), FileEncoding))
                 sw.WriteLine(ToString());
         }
-
-        /// <summary>
-        ///     Метод формирует строку, равносильную .str/.csf файлу.
-        /// </summary>
-        public override string ToString()
-        {
-            return base.ToString();
-        }
         #endregion
 
         #region Конверторы
@@ -326,7 +318,7 @@ namespace mah_boi.Tools
                 if (str.StringValue.IndexOf("\\n") > -1)
                     str.StringValue.Replace("\\n", "\n");
 
-            return new CsfFile(FileName, tmp);
+            return new CsfFile(FileName, tmp, ExtraTable);
         }
 
         public bool Safe_ToCsf(out CsfFile returnParam)
@@ -357,7 +349,7 @@ namespace mah_boi.Tools
                 if (str.StringValue.IndexOf("\\n") > -1)
                     str.StringValue.Replace("\\n", "\n");
 
-            return new CsfFile(fileSample.FileName, tmp);
+            return new CsfFile(fileSample.FileName, tmp, fileSample.ExtraTable);
         }
 
         public static bool Safe_ToCsf(StrFile fileSample, out CsfFile returnParam)
@@ -405,6 +397,13 @@ namespace mah_boi.Tools
         public override int GetHashCode()
             =>
                 base.GetHashCode();
+
+        /// <summary>
+        ///     Метод формирует строку, равносильную .str/.csf файлу.
+        /// </summary>
+        public override string ToString()
+            =>
+                base.ToString();
         #endregion
     }
 }

@@ -162,6 +162,10 @@ namespace mah_boi.Tools
         public CsfFile(string fileName, Encoding encoding, List<StringTableString> strings) : base(fileName, encoding, strings)
         {
         }
+
+        public CsfFile(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings) : base(fileName, strings, extraStrings)
+        {
+        }
         #endregion
 
         #region Парсинг
@@ -337,13 +341,6 @@ namespace mah_boi.Tools
             Header.CSFunknownBytes = br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует
             Header.CSFlanguageCode = br.ReadUInt32(); // код языка (подробнее в CSFLanguageCodes)
         }
-
-        /// <summary>
-        ///     Метод формирует строку, равносильную .str/.csf файлу.
-        /// </summary>
-        public override string ToString()
-            =>
-                base.ToString();
         #endregion
 
         #region Конверторы
@@ -451,6 +448,13 @@ namespace mah_boi.Tools
         public override int GetHashCode()
             =>
                 base.GetHashCode();
+
+        /// <summary>
+        ///     Метод формирует строку, равносильную .str/.csf файлу.
+        /// </summary>
+        public override string ToString()
+            =>
+                base.ToString();
         #endregion
     }
 }
