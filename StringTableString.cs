@@ -64,7 +64,6 @@ namespace mah_boi.Tools
         {
             if (firstString.StringName       != secondString.StringName)       return false;
             if (firstString.StringValue      != secondString.StringValue)      return false;
-            if (firstString.ExtraStringValue != secondString.ExtraStringValue) return false;
             return true;
         }
         public static bool operator !=(StringTableString firstString, StringTableString secondString)

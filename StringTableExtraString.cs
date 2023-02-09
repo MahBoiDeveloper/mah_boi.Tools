@@ -55,5 +55,13 @@ namespace mah_boi.Tools
         public static bool operator !=(StringTableExtraString firstString, StringTableExtraString secondString)
             =>
                 !(firstString == secondString);
+
+        public override bool Equals(object obj)
+            =>
+                (StringTableExtraString)obj == this;
+
+        public override int GetHashCode()
+            =>
+                base.GetHashCode();
     }
 }
