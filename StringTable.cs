@@ -29,9 +29,11 @@ namespace mah_boi.Tools
         /// </summary>
         public StringTable()
         {
-            FileEncoding = Encoding.Unicode;
-            FileName = "TMP-" + DateTime.Now;
-        }
+            FileEncoding = Encoding.UTF8;
+            FileName     = "TMP-" + DateTime.Now;
+            Table        = new List<StringTableString>();
+            ExtraTable   = new List<StringTableExtraString>();
+    }
 
         /// <summary>
         ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
@@ -43,10 +45,12 @@ namespace mah_boi.Tools
         public StringTable(string fileName)
         {
             if (!File.Exists(fileName))
-            {
-                FileEncoding = Encoding.Unicode;
-                FileName = fileName;
-            }
+                File.Create(fileName);
+
+            FileEncoding = Encoding.UTF8;
+            FileName     = fileName;
+            Table        = new List<StringTableString>();
+            ExtraTable   = new List<StringTableExtraString>();
         }
 
         /// <summary>
@@ -59,10 +63,12 @@ namespace mah_boi.Tools
         public StringTable(string fileName, Encoding encoding)
         {
             if (!File.Exists(fileName))
-            {
-                FileEncoding = encoding;
-                FileName     = fileName;
-            }
+                File.Create(fileName);
+
+            FileEncoding = encoding;
+            FileName     = fileName;
+            Table        = new List<StringTableString>();
+            ExtraTable   = new List<StringTableExtraString>();
         }
 
         /// <summary>
@@ -89,7 +95,7 @@ namespace mah_boi.Tools
         /// </summary>
         public StringTable(string fileName, List<StringTableString> strings)
         {
-            FileEncoding = Encoding.Unicode;
+            FileEncoding = Encoding.UTF8;
             FileName     = fileName;
             Table        = strings;
             ExtraTable   = new List<StringTableExtraString>();
@@ -97,7 +103,7 @@ namespace mah_boi.Tools
 
         public StringTable(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
         {
-            FileEncoding = Encoding.Unicode;
+            FileEncoding = Encoding.UTF8;
             FileName     = fileName;
             Table        = strings;
             ExtraTable   = extraStrings;
@@ -140,18 +146,26 @@ namespace mah_boi.Tools
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-
+            
             foreach (var str in Table)
-                sb.AppendLine(str.StringName)
-                  .AppendLine("\t\"" + str.StringValue + "\"")
-                  .AppendLine("END")
-                  .AppendLine(string.Empty);
+            {
+                str.StringValue = str.StringValue.Replace("\n", "\\n");
 
+                sb.AppendLine(str.StringName)
+                  .AppendLine("\t\"" + str.StringValue + "\"")
+                  .AppendLine("END")
+                  .AppendLine(string.Empty);          
+            }
+                
             foreach (var str in ExtraTable)
+            {
+                str.StringValue = str.StringValue.Replace("\n", "\\n");
+
                 sb.AppendLine(str.StringName)
                   .AppendLine("\t\"" + str.StringValue + "\"")
                   .AppendLine("END")
                   .AppendLine(string.Empty);
+            }
 
             return sb.ToString();
         }
@@ -637,7 +651,7 @@ namespace mah_boi.Tools
         /// </summary>
         public bool IsExtraStringsInStringTable()
             =>
-                ExtraTable.Count == 0 ? false : true;
+                ExtraTable.Count != 0 ? true : false;
 
         /// <summary>
         ///     Проверка конвертируемости текущего формата строковой таблицы в другой (из <u>.csf</u> в <u>.str</u> и наоборот).

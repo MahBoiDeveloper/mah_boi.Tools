@@ -70,7 +70,6 @@ namespace mah_boi.Tools
         }
 
         #region Конструкторы
-
         /// <summary>
         ///     Класс для парсинга <u>.str</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
@@ -81,7 +80,6 @@ namespace mah_boi.Tools
         public StrFile() : base()
         {
         }
-
 
         /// <summary>
         ///     Класс для парсинга <u>.str</u> файлов<br/>
@@ -315,8 +313,7 @@ namespace mah_boi.Tools
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
             List<StringTableString> tmp = Table;
             foreach (var str in tmp)
-                if (str.StringValue.IndexOf("\\n") > -1)
-                    str.StringValue.Replace("\\n", "\n");
+                str.StringValue = str.StringValue.Replace("\\n", "\n");
 
             return new CsfFile(FileName, tmp, ExtraTable);
         }

@@ -20,10 +20,10 @@ namespace mah_boi.Tools
         static string pathSaveTest_SourceStr = "";
         static string pathSaveTest_ResultStr = "";
 
-        static string pathConvertTest_SourceCsf = "";
-        static string pathConvertTest_ResultStr = "";
-        static string pathConvertTest_SourceStr = "";
-        static string pathConvertTest_ResultCsf = "";
+        static string pathConvertTest_SourceCsf = @"C:\D-Drive\_Github\mah_boi.Tools\csf2str_orig.csf";
+        static string pathConvertTest_ResultStr = @"C:\D-Drive\_Github\mah_boi.Tools\csf2str_rslt.str";
+        static string pathConvertTest_SourceStr = @"C:\D-Drive\_Github\mah_boi.Tools\str2csf_orig.str";
+        static string pathConvertTest_ResultCsf = @"C:\D-Drive\_Github\mah_boi.Tools\str2csf_rslt.csf";
 
         static void Main(string[] args)
         {
@@ -35,14 +35,9 @@ namespace mah_boi.Tools
             //Console.WriteLine("===========================");
             //Console.WriteLine(str.ToString());
 
-            ReadTest();
-            SaveTest();
+            //SaveTest();
             ConvertTest();
-            AddTest();
-        }
-
-        static void ReadTest()
-        {
+            //AddTest();
         }
 
         static void AddTest()
@@ -117,7 +112,7 @@ namespace mah_boi.Tools
             Console.WriteLine();
 
             Console.WriteLine($"Парсинг STR файла по пути {pathConvertTest_SourceStr}");
-                StrFile str = new StrFile(pathConvertTest_SourceStr);
+                StrFile str = new StrFile(pathConvertTest_SourceStr, Encoding.UTF8);
             Console.WriteLine($"Конвертируем ли файл: {str.IsConvertable()}");
             Console.WriteLine($"Конвертация файла и сохранение его в {pathConvertTest_ResultCsf}");
                 str.ToCsf().Save(pathConvertTest_ResultCsf);
