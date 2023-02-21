@@ -101,6 +101,13 @@ namespace mah_boi.Tools
             ExtraTable   = new List<StringTableExtraString>();
         }
 
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
         public StringTable(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
         {
             FileEncoding = Encoding.UTF8;
@@ -124,6 +131,13 @@ namespace mah_boi.Tools
             ExtraTable   = new List<StringTableExtraString>();
         }
 
+        /// <summary>
+        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
         public StringTable(string fileName, Encoding encoding, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
         {
             FileEncoding = encoding;
@@ -134,10 +148,23 @@ namespace mah_boi.Tools
         #endregion
 
         #region Парсинг
+        /// <summary>
+        ///     Абстрактный метод, предназначенный для того, чтобы заставить
+        ///     дочерние классы реализовывать парсинг определённого формата
+        ///     строковой таблицы игр серии C&C.
+        /// </summary>
         public abstract void Parse();
 
+        /// <summary>
+        ///     Абстрактный метод, предназначенный для того, чтобы заставить
+        ///     дочерние классы реализовывать соранение определённого формата
+        ///     строковой таблицы игр серии C&C.
+        /// </summary>
         public abstract void Save();
 
+        /// <summary>
+        ///     То же самое, что и метод:<code>Save()</code>Только с указанием того, куда сохранять.
+        /// </summary>
         public abstract void Save(string fileName);
 
         /// <summary>
@@ -172,45 +199,68 @@ namespace mah_boi.Tools
         #endregion
 
         #region Методы добавления строк
+        /// <summary>
+        ///     Метод добавления в строковую таблицу нормализированной,<br/>
+        ///     заранее заданной, строки.
+        /// </summary>
         public void AddString(StringTableString stString)
         {
             if (stString.IsACIIStringName())
                 Table.Add(stString);
         }
 
+        /// <summary>
+        ///     Метод добавления в строковую таблицу заранее собранных <br/>
+        ///     в список нормализированных строк. Новые строки <br/>
+        ///     добавляются в конец таблицы без соритровки.
+        /// </summary>
         public void AddString(List<StringTableString> stList)
             =>
                 Table.AddRange(stList.Where(x => x.IsACIIStringName()));
 
+        /// <summary>
+        ///     Ленивый экспорт строк из одной таблицы в другую.
+        /// </summary>
         public void AddString(StringTable stImportTable)
         {
             if (stImportTable is CsfFile || stImportTable is StrFile)
             {
                 Table.AddRange(stImportTable.Table);
 
-                if (stImportTable is CsfFile && stImportTable.IsExtraStringsInStringTable())
-                {
+                if (stImportTable.IsExtraStringsInStringTable())
                     ExtraTable.AddRange(stImportTable.ExtraTable);
-                }
             }
         }
 
+        /// <summary>
+        ///     Метод добавления в строковую таблицу дополнительной,<br/>
+        ///     заранее заданной, строки.
+        /// </summary>
         public void AddString(StringTableExtraString stString)
         {
             if (stString.IsACIIStringName())
                 ExtraTable  .Add(stString);
         }
 
+        /// <summary>
+        ///     Метод объединения дополнительных строковых таблиц.
+        /// </summary>
         public void AddString(List<StringTableExtraString> stList)
             =>
                 ExtraTable.AddRange(stList.Where(x => x.IsACIIStringName()));
 
+        /// <summary>
+        ///     Добавить в таблицу пустую нормализированную строку без значения.
+        /// </summary>
         public void AddEmptyString(string stringName)
             =>
                 Table.Add(new StringTableString(stringName));
         #endregion
 
         #region Методы модификации строк
+        /// <summary>
+        ///     Изменяет название одной строки.
+        /// </summary>
         public void ChangeStringName(string oldName, string newName)
         {
             if (!(StringTableString.IsACIIString(oldName) && StringTableString.IsACIIString(newName))) return;
@@ -234,6 +284,9 @@ namespace mah_boi.Tools
             }
         }
 
+        /// <summary>
+        ///     Изменяет название <u>всех</u> строк при совпадении.
+        /// </summary>
         public void ChangeStringNameOnMatch(string oldName, string newName)
         {
             if (!(StringTableString.IsACIIString(oldName) && StringTableString.IsACIIString(newName))) return;
@@ -243,6 +296,9 @@ namespace mah_boi.Tools
             ExtraTable.Where(str => str.StringName == oldName).ToList().ForEach(str => str.StringName = newName);
         }
 
+        /// <summary>
+        ///     Изменяет значение строки, ищя её по названию.
+        /// </summary>
         public void ChangeStringValue(string stringName, string newValue)
         {
             if (!StringTableString.IsACIIString(stringName)) return;
@@ -266,6 +322,9 @@ namespace mah_boi.Tools
             }
         }
 
+        /// <summary>
+        ///     Изменяет значение <u>всех</u> строк при совпадении названияю
+        /// </summary>
         public void ChangeStringValueOnMatch(string stringName, string newValue)
         {
             if (!StringTableString.IsACIIString(stringName)) return;
@@ -275,6 +334,9 @@ namespace mah_boi.Tools
             ExtraTable.Where(str => str.StringName == stringName).ToList().ForEach(str => str.StringValue = newValue);
         }
 
+        /// <summary>
+        ///     Изменяет дополнительное значение строки.
+        /// </summary>
         public void ChangeStringExtraValue(string stringName, string newExtraValue)
         {
             if (!StringTableString.IsACIIString(stringName)) return;
@@ -289,6 +351,9 @@ namespace mah_boi.Tools
             }
         }
 
+        /// <summary>
+        ///     Изменяет дополнительное значение <u>всех</u> строк при совпадении.
+        /// </summary>
         public void ChangeStringExtraValueOnMatch(string stringName, string newExtraValue)
         {
             if (!StringTableString.IsACIIString(stringName)) return;
@@ -296,6 +361,9 @@ namespace mah_boi.Tools
             ExtraTable.Where(str => str.StringName == stringName).ToList().ForEach(str => str.StringExtraValue = newExtraValue);
         }
 
+        /// <summary>
+        ///     Удаляет дополнительные значения, преобразуя строки к нормализированным.
+        /// </summary>
         public void DeleteExtraValues()
         {
             ExtraTable.ForEach(str => Table.Add(new StringTableString(str.StringName, str.StringValue)));
