@@ -373,6 +373,10 @@ namespace mah_boi.Tools
         #endregion
 
         #region Методы удаления строк
+        /// <summary>
+        ///     Удаление строки по названию.<br/>
+        ///     Удаляется первая найденная строка относительно начала.
+        /// </summary>
         public void DeleteStringByName(string stringName)
         {
             if (StringTableString.IsACIIString(stringName))
@@ -397,6 +401,9 @@ namespace mah_boi.Tools
             }
         }
 
+        /// <summary>
+        ///     Удаление строк, название которых совпадает с названием шаблона.
+        /// </summary>
         public void DeleteStringByNameOnMatch(string stringName)
         {
             if (!StringTableString.IsACIIString(stringName)) return;
@@ -405,12 +412,19 @@ namespace mah_boi.Tools
             ExtraTable.RemoveAll(str => str.StringName == stringName);
         }
 
+        /// <summary>
+        ///     Удаление всех строк по полному совпадению названия.<br/>
+        ///     Удаление происходит из основной и дополнительной таблиц.
+        /// </summary>
         public void DeleteStringOnMatch(StringTableString deleteString)
         {
             Table.RemoveAll(str => str == deleteString);
             ExtraTable.RemoveAll(str => str == deleteString);
         }
 
+        /// <summary>
+        ///     Удаление всех строк по полному совпадению из строк коллекции.
+        /// </summary>
         public void DeleteStringOnMatch(List<StringTableString> deleteStringList)
         {
             foreach (var deleteString in deleteStringList)
@@ -421,6 +435,10 @@ namespace mah_boi.Tools
             }
         }
 
+        /// <summary>
+        ///     Удаление строки из таблицы, с поиском относительно её значения.
+        /// </summary>
+        /// <param name="stringValue"></param>
         public void DeleteStringByValue(string stringValue)
         {
             foreach (var str in Table)
@@ -442,12 +460,14 @@ namespace mah_boi.Tools
             }
         }
 
+        /// <summary>
+        ///     Удаление всех строк из таблицы, значения которых совпадают.
+        /// </summary>
         public void DeleteStringByValueOnMatch(string stringValue)
         {
             Table.RemoveAll(str => str.StringValue == stringValue);
             ExtraTable.RemoveAll(str => str.StringValue == stringValue);
         }
-
         #endregion
 
         #region Методы выборки строк
