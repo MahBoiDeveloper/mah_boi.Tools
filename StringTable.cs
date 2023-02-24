@@ -471,6 +471,9 @@ namespace mah_boi.Tools
         #endregion
 
         #region Методы выборки строк
+        /// <summary>
+        ///     Получение значения строки по её названию.
+        /// </summary>
         public string GetStringValue(string stringName)
         {
             if (StringTableString.IsACIIString(stringName))
@@ -487,6 +490,9 @@ namespace mah_boi.Tools
             return null;
         }
 
+        /// <summary>
+        ///     Получение названия строки по её значению.
+        /// </summary>
         public string GetStringName(string stringValue)
         {
             foreach (var str in Table)
@@ -500,6 +506,9 @@ namespace mah_boi.Tools
             return null;
         }
 
+        /// <summary>
+        ///     Получение полной строки по названию.
+        /// </summary>
         public StringTableString GetString(string stringName)
         {
             if (StringTableString.IsACIIString(stringName))
@@ -516,10 +525,16 @@ namespace mah_boi.Tools
             return null;
         }
 
+        /// <summary>
+        ///     Получение всех дополнительных строк.
+        /// </summary>
         public List<StringTableExtraString> GetStringsWithExtraValue()
             =>
                 ExtraTable;
 
+        /// <summary>
+        ///     Получение всех строк, подходящих по названию.
+        /// </summary>
         public List<StringTableString> GetStringOnMatch(string stringName)
         {
             if (StringTableString.IsACIIString(stringName))
@@ -536,6 +551,9 @@ namespace mah_boi.Tools
             return null;
         }
 
+        /// <summary>
+        ///     Получение всех строк, подходящих по названию.
+        /// </summary>
         public List<StringTableString> GetStringByNameOnMatch(string stringName)
         {
             if (StringTableString.IsACIIString(stringName))
@@ -552,6 +570,9 @@ namespace mah_boi.Tools
             return null;
         }
 
+        /// <summary>
+        ///     Полчение всех строк, подходящих по значению.
+        /// </summary>
         public List<StringTableString> GetStringByValueOnMatch(string stringValue)
         {
             List<StringTableString> stsList = new List<StringTableString>();
@@ -563,6 +584,9 @@ namespace mah_boi.Tools
             return stsList;
         }
 
+        /// <summary>
+        ///     Получение общего индекса строки.
+        /// </summary>
         public int GetStringIndexByName(string stringName)
         {
             if (!StringTableString.IsACIIString(stringName)) return -1;
@@ -570,6 +594,9 @@ namespace mah_boi.Tools
             return Table.FindIndex(str => str == GetString(stringName));
         }
 
+        /// <summary>
+        ///     Получение общего индекса дополнительной строки.
+        /// </summary>
         public int GetExtraStringIndexByName(string stringName)
         {
             if (!StringTableString.IsACIIString(stringName)) return -1;
@@ -581,6 +608,9 @@ namespace mah_boi.Tools
             return -1;
         }
 
+        /// <summary>
+        ///     Получение списка индексов строк по шаблону.
+        /// </summary>
         public List<int> GetStringIndexByNameOnMatch(string stringName)
         {
             if (StringTableString.IsACIIString(stringName))
@@ -601,10 +631,16 @@ namespace mah_boi.Tools
             return null;
         }
 
+        /// <summary>
+        ///     Получение индекса строки по полному совпадению.
+        /// </summary>
         public int GetStringIndex(StringTableString _string)
             =>
                 Table.FindIndex(str => str == _string);
 
+        /// <summary>
+        ///     Получение список индексов строк по полному совпадению.
+        /// </summary>
         public List<int> GetStringIndexOnMatch(StringTableString _string)
         {
             List<int> idList = new List<int>();
@@ -619,6 +655,9 @@ namespace mah_boi.Tools
             return idList;
         }
 
+        /// <summary>
+        ///     Получение названий всех строк.
+        /// </summary>
         public List<string> GetStringNames()
         {
             List<string> nameList = new List<string>();
@@ -627,6 +666,9 @@ namespace mah_boi.Tools
             return nameList;
         }
 
+        /// <summary>
+        ///     Возвращает список названий категорий.
+        /// </summary>
         public List<string> GetCategoryNames(char stringDelimiter)
         {
             List<string> categoryList = new List<string>();
@@ -658,6 +700,9 @@ namespace mah_boi.Tools
             return categoryList;
         }
 
+        /// <summary>
+        ///     Возвращает список с названиями строк в категории.
+        /// </summary>
         public List<string> GetStringsInCategory(char stringDelimiter, string categoryName)
         {
             List<string> stringList = new List<string>();
@@ -692,7 +737,7 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
-        ///     Проверка существовании строки в .csf/.str файле с использованием примера строки.
+        ///     Проверка существования строки в .csf/.str файле с использованием примера строки.
         /// </summary>
         public bool StringExist(StringTableString _string)
         {
@@ -709,6 +754,9 @@ namespace mah_boi.Tools
             return false;
         }
 
+        /// <summary>
+        ///     Проверка существования дополнительной строки.
+        /// </summary>
         public bool StringExist(StringTableExtraString extraString)
         {
             foreach (var str in ExtraTable)
