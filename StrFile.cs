@@ -94,7 +94,7 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Класс для парсинга <u>.str</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
         ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
         ///     Подробнее про особенности парсинга 
@@ -128,7 +128,7 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Класс для парсинга <u>.str</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
         ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
         ///     Подробнее про особенности парсинга 
@@ -138,10 +138,16 @@ namespace mah_boi.Tools
         {
         }
 
+        /// <summary>
+        ///     Класс для парсинга <u>.str</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
         public StrFile(string fileName, List<StringTableString> stStringsList, List<StringTableExtraString> stExtraStringList) : base(fileName, stStringsList, stExtraStringList)
         {
         }
-
         #endregion
 
         #region Парсинг
@@ -318,6 +324,9 @@ namespace mah_boi.Tools
             return new CsfFile(FileName, tmp, ExtraTable);
         }
 
+        /// <summary>
+        ///     Конвертор, аналогичный ToCsf, только безопасный.
+        /// </summary>
         public bool Safe_ToCsf(out CsfFile returnParam)
         {
             try
@@ -349,6 +358,9 @@ namespace mah_boi.Tools
             return new CsfFile(fileSample.FileName, tmp, fileSample.ExtraTable);
         }
 
+        /// <summary>
+        ///     Безопасный конвертор для конвертации .str файла без исключений.
+        /// </summary>
         public static bool Safe_ToCsf(StrFile fileSample, out CsfFile returnParam)
         {
             try

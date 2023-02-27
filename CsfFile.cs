@@ -119,7 +119,7 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Класс для парсинга <u>.csf</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
         ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
         ///     Подробнее про особенности парсинга 
@@ -153,7 +153,7 @@ namespace mah_boi.Tools
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str/.csf</u> файлов<br/>
+        ///     Класс для парсинга <u>.csf</u> файлов<br/>
         ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
         ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
         ///     Подробнее про особенности парсинга 
@@ -163,12 +163,22 @@ namespace mah_boi.Tools
         {
         }
 
+        /// <summary>
+        ///     Класс для парсинга <u>.csf</u> файлов<br/>
+        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
+        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
+        ///     Подробнее про особенности парсинга 
+        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// </summary>
         public CsfFile(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings) : base(fileName, strings, extraStrings)
         {
         }
         #endregion
 
         #region Парсинг
+        /// <summary>
+        ///     Парсинг .csf файла.
+        /// </summary>
         public override void Parse()
         {
             using (BinaryReader br = new BinaryReader(File.Open(FileName, FileMode.Open)))
@@ -178,85 +188,9 @@ namespace mah_boi.Tools
             }
         }
 
-        public override void Save()
-        {
-            using (BinaryWriter bw = new BinaryWriter(File.Open(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
-            {
-                UInt32 countOfLables = Convert.ToUInt32(Count());
-
-                // записываем хедер файла
-                bw.Write(FSC);                                                // ' FSC'
-                bw.Write(CNC_CSF_VERSION);                                    // Версия формата
-                bw.Write(countOfLables);                                      // Количество строк
-                bw.Write(countOfLables + Convert.ToUInt32(ExtraTable.Count)); // Количество значений
-                bw.Write((UInt32)0);                                          // ХЗ-байты
-                bw.Write((UInt32)0);                                          // Код языка
-
-                // записываем построчно значения из строковой таблицы в файл
-                UInt32 labelCounter = 0;
-                do
-                {
-                    // запись нормальных строк
-                    foreach (var str in Table)
-                    {
-                        string labelName = str.StringName;
-
-                        bw.Write(LBL);                     // строка со значением ' LBL'
-                        bw.Write((uint)1);                 // количество строк для дополнительного значения
-                        bw.Write(labelName.Length);        // длина названия
-                        bw.Write(labelName.ToCharArray()); // само название
-                        
-                        bw.Write(RTS);  // строка со значением ' RTS'
-                        bw.Write(Convert.ToUInt32(str.StringValue.Length));        // запись длины значения
-                        byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
-                        InvertAllBytesInArray(byteValue);                          // инвертирование полученного массива
-
-                        bw.Write(byteValue);                                       // запись в файл инвертированных байтов значения строки
-
-                        labelCounter++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
-                    }
-
-                    // запись дополнительных строк
-                    foreach (var str in ExtraTable)
-                    {
-                        string labelName = str.StringName;
-
-                        bw.Write(LBL);                     // строка со значением ' LBL'
-                        bw.Write((uint)1);                 // количество строк для дополнительного значения
-                        bw.Write(labelName.Length);        // длина названия
-                        bw.Write(labelName.ToCharArray()); // само название
-
-                        if (str.StringExtraValue == string.Empty)
-                            bw.Write(RTS);  // строка со значением ' RTS'
-                        else
-                            bw.Write(WRTS); // строка со значением 'WRTS'
-
-                        bw.Write(Convert.ToUInt32(str.StringValue.Length));        // запись длины значения
-
-                        byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
-                        InvertAllBytesInArray(byteValue);                          // инвертирование полученного массива
-
-                        bw.Write(byteValue);                                       // запись в файл инвертированных байтов значения строки
-
-                        if (str.StringExtraValue != string.Empty)
-                        {
-                            bw.Write(Convert.ToUInt32(str.StringExtraValue.Length));
-                            bw.Write(str.StringExtraValue.ToCharArray());
-                        }
-                        labelCounter++;
-                    }
-                } while (labelCounter < countOfLables);
-            }
-        }
-
-        public override void Save(string fileName)
-        {
-            string tmp = FileName;
-            FileName = fileName;
-            Save();
-            FileName = tmp;
-        }
-
+        /// <summary>
+        ///     Парсинг хедера .csf файла в указанном заранее потоке.
+        /// </summary>
         public void ParseHeader(BinaryReader br)
         {
             // читаем заголовок файла, который нам укажет количество считываний далее
@@ -285,6 +219,9 @@ namespace mah_boi.Tools
             Header.CSFlanguageCode = br.ReadUInt32(); // код языка (подробнее в CSFLanguageCodes)
         }
 
+        /// <summary>
+        ///     Парсинг тела .csf файла в указанном заранее потоке.
+        /// </summary>
         public void ParseBody(BinaryReader br)
         {
             // читать файл, пока не закончатся строки или не будет ошибки чтения
@@ -335,6 +272,90 @@ namespace mah_boi.Tools
             }
         }
 
+        /// <summary>
+        ///     Сохранение текущего .csf файла согласно общему стандарту.
+        /// </summary>
+        public override void Save()
+        {
+            using (BinaryWriter bw = new BinaryWriter(File.Open(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
+            {
+                UInt32 countOfLables = Convert.ToUInt32(Count());
+
+                // записываем хедер файла
+                bw.Write(FSC);                                                // ' FSC'
+                bw.Write(CNC_CSF_VERSION);                                    // Версия формата
+                bw.Write(countOfLables);                                      // Количество строк
+                bw.Write(countOfLables + Convert.ToUInt32(ExtraTable.Count)); // Количество значений
+                bw.Write((UInt32)0);                                          // ХЗ-байты
+                bw.Write((UInt32)0);                                          // Код языка
+
+                // записываем построчно значения из строковой таблицы в файл
+                UInt32 labelCounter = 0;
+                do
+                {
+                    // запись нормальных строк
+                    foreach (var str in Table)
+                    {
+                        string labelName = str.StringName;
+
+                        bw.Write(LBL);                     // строка со значением ' LBL'
+                        bw.Write((uint)1);                 // количество строк для дополнительного значения
+                        bw.Write(labelName.Length);        // длина названия
+                        bw.Write(labelName.ToCharArray()); // само название
+
+                        bw.Write(RTS);  // строка со значением ' RTS'
+                        bw.Write(Convert.ToUInt32(str.StringValue.Length));        // запись длины значения
+                        byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
+                        InvertAllBytesInArray(byteValue);                          // инвертирование полученного массива
+
+                        bw.Write(byteValue);                                       // запись в файл инвертированных байтов значения строки
+
+                        labelCounter++; // т.к. мы прошли лейбл, то мы обязаны увеличить счётчик на 1
+                    }
+
+                    // запись дополнительных строк
+                    foreach (var str in ExtraTable)
+                    {
+                        string labelName = str.StringName;
+
+                        bw.Write(LBL);                     // строка со значением ' LBL'
+                        bw.Write((uint)1);                 // количество строк для дополнительного значения
+                        bw.Write(labelName.Length);        // длина названия
+                        bw.Write(labelName.ToCharArray()); // само название
+
+                        if (str.StringExtraValue == string.Empty)
+                            bw.Write(RTS);  // строка со значением ' RTS'
+                        else
+                            bw.Write(WRTS); // строка со значением 'WRTS'
+
+                        bw.Write(Convert.ToUInt32(str.StringValue.Length));        // запись длины значения
+
+                        byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
+                        InvertAllBytesInArray(byteValue);                          // инвертирование полученного массива
+
+                        bw.Write(byteValue);                                       // запись в файл инвертированных байтов значения строки
+
+                        if (str.StringExtraValue != string.Empty)
+                        {
+                            bw.Write(Convert.ToUInt32(str.StringExtraValue.Length));
+                            bw.Write(str.StringExtraValue.ToCharArray());
+                        }
+                        labelCounter++;
+                    }
+                } while (labelCounter < countOfLables);
+            }
+        }
+
+        /// <summary>
+        ///     Сохранение текущего .csf файла согласно общему стандарту по указанному пути.
+        /// </summary>
+        public override void Save(string fileName)
+        {
+            string tmp = FileName;
+            FileName = fileName;
+            Save();
+            FileName = tmp;
+        }
         #endregion
 
         #region Конверторы
@@ -354,6 +375,9 @@ namespace mah_boi.Tools
             return new StrFile(FileName, tmp, ExtraTable);
         }
 
+        /// <summary>
+        ///     Безопасный конвертор .csf файла в .str файл.
+        /// </summary>
         public bool Safe_ToStr(out StrFile returnParam)
         {
             try
@@ -384,6 +408,9 @@ namespace mah_boi.Tools
             return new StrFile(fileSample.FileName, tmp, fileSample.ExtraTable);
         }
 
+        /// <summary>
+        ///     Безопасный конвертор .csf файла в .str файл.
+        /// </summary>
         public static bool Safe_ToStr(CsfFile fileSample, out StrFile returnParam)
         {
             try
