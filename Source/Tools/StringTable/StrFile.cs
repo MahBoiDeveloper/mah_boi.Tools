@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 
-namespace mah_boi.Tools
+namespace mah_boi.Tools.StringTable
 {
     /// <summary>
     ///     Класс для парсинга <u>.str</u> файлов<br/>
@@ -169,7 +169,7 @@ namespace mah_boi.Tools
             LineType searchStatus = LineType.Label;
 
             // красиво-ленивый способ пробежаться по всем строкам файла.
-            UInt32 currentLineNumber = 0;
+            uint currentLineNumber = 0;
             foreach (var currentLine in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {
                 currentLineNumber++;
@@ -314,7 +314,7 @@ namespace mah_boi.Tools
         /// </summary>
         public CsfFile ToCsf()
         {
-            if (!StringTable.IsConvertableTo((Object)this, StringTableFormats.csf))
+            if (!StringTable.IsConvertableTo((object)this, StringTableFormats.csf))
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
@@ -332,7 +332,7 @@ namespace mah_boi.Tools
         {
             try
             {
-                returnParam = this.ToCsf();
+                returnParam = ToCsf();
             }
             catch(StringTableParseException)
             {
@@ -383,14 +383,14 @@ namespace mah_boi.Tools
         /// </summary>
         public override bool IsConvertable()
             =>
-                StringTable.IsConvertableTo((Object)this, StringTableFormats.csf);
+                StringTable.IsConvertableTo((object)this, StringTableFormats.csf);
 
         /// <summary>
         ///     Проверка конвертируемости текущего формата строковой таблицы в другой в <u>.csf</u>.
         /// </summary>
         public override bool IsConvertable(List<StringTableString> strings)
             =>
-                StringTable.IsConvertableTo((Object)(new CsfFile(string.Empty, strings)), StringTableFormats.str);
+                StringTable.IsConvertableTo((object)new CsfFile(string.Empty, strings), StringTableFormats.str);
 
         public static bool operator ==(StrFile firstFile, StrFile secondFile)
             =>

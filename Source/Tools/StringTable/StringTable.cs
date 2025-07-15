@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace mah_boi.Tools
+namespace mah_boi.Tools.StringTable
 {
     public abstract class StringTable
     {
@@ -805,7 +805,7 @@ namespace mah_boi.Tools
         ///     1) <u>.csf</u> → <u>.str</u> <br/>
         ///     2) <u>.str</u> → <u>.csf</u>
         /// </summary>
-        public static bool IsConvertableTo(Object stFormated, StringTableFormats format)
+        public static bool IsConvertableTo(object stFormated, StringTableFormats format)
         {
             if (format == StringTableFormats.csf && stFormated is StrFile strFile)
             {

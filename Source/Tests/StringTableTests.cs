@@ -1,4 +1,4 @@
-﻿using mah_boi.Tools;
+﻿using mah_boi.Tools.StringTable;
 using System.Text;
 
 namespace mah_boi.Tools.Tests;

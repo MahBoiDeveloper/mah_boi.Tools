@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace mah_boi.Tools
+namespace mah_boi.Tools.StringTable
 {
     public class StringTableExtraString : StringTableString
     {

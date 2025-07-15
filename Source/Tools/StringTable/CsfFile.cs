@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
-namespace mah_boi.Tools
+namespace mah_boi.Tools.StringTable
 {
     /// <summary>
     ///     Класс для парсинга <u>.csf</u> файлов<br/>
@@ -74,9 +74,9 @@ namespace mah_boi.Tools
         private static readonly char[] LBL  = {' ', 'L', 'B', 'L' }; // с этих символов начинается название лейбла
         private static readonly char[] RTS  = {' ', 'R', 'T', 'S' }; // с этих символов начинается значение лейбла
         private static readonly char[] WRTS = {'W', 'R', 'T', 'S' }; // с этих символов начинается значение лейбла, и у него имеется доп. значение
-        private static UInt32 CNC_CSF_VERSION = 3;                   // стандартная версия формата CSF во всех играх C&C
+        private static uint CNC_CSF_VERSION = 3;                   // стандартная версия формата CSF во всех играх C&C
 
-        public enum CSFLanguageCodes : UInt32
+        public enum CSFLanguageCodes : uint
         {
             US                        = 0,
             UK                        = 1,
@@ -225,7 +225,7 @@ namespace mah_boi.Tools
         public void ParseBody(BinaryReader br)
         {
             // читать файл, пока не закончатся строки или не будет ошибки чтения
-            for (UInt32 i = 0; i < Header.CSFnumberOfLabels || br.PeekChar() > -1; i++)
+            for (uint i = 0; i < Header.CSFnumberOfLabels || br.PeekChar() > -1; i++)
             {
                 // чтение лейбла
                 char[] lbl = br.ReadChars(4); // записывает строку ' LBL'
@@ -237,12 +237,12 @@ namespace mah_boi.Tools
                     continue;
                 }
 
-                UInt32 countOfStrings = br.ReadUInt32();                     // количество строк в значении. почти всегда равно 1
-                                                                             // а если больше 1, то имеется дополнительные значения у строки,
-                                                                             // которые на данный момент класс не умеет обрабатывать.
-                                                                             // если 0, то значения нет
+                uint countOfStrings = br.ReadUInt32();                     // количество строк в значении. почти всегда равно 1
+                                                                           // а если больше 1, то имеется дополнительные значения у строки,
+                                                                           // которые на данный момент класс не умеет обрабатывать.
+                                                                           // если 0, то значения нет
 
-                UInt32 labelNameLength = br.ReadUInt32();                    // длина названия лейбла
+                uint labelNameLength = br.ReadUInt32();                    // длина названия лейбла
                 char[] labelName = br.ReadChars((int)labelNameLength); // само название лейбла
 
                 byte[] stringValue = FileEncoding.GetBytes(string.Empty);
@@ -252,7 +252,7 @@ namespace mah_boi.Tools
                 {
                     // чтение значения лейбла
                     char[] rtsOrWrts = br.ReadChars(4);                                // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
-                    UInt32 valueLength = br.ReadUInt32();                                // длина строки юникода, укороченная вдвое
+                    uint valueLength = br.ReadUInt32();                                // длина строки юникода, укороченная вдвое
                     stringValue = br.ReadBytes(Convert.ToInt32(valueLength * 2)); // строка, конвертированная в интертированные байты
 
                     InvertAllBytesInArray(stringValue);
@@ -260,7 +260,7 @@ namespace mah_boi.Tools
                     // чтение дополнительного значения лейбла
                     if (new string(rtsOrWrts) == new string(WRTS))
                     {
-                        UInt32 extraValueLength = br.ReadUInt32();                                 // длина доп. значения
+                        uint extraValueLength = br.ReadUInt32();                                 // длина доп. значения
                         extraStringValue = br.ReadChars(Convert.ToInt32(extraValueLength)); // само доп значение (проблема поддержки кодировки отличной от Unicode)
                     }
                 }
@@ -279,18 +279,18 @@ namespace mah_boi.Tools
         {
             using (BinaryWriter bw = new BinaryWriter(File.Open(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
             {
-                UInt32 countOfLables = Convert.ToUInt32(Count());
+                uint countOfLables = Convert.ToUInt32(Count());
 
                 // записываем хедер файла
                 bw.Write(FSC);                                                // ' FSC'
                 bw.Write(CNC_CSF_VERSION);                                    // Версия формата
                 bw.Write(countOfLables);                                      // Количество строк
                 bw.Write(countOfLables + Convert.ToUInt32(ExtraTable.Count)); // Количество значений
-                bw.Write((UInt32)0);                                          // ХЗ-байты
-                bw.Write((UInt32)0);                                          // Код языка
+                bw.Write((uint)0);                                          // ХЗ-байты
+                bw.Write((uint)0);                                          // Код языка
 
                 // записываем построчно значения из строковой таблицы в файл
-                UInt32 labelCounter = 0;
+                uint labelCounter = 0;
                 do
                 {
                     // запись нормальных строк
@@ -364,7 +364,7 @@ namespace mah_boi.Tools
         /// </summary>
         public StrFile ToStr()
         {
-            if (!StringTable.IsConvertableTo((Object)this, StringTableFormats.str))
+            if (!StringTable.IsConvertableTo((object)this, StringTableFormats.str))
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат .str");
 
             // в str нет символов переводы на новую строку заменяются на \n
@@ -382,7 +382,7 @@ namespace mah_boi.Tools
         {
             try
             {
-                returnParam = this.ToStr();
+                returnParam = ToStr();
             }
             catch (StringTableParseException)
             {
@@ -432,11 +432,11 @@ namespace mah_boi.Tools
         /// </summary>
         public override bool IsConvertable()
             =>
-                StringTable.IsConvertableTo((Object)this, StringTableFormats.str);
+                StringTable.IsConvertableTo((object)this, StringTableFormats.str);
 
         public override bool IsConvertable(List<StringTableString> strings)
             =>
-                StringTable.IsConvertableTo((Object)(new StrFile(string.Empty, strings)), StringTableFormats.csf);
+                StringTable.IsConvertableTo((object)new StrFile(string.Empty, strings), StringTableFormats.csf);
 
         /// <summary>
         ///     Согласно описанию формата <u>.csf</u> на <a href="https://modenc.renegadeprojects.com/CSF_File_Format">modenc</a>, 
@@ -449,7 +449,7 @@ namespace mah_boi.Tools
             if (array == null) return;
 
             for (int i = 0; i < array.Length; i++)
-                array[i] = (byte)~(array[i]);
+                array[i] = (byte)~array[i];
         }
 
         public static bool operator ==(CsfFile firstFile, CsfFile secondFile)

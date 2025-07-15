@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace mah_boi.Tools
+namespace mah_boi.Tools.StringTable
 {
     public class StringTableString
     {
         public string StringName { get; set; }
         public string StringValue { get; set; }
-        public string? ExtraStringValue { get; set; } = null;
+        public string ExtraStringValue { get; set; } = null;
 
         public StringTableString()
         {
