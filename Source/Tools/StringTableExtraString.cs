@@ -4,7 +4,7 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    class StringTableExtraString : StringTableString
+    public class StringTableExtraString : StringTableString
     {
         public string StringExtraValue { get; set; }
 

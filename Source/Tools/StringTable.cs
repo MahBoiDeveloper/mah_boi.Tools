@@ -6,18 +6,18 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    abstract class StringTable
+    public abstract class StringTable
     {
-        protected StringTableParseException ParsingErrorsAndWarnings = new StringTableParseException();
+        public StringTableParseException ParsingErrorsAndWarnings = new StringTableParseException();
         public enum StringTableFormats
         {
             csf,
             str
         }
-        protected Encoding FileEncoding { get; set; }
-        protected string FileName { get; set; }
-        protected List<StringTableString> Table;
-        protected List<StringTableExtraString> ExtraTable;
+        public Encoding FileEncoding { get; set; }
+        public string FileName { get; set; }
+        public List<StringTableString> Table;
+        public List<StringTableExtraString> ExtraTable;
 
         #region Конструкторы
         /// <summary>

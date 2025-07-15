@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mah_boi.Tools
 {
-    class StringTableParseException : Exception
+    public class StringTableParseException : Exception
     {
         public enum MessageType : int
         {

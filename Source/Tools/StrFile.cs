@@ -61,7 +61,7 @@ namespace mah_boi.Tools
     //     end
     #endregion
     
-    class StrFile : StringTable
+    public class StrFile : StringTable
     {
         private enum LineType
         {
@@ -170,7 +170,7 @@ namespace mah_boi.Tools
 
             // красиво-ленивый способ пробежаться по всем строкам файла.
             UInt32 currentLineNumber = 0;
-            foreach (var currentLine in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(Environment.NewLine))
+            foreach (var currentLine in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {
                 currentLineNumber++;
                 // считанная строка - комментарий или пустая строка
