@@ -8,6 +8,7 @@ namespace mah_boi.Tools
     {
         public string StringName { get; set; }
         public string StringValue { get; set; }
+        public string? ExtraStringValue { get; set; } = null;
 
         public StringTableString()
         {
@@ -60,18 +61,37 @@ namespace mah_boi.Tools
             return false;
         }
 
-        public static bool operator ==(StringTableString firstString, StringTableString secondString)
+        /// <summary>
+        ///     Проверка на то, состоит ли дополнительное значение строки только из ASCII символов.
+        /// </summary>
+        public bool IsACIIExtraStringValue()
         {
-            if (firstString.StringName       != secondString.StringName)       return false;
-            if (firstString.StringValue      != secondString.StringValue)      return false;
+            if (IsACIIString(ExtraStringValue)) return true;
+
+            return false;
+        }
+
+        public static bool operator== (StringTableString firstString, StringTableString secondString)
+        {
+            if (firstString.StringName  != secondString.StringName)  return false;
+            if (firstString.StringValue != secondString.StringValue) return false;
+            
+            string extra1 = firstString?.ExtraStringValue ?? string.Empty;
+            string extra2 = secondString?.ExtraStringValue ?? string.Empty;
+
+            if (extra1 != extra2) return false;
+
             return true;
         }
-        public static bool operator !=(StringTableString firstString, StringTableString secondString)
+
+        public static bool operator!= (StringTableString firstString, StringTableString secondString)
             =>
                 !(firstString == secondString);
+        
         public override bool Equals(object obj)
             =>
                 (StringTableString)obj == this;
+        
         public override int GetHashCode()
             =>
                 base.GetHashCode();
