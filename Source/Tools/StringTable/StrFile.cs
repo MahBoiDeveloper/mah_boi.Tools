@@ -301,7 +301,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         ///     Сохранение данных класса в .str файл с указанным именем.
         /// </summary>
-        public override void Save(string fileName)
+        public override void SaveAs(string fileName)
         {
             using (StreamWriter sw = new StreamWriter(File.OpenWrite(fileName), FileEncoding))
                 sw.WriteLine(ToString());

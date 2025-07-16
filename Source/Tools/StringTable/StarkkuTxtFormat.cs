@@ -28,7 +28,7 @@ namespace mah_boi.Tools.StringTable
             
         }
 
-        public override void Save(string fileName)
+        public override void SaveAs(string fileName)
         {
             
         }

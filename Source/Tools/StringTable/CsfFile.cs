@@ -349,7 +349,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         ///     Сохранение текущего .csf файла согласно общему стандарту по указанному пути.
         /// </summary>
-        public override void Save(string fileName)
+        public override void SaveAs(string fileName)
         {
             string tmp = FileName;
             FileName = fileName;

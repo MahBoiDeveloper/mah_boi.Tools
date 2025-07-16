@@ -41,7 +41,7 @@ public sealed class StringTableTests
         Console.WriteLine("Ошибки, найденные во время парсинга");
         Console.WriteLine(csf.GetParsingMessages());
         Console.WriteLine($"Сохранение файла по пути {pathConvertTest_ResultCsf}");
-        csf.Save(pathConvertTest_ResultCsf);
+        csf.SaveAs(pathConvertTest_ResultCsf);
         Console.WriteLine("");
         Console.Write($"Сравнение файлов {pathSaveTest_SourceCsf} и {pathConvertTest_ResultCsf}. Результат: ");
         
@@ -60,7 +60,7 @@ public sealed class StringTableTests
         Console.WriteLine("===============================================================");
         Console.WriteLine("");
         Console.WriteLine($"Сохранение файла по пути {pathConvertTest_ResultStr}");
-        str.Save(pathConvertTest_ResultStr);
+        str.SaveAs(pathConvertTest_ResultStr);
         Console.WriteLine("");
         Console.Write($"Сравнение файлов {pathSaveTest_SourceStr} и {pathConvertTest_ResultStr}. Результат: ");
         
@@ -90,7 +90,7 @@ public sealed class StringTableTests
         CsfFile csf = new CsfFile(pathConvertTest_SourceCsf);
         Console.WriteLine($"Конвертируем ли файл: {csf.IsConvertable()}");
         Console.WriteLine($"Конвертация файла и сохранение его в {pathConvertTest_ResultStr}");
-        csf.ToStr().Save(pathConvertTest_ResultStr);
+        csf.ToStr().SaveAs(pathConvertTest_ResultStr);
 
         Console.WriteLine();
 
@@ -98,7 +98,7 @@ public sealed class StringTableTests
         StrFile str = new StrFile(pathConvertTest_SourceStr, Encoding.UTF8);
         Console.WriteLine($"Конвертируем ли файл: {str.IsConvertable()}");
         Console.WriteLine($"Конвертация файла и сохранение его в {pathConvertTest_ResultCsf}");
-        str.ToCsf().Save(pathConvertTest_ResultCsf);
+        str.ToCsf().SaveAs(pathConvertTest_ResultCsf);
 
         Console.WriteLine();
         Console.WriteLine("***************************************************************");

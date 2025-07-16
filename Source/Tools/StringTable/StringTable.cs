@@ -9,11 +9,6 @@ namespace mah_boi.Tools.StringTable
     public abstract class StringTable
     {
         protected StringTableParseException ParsingErrorsAndWarnings = new StringTableParseException();
-        public enum StringTableFormats
-        {
-            csf,
-            str
-        }
 
         /// <summary>
         /// Source file encoding.
@@ -162,29 +157,22 @@ namespace mah_boi.Tools.StringTable
         }
         #endregion
 
-        #region Парсинг
+        #region Parsing
         /// <summary>
-        ///     Абстрактный метод, предназначенный для того, чтобы заставить
-        ///     дочерние классы реализовывать парсинг определённого формата
-        ///     строковой таблицы игр серии C&C.
+        /// Abstract method to parse special file format of string table.
         /// </summary>
         public abstract void Parse();
 
         /// <summary>
-        ///     Абстрактный метод, предназначенный для того, чтобы заставить
-        ///     дочерние классы реализовывать соранение определённого формата
-        ///     строковой таблицы игр серии C&C.
+        /// Abstract method to save string table to special file format.
         /// </summary>
         public abstract void Save();
 
         /// <summary>
-        ///     То же самое, что и метод:<code>Save()</code>Только с указанием того, куда сохранять.
+        /// Abstract method to save string table to special file format with new name.
         /// </summary>
-        public abstract void Save(string fileName);
+        public abstract void SaveAs(string fileName);
 
-        /// <summary>
-        ///     Метод формирует строку, равносильную .str/.csf файлу.
-        /// </summary>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -736,7 +724,7 @@ namespace mah_boi.Tools.StringTable
 
         #region Other methods
         /// <summary>
-        ///     Checks if string exist in string table by its name.
+        /// Checks if string exist in string table by its name.
         /// </summary>
         public bool StringExist(string stringName)
         {
@@ -752,7 +740,7 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Checks if string exist in string table.
+        /// Checks if string exist in string table.
         /// </summary>
         public bool StringExist(StringTableString _string)
         {
@@ -770,7 +758,7 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Check if extra string value exist.
+        /// Check if extra string value exist.
         /// </summary>
         public bool StringExist(StringTableExtraString extraString)
         {
@@ -784,45 +772,37 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Count the number of strings in string table.
+        /// Count the number of strings in string table.
         /// </summary>
-        public int Count()
-            =>
-                Table.Count + ExtraTable.Count;
+        public int Count() => Table.Count + ExtraTable.Count;
 
         /// <summary>
-        ///     Returns parsing errors and warnings.
+        /// Returns parsing errors and warnings.
         /// </summary>
-        public string GetParsingMessages()
-            =>
-                ParsingErrorsAndWarnings.GetExceptions();
+        public string GetParsingMessages() => ParsingErrorsAndWarnings.GetExceptions();
 
         /// <summary>
-        ///     Checks if strings with extra values exist in string table.
+        /// Checks if strings with extra values exist in string table.
         /// </summary>
-        public bool IsExtraStringsInStringTable()
-            =>
-                ExtraTable.Count != 0 ? true : false;
+        public bool IsExtraStringsInStringTable() => ExtraTable.Count != 0 ? true : false;
 
         /// <summary>
-        ///     Checks if string table could be converted to other file formats.
+        /// Checks if string table could be converted to other file formats.
         /// </summary>
         public abstract bool IsConvertable();
 
         /// <summary>
-        ///     Checks if category list could be converted to current string table format.
+        /// Checks if category list could be converted to current string table format.
         /// </summary>
         public abstract bool IsConvertable(List<StringTableString> TableSample);
 
         /// <summary>
-        ///     Checks if string table could be converted to other file formats.
+        /// Checks if string table could be converted to other file formats.
         /// </summary>
-        public bool IsConvertableTo(StringTableFormats format)
-            => 
-                IsConvertableTo(this, format);
+        public bool IsConvertableTo(StringTableFormats format) => IsConvertableTo(this, format);
 
         /// <summary>
-        ///     Checks if string table could be converted to other file formats.
+        /// Checks if string table could be converted to other file formats.
         /// </summary>
         public static bool IsConvertableTo(StringTable stFormated, StringTableFormats format)
         {
@@ -852,17 +832,11 @@ namespace mah_boi.Tools.StringTable
 
             return true;
         }
-        public static bool operator != (StringTable firstFile, StringTable secondFile)
-            =>
-                !(firstFile == secondFile);
+        public static bool operator != (StringTable a, StringTable b) => !(a == b);
 
-        public override bool Equals(object obj)
-            =>
-                (StringTable)obj == this;
+        public override bool Equals(object obj) => (StringTable)obj == this;
 
-        public override int GetHashCode()
-            =>
-                base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }
