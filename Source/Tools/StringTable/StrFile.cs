@@ -183,7 +183,7 @@ namespace mah_boi.Tools.StringTable
                     searchStatus == LineType.End && currentLine.Trim().ToLower() != "end"
                 )
                 {
-                    ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                    parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
                                                        + "После значения лейбла идёт другая строка со значением", StringTableParseException.MessageType.Error);
                     searchStatus = LineType.Label;
                 }
@@ -191,7 +191,7 @@ namespace mah_boi.Tools.StringTable
                 // считанная строка содержит ошибку, т.к. нет значения
                 else if (currentLine.Trim().ToLower() == "end" && searchStatus == LineType.Value)
                 {
-                    ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                    parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
                                                        + "После названия лейбла идёт закрытие строки, а не значение. "
                                                        + "Воспользуйтесь ковычками \"\" для обозначения пустой строк", StringTableParseException.MessageType.Error);
 
@@ -212,7 +212,7 @@ namespace mah_boi.Tools.StringTable
                     }
                     else                                             // символы в значении не в кодировке ASCII
                     {
-                        ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                        parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
                                                            + "В названии строки содержатся не ASCII символы, что не является "
                                                            + "допустимым. Замените их, чтобы строку можно было считать.",
                                                             StringTableParseException.MessageType.Error);
@@ -269,7 +269,7 @@ namespace mah_boi.Tools.StringTable
                     && !currentLine.Trim().StartsWith("\\n") // а текущая строка не начинается с \n, когда мы ищем значение
                 )
                 {
-                    ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                    parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
                                                        + "Отсутствие символов \"\\n\" в начале составной строки.", StringTableParseException.MessageType.Error);
                 }
 
@@ -283,7 +283,7 @@ namespace mah_boi.Tools.StringTable
                 // на случай не предвиденных проблем
                 else
                 {
-                    ParsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
+                    parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
                                                        + "Неизвестная ошибка", StringTableParseException.MessageType.Error);
                 }
             }

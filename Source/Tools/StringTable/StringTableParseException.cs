@@ -3,103 +3,101 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace mah_boi.Tools.StringTable
+namespace mah_boi.Tools.StringTable;
+
+public class StringTableParseException : Exception
 {
-    public class StringTableParseException : Exception
+    public enum MessageType
     {
-        public enum MessageType : int
+        Info    = 0,
+        Warning = 1,
+        Error   = 2
+    }
+
+    private List<string> InfoList;
+    private List<string> WarningList;
+    private List<string> ErrorList;
+
+    public StringTableParseException()
+    {
+        InfoList    = new List<string>();
+        WarningList = new List<string>();
+        ErrorList   = new List<string>();
+    }
+    public StringTableParseException(string message) : base(message)
+    {
+    }
+
+    public StringTableParseException AddMessage(string msgText, MessageType msgType)
+    {
+        switch (msgType)
         {
-            Info    = 0, // для подсказок пользователю. фича на будушее
-            Warning = 1,
-            Error   = 2
+            case MessageType.Info:
+                break;
+            case MessageType.Warning:
+                WarningList.Add(msgText);
+                break;
+            case MessageType.Error:
+                ErrorList.Add(msgText);
+                break;
+            default:
+                break;
         }
 
-        private List<string> InfoList;
-        private List<string> WarningList;
-        private List<string> ErrorList;
+        return this;
+    }
 
-        public StringTableParseException()
+    public StringTableParseException DeleteMessage(string msgText, MessageType msgType)
+    {
+        switch (msgType)
         {
-            InfoList    = new List<string>();
-            WarningList = new List<string>();
-            ErrorList   = new List<string>();
-        }
-        public StringTableParseException(string message) : base(message)
-        {
-        }
-
-        public void AddMessage(string msgText, MessageType msgType)
-        {
-            switch (msgType)
-            {
-                case MessageType.Info:
-                    break;
-                case MessageType.Warning:
-                    WarningList.Add(msgText);
-                    break;
-                case MessageType.Error:
-                    ErrorList.Add(msgText);
-                    break;
-                default:
-                    break;
-            }
+            case MessageType.Info:
+                break;
+            case MessageType.Warning:
+                WarningList.Remove(msgText);
+                break;
+            case MessageType.Error:
+                ErrorList.Remove(msgText);
+                break;
+            default:
+                break;
         }
 
-        public void DeleteMessage(string msgText, MessageType msgType)
+        return this;
+    }
+
+    public void ThrowExceptions() => throw new StringTableParseException(ToString());
+
+    public string GetExceptions() => ToString();
+
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        int i = 0;
+        foreach (var str in InfoList)
         {
-            switch (msgType)
-            {
-                case MessageType.Info:
-                    break;
-                case MessageType.Warning:
-                    WarningList.Remove(msgText);
-                    break;
-                case MessageType.Error:
-                    ErrorList.Remove(msgText);
-                    break;
-                default:
-                    break;
-            }
+            i++;
+            sb.AppendLine($"Information №{i}: " + Environment.NewLine + "\t" + str);
+            sb.AppendLine();
         }
 
-        public void ThrowExceptions()
-            => throw new StringTableParseException(ToString());
-
-        public string GetExceptions()
-            => ToString();
-
-        public override string ToString()
+        i = 0;
+        foreach (var str in WarningList)
         {
-            StringBuilder sb = new StringBuilder();
-
-            int i = 0;
-            if (InfoList.Count > 0)
-                foreach (var str in InfoList)
-                {
-                    i++;
-                    sb.AppendLine($"Информация №{i}: " + Environment.NewLine + "\t" + str);
-                    sb.AppendLine();
-                }
-
-            i = 0;
-            if (WarningList.Count > 0)
-                foreach (var str in WarningList)
-                {
-                    i++;
-                    sb.AppendLine($"Предупреждение №{i}: " + Environment.NewLine + "\t" + str);
-                    sb.AppendLine();
-                }
-
-            i = 0;
-            if (ErrorList.Count > 0)
-                foreach (var str in ErrorList)
-                {
-                    i++;
-                    sb.AppendLine($"Ошибка №{i}: " + Environment.NewLine + "\t" + str);
-                    sb.AppendLine();
-                }
-
-            return sb.ToString();
+            i++;
+            sb.AppendLine($"Warning №{i}: " + Environment.NewLine + "\t" + str);
+            sb.AppendLine();
         }
+
+        i = 0;
+        foreach (var str in ErrorList)
+        {
+            i++;
+            sb.AppendLine($"Error №{i}: " + Environment.NewLine + "\t" + str);
+            sb.AppendLine();
+        }
+
+        return sb.ToString();
     }
 }

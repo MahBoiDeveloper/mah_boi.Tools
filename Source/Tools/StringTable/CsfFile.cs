@@ -197,20 +197,20 @@ namespace mah_boi.Tools.StringTable
             Header.CSFchars = br.ReadChars(4); // по факту эта строка обязана всегда быть " FSC"
 
             if (new string(Header.CSFchars) != new string(FSC))
-                ParsingErrorsAndWarnings.AddMessage("Ошибка чтения заголовка: заголовок не содержит строку ' FSC'. "
+                parsingErrorsAndWarnings.AddMessage("Ошибка чтения заголовка: заголовок не содержит строку ' FSC'. "
                                                   + "Игра не прилинкует указанный .csf файл.", StringTableParseException.MessageType.Error);
 
             Header.CSFformatVersion = br.ReadUInt32(); // у игр серии ЦНЦ это число всегда равно 3. по факту оно ни на что не влияет
 
             if (Header.CSFformatVersion != 3)
-                ParsingErrorsAndWarnings.AddMessage("Версия формата, указанная в заголовке, не соответствует версии, "
+                parsingErrorsAndWarnings.AddMessage("Версия формата, указанная в заголовке, не соответствует версии, "
                                                   + "используемой в играх серии C&C.", StringTableParseException.MessageType.Warning);
 
             Header.CSFnumberOfLabels = br.ReadUInt32(); // количество лейблов
             Header.CSFnumberOfStrings = br.ReadUInt32(); // количество строк
 
             if (Header.CSFnumberOfLabels < Header.CSFnumberOfStrings)
-                ParsingErrorsAndWarnings.AddMessage("В файле используются строки с дополнительным значением. "
+                parsingErrorsAndWarnings.AddMessage("В файле используются строки с дополнительным значением. "
                                                   + "Конвертирование данного .csf файла в .str файл в будущем невозможно! "
                                                   + "Советуем удалить все дополнительные значения."
                                                   , StringTableParseException.MessageType.Warning);

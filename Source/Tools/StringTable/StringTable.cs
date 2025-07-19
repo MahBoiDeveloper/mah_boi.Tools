@@ -8,7 +8,8 @@ namespace mah_boi.Tools.StringTable
 {
     public abstract class StringTable
     {
-        protected StringTableParseException ParsingErrorsAndWarnings = new StringTableParseException();
+        protected StringTableParseException        parsingErrorsAndWarnings = new();
+        protected StringTableNonAsciiNameException nonAsciiNameException    = new();
 
         /// <summary>
         /// Source file encoding.
@@ -203,23 +204,22 @@ namespace mah_boi.Tools.StringTable
 
         #region Методы добавления строк
         /// <summary>
-        ///     Метод добавления в строковую таблицу нормализированной,<br/>
-        ///     заранее заданной, строки.
+        /// Adds string sample to the string table.<br/>
+        /// If string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
         /// </summary>
         public void AddString(StringTableString stString)
         {
             if (stString.IsACIIStringName())
                 Table.Add(stString);
+            else
+                throw nonAsciiNameException;
         }
 
         /// <summary>
-        ///     Метод добавления в строковую таблицу заранее собранных <br/>
-        ///     в список нормализированных строк. Новые строки <br/>
-        ///     добавляются в конец таблицы без соритровки.
+        /// Adds string range to the string table in the end of list.<br/>
+        /// If even one string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
         /// </summary>
-        public void AddString(List<StringTableString> stList)
-            =>
-                Table.AddRange(stList.Where(x => x.IsACIIStringName()));
+        public void AddString(List<StringTableString> stList) => Table.AddRange(stList.Where(x => x.IsACIIStringName()));
 
         /// <summary>
         ///     Ленивый экспорт строк из одной таблицы в другую.
@@ -779,7 +779,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Returns parsing errors and warnings.
         /// </summary>
-        public string GetParsingMessages() => ParsingErrorsAndWarnings.GetExceptions();
+        public string GetParsingMessages() => parsingErrorsAndWarnings.GetExceptions();
 
         /// <summary>
         /// Checks if strings with extra values exist in string table.
