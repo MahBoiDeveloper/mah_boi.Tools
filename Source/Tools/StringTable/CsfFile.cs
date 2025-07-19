@@ -297,7 +297,7 @@ namespace mah_boi.Tools.StringTable
                     // запись нормальных строк
                     foreach (var str in Table)
                     {
-                        string labelName = str.StringName;
+                        string labelName = str.Name;
 
                         bw.Write(LBL);                     // строка со значением ' LBL'
                         bw.Write((uint)1);                 // количество строк для дополнительного значения
@@ -305,8 +305,8 @@ namespace mah_boi.Tools.StringTable
                         bw.Write(labelName.ToCharArray()); // само название
 
                         bw.Write(RTS);  // строка со значением ' RTS'
-                        bw.Write(Convert.ToUInt32(str.StringValue.Length));        // запись длины значения
-                        byte[] byteValue = FileEncoding.GetBytes(str.StringValue); // получения байтового массива на основе строки
+                        bw.Write(Convert.ToUInt32(str.Value.Length));        // запись длины значения
+                        byte[] byteValue = FileEncoding.GetBytes(str.Value); // получения байтового массива на основе строки
                         InvertAllBytesInArray(byteValue);                          // инвертирование полученного массива
 
                         bw.Write(byteValue);                                       // запись в файл инвертированных байтов значения строки
@@ -371,7 +371,7 @@ namespace mah_boi.Tools.StringTable
             // в str нет символов переводы на новую строку заменяются на \n
             List<StringTableString> tmp = Table;
             foreach (var str in tmp)
-                str.StringValue = str.StringValue.Replace("\n", "\\n");
+                str.Value = str.Value.Replace("\n", "\\n");
 
             return new StrFile(FileName, tmp, ExtraTable);
         }
@@ -404,7 +404,7 @@ namespace mah_boi.Tools.StringTable
             // в str нет символов переводы на новую строку заменяются на \n
             List<StringTableString> tmp = fileSample.Table;
             foreach (var str in tmp)
-                str.StringValue = str.StringValue.Replace("\n", "\\n");
+                str.Value = str.Value.Replace("\n", "\\n");
 
             return new StrFile(fileSample.FileName, tmp, fileSample.ExtraTable);
         }

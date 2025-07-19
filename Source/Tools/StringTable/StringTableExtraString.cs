@@ -25,8 +25,8 @@ namespace mah_boi.Tools.StringTable
 
         public static bool operator == (StringTableString firstString, StringTableExtraString secondString)
         {
-            if (firstString.StringName != secondString.StringName) return false;
-            if (firstString.StringValue != secondString.StringValue) return false;
+            if (firstString.Name != secondString.Name) return false;
+            if (firstString.Value != secondString.Value) return false;
             if (secondString.StringExtraValue == string.Empty) return false;
             return true;
         }
@@ -36,8 +36,8 @@ namespace mah_boi.Tools.StringTable
 
         public static bool operator == (StringTableExtraString firstString, StringTableString secondString)
         {
-            if (firstString.StringName != secondString.StringName) return false;
-            if (firstString.StringValue != secondString.StringValue) return false;
+            if (firstString.Name != secondString.Name) return false;
+            if (firstString.Value != secondString.Value) return false;
             if (firstString.StringExtraValue == string.Empty) return false;
             return true;
         }
@@ -47,8 +47,8 @@ namespace mah_boi.Tools.StringTable
 
         public static bool operator ==(StringTableExtraString firstString, StringTableExtraString secondString)
         {
-            if (firstString.StringName != secondString.StringName) return false;
-            if (firstString.StringValue != secondString.StringValue) return false;
+            if (firstString.Name != secondString.Name) return false;
+            if (firstString.Value != secondString.Value) return false;
             if (firstString.StringExtraValue != secondString.StringExtraValue) return false;
             return true;
         }

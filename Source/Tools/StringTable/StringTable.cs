@@ -27,9 +27,6 @@ namespace mah_boi.Tools.StringTable
         /// String table data.
         /// </summary>
         public List<StringTableString> Table;
-        
-        // TODO: Remove
-        public List<StringTableExtraString> ExtraTable;
 
         #region Constructors
         /// <summary>
@@ -181,10 +178,10 @@ namespace mah_boi.Tools.StringTable
             
             foreach (var str in Table)
             {
-                str.StringValue = str.StringValue.Replace("\n", "\\n");
+                str.Value = str.Value.Replace("\n", "\\n");
 
-                sb.AppendLine(str.StringName)
-                  .AppendLine("\t\"" + str.StringValue + "\"")
+                sb.AppendLine(str.Name)
+                  .AppendLine("\t\"" + str.Value + "\"")
                   .AppendLine("END")
                   .AppendLine(string.Empty);          
             }
@@ -203,7 +200,7 @@ namespace mah_boi.Tools.StringTable
         }
         #endregion
 
-        #region Методы добавления строк
+        #region String table data changing methods
         /// <summary>
         /// Adds string sample to the string table.<br/>
         /// If string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
@@ -223,42 +220,14 @@ namespace mah_boi.Tools.StringTable
         public void AddString(List<StringTableString> stList) => Table.AddRange(stList.Where(x => x.IsACIIStringName()));
 
         /// <summary>
-        ///     Ленивый экспорт строк из одной таблицы в другую.
+        /// Transfer data from given string table.
         /// </summary>
-        public void AddString(StringTable stImportTable)
-        {
-            if (stImportTable is CsfFile || stImportTable is StrFile)
-            {
-                Table.AddRange(stImportTable.Table);
-
-                if (stImportTable.IsExtraStringsInStringTable())
-                    ExtraTable.AddRange(stImportTable.ExtraTable);
-            }
-        }
+        public void AddString(StringTable stImportTable) => Table.AddRange(stImportTable.Table);
 
         /// <summary>
-        ///     Метод добавления в строковую таблицу дополнительной,<br/>
-        ///     заранее заданной, строки.
+        /// Add new entry to the string table with name but without value.
         /// </summary>
-        public void AddString(StringTableExtraString stString)
-        {
-            if (stString.IsACIIStringName())
-                ExtraTable  .Add(stString);
-        }
-
-        /// <summary>
-        ///     Метод объединения дополнительных строковых таблиц.
-        /// </summary>
-        public void AddString(List<StringTableExtraString> stList)
-            =>
-                ExtraTable.AddRange(stList.Where(x => x.IsACIIStringName()));
-
-        /// <summary>
-        ///     Добавить в таблицу пустую нормализированную строку без значения.
-        /// </summary>
-        public void AddEmptyString(string stringName)
-            =>
-                Table.Add(new StringTableString(stringName));
+        public void AddEmptyString(string stringName) => Table.Add(new StringTableString(stringName));
         #endregion
 
         #region Методы модификации строк
@@ -271,9 +240,9 @@ namespace mah_boi.Tools.StringTable
 
             foreach (var str in Table)
             {
-                if (str.StringName == oldName)
+                if (str.Name == oldName)
                 {
-                    str.StringName = newName;
+                    str.Name = newName;
                     return;
                 }
             }
@@ -295,7 +264,7 @@ namespace mah_boi.Tools.StringTable
         {
             if (!(StringTableString.IsACIIString(oldName) && StringTableString.IsACIIString(newName))) return;
 
-            Table.Where(str => str.StringName == oldName).ToList().ForEach(str => str.StringName = newName);
+            Table.Where(str => str.Name == oldName).ToList().ForEach(str => str.Name = newName);
 
             ExtraTable.Where(str => str.StringName == oldName).ToList().ForEach(str => str.StringName = newName);
         }
@@ -309,9 +278,9 @@ namespace mah_boi.Tools.StringTable
 
             foreach (var str in Table)
             {
-                if (str.StringName == stringName)
+                if (str.Name == stringName)
                 {
-                    str.StringValue = newValue;
+                    str.Value = newValue;
                     return;
                 }
             }
@@ -333,7 +302,7 @@ namespace mah_boi.Tools.StringTable
         {
             if (!StringTableString.IsACIIString(stringName)) return;
 
-            Table.Where(str => str.StringName == stringName).ToList().ForEach(str => str.StringValue = newValue);
+            Table.Where(str => str.Name == stringName).ToList().ForEach(str => str.Value = newValue);
 
             ExtraTable.Where(str => str.StringName == stringName).ToList().ForEach(str => str.StringValue = newValue);
         }
@@ -387,7 +356,7 @@ namespace mah_boi.Tools.StringTable
             {
                 foreach (var str in Table)
                 {
-                    if (str.StringName == stringName)
+                    if (str.Name == stringName)
                     {
                         Table.Remove(str);
                         return;
@@ -412,7 +381,7 @@ namespace mah_boi.Tools.StringTable
         {
             if (!StringTableString.IsACIIString(stringName)) return;
                 
-            Table.RemoveAll(str => str.StringName == stringName);
+            Table.RemoveAll(str => str.Name == stringName);
             ExtraTable.RemoveAll(str => str.StringName == stringName);
         }
 
@@ -447,7 +416,7 @@ namespace mah_boi.Tools.StringTable
         {
             foreach (var str in Table)
             {
-                if (str.StringValue == stringValue)
+                if (str.Value == stringValue)
                 {
                     Table.Remove(str);
                     return;
@@ -469,7 +438,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public void DeleteStringByValueOnMatch(string stringValue)
         {
-            Table.RemoveAll(str => str.StringValue == stringValue);
+            Table.RemoveAll(str => str.Value == stringValue);
             ExtraTable.RemoveAll(str => str.StringValue == stringValue);
         }
         #endregion
@@ -483,8 +452,8 @@ namespace mah_boi.Tools.StringTable
             if (StringTableString.IsACIIString(stringName))
             {
                 foreach (var str in Table)
-                    if (str.StringName == stringName)
-                        return str.StringValue;
+                    if (str.Name == stringName)
+                        return str.Value;
 
                 foreach (var str in ExtraTable)
                     if (str.StringName == stringName)
@@ -500,8 +469,8 @@ namespace mah_boi.Tools.StringTable
         public string GetStringName(string stringValue)
         {
             foreach (var str in Table)
-                if (str.StringValue == stringValue)
-                    return str.StringName;
+                if (str.Value == stringValue)
+                    return str.Name;
 
             foreach (var str in ExtraTable)
                 if (str.StringValue == stringValue)
@@ -518,7 +487,7 @@ namespace mah_boi.Tools.StringTable
             if (StringTableString.IsACIIString(stringName))
             {
                 foreach (var str in Table)
-                    if (str.StringName == stringName)
+                    if (str.Name == stringName)
                         return str;
 
                 foreach (var str in ExtraTable)
@@ -546,7 +515,7 @@ namespace mah_boi.Tools.StringTable
                 List<StringTableString> stsList = new List<StringTableString>();
 
                 foreach (var str in Table)
-                    if (str.StringName == stringName)
+                    if (str.Name == stringName)
                         stsList.Add(str);
 
                 return stsList;
@@ -565,7 +534,7 @@ namespace mah_boi.Tools.StringTable
                 List<StringTableString> stsList = new List<StringTableString>();
 
                 foreach (var str in Table)
-                    if (str.StringName == stringName)
+                    if (str.Name == stringName)
                         stsList.Add(str);
 
                 return stsList;
@@ -582,7 +551,7 @@ namespace mah_boi.Tools.StringTable
             List<StringTableString> stsList = new List<StringTableString>();
 
             foreach (var str in Table)
-                if (str.StringValue == stringValue)
+                if (str.Value == stringValue)
                     stsList.Add(str);
 
             return stsList;
@@ -625,7 +594,7 @@ namespace mah_boi.Tools.StringTable
                 foreach (var str in Table)
                 {
                     i++;
-                    if (str.StringName == stringName)
+                    if (str.Name == stringName)
                         idList.Add(i);
                 }
 
@@ -665,7 +634,7 @@ namespace mah_boi.Tools.StringTable
         public List<string> GetStringNames()
         {
             List<string> nameList = new List<string>();
-            Table.ForEach(str => nameList.Add(str.StringName));
+            Table.ForEach(str => nameList.Add(str.Name));
             ExtraTable.ForEach(str => nameList.Add(str.StringName));
             return nameList;
         }
@@ -679,13 +648,13 @@ namespace mah_boi.Tools.StringTable
 
             foreach (var str in Table)
             {
-                if (str.StringName.Contains(stringDelimiter))
+                if (str.Name.Contains(stringDelimiter))
                 {
-                    str.StringName.Substring(0, str.StringName.LastIndexOf(stringDelimiter));
+                    str.Name.Substring(0, str.Name.LastIndexOf(stringDelimiter));
                 }
                 else
                 {
-                    categoryList.Add(str.StringName);
+                    categoryList.Add(str.Name);
                 }
             }
 
@@ -712,8 +681,8 @@ namespace mah_boi.Tools.StringTable
             List<string> stringList = new List<string>();
 
             foreach (var str in Table)
-                if (str.StringName.Contains(categoryName))
-                    stringList.Add(str.StringName.Substring(str.StringName.LastIndexOf(stringDelimiter) + 1));
+                if (str.Name.Contains(categoryName))
+                    stringList.Add(str.Name.Substring(str.Name.LastIndexOf(stringDelimiter) + 1));
 
             foreach (var str in ExtraTable)
                 if (str.StringName.Contains(categoryName))
@@ -730,13 +699,9 @@ namespace mah_boi.Tools.StringTable
         public bool StringExist(string stringName)
         {
             foreach (var str in Table)
-                if (str.StringName == stringName)
+                if (str.Name == stringName)
                     return true;
-
-            foreach (var str in ExtraTable)
-                if (str.StringName == stringName)
-                    return true;
-
+            
             return false;
         }
 
@@ -746,27 +711,7 @@ namespace mah_boi.Tools.StringTable
         public bool StringExist(StringTableString _string)
         {
             foreach (var str in Table)
-                if (_string.StringName == str.StringName
-                    && _string.StringValue == str.StringValue)
-                    return true;
-
-            foreach (var str in ExtraTable)
-                if (_string.StringName == str.StringName
-                    && _string.StringValue == str.StringValue)
-                    return true;
-
-            return false;
-        }
-
-        /// <summary>
-        /// Check if extra string value exist.
-        /// </summary>
-        public bool StringExist(StringTableExtraString extraString)
-        {
-            foreach (var str in ExtraTable)
-                if (extraString.StringName == str.StringName
-                    && extraString.StringValue == str.StringValue
-                    && extraString.StringExtraValue == str.StringExtraValue)
+                if (_string == str)
                     return true;
 
             return false;
@@ -775,7 +720,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Count the number of strings in string table.
         /// </summary>
-        public int Count() => Table.Count + ExtraTable.Count;
+        public int Count() => Table.Count;
 
         /// <summary>
         /// Returns parsing errors and warnings.
@@ -785,7 +730,16 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Checks if strings with extra values exist in string table.
         /// </summary>
-        public bool IsExtraStringsInStringTable() => ExtraTable.Count != 0 ? true : false;
+        public bool AreExtraValuesExist()
+        {
+            foreach (var str in Table)
+            {
+                if (str.ExtraValue != null)
+                    return true;
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Checks if string table could be converted to other file formats.

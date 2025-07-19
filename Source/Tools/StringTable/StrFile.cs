@@ -321,7 +321,7 @@ namespace mah_boi.Tools.StringTable
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
             List<StringTableString> tmp = Table;
             foreach (var str in tmp)
-                str.StringValue = str.StringValue.Replace("\\n", "\n");
+                str.Value = str.Value.Replace("\\n", "\n");
 
             return new CsfFile(FileName, tmp, ExtraTable);
         }
@@ -354,8 +354,8 @@ namespace mah_boi.Tools.StringTable
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
             List<StringTableString> tmp = fileSample.Table;
             foreach (var str in tmp)
-                if (str.StringValue.IndexOf("\\n") > -1)
-                    str.StringValue.Replace("\\n", "\n");
+                if (str.Value.IndexOf("\\n") > -1)
+                    str.Value.Replace("\\n", "\n");
 
             return new CsfFile(fileSample.FileName, tmp, fileSample.ExtraTable);
         }

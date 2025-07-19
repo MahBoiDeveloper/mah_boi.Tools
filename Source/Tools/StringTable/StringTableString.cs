@@ -6,9 +6,9 @@ namespace mah_boi.Tools.StringTable
 {
     public class StringTableString
     {
-        public string StringName { get; set; }
-        public string StringValue { get; set; }
-        public string ExtraStringValue { get; set; } = null;
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public string ExtraValue { get; set; } = null;
 
         public StringTableString()
         {
@@ -16,84 +16,44 @@ namespace mah_boi.Tools.StringTable
 
         public StringTableString(string stringName)
         {
-            StringName       = stringName;
-            StringValue      = string.Empty;
+            Name  = stringName;
+            Value = string.Empty;
         }
 
         public StringTableString(string stringName, string stringValue)
         {
-            StringName       = stringName;
-            StringValue      = stringValue;
+            Name  = stringName;
+            Value = stringValue;
         }
 
         /// <summary>
-        ///     Проверка на то, состоит ли строка только из ASCII символов.
+        /// Checks if string contains only ASCII characters.
         /// </summary>
-        public static bool IsACIIString(string str)
-        {
-            // Создание байтового массива на основе символов строки
-            byte[] bytesArray = Encoding.UTF8.GetBytes(str);
+        public static bool IsACIIString(string str) => Encoding.UTF8.GetByteCount(str) == str.Length;
+        
+        /// <summary>
+        /// Checks if string contains any non ASCII characters.
+        /// </summary>
+        public static bool HasNonASCIIChars(string str) => Encoding.UTF8.GetByteCount(str) != str.Length;
 
-            // Если символ имеет номер больше 126, то он не является символом ASCII
-            foreach (var tmp in bytesArray)
-                if (tmp >= 127) return false;
+        /// <summary>
+        /// Checks if string name has only ASCII characters
+        /// </summary>
+        public bool IsACIIStringName() => IsACIIString(Name);
+
+        public static bool operator == (StringTableString firstString, StringTableString secondString)
+        {
+            if (firstString.Name       != secondString.Name)       return false;
+            if (firstString.Value      != secondString.Value)      return false;
+            if (firstString.ExtraValue != secondString.ExtraValue) return false;
 
             return true;
         }
 
-        /// <summary>
-        ///     Проверка на то, состоит ли название строки только из ASCII символов.
-        /// </summary>
-        public bool IsACIIStringName()
-        {
-            if (IsACIIString(StringName)) return true;
-            
-            return false;
-        }
-
-        /// <summary>
-        ///     Проверка на то, состоит ли значение строки только из ASCII символов.
-        /// </summary>
-        public bool IsACIIStringValue()
-        {
-            if (IsACIIString(StringValue)) return true;
-
-            return false;
-        }
-
-        /// <summary>
-        ///     Проверка на то, состоит ли дополнительное значение строки только из ASCII символов.
-        /// </summary>
-        public bool IsACIIExtraStringValue()
-        {
-            if (IsACIIString(ExtraStringValue)) return true;
-
-            return false;
-        }
-
-        public static bool operator== (StringTableString firstString, StringTableString secondString)
-        {
-            if (firstString.StringName  != secondString.StringName)  return false;
-            if (firstString.StringValue != secondString.StringValue) return false;
-            
-            string extra1 = firstString?.ExtraStringValue ?? string.Empty;
-            string extra2 = secondString?.ExtraStringValue ?? string.Empty;
-
-            if (extra1 != extra2) return false;
-
-            return true;
-        }
-
-        public static bool operator!= (StringTableString firstString, StringTableString secondString)
-            =>
-                !(firstString == secondString);
+        public static bool operator != (StringTableString a, StringTableString b) => !(a == b);
         
-        public override bool Equals(object obj)
-            =>
-                (StringTableString)obj == this;
+        public override bool Equals(object obj) => (StringTableString)obj == this;
         
-        public override int GetHashCode()
-            =>
-                base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }
