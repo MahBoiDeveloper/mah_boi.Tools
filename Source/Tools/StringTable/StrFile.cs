@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using mah_boi.Tools.StringTable.Exceptions;
 
 namespace mah_boi.Tools.StringTable
 {
@@ -314,7 +315,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public CsfFile ToCsf()
         {
-            if (!StringTable.IsConvertableTo((object)this, StringTableFormats.csf))
+            if (!StringTable.IsConvertableTo((StringTable)this, StringTableFormats.csf))
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
@@ -383,14 +384,14 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public override bool IsConvertable()
             =>
-                StringTable.IsConvertableTo((object)this, StringTableFormats.csf);
+                StringTable.IsConvertableTo((StringTable)this, StringTableFormats.csf);
 
         /// <summary>
         ///     Проверка конвертируемости текущего формата строковой таблицы в другой в <u>.csf</u>.
         /// </summary>
         public override bool IsConvertable(List<StringTableString> strings)
             =>
-                StringTable.IsConvertableTo((object)new CsfFile(string.Empty, strings), StringTableFormats.str);
+                StringTable.IsConvertableTo((StringTable)new CsfFile(string.Empty, strings), StringTableFormats.str);
 
         public static bool operator ==(StrFile firstFile, StrFile secondFile)
             =>
