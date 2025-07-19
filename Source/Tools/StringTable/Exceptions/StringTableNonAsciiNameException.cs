@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mah_boi.Tools.StringTable;
+namespace mah_boi.Tools.StringTable.Exceptions;
 
 public class StringTableNonAsciiNameException : Exception
 {
