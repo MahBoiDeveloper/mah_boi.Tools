@@ -1,9 +1,9 @@
 ﻿namespace mah_boi.Tools.StringTable;
 
 /// <summary>
-///     Supported string table file formats.
+/// Supported string table file formats.
 /// </summary>
-public enum StringTableFormats
+public enum StringTableFormat
 {
     csf,
     str,

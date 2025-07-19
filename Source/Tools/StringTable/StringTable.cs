@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using mah_boi.Tools.StringTable.Exceptions;
+using mah_boi.Tools.StringTable.Extensions;
 
 namespace mah_boi.Tools.StringTable
 {
@@ -11,6 +12,8 @@ namespace mah_boi.Tools.StringTable
     {
         protected StringTableParseException        parsingErrorsAndWarnings = new();
         protected StringTableNonAsciiNameException nonAsciiNameException    = new();
+
+        public StringTableFormat Format { get; set; } = StringTableFormat.csf;
 
         /// <summary>
         /// Source file encoding.
@@ -41,15 +44,14 @@ namespace mah_boi.Tools.StringTable
             FileEncoding = Encoding.UTF8;
             FileName     = "TMP-" + DateTime.Now;
             Table        = new List<StringTableString>();
-            ExtraTable   = new List<StringTableExtraString>();
         }
 
         /// <summary>
-        ///     Class for parsing <u>.str/.csf</u> file formats.<br/>
-        ///     Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        ///     Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        ///     Read more about parsing nuances
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
+        /// Read more about parsing nuances
+        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
         public StringTable(string fileName)
         {
@@ -59,15 +61,14 @@ namespace mah_boi.Tools.StringTable
             FileEncoding = Encoding.UTF8;
             FileName     = fileName;
             Table        = new List<StringTableString>();
-            ExtraTable   = new List<StringTableExtraString>();
         }
 
         /// <summary>
-        ///     Class for parsing <u>.str/.csf</u> file formats.<br/>
-        ///     Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        ///     Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        ///     Read more about parsing nuances
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
+        /// Read more about parsing nuances
+        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
         public StringTable(string fileName, Encoding encoding)
         {
@@ -77,82 +78,76 @@ namespace mah_boi.Tools.StringTable
             FileEncoding = encoding;
             FileName     = fileName;
             Table        = new List<StringTableString>();
-            ExtraTable   = new List<StringTableExtraString>();
         }
 
         /// <summary>
-        ///     Class for parsing <u>.str/.csf</u> file formats.<br/>
-        ///     Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        ///     Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        ///     Read more about parsing nuances
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
+        /// Read more about parsing nuances
+        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
         public StringTable(StringTable stFile)
         {
             FileEncoding = stFile.FileEncoding;
             FileName     = stFile.FileName;
             Table        = stFile.Table;
-            ExtraTable   = stFile.ExtraTable;
         }
 
         /// <summary>
-        ///     Class for parsing <u>.str/.csf</u> file formats.<br/>
-        ///     Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        ///     Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        ///     Read more about parsing nuances
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
+        /// Read more about parsing nuances
+        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
         public StringTable(string fileName, List<StringTableString> strings)
         {
             FileEncoding = Encoding.UTF8;
             FileName     = fileName;
             Table        = strings;
-            ExtraTable   = new List<StringTableExtraString>();
         }
 
         /// <summary>
-        ///     Class for parsing <u>.str/.csf</u> file formats.<br/>
-        ///     Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        ///     Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        ///     Read more about parsing nuances
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
+        /// Read more about parsing nuances
+        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
         public StringTable(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
         {
             FileEncoding = Encoding.UTF8;
             FileName     = fileName;
             Table        = strings;
-            ExtraTable   = extraStrings;
         }
 
         /// <summary>
-        ///     Class for parsing <u>.str/.csf</u> file formats.<br/>
-        ///     Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        ///     Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        ///     Read more about parsing nuances
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
+        /// Read more about parsing nuances
+        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
         public StringTable(string fileName, Encoding encoding, List<StringTableString> strings)
         {
             FileEncoding = encoding;
             FileName     = fileName;
             Table        = strings;
-            ExtraTable   = new List<StringTableExtraString>();
         }
 
         /// <summary>
-        ///     Class for parsing <u>.str/.csf</u> file formats.<br/>
-        ///     Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        ///     Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        ///     Read more about parsing nuances
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
+        /// Read more about parsing nuances
+        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
         public StringTable(string fileName, Encoding encoding, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
         {
             FileEncoding = encoding;
             FileName     = fileName;
             Table        = strings;
-            ExtraTable   = extraStrings;
         }
         #endregion
 
@@ -200,14 +195,14 @@ namespace mah_boi.Tools.StringTable
         }
         #endregion
 
-        #region String table data changing methods
+        #region String table add methods
         /// <summary>
         /// Adds string sample to the string table.<br/>
         /// If string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
         /// </summary>
         public void AddString(StringTableString stString)
         {
-            if (stString.IsACIIStringName())
+            if (stString.IsACIIName())
                 Table.Add(stString);
             else
                 throw nonAsciiNameException;
@@ -217,7 +212,7 @@ namespace mah_boi.Tools.StringTable
         /// Adds string range to the string table in the end of list.<br/>
         /// If even one string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
         /// </summary>
-        public void AddString(List<StringTableString> stList) => Table.AddRange(stList.Where(x => x.IsACIIStringName()));
+        public void AddString(List<StringTableString> stList) => Table.AddRange(stList.Where(x => x.IsACIIName()));
 
         /// <summary>
         /// Transfer data from given string table.
@@ -230,9 +225,9 @@ namespace mah_boi.Tools.StringTable
         public void AddEmptyString(string stringName) => Table.Add(new StringTableString(stringName));
         #endregion
 
-        #region Методы модификации строк
+        #region String table modify methods
         /// <summary>
-        ///     Изменяет название одной строки.
+        /// Renames string name.
         /// </summary>
         public void ChangeStringName(string oldName, string newName)
         {
@@ -246,35 +241,26 @@ namespace mah_boi.Tools.StringTable
                     return;
                 }
             }
-
-            foreach (var str in ExtraTable)
-            {
-                if (str.StringName == oldName)
-                {
-                    str.StringName = newName;
-                    return;
-                }
-            }
         }
 
         /// <summary>
-        ///     Изменяет название <u>всех</u> строк при совпадении.
+        /// Change string name for each match.
         /// </summary>
         public void ChangeStringNameOnMatch(string oldName, string newName)
         {
-            if (!(StringTableString.IsACIIString(oldName) && StringTableString.IsACIIString(newName))) return;
+            if (oldName.HasNonASCIIChars() || oldName.HasNonASCIIChars())
+                throw nonAsciiNameException;
 
             Table.Where(str => str.Name == oldName).ToList().ForEach(str => str.Name = newName);
-
-            ExtraTable.Where(str => str.StringName == oldName).ToList().ForEach(str => str.StringName = newName);
         }
 
         /// <summary>
-        ///     Изменяет значение строки, ищя её по названию.
+        /// Change string value by name match.
         /// </summary>
         public void ChangeStringValue(string stringName, string newValue)
         {
-            if (!StringTableString.IsACIIString(stringName)) return;
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
 
             foreach (var str in Table)
             {
@@ -284,27 +270,17 @@ namespace mah_boi.Tools.StringTable
                     return;
                 }
             }
-
-            foreach (var str in ExtraTable)
-            {
-                if (str.StringName == stringName)
-                {
-                    str.StringValue = newValue;
-                    return;
-                }
-            }
         }
 
         /// <summary>
-        ///     Изменяет значение <u>всех</u> строк при совпадении названияю
+        /// Change string value for each name match.
         /// </summary>
         public void ChangeStringValueOnMatch(string stringName, string newValue)
         {
-            if (!StringTableString.IsACIIString(stringName)) return;
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
 
             Table.Where(str => str.Name == stringName).ToList().ForEach(str => str.Value = newValue);
-
-            ExtraTable.Where(str => str.StringName == stringName).ToList().ForEach(str => str.StringValue = newValue);
         }
 
         /// <summary>
@@ -754,15 +730,15 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Checks if string table could be converted to other file formats.
         /// </summary>
-        public bool IsConvertableTo(StringTableFormats format) => IsConvertableTo(this, format);
+        public bool IsConvertableTo(StringTableFormat format) => IsConvertableTo(this, format);
 
         /// <summary>
         /// Checks if string table could be converted to other file formats.
         /// </summary>
-        public static bool IsConvertableTo(StringTable stFormated, StringTableFormats format)
+        public static bool IsConvertableTo(StringTable stFormated, StringTableFormat format)
         {
-            if (format == StringTableFormats.csf)
-                return !stFormated.IsExtraStringsInStringTable();
+            if (format == StringTableFormat.csf)
+                return !stFormated.AreExtraValuesExist();
 
             return true;
         }
@@ -773,16 +749,9 @@ namespace mah_boi.Tools.StringTable
 
             if (firstFile.Table.Count != secondFile.Table.Count) return false;
 
-            if (firstFile.ExtraTable.Count != secondFile.ExtraTable.Count) return false;
-
             int countOfStrings = firstFile.Table.Count;
             for (int i = 0; i < countOfStrings; i++)
                 if (firstFile.Table[i] != secondFile.Table[i])
-                    return false;
-
-            countOfStrings = firstFile.ExtraTable.Count;
-            for (int i = 0; i < countOfStrings; i++)
-                if (firstFile.ExtraTable[i] != secondFile.ExtraTable[i])
                     return false;
 
             return true;

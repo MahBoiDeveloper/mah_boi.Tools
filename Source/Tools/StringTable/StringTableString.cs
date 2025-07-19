@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mah_boi.Tools.StringTable.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,19 +28,9 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        /// Checks if string contains only ASCII characters.
-        /// </summary>
-        public static bool IsACIIString(string str) => Encoding.UTF8.GetByteCount(str) == str.Length;
-        
-        /// <summary>
-        /// Checks if string contains any non ASCII characters.
-        /// </summary>
-        public static bool HasNonASCIIChars(string str) => Encoding.UTF8.GetByteCount(str) != str.Length;
-
-        /// <summary>
         /// Checks if string name has only ASCII characters
         /// </summary>
-        public bool IsACIIStringName() => IsACIIString(Name);
+        public bool IsACIIName() => Name.IsACII();
 
         public static bool operator == (StringTableString firstString, StringTableString secondString)
         {

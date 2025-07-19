@@ -365,7 +365,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public StrFile ToStr()
         {
-            if (!StringTable.IsConvertableTo((StringTable)this, StringTableFormats.str))
+            if (!StringTable.IsConvertableTo((StringTable)this, StringTableFormat.str))
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат .str");
 
             // в str нет символов переводы на новую строку заменяются на \n
@@ -433,11 +433,11 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public override bool IsConvertable()
             =>
-                StringTable.IsConvertableTo((StringTable)this, StringTableFormats.str);
+                StringTable.IsConvertableTo((StringTable)this, StringTableFormat.str);
 
         public override bool IsConvertable(List<StringTableString> strings)
             =>
-                StringTable.IsConvertableTo((StringTable)new StrFile(string.Empty, strings), StringTableFormats.csf);
+                StringTable.IsConvertableTo((StringTable)new StrFile(string.Empty, strings), StringTableFormat.csf);
 
         /// <summary>
         ///     Согласно описанию формата <u>.csf</u> на <a href="https://modenc.renegadeprojects.com/CSF_File_Format">modenc</a>, 
