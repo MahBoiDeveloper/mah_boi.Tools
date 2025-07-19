@@ -7,5 +7,6 @@ public enum StringTableFormats
 {
     csf,
     str,
-    txt
+    txt,
+    ini
 }
