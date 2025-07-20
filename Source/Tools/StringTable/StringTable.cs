@@ -43,9 +43,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Class for parsing <u>.str/.csf</u> file formats.<br/>
         /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        /// Read more about parsing nuances
-        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StringTable()
         {
@@ -57,9 +55,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Class for parsing <u>.str/.csf</u> file formats.<br/>
         /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        /// Read more about parsing nuances
-        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StringTable(string fileName)
         {
@@ -74,9 +70,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Class for parsing <u>.str/.csf</u> file formats.<br/>
         /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        /// Read more about parsing nuances
-        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StringTable(string fileName, Encoding encoding)
         {
@@ -91,9 +85,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Class for parsing <u>.str/.csf</u> file formats.<br/>
         /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        /// Read more about parsing nuances
-        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StringTable(StringTable stFile)
         {
@@ -105,9 +97,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Class for parsing <u>.str/.csf</u> file formats.<br/>
         /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        /// Read more about parsing nuances
-        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StringTable(string fileName, List<StringTableEntry> strings)
         {
@@ -119,9 +109,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Class for parsing <u>.str/.csf</u> file formats.<br/>
         /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        /// Read more about parsing nuances
-        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StringTable(string fileName, Encoding encoding, List<StringTableEntry> strings)
         {
@@ -583,16 +571,6 @@ namespace mah_boi.Tools.StringTable
 
             return false;
         }
-
-        /// <summary>
-        /// Checks if string table could be converted to other file formats.
-        /// </summary>
-        public abstract bool IsConvertable();
-
-        /// <summary>
-        /// Checks if category list could be converted to current string table format.
-        /// </summary>
-        public abstract bool IsConvertable(List<StringTableEntry> TableSample);
 
         /// <summary>
         /// Checks if string table could be converted to other file formats.

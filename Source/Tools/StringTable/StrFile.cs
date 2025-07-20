@@ -73,22 +73,18 @@ namespace mah_boi.Tools.StringTable
 
         #region Конструкторы
         /// <summary>
-        ///     Класс для парсинга <u>.str</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.str</u> file format.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StrFile() : base()
         {
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.str</u> file format.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StrFile(string fileName) : base(fileName)
         {
@@ -96,11 +92,9 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.str</u> file format.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StrFile(string fileName, Encoding encoding) : base(fileName, encoding)
         {
@@ -108,46 +102,34 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.str</u> file format.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StrFile(StrFile strFile) : base(strFile)
         {
+            this.Format = strFile.Format;
+            this.CategorySeparator = strFile.CategorySeparator;
+            this.FileEncoding = strFile.FileEncoding;
+            this.FileName = strFile.FileName;
+            this.Table = strFile.Table;
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.str</u> file format.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StrFile(string fileName, List<StringTableEntry> stStringsList) : base(fileName, stStringsList)
         {
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.str</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.str</u> file format.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public StrFile(string fileName, Encoding encoding, List<StringTableEntry> stStringsList) : base(fileName, encoding, stStringsList)
-        {
-        }
-
-        /// <summary>
-        ///     Класс для парсинга <u>.str</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
-        /// </summary>
-        public StrFile(string fileName, List<StringTableEntry> stStringsList, List<StringTableExtraString> stExtraStringList) : base(fileName, stStringsList, stExtraStringList)
         {
         }
         #endregion
@@ -378,43 +360,17 @@ namespace mah_boi.Tools.StringTable
         }
         #endregion
 
-        #region Вспомогательные методы
-        /// <summary>
-        ///     Проверка конвертируемости текущего формата строковой таблицы в другой в <u>.csf</u>.
-        /// </summary>
-        public override bool IsConvertable()
-            =>
-                StringTable.IsConvertableTo((StringTable)this, StringTableFormat.csf);
+        #region Other methods
 
-        /// <summary>
-        ///     Проверка конвертируемости текущего формата строковой таблицы в другой в <u>.csf</u>.
-        /// </summary>
-        public override bool IsConvertable(List<StringTableEntry> strings)
-            =>
-                StringTable.IsConvertableTo((StringTable)new CsfFile(string.Empty, strings), StringTableFormat.str);
+        public static bool operator == (StrFile a, StrFile b) => (StringTable)a == (StringTable)b;
 
-        public static bool operator ==(StrFile firstFile, StrFile secondFile)
-            =>
-                (StringTable)firstFile == (StringTable)secondFile;
+        public static bool operator != (StrFile a, StrFile b) => !(a == b);
 
-        public static bool operator !=(StrFile firstFile, StrFile secondFile)
-            =>
-                !(firstFile == secondFile);
+        public override bool Equals(object obj) => (StrFile)obj == this;
 
-        public override bool Equals(object obj)
-            =>
-                (StrFile)obj == this;
+        public override int GetHashCode() => base.GetHashCode();
 
-        public override int GetHashCode()
-            =>
-                base.GetHashCode();
-
-        /// <summary>
-        ///     Метод формирует строку, равносильную .str/.csf файлу.
-        /// </summary>
-        public override string ToString()
-            =>
-                base.ToString();
+        public override string ToString() => base.ToString();
         #endregion
     }
 }
