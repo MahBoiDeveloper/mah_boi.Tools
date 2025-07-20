@@ -1,7 +1,4 @@
-﻿using mah_boi.Tools.StringTable.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using mah_boi.Tools.Extensions;
 
 namespace mah_boi.Tools.StringTable
 {

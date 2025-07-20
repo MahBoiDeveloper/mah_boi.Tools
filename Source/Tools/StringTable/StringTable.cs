@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 using System.Text;
+
+using mah_boi.Tools.Extensions;
 using mah_boi.Tools.StringTable.Exceptions;
-using mah_boi.Tools.StringTable.Extensions;
 
 namespace mah_boi.Tools.StringTable
 {
     public abstract class StringTable
     {
+        #region Fields and properties
         protected StringTableParseException        parsingErrorsAndWarnings = new();
         protected StringTableNonAsciiNameException nonAsciiNameException    = new();
 
@@ -30,6 +32,12 @@ namespace mah_boi.Tools.StringTable
         /// String table data.
         /// </summary>
         public List<StringTableEntry> Table;
+
+        /// <summary>
+        /// Categories separator.
+        /// </summary>
+        public char CategorySeparator { get; set; } = ':';
+        #endregion
 
         #region Constructors
         /// <summary>
@@ -115,35 +123,7 @@ namespace mah_boi.Tools.StringTable
         /// Read more about parsing nuances
         /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
-        public StringTable(string fileName, List<StringTableEntry> strings, List<StringTableExtraString> extraStrings)
-        {
-            FileEncoding = Encoding.UTF8;
-            FileName     = fileName;
-            Table        = strings;
-        }
-
-        /// <summary>
-        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
-        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        /// Read more about parsing nuances
-        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
-        /// </summary>
         public StringTable(string fileName, Encoding encoding, List<StringTableEntry> strings)
-        {
-            FileEncoding = encoding;
-            FileName     = fileName;
-            Table        = strings;
-        }
-
-        /// <summary>
-        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
-        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        /// Read more about parsing nuances
-        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
-        /// </summary>
-        public StringTable(string fileName, Encoding encoding, List<StringTableEntry> strings, List<StringTableExtraString> extraStrings)
         {
             FileEncoding = encoding;
             FileName     = fileName;
@@ -177,20 +157,15 @@ namespace mah_boi.Tools.StringTable
 
                 sb.AppendLine(str.Name)
                   .AppendLine("\t\"" + str.Value + "\"")
-                  .AppendLine("END")
-                  .AppendLine(string.Empty);          
+                  .AppendLine("END");
+
+                if (str.ExtraValue != null)
+                    sb.Append("; Extra value: ")
+                      .AppendLine(str.ExtraValue);
+
+                sb.AppendLine(string.Empty);          
             }
                 
-            foreach (var str in ExtraTable)
-            {
-                str.StringValue = str.StringValue.Replace("\n", "\\n");
-
-                sb.AppendLine(str.StringName)
-                  .AppendLine("\t\"" + str.StringValue + "\"")
-                  .AppendLine("END")
-                  .AppendLine(string.Empty);
-            }
-
             return sb.ToString();
         }
         #endregion
@@ -231,7 +206,8 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public void ChangeStringName(string oldName, string newName)
         {
-            if (!(StringTableEntry.IsACIIString(oldName) && StringTableEntry.IsACIIString(newName))) return;
+            if (oldName.HasNonASCIIChars() || newName.HasNonASCIIChars()) 
+                throw nonAsciiNameException;
 
             foreach (var str in Table)
             {
@@ -433,185 +409,127 @@ namespace mah_boi.Tools.StringTable
         public List<StringTableEntry> GetStringsWithExtraValue() => Table.Where(str => str.ExtraValue != null).ToList();
 
         /// <summary>
-        /// Returns all strings by name match.
+        /// Returns first string table entry by name match.
         /// </summary>
-        public List<StringTableEntry> GetStringOnMatch(string stringName)
+        public StringTableEntry GetStringOnMatch(string stringName)
+        {
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
+
+            StringTableEntry str = new();
+
+            foreach (var elem in Table)
+            {
+                if (elem.Name == stringName)
+                    return elem;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Returns all string table entries by name match.
+        /// </summary>
+        public List<StringTableEntry> GetStringsByNameOnMatch(string stringName)
         {
             if (stringName.HasNonASCIIChars())
                 throw nonAsciiNameException;
 
             List<StringTableEntry> stsList = new();
 
-            foreach (var str in Table)
-                if (str.Name == stringName)
-                    stsList.Add(str);
+            Table.Where(str => str.Name == stringName).ForEach(str => stsList.Add(str)).ToList();
 
             return stsList;
         }
 
         /// <summary>
-        ///     Получение всех строк, подходящих по названию.
+        /// Returns all string table entries by value match.
         /// </summary>
-        public List<StringTableEntry> GetStringByNameOnMatch(string stringName)
+        public List<StringTableEntry> GetStringsByValueOnMatch(string stringValue)
         {
-            if (StringTableEntry.IsACIIString(stringName))
-            {
-                List<StringTableEntry> stsList = new List<StringTableEntry>();
 
-                foreach (var str in Table)
-                    if (str.Name == stringName)
-                        stsList.Add(str);
+            List<StringTableEntry> stsList = new();
 
-                return stsList;
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        ///     Полчение всех строк, подходящих по значению.
-        /// </summary>
-        public List<StringTableEntry> GetStringByValueOnMatch(string stringValue)
-        {
-            List<StringTableEntry> stsList = new List<StringTableEntry>();
-
-            foreach (var str in Table)
-                if (str.Value == stringValue)
-                    stsList.Add(str);
+            Table.Where(str => str.Value == stringValue).ForEach(str => stsList.Add(str)).ToList();
 
             return stsList;
         }
 
         /// <summary>
-        ///     Получение общего индекса строки.
+        /// Returns entry index by name match.
         /// </summary>
         public int GetStringIndexByName(string stringName)
         {
-            if (!StringTableEntry.IsACIIString(stringName)) return -1;
+            if (stringName.HasNonASCIIChars())
+                return -1;
 
-            return Table.FindIndex(str => str == GetString(stringName));
+            return GetStringIndex(GetString(stringName));
         }
 
         /// <summary>
-        ///     Получение общего индекса дополнительной строки.
-        /// </summary>
-        public int GetExtraStringIndexByName(string stringName)
-        {
-            if (!StringTableEntry.IsACIIString(stringName)) return -1;
-
-            int index = ExtraTable.FindIndex(str => str == GetString(stringName));
-            if (index != -1)
-                return Table.Count() + index;
-
-            return -1;
-        }
-
-        /// <summary>
-        ///     Получение списка индексов строк по шаблону.
+        /// Returns list of entries indexes by name match.
         /// </summary>
         public List<int> GetStringIndexByNameOnMatch(string stringName)
         {
-            if (StringTableEntry.IsACIIString(stringName))
-            {
-                List<int> idList = new List<int>();
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
 
-                int i = 0;
-                foreach (var str in Table)
-                {
-                    i++;
-                    if (str.Name == stringName)
-                        idList.Add(i);
-                }
-
-                return idList;
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        ///     Получение индекса строки по полному совпадению.
-        /// </summary>
-        public int GetStringIndex(StringTableEntry _string)
-            =>
-                Table.FindIndex(str => str == _string);
-
-        /// <summary>
-        ///     Получение список индексов строк по полному совпадению.
-        /// </summary>
-        public List<int> GetStringIndexOnMatch(StringTableEntry _string)
-        {
             List<int> idList = new List<int>();
-            int i = 0;
 
-            foreach (var str in Table)
-            {
-                i++;
-                if (str == _string)
-                    idList.Add(i);
-            }
+            Table.Where(str => str.Name == stringName).ForEach(str => GetStringIndexByName(stringName));
+
             return idList;
         }
 
         /// <summary>
-        ///     Получение названий всех строк.
+        /// Returns index of entry by all field match.
+        /// </summary>
+        public int GetStringIndex(StringTableEntry _string) => Table.FindIndex(str => str == _string);
+
+        /// <summary>
+        /// Returns list of entries indexes by all field match.
+        /// </summary>
+        public List<int> GetStringIndexOnMatch(StringTableEntry _string)
+        {
+            List<int> idList = new List<int>();
+
+            Table.Where(str => str == _string).ForEach(str => idList.Add(GetStringIndex(_string)));
+
+            return idList;
+        }
+
+        /// <summary>
+        /// Returns list of entries names.
         /// </summary>
         public List<string> GetStringNames()
         {
             List<string> nameList = new List<string>();
             Table.ForEach(str => nameList.Add(str.Name));
-            ExtraTable.ForEach(str => nameList.Add(str.StringName));
             return nameList;
         }
 
         /// <summary>
-        ///     Возвращает список названий категорий.
+        /// Returns list of categories.
         /// </summary>
-        public List<string> GetCategoryNames(char stringDelimiter)
+        public List<string> GetCategoryNames()
         {
             List<string> categoryList = new List<string>();
 
-            foreach (var str in Table)
-            {
-                if (str.Name.Contains(stringDelimiter))
-                {
-                    str.Name.Substring(0, str.Name.LastIndexOf(stringDelimiter));
-                }
-                else
-                {
-                    categoryList.Add(str.Name);
-                }
-            }
-
-            foreach (var str in ExtraTable)
-            {
-                if (str.StringName.Contains(stringDelimiter))
-                {
-                    str.StringName.Substring(0, str.StringName.LastIndexOf(stringDelimiter));
-                }
-                else
-                {
-                    categoryList.Add(str.StringName);
-                }
-            }
+            Table.ForEach(str => categoryList.Add(str.Name.Split(CategorySeparator)[0]));
 
             return categoryList;
         }
 
         /// <summary>
-        ///     Возвращает список с названиями строк в категории.
+        /// Returens list of entries in category.
         /// </summary>
-        public List<string> GetStringsInCategory(char stringDelimiter, string categoryName)
+        public List<string> GetStringsInCategory(string categoryName)
         {
             List<string> stringList = new List<string>();
 
-            foreach (var str in Table)
-                if (str.Name.Contains(categoryName))
-                    stringList.Add(str.Name.Substring(str.Name.LastIndexOf(stringDelimiter) + 1));
+            string searchString = categoryName + CategorySeparator;
 
-            foreach (var str in ExtraTable)
-                if (str.StringName.Contains(categoryName))
-                    stringList.Add(str.StringName.Substring(str.StringName.LastIndexOf(stringDelimiter) + 1));
+            Table.Where(str => str.Name.StartsWith(searchString)).ForEach(str => stringList.Add(str.Name));
 
             return stringList;
         }

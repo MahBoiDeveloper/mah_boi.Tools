@@ -75,10 +75,10 @@ public sealed class StringTableTests
     {
         Init();
 
-        string pathConvertTest_SourceCsf = @"C:\D-Drive\_Github\mah_boi.Tools\csf2str_orig.csf";
-        string pathConvertTest_ResultStr = @"C:\D-Drive\_Github\mah_boi.Tools\csf2str_rslt.str";
-        string pathConvertTest_SourceStr = @"C:\D-Drive\_Github\mah_boi.Tools\str2csf_orig.str";
-        string pathConvertTest_ResultCsf = @"C:\D-Drive\_Github\mah_boi.Tools\str2csf_rslt.csf";
+        string pathConvertTest_SourceCsf = @"mah_boi.Tools\csf2str_orig.csf";
+        string pathConvertTest_ResultStr = @"mah_boi.Tools\csf2str_rslt.str";
+        string pathConvertTest_SourceStr = @"mah_boi.Tools\str2csf_orig.str";
+        string pathConvertTest_ResultCsf = @"mah_boi.Tools\str2csf_rslt.csf";
 
         Console.WriteLine();
         Console.WriteLine();
