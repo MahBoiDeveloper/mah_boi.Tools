@@ -18,7 +18,7 @@ namespace mah_boi.Tools.StringTable
             return true;
         }
 
-        public override bool IsConvertable(List<StringTableString> db)
+        public override bool IsConvertable(List<StringTableEntry> db)
         {
             return true;
         }

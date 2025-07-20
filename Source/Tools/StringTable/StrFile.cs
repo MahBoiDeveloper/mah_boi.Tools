@@ -125,7 +125,7 @@ namespace mah_boi.Tools.StringTable
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public StrFile(string fileName, List<StringTableString> stStringsList) : base(fileName, stStringsList)
+        public StrFile(string fileName, List<StringTableEntry> stStringsList) : base(fileName, stStringsList)
         {
         }
 
@@ -136,7 +136,7 @@ namespace mah_boi.Tools.StringTable
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public StrFile(string fileName, Encoding encoding, List<StringTableString> stStringsList) : base(fileName, encoding, stStringsList)
+        public StrFile(string fileName, Encoding encoding, List<StringTableEntry> stStringsList) : base(fileName, encoding, stStringsList)
         {
         }
 
@@ -147,7 +147,7 @@ namespace mah_boi.Tools.StringTable
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public StrFile(string fileName, List<StringTableString> stStringsList, List<StringTableExtraString> stExtraStringList) : base(fileName, stStringsList, stExtraStringList)
+        public StrFile(string fileName, List<StringTableEntry> stStringsList, List<StringTableExtraString> stExtraStringList) : base(fileName, stStringsList, stExtraStringList)
         {
         }
         #endregion
@@ -206,7 +206,7 @@ namespace mah_boi.Tools.StringTable
                     && !currentLine.Trim().StartsWith("\"")          // строка не является значением
                 )
                 {
-                    if (StringTableString.IsACIIString(currentLine)) // символы в значении исключительно в кодировке ASCII
+                    if (StringTableEntry.IsACIIString(currentLine)) // символы в значении исключительно в кодировке ASCII
                     {
                         stringName   = currentLine.Trim();
                         searchStatus = LineType.Value;
@@ -277,7 +277,7 @@ namespace mah_boi.Tools.StringTable
                 // считанная строка - окончание строки
                 else if (searchStatus == LineType.End && currentLine.Trim().ToLower() == "end")
                 {
-                    Table.Add(new StringTableString(stringName, stringValue));
+                    Table.Add(new StringTableEntry(stringName, stringValue));
                     searchStatus = (int)LineType.Label;
                 }
 
@@ -319,7 +319,7 @@ namespace mah_boi.Tools.StringTable
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
-            List<StringTableString> tmp = Table;
+            List<StringTableEntry> tmp = Table;
             foreach (var str in tmp)
                 str.Value = str.Value.Replace("\\n", "\n");
 
@@ -352,7 +352,7 @@ namespace mah_boi.Tools.StringTable
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
-            List<StringTableString> tmp = fileSample.Table;
+            List<StringTableEntry> tmp = fileSample.Table;
             foreach (var str in tmp)
                 if (str.Value.IndexOf("\\n") > -1)
                     str.Value.Replace("\\n", "\n");
@@ -389,7 +389,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         ///     Проверка конвертируемости текущего формата строковой таблицы в другой в <u>.csf</u>.
         /// </summary>
-        public override bool IsConvertable(List<StringTableString> strings)
+        public override bool IsConvertable(List<StringTableEntry> strings)
             =>
                 StringTable.IsConvertableTo((StringTable)new CsfFile(string.Empty, strings), StringTableFormat.str);
 

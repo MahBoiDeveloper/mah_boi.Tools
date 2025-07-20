@@ -5,23 +5,23 @@ using System.Text;
 
 namespace mah_boi.Tools.StringTable
 {
-    public class StringTableString
+    public class StringTableEntry
     {
         public string Name { get; set; }
         public string Value { get; set; }
         public string ExtraValue { get; set; } = null;
 
-        public StringTableString()
+        public StringTableEntry()
         {
         }
 
-        public StringTableString(string stringName)
+        public StringTableEntry(string stringName)
         {
             Name  = stringName;
             Value = string.Empty;
         }
 
-        public StringTableString(string stringName, string stringValue)
+        public StringTableEntry(string stringName, string stringValue)
         {
             Name  = stringName;
             Value = stringValue;
@@ -32,7 +32,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public bool IsACIIName() => Name.IsACII();
 
-        public static bool operator == (StringTableString firstString, StringTableString secondString)
+        public static bool operator == (StringTableEntry firstString, StringTableEntry secondString)
         {
             if (firstString.Name       != secondString.Name)       return false;
             if (firstString.Value      != secondString.Value)      return false;
@@ -41,9 +41,9 @@ namespace mah_boi.Tools.StringTable
             return true;
         }
 
-        public static bool operator != (StringTableString a, StringTableString b) => !(a == b);
+        public static bool operator != (StringTableEntry a, StringTableEntry b) => !(a == b);
         
-        public override bool Equals(object obj) => (StringTableString)obj == this;
+        public override bool Equals(object obj) => (StringTableEntry)obj == this;
         
         public override int GetHashCode() => base.GetHashCode();
     }

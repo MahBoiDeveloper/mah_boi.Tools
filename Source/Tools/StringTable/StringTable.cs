@@ -29,7 +29,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// String table data.
         /// </summary>
-        public List<StringTableString> Table;
+        public List<StringTableEntry> Table;
 
         #region Constructors
         /// <summary>
@@ -43,7 +43,7 @@ namespace mah_boi.Tools.StringTable
         {
             FileEncoding = Encoding.UTF8;
             FileName     = "TMP-" + DateTime.Now;
-            Table        = new List<StringTableString>();
+            Table        = new List<StringTableEntry>();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace mah_boi.Tools.StringTable
 
             FileEncoding = Encoding.UTF8;
             FileName     = fileName;
-            Table        = new List<StringTableString>();
+            Table        = new List<StringTableEntry>();
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace mah_boi.Tools.StringTable
 
             FileEncoding = encoding;
             FileName     = fileName;
-            Table        = new List<StringTableString>();
+            Table        = new List<StringTableEntry>();
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace mah_boi.Tools.StringTable
         /// Read more about parsing nuances
         /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
-        public StringTable(string fileName, List<StringTableString> strings)
+        public StringTable(string fileName, List<StringTableEntry> strings)
         {
             FileEncoding = Encoding.UTF8;
             FileName     = fileName;
@@ -115,7 +115,7 @@ namespace mah_boi.Tools.StringTable
         /// Read more about parsing nuances
         /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
-        public StringTable(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
+        public StringTable(string fileName, List<StringTableEntry> strings, List<StringTableExtraString> extraStrings)
         {
             FileEncoding = Encoding.UTF8;
             FileName     = fileName;
@@ -129,7 +129,7 @@ namespace mah_boi.Tools.StringTable
         /// Read more about parsing nuances
         /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
-        public StringTable(string fileName, Encoding encoding, List<StringTableString> strings)
+        public StringTable(string fileName, Encoding encoding, List<StringTableEntry> strings)
         {
             FileEncoding = encoding;
             FileName     = fileName;
@@ -143,7 +143,7 @@ namespace mah_boi.Tools.StringTable
         /// Read more about parsing nuances
         /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
-        public StringTable(string fileName, Encoding encoding, List<StringTableString> strings, List<StringTableExtraString> extraStrings)
+        public StringTable(string fileName, Encoding encoding, List<StringTableEntry> strings, List<StringTableExtraString> extraStrings)
         {
             FileEncoding = encoding;
             FileName     = fileName;
@@ -200,7 +200,7 @@ namespace mah_boi.Tools.StringTable
         /// Adds string sample to the string table.<br/>
         /// If string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
         /// </summary>
-        public void AddString(StringTableString stString)
+        public void AddString(StringTableEntry stString)
         {
             if (stString.IsACIIName())
                 Table.Add(stString);
@@ -212,7 +212,7 @@ namespace mah_boi.Tools.StringTable
         /// Adds string range to the string table in the end of list.<br/>
         /// If even one string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
         /// </summary>
-        public void AddString(List<StringTableString> stList) => Table.AddRange(stList.Where(x => x.IsACIIName()));
+        public void AddString(List<StringTableEntry> stList) => Table.AddRange(stList.Where(x => x.IsACIIName()));
 
         /// <summary>
         /// Transfer data from given string table.
@@ -222,7 +222,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Add new entry to the string table with name but without value.
         /// </summary>
-        public void AddEmptyString(string stringName) => Table.Add(new StringTableString(stringName));
+        public void AddEmptyString(string stringName) => Table.Add(new StringTableEntry(stringName));
         #endregion
 
         #region String table modify methods
@@ -231,7 +231,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public void ChangeStringName(string oldName, string newName)
         {
-            if (!(StringTableString.IsACIIString(oldName) && StringTableString.IsACIIString(newName))) return;
+            if (!(StringTableEntry.IsACIIString(oldName) && StringTableEntry.IsACIIString(newName))) return;
 
             foreach (var str in Table)
             {
@@ -351,12 +351,12 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Removes all entries from string table by match.
         /// </summary>
-        public void DeleteStringsOnMatch(StringTableString deleteString) => Table.RemoveAll(str => str == deleteString);
+        public void DeleteStringsOnMatch(StringTableEntry deleteString) => Table.RemoveAll(str => str == deleteString);
 
         /// <summary>
         /// Removes entries range from string table by match.
         /// </summary>
-        public void DeleteStringRange(List<StringTableString> list) => list.ForEach(input => Table.RemoveAll(str => str == input));
+        public void DeleteStringRange(List<StringTableEntry> list) => list.ForEach(input => Table.RemoveAll(str => str == input));
 
         /// <summary>
         /// Removes entry from string table by value match.
@@ -384,95 +384,79 @@ namespace mah_boi.Tools.StringTable
         public void Clear() => Table.Clear();
         #endregion
 
-        #region Методы выборки строк
+        #region String table selection methods
         /// <summary>
-        ///     Получение значения строки по её названию.
+        /// Get string value by value match.
         /// </summary>
-        public string GetStringValue(string stringName)
-        {
-            if (StringTableString.IsACIIString(stringName))
-            {
-                foreach (var str in Table)
-                    if (str.Name == stringName)
-                        return str.Value;
-
-                foreach (var str in ExtraTable)
-                    if (str.StringName == stringName)
-                        return str.StringValue;
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        ///     Получение названия строки по её значению.
-        /// </summary>
-        public string GetStringName(string stringValue)
+        public string GetStringValue(string stringValue)
         {
             foreach (var str in Table)
                 if (str.Value == stringValue)
+                    return str.Value;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get string value by name match.
+        /// </summary>
+        public string GetStringName(string stringName)
+        {
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
+
+            foreach (var str in Table)
+                if (str.Name == stringName)
                     return str.Name;
 
-            foreach (var str in ExtraTable)
-                if (str.StringValue == stringValue)
-                    return str.StringName;
+            return null;
+        }
+
+        /// <summary>
+        /// Get string by name match.
+        /// </summary>
+        public StringTableEntry GetString(string stringName)
+        {
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
+
+            foreach (var str in Table)
+                if (str.Name == stringName)
+                    return str;
 
             return null;
         }
 
         /// <summary>
-        ///     Получение полной строки по названию.
+        /// Returns all string table entries with extra value.
         /// </summary>
-        public StringTableString GetString(string stringName)
-        {
-            if (StringTableString.IsACIIString(stringName))
-            {
-                foreach (var str in Table)
-                    if (str.Name == stringName)
-                        return str;
-
-                foreach (var str in ExtraTable)
-                    if (str.StringName == stringName)
-                        return str;
-            }
-
-            return null;
-        }
+        public List<StringTableEntry> GetStringsWithExtraValue() => Table.Where(str => str.ExtraValue != null).ToList();
 
         /// <summary>
-        ///     Получение всех дополнительных строк.
+        /// Returns all strings by name match.
         /// </summary>
-        public List<StringTableExtraString> GetStringsWithExtraValue()
-            =>
-                ExtraTable;
-
-        /// <summary>
-        ///     Получение всех строк, подходящих по названию.
-        /// </summary>
-        public List<StringTableString> GetStringOnMatch(string stringName)
+        public List<StringTableEntry> GetStringOnMatch(string stringName)
         {
-            if (StringTableString.IsACIIString(stringName))
-            {
-                List<StringTableString> stsList = new List<StringTableString>();
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
 
-                foreach (var str in Table)
-                    if (str.Name == stringName)
-                        stsList.Add(str);
+            List<StringTableEntry> stsList = new();
 
-                return stsList;
-            }
+            foreach (var str in Table)
+                if (str.Name == stringName)
+                    stsList.Add(str);
 
-            return null;
+            return stsList;
         }
 
         /// <summary>
         ///     Получение всех строк, подходящих по названию.
         /// </summary>
-        public List<StringTableString> GetStringByNameOnMatch(string stringName)
+        public List<StringTableEntry> GetStringByNameOnMatch(string stringName)
         {
-            if (StringTableString.IsACIIString(stringName))
+            if (StringTableEntry.IsACIIString(stringName))
             {
-                List<StringTableString> stsList = new List<StringTableString>();
+                List<StringTableEntry> stsList = new List<StringTableEntry>();
 
                 foreach (var str in Table)
                     if (str.Name == stringName)
@@ -487,9 +471,9 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         ///     Полчение всех строк, подходящих по значению.
         /// </summary>
-        public List<StringTableString> GetStringByValueOnMatch(string stringValue)
+        public List<StringTableEntry> GetStringByValueOnMatch(string stringValue)
         {
-            List<StringTableString> stsList = new List<StringTableString>();
+            List<StringTableEntry> stsList = new List<StringTableEntry>();
 
             foreach (var str in Table)
                 if (str.Value == stringValue)
@@ -503,7 +487,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public int GetStringIndexByName(string stringName)
         {
-            if (!StringTableString.IsACIIString(stringName)) return -1;
+            if (!StringTableEntry.IsACIIString(stringName)) return -1;
 
             return Table.FindIndex(str => str == GetString(stringName));
         }
@@ -513,7 +497,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public int GetExtraStringIndexByName(string stringName)
         {
-            if (!StringTableString.IsACIIString(stringName)) return -1;
+            if (!StringTableEntry.IsACIIString(stringName)) return -1;
 
             int index = ExtraTable.FindIndex(str => str == GetString(stringName));
             if (index != -1)
@@ -527,7 +511,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public List<int> GetStringIndexByNameOnMatch(string stringName)
         {
-            if (StringTableString.IsACIIString(stringName))
+            if (StringTableEntry.IsACIIString(stringName))
             {
                 List<int> idList = new List<int>();
 
@@ -548,14 +532,14 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         ///     Получение индекса строки по полному совпадению.
         /// </summary>
-        public int GetStringIndex(StringTableString _string)
+        public int GetStringIndex(StringTableEntry _string)
             =>
                 Table.FindIndex(str => str == _string);
 
         /// <summary>
         ///     Получение список индексов строк по полному совпадению.
         /// </summary>
-        public List<int> GetStringIndexOnMatch(StringTableString _string)
+        public List<int> GetStringIndexOnMatch(StringTableEntry _string)
         {
             List<int> idList = new List<int>();
             int i = 0;
@@ -649,7 +633,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Checks if string exist in string table.
         /// </summary>
-        public bool StringExist(StringTableString _string)
+        public bool StringExist(StringTableEntry _string)
         {
             foreach (var str in Table)
                 if (_string == str)
@@ -690,7 +674,7 @@ namespace mah_boi.Tools.StringTable
         /// <summary>
         /// Checks if category list could be converted to current string table format.
         /// </summary>
-        public abstract bool IsConvertable(List<StringTableString> TableSample);
+        public abstract bool IsConvertable(List<StringTableEntry> TableSample);
 
         /// <summary>
         /// Checks if string table could be converted to other file formats.

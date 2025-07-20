@@ -149,7 +149,7 @@ namespace mah_boi.Tools.StringTable
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public CsfFile(string fileName, List<StringTableString> strings) : base(fileName, strings)
+        public CsfFile(string fileName, List<StringTableEntry> strings) : base(fileName, strings)
         {
         }
 
@@ -160,7 +160,7 @@ namespace mah_boi.Tools.StringTable
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public CsfFile(string fileName, Encoding encoding, List<StringTableString> strings) : base(fileName, encoding, strings)
+        public CsfFile(string fileName, Encoding encoding, List<StringTableEntry> strings) : base(fileName, encoding, strings)
         {
         }
 
@@ -171,7 +171,7 @@ namespace mah_boi.Tools.StringTable
         ///     Подробнее про особенности парсинга 
         ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
         /// </summary>
-        public CsfFile(string fileName, List<StringTableString> strings, List<StringTableExtraString> extraStrings) : base(fileName, strings, extraStrings)
+        public CsfFile(string fileName, List<StringTableEntry> strings, List<StringTableExtraString> extraStrings) : base(fileName, strings, extraStrings)
         {
         }
         #endregion
@@ -267,7 +267,7 @@ namespace mah_boi.Tools.StringTable
                 }
 
                 if (extraStringValue == string.Empty.ToCharArray())
-                    Table.Add(new StringTableString(new string(labelName), new string(FileEncoding.GetChars(stringValue))));
+                    Table.Add(new StringTableEntry(new string(labelName), new string(FileEncoding.GetChars(stringValue))));
                 else
                     ExtraTable.Add(new StringTableExtraString(new string(labelName), new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue)));
             }
@@ -369,7 +369,7 @@ namespace mah_boi.Tools.StringTable
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат .str");
 
             // в str нет символов переводы на новую строку заменяются на \n
-            List<StringTableString> tmp = Table;
+            List<StringTableEntry> tmp = Table;
             foreach (var str in tmp)
                 str.Value = str.Value.Replace("\n", "\\n");
 
@@ -402,7 +402,7 @@ namespace mah_boi.Tools.StringTable
                 throw new StringTableParseException("Указанный экземпляр .csf файла не конвертируем в формат.str");
 
             // в str нет символов переводы на новую строку заменяются на \n
-            List<StringTableString> tmp = fileSample.Table;
+            List<StringTableEntry> tmp = fileSample.Table;
             foreach (var str in tmp)
                 str.Value = str.Value.Replace("\n", "\\n");
 
@@ -435,7 +435,7 @@ namespace mah_boi.Tools.StringTable
             =>
                 StringTable.IsConvertableTo((StringTable)this, StringTableFormat.str);
 
-        public override bool IsConvertable(List<StringTableString> strings)
+        public override bool IsConvertable(List<StringTableEntry> strings)
             =>
                 StringTable.IsConvertableTo((StringTable)new StrFile(string.Empty, strings), StringTableFormat.csf);
 
