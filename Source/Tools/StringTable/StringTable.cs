@@ -33,11 +33,11 @@ namespace mah_boi.Tools.StringTable
 
         #region Constructors
         /// <summary>
-        ///     Class for parsing <u>.str/.csf</u> file formats.<br/>
-        ///     Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        ///     Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
-        ///     Read more about parsing nuances
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
+        /// Class for parsing <u>.str/.csf</u> file formats.<br/>
+        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about CSF/STR formats <see href="https://modenc.renegadeprojects.com/CSF_File_Format">here</see>.<br/>
+        /// Read more about parsing nuances
+        /// <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">here</see>.
         /// </summary>
         public StringTable()
         {
@@ -284,110 +284,83 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Изменяет дополнительное значение строки.
+        /// Change string extra value by name match.
         /// </summary>
         public void ChangeStringExtraValue(string stringName, string newExtraValue)
         {
-            if (!StringTableString.IsACIIString(stringName)) return;
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
 
-            foreach (var str in ExtraTable)
+            foreach (var str in Table)
             {
-                if (str.StringName == stringName)
+                if (str.Name == stringName)
                 {
-                    str.StringExtraValue = newExtraValue;
+                    str.ExtraValue = newExtraValue;
                     return;
                 }
             }
         }
 
         /// <summary>
-        ///     Изменяет дополнительное значение <u>всех</u> строк при совпадении.
+        /// Change string value for each name match.
         /// </summary>
         public void ChangeStringExtraValueOnMatch(string stringName, string newExtraValue)
         {
-            if (!StringTableString.IsACIIString(stringName)) return;
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
 
-            ExtraTable.Where(str => str.StringName == stringName).ToList().ForEach(str => str.StringExtraValue = newExtraValue);
+            Table.Where(str => str.Name == stringName).ToList().ForEach(str => str.ExtraValue = newExtraValue);
         }
 
         /// <summary>
-        ///     Удаляет дополнительные значения, преобразуя строки к нормализированным.
+        /// Delete all extra values from string table and make it convertable to text file formats.
         /// </summary>
-        public void DeleteExtraValues()
-        {
-            ExtraTable.ForEach(str => Table.Add(new StringTableString(str.StringName, str.StringValue)));
-
-            ExtraTable = new List<StringTableExtraString>();
-        }
+        public void DeleteExtraValues() => Table.ForEach(str => str.ExtraValue = null);
         #endregion
 
-        #region Методы удаления строк
+        #region String table delete methods
         /// <summary>
-        ///     Удаление строки по названию.<br/>
-        ///     Удаляется первая найденная строка относительно начала.
+        /// Removes entry from string table by name match.
         /// </summary>
         public void DeleteStringByName(string stringName)
         {
-            if (StringTableString.IsACIIString(stringName))
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
+            
+            foreach (var str in Table)
             {
-                foreach (var str in Table)
+                if (str.Name == stringName)
                 {
-                    if (str.Name == stringName)
-                    {
-                        Table.Remove(str);
-                        return;
-                    }
-                }
-
-                foreach (var str in ExtraTable)
-                {
-                    if (str.StringName == stringName)
-                    {
-                        Table.Remove(str);
-                        return;
-                    }
+                    Table.Remove(str);
+                    return;
                 }
             }
         }
 
         /// <summary>
-        ///     Удаление строк, название которых совпадает с названием шаблона.
+        /// Removes all entries from string table by name match.
         /// </summary>
-        public void DeleteStringByNameOnMatch(string stringName)
+        public void DeleteStringsByNameOnMatch(string stringName)
         {
-            if (!StringTableString.IsACIIString(stringName)) return;
-                
+            if (stringName.HasNonASCIIChars())
+                throw nonAsciiNameException;
+
             Table.RemoveAll(str => str.Name == stringName);
-            ExtraTable.RemoveAll(str => str.StringName == stringName);
         }
 
         /// <summary>
-        ///     Удаление всех строк по полному совпадению названия.<br/>
-        ///     Удаление происходит из основной и дополнительной таблиц.
+        /// Removes all entries from string table by match.
         /// </summary>
-        public void DeleteStringOnMatch(StringTableString deleteString)
-        {
-            Table.RemoveAll(str => str == deleteString);
-            ExtraTable.RemoveAll(str => str == deleteString);
-        }
+        public void DeleteStringsOnMatch(StringTableString deleteString) => Table.RemoveAll(str => str == deleteString);
 
         /// <summary>
-        ///     Удаление всех строк по полному совпадению из строк коллекции.
+        /// Removes entries range from string table by match.
         /// </summary>
-        public void DeleteStringOnMatch(List<StringTableString> deleteStringList)
-        {
-            foreach (var deleteString in deleteStringList)
-            {
-                Table.RemoveAll(str => str == deleteString);
-                ExtraTable.RemoveAll(str => str == deleteString);
-                deleteStringList.RemoveAll(str => str == deleteString);
-            }
-        }
+        public void DeleteStringRange(List<StringTableString> list) => list.ForEach(input => Table.RemoveAll(str => str == input));
 
         /// <summary>
-        ///     Удаление строки из таблицы, с поиском относительно её значения.
+        /// Removes entry from string table by value match.
         /// </summary>
-        /// <param name="stringValue"></param>
         public void DeleteStringByValue(string stringValue)
         {
             foreach (var str in Table)
@@ -398,25 +371,17 @@ namespace mah_boi.Tools.StringTable
                     return;
                 }
             }
-
-            foreach (var str in ExtraTable)
-            {
-                if (str.StringValue == stringValue)
-                {
-                    ExtraTable.Remove(str);
-                    return;
-                }
-            }
         }
 
         /// <summary>
-        ///     Удаление всех строк из таблицы, значения которых совпадают.
+        /// Removes all entries from string table by value match.
         /// </summary>
-        public void DeleteStringByValueOnMatch(string stringValue)
-        {
-            Table.RemoveAll(str => str.Value == stringValue);
-            ExtraTable.RemoveAll(str => str.StringValue == stringValue);
-        }
+        public void DeleteStringsByValueOnMatch(string stringValue) => Table.RemoveAll(str => str.Value == stringValue);
+
+        /// <summary>
+        /// Removes all string table data.
+        /// </summary>
+        public void Clear() => Table.Clear();
         #endregion
 
         #region Методы выборки строк
