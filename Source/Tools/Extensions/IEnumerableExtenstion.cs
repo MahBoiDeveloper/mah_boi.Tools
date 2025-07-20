@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mah_boi.Tools.StringTable.Extensions;
+namespace mah_boi.Tools.Extensions;
 
 public static class IEnumerableExtenstion
 {
