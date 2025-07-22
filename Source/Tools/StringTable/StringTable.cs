@@ -48,7 +48,7 @@ namespace mah_boi.Tools.StringTable
         public StringTable()
         {
             FileEncoding = Encoding.UTF8;
-            FileName     = "TMP-" + DateTime.Now;
+            FileName     = "TMP-" + DateTime.Now.ToString();
             Table        = new List<StringTableEntry>();
         }
 
