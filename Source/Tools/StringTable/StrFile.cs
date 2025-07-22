@@ -74,8 +74,8 @@ namespace mah_boi.Tools.StringTable
         #region Конструкторы
         /// <summary>
         /// Class for parsing <u>.str</u> file format.<br/>
-        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
+        /// Supported games: GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
         /// </summary>
         public StrFile() : base()
         {
@@ -83,8 +83,8 @@ namespace mah_boi.Tools.StringTable
 
         /// <summary>
         /// Class for parsing <u>.str</u> file format.<br/>
-        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
+        /// Supported games: GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
         /// </summary>
         public StrFile(string fileName) : base(fileName)
         {
@@ -93,8 +93,8 @@ namespace mah_boi.Tools.StringTable
 
         /// <summary>
         /// Class for parsing <u>.str</u> file format.<br/>
-        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
+        /// Supported games: GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
         /// </summary>
         public StrFile(string fileName, Encoding encoding) : base(fileName, encoding)
         {
@@ -103,8 +103,8 @@ namespace mah_boi.Tools.StringTable
 
         /// <summary>
         /// Class for parsing <u>.str</u> file format.<br/>
-        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
+        /// Supported games: GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
         /// </summary>
         public StrFile(StrFile strFile) : base(strFile)
         {
@@ -117,8 +117,8 @@ namespace mah_boi.Tools.StringTable
 
         /// <summary>
         /// Class for parsing <u>.str</u> file format.<br/>
-        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
+        /// Supported games: GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
         /// </summary>
         public StrFile(string fileName, List<StringTableEntry> stStringsList) : base(fileName, stStringsList)
         {
@@ -126,8 +126,8 @@ namespace mah_boi.Tools.StringTable
 
         /// <summary>
         /// Class for parsing <u>.str</u> file format.<br/>
-        /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
-        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
+        /// Supported games: GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
         /// </summary>
         public StrFile(string fileName, Encoding encoding, List<StringTableEntry> stStringsList) : base(fileName, encoding, stStringsList)
         {
