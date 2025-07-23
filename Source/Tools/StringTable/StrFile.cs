@@ -2,66 +2,17 @@
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using mah_boi.Tools.Extensions;
 using mah_boi.Tools.StringTable.Exceptions;
 
 namespace mah_boi.Tools.StringTable
 {
     /// <summary>
-    ///     Класс для парсинга <u>.str</u> файлов<br/>
-    ///     Поддерживаются форматы игр: GZH, TWKW, RA3.<br/><br/>
-    ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-    ///     Подробнее про особенности парсинга 
-    ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L16">здесь</see>
+    /// Class for parsing <u>.str</u> file format.<br/>
+    /// Supported games: GZH, TW, KW, RA3.<br/><br/>
+    /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
     /// </summary>
-    #region Нюансы парсинга STR
-    //     Это не войдёт в описание класса, но это необходимо упомянуть хотя бы в виде комментариев.
-    //     
-    //     Используемый формат .str файлов основывается в основном на формате mod.str
-    //     модов на игру Red Alert 3. Тем не менее, он поддерживает и не только формат .str Red Alert 3, 
-    //     но форматы и TW, и KW, и GZH. Применяемая при написании кода терминалогия немного отличается от 
-    //     общепринятой с сайта-вики modenc.renegadeprojects.com, т.к. она более структурированная и расширена.
-    //     
-    //     .str файл состоит из лейблов aka строк, которые имеют значение.
-    //     Лейблы регистронезависимы, т.к. писать можно их в любом регистре. Лейблы могут повторяться.
-    //     Названия лейблов состоят исключительно из символов ASCII и могут содержать пробелы.
-    //     
-    //     Пример лейбла
-    //     
-    //                          Лейбл
-    //                            ^
-    //            *---------------^----------------*
-    //            |HOTKEYNAME_SIDEBARWATERCRAFTPAGE|
-    //            *----^-----^-----------v---------*
-    //                 ^     ^           v
-    //             Категория ^           v
-    //                       ^         Строка
-    //                  Разделитель (условный; по факту разделителем может быть что угодно, но WW и EA использвали в основном двоеточие)
-    //     
-    //     У лейблов ВСЕГДА имеется значение, которое указывается между ковычками "".
-    //     Пустое значение обозначается в друг за другом идущих ковычках.
-    //     
-    //     Значение может быть многострочным, т.е. его можно расписать на несколько строк.
-    //     каждая строка после первой обязана начинаться \n, а последняя строка
-    //     должна начинаться с \n и заканчиваться ".
-    //     
-    //     Заканчиваются лейблы всегда словом "end". Регистр слова не важен.
-    //     
-    //     Примеры правильных лейблов:
-    //     SCRIPT:SCRIPT_EXAMPLE
-    //     	"Значение строки, котороые будет выведено"
-    //     END
-    //     
-    //     SCRIPT:SCRIPT_EXAMPLE
-    //     "Значение строки, котороые будет выведено.
-    //     \n Однако разделено на несколько строк.
-    //     \n И в этой строке их 3"
-    //     End
-    //     
-    //     Some text for string
-    //     ""
-    //     end
-    #endregion
-    
+
     public class StrFile : StringTable
     {
         private enum LineType
@@ -71,7 +22,7 @@ namespace mah_boi.Tools.StringTable
             End = 2
         }
 
-        #region Конструкторы
+        #region Contsructors
         /// <summary>
         /// Class for parsing <u>.str</u> file format.<br/>
         /// Supported games: GZH, TW, KW, RA3.<br/><br/>
@@ -188,7 +139,7 @@ namespace mah_boi.Tools.StringTable
                     && !currentLine.Trim().StartsWith("\"")          // строка не является значением
                 )
                 {
-                    if (StringTableEntry.IsACIIString(currentLine)) // символы в значении исключительно в кодировке ASCII
+                    if (currentLine.IsACII()) // символы в значении исключительно в кодировке ASCII
                     {
                         stringName   = currentLine.Trim();
                         searchStatus = LineType.Value;
@@ -330,7 +281,7 @@ namespace mah_boi.Tools.StringTable
         /// </summary>
         public static CsfFile ToCsf(StrFile fileSample)
         {
-            if (!fileSample.IsConvertable())
+            if (!fileSample.IsConvertableTo(StringTableFormat.csf))
                 throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
 
             // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
