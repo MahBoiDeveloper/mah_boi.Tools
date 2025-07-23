@@ -13,16 +13,6 @@ namespace mah_boi.Tools.StringTable
 
         }
 
-        public override bool IsConvertable()
-        {
-            return true;
-        }
-
-        public override bool IsConvertable(List<StringTableEntry> db)
-        {
-            return true;
-        }
-
         public override void Save()
         {
             
