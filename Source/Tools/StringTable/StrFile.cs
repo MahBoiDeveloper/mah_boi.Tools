@@ -85,36 +85,34 @@ namespace mah_boi.Tools.StringTable
         }
         #endregion
 
-        #region Парсинг
-        /// <summary>
-        ///     Парсинг .str файла.
-        /// </summary>
+        #region Parsing
         public override void Parse()
         {
             string stringName   = string.Empty;
             string stringValue  = string.Empty;
 
-            // Согласно https://modenc.renegadeprojects.com/CSF_File_Format
-            // название строки состоит исключительно из ASCII символов
-            // дополнительно к этому стоит отметить, что формат поддерживает
-            // комментарии, которые подобны комментариям из FORTRAN 66
-            // т.е. комментрии должны начинаться с 1-ой буквы строки.
-            // Комметрий создаётся за счёт символов //, как в C-подобных языках
             LineType searchStatus = LineType.Label;
 
-            // красиво-ленивый способ пробежаться по всем строкам файла.
+            // For each cycle through all lines in text file.
             uint currentLineNumber = 0;
             foreach (var currentLine in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {
                 currentLineNumber++;
-                // считанная строка - комментарий или пустая строка
-                if (currentLine.StartsWith("//") || currentLine.Trim() == string.Empty)
+
+                // Skip line if it is a commentary or empty line
+                if 
+                (
+                    currentLine.StartsWith("//") 
+                    || currentLine.StartsWith(";") 
+                    || currentLine.Trim() == string.Empty
+                )
                     continue;
 
-                // считанная строка содержит ошибку, т.к. несколько значений
-                else if
+                // If read string has an error (multiple value)
+                if
                 (
-                    searchStatus == LineType.End && currentLine.Trim().ToLower() != "end"
+                    searchStatus == LineType.End 
+                    && !currentLine.Trim().Equals("end", StringComparison.InvariantCultureIgnoreCase)
                 )
                 {
                     parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
@@ -135,8 +133,8 @@ namespace mah_boi.Tools.StringTable
                 // считанная строка - лейбл а-ля название строки
                 else if
                 (
-                    searchStatus == (int)LineType.Label              // анализируемая строка является лейблом
-                    && !currentLine.Trim().StartsWith("\"")          // строка не является значением
+                    searchStatus == (int)LineType.Label     // анализируемая строка является лейблом
+                    && !currentLine.Trim().StartsWith("\"") // строка не является значением
                 )
                 {
                     if (currentLine.IsACII()) // символы в значении исключительно в кодировке ASCII
@@ -144,7 +142,7 @@ namespace mah_boi.Tools.StringTable
                         stringName   = currentLine.Trim();
                         searchStatus = LineType.Value;
                     }
-                    else                                             // символы в значении не в кодировке ASCII
+                    else                                   // символы в значении не в кодировке ASCII
                     {
                         parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
                                                            + "В названии строки содержатся не ASCII символы, что не является "
@@ -224,90 +222,21 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Сохранение данных класса в .str файл.
+        /// Save .str file format data to the source file.
         /// </summary>
         public override void Save()
         {
-            using (StreamWriter sw = new StreamWriter(File.OpenWrite(FileName), FileEncoding))
+            using (StreamWriter sw = new(File.OpenWrite(FileName), FileEncoding))
                 sw.WriteLine(ToString());
         }
 
         /// <summary>
-        ///     Сохранение данных класса в .str файл с указанным именем.
+        /// Save .str file format data to the destination file.
         /// </summary>
         public override void SaveAs(string fileName)
         {
-            using (StreamWriter sw = new StreamWriter(File.OpenWrite(fileName), FileEncoding))
+            using (StreamWriter sw = new(File.OpenWrite(fileName), FileEncoding))
                 sw.WriteLine(ToString());
-        }
-        #endregion
-
-        #region Конверторы
-        /// <summary>
-        ///     Конвертор из <u>.str</u> в <u>.csf</u> из текущего отпарсенного файла.
-        /// </summary>
-        public CsfFile ToCsf()
-        {
-            if (!StringTable.IsConvertableTo((StringTable)this, StringTableFormat.csf))
-                throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
-
-            // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
-            List<StringTableEntry> tmp = Table;
-            foreach (var str in tmp)
-                str.Value = str.Value.Replace("\\n", "\n");
-
-            return new CsfFile(FileName, tmp, ExtraTable);
-        }
-
-        /// <summary>
-        ///     Конвертор, аналогичный ToCsf, только безопасный.
-        /// </summary>
-        public bool Safe_ToCsf(out CsfFile returnParam)
-        {
-            try
-            {
-                returnParam = ToCsf();
-            }
-            catch(StringTableParseException)
-            {
-                returnParam = new CsfFile();
-                return false;
-            }
-            return true;
-        }
-
-        /// <summary>
-        ///     Конвертор из <u>.str</u> в <u>.csf</u> на основе указанного отпарсенного файла fileSample.
-        /// </summary>
-        public static CsfFile ToCsf(StrFile fileSample)
-        {
-            if (!fileSample.IsConvertableTo(StringTableFormat.csf))
-                throw new StringTableParseException("Указанный экземпляр .str файла не конвертируем в формат .csf");
-
-            // в csf нет символов \n, т.к. они заменяются на символ перевода строки и каретки
-            List<StringTableEntry> tmp = fileSample.Table;
-            foreach (var str in tmp)
-                if (str.Value.IndexOf("\\n") > -1)
-                    str.Value.Replace("\\n", "\n");
-
-            return new CsfFile(fileSample.FileName, tmp, fileSample.ExtraTable);
-        }
-
-        /// <summary>
-        ///     Безопасный конвертор для конвертации .str файла без исключений.
-        /// </summary>
-        public static bool Safe_ToCsf(StrFile fileSample, out CsfFile returnParam)
-        {
-            try
-            {
-                returnParam = fileSample.ToCsf();
-            }
-            catch (StringTableParseException)
-            {
-                returnParam = new CsfFile();
-                return false;
-            }
-            return true;
         }
         #endregion
 
