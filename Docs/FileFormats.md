@@ -1,8 +1,12 @@
 # File Formats
 
-Document intended to describe string table file formats commonly used by C&C community.
+Document intended to different file formats used in the mah_boi's Tools.
 
-## Compiled String Format (CSF)
+## String Table
+
+Description of string table file formats commonly used by C&C community.
+
+### Compiled String Format (CSF)
 
 > [!IMPORTANT]
 > Reference: https://modenc2.markjfox.net/CSF_File_Format
@@ -30,53 +34,22 @@ Label data ordering:
 
 ```
 char[4] -- " LBL" string. If game haven't found string, it search string in the next 4 bytes.
-uint32  -- Count of values for label. If value more than 2, it may be a corrupt in file.
+uint32  -- Count of values for label. If value more than 2, it may be a corrupts in the file.
 uint32  -- Length of the string byte array.
-char*   -- Label name as byte array.
+char*   -- Label name as byte array. Name is ASCII string without \0 terminator on the end.
 ```
 
 Value data ordering:
 
 ```
-
+char[4] -- " RTS" or "WRTS" string. "WRTS" means that the string has extra value. You can find example of this string in generals.csf --> DIALOGEVENT:MisGLA02Chatter18Subtitle
+uint32  -- Length of the string value array.
+uint16* -- String value represented as 2 byte array. All array contain values in inverted mode. Has Unicode encoding.
+uint32  -- Length of the string value array. All array contain values in inverted mode. Exists only if it is a extra string.
+uint16* -- Extra string value represented as 2 byte array. Alsmost all C&C games doesn't use extra value. Exists only if it is a extra string.
 ```
 
-Порядок данных в лейбле:
-char[4] -- " LBL" - строка, без прочтения которой игра пойдёт искать следующие 4 байта на их наличие.
-           Эта идея с чтением используется при ориентировке на пустых строках.
-UInt32  -- количество значений лейбла. Почти всегда равно 1. Может быть равно 0. Код ниже никак не 
-           учитывает вариант, когда больше 1, что является скорее намеренной порчей файла, нежели
-           правильной записью строки в формате. 
-           Пример строки с 0 значений из generals.csf: TOOLTIP:InvalidGameVersion
-UInt32  -- длина названия лейбла в символах.
-     v
-     v
-     v
-char[ ] -- название лейбла. Значение всегда в ASCII. Пробелов нет. Строка не оканчивается \0 терминатором.
-
-Порядок данных в значении:
-char[4] -- " RTS" или "WRTS". Если "WRTS", то имеется дополнительное значение и движок их считывает, но в игре
-           они нигде не используются. 
-           Пример строки с дополнительным значением из generals.csf: DIALOGEVENT:MisGLA02Chatter18Subtitle
-UInt32  -- длина значения лейбла в символах. 
-     v
-    x2
-     v
-byte[ ] -- значение лейбла в виде байтов. Длина массива в 2 раза больше количества символов, т.к. по умолчанию 
-           подразумевается, что они записываются в кодировке Unicode. Все байты значения инвертированы, поэтому
-           необходимо предварительно их инвертировать, чтобы конвертирвать в нормальную строку.
-
-Опциональное.
-
-UInt32  -- длина дополнительного значения в символах.
-     v
-     v
-     v
-char[ ] -- дополнительное значение лейбла. Строка не оканчивается \0 терминатором.
-           Само по себе использование дополнительных значений было замечено ТОЛЬКО в оригинальном generals.csf.
-           И значение нигде в игре не используется, так что можно считать, что это такой же рудимент, как и код языка.
-
-## Third Generation Text Format (STR)
+### Third Generation Text Format (STR)
 
 > [!IMPORTANT]
 > Reference: https://generals.projectperfectmod.com/genstr/
@@ -127,10 +100,10 @@ Script:example
 end
 ```
 
-## Starkku's File Format (TXT)
+### Starkku's File Format (TXT)
 
 
 
-## CnCNet's File Format
+### CnCNet's File Format (INI)
 
 
