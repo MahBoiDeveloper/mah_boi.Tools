@@ -15,32 +15,28 @@ namespace mah_boi.Tools.StringTable
     
     public class CsfFile : StringTable
     {
-        private static readonly char[] FSC  = {' ', 'F', 'S', 'C' }; // с этих символов начинается любой CSF файл, иначе его игра не прилинкует файл
-        private static readonly char[] LBL  = {' ', 'L', 'B', 'L' }; // с этих символов начинается название лейбла
-        private static readonly char[] RTS  = {' ', 'R', 'T', 'S' }; // с этих символов начинается значение лейбла
-        private static readonly char[] WRTS = {'W', 'R', 'T', 'S' }; // с этих символов начинается значение лейбла, и у него имеется доп. значение
-        private static UInt32 CNC_CSF_VERSION = 3;                   // стандартная версия формата CSF во всех играх C&C
+        private static readonly char[] FSC  = {' ', 'F', 'S', 'C' }; // begin of the CSF file
+        private static readonly char[] LBL  = {' ', 'L', 'B', 'L' }; // begin of the label
+        private static readonly char[] RTS  = {' ', 'R', 'T', 'S' }; // begin of the value
+        private static readonly char[] WRTS = {'W', 'R', 'T', 'S' }; // begin of the value with extra value
+        private static UInt32 CNC_CSF_VERSION = 3;                   // file format version for C&C games
 
-        private CsfFileHeader Header = new CsfFileHeader();
+        private CsfFileHeader Header = new();
 
         #region Конструкторы
         /// <summary>
-        ///     Класс для парсинга <u>.csf</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.csf</u> file format.<br/>
+        /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public CsfFile() : base()
         {
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.csf</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.csf</u> file format.<br/>
+        /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public CsfFile(string fileName) : base(fileName)
         {
@@ -48,11 +44,9 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.csf</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.csf</u> file format.<br/>
+        /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public CsfFile(string fileName, Encoding encoding) : base(fileName, encoding)
         {
@@ -60,51 +54,34 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.csf</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.csf</u> file format.<br/>
+        /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public CsfFile(CsfFile csfFile) : base(csfFile)
         {
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.csf</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.csf</u> file format.<br/>
+        /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public CsfFile(string fileName, List<StringTableEntry> strings) : base(fileName, strings)
         {
         }
 
         /// <summary>
-        ///     Класс для парсинга <u>.csf</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
+        /// Class for parsing <u>.csf</u> file format.<br/>
+        /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
+        /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
         /// </summary>
         public CsfFile(string fileName, Encoding encoding, List<StringTableEntry> strings) : base(fileName, encoding, strings)
         {
         }
-
-        /// <summary>
-        ///     Класс для парсинга <u>.csf</u> файлов<br/>
-        ///     Поддерживаются форматы игр: GZH, TW, KW, RA3.<br/><br/>
-        ///     Подробнее про CSF/STR форматы <see href="https://modenc.renegadeprojects.com/CSF_File_Format">здесь</see><br/>
-        ///     Подробнее про особенности парсинга 
-        ///     <see href="https://github.com/MahBoiDeveloper/mah_boi.Tools/blob/main/StrFile.cs#L17">здесь</see>
-        /// </summary>
-        public CsfFile(string fileName, List<StringTableEntry> strings, List<StringTableExtraString> extraStrings) : base(fileName, strings, extraStrings)
-        {
-        }
         #endregion
 
-        #region Парсинг
+        #region Parsing
         /// <summary>
         ///     Парсинг .csf файла.
         /// </summary>
