@@ -23,7 +23,7 @@ namespace mah_boi.Tools.StringTable
 
         private CsfFileHeader Header = new();
 
-        #region Конструкторы
+        #region Constructors
         /// <summary>
         /// Class for parsing <u>.csf</u> file format.<br/>
         /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
@@ -83,7 +83,7 @@ namespace mah_boi.Tools.StringTable
 
         #region Parsing
         /// <summary>
-        ///     Парсинг .csf файла.
+        /// Parse .csf file.
         /// </summary>
         public override void Parse()
         {
@@ -95,60 +95,61 @@ namespace mah_boi.Tools.StringTable
         }
 
         /// <summary>
-        ///     Парсинг хедера .csf файла в указанном заранее потоке.
+        /// Parsing header of .csf file.
         /// </summary>
         public void ParseHeader(BinaryReader br)
         {
-            // читаем заголовок файла, который нам укажет количество считываний далее
-            Header.CSFchars = br.ReadChars(4); // по факту эта строка обязана всегда быть " FSC"
+            // read the header, that defines count of entries in the string table
+            Header.CSFchars = br.ReadChars(4); // first 4 bytes must be " FSC"
 
+            // TODO: Make skip for next 4 bytes if previous one doesn't contain " FSC"
             if (new string(Header.CSFchars) != new string(FSC))
-                parsingErrorsAndWarnings.AddMessage("Ошибка чтения заголовка: заголовок не содержит строку ' FSC'. "
-                                                  + "Игра не прилинкует указанный .csf файл.", StringTableParseException.MessageType.Error);
+                parsingErrorsAndWarnings.AddMessage("Unable to read header: header doesn't contain ' FSC' string in the begining"
+                                                  + "This file games wouldn't be able to use.", StringTableParseException.MessageType.Error);
 
-            Header.CSFformatVersion = br.ReadUInt32(); // у игр серии ЦНЦ это число всегда равно 3. по факту оно ни на что не влияет
+            Header.FormatVersion = br.ReadUInt32(); // format version should be equal 3
 
-            if (Header.CSFformatVersion != 3)
-                parsingErrorsAndWarnings.AddMessage("Версия формата, указанная в заголовке, не соответствует версии, "
-                                                  + "используемой в играх серии C&C.", StringTableParseException.MessageType.Warning);
+            if (Header.FormatVersion != 3)
+                parsingErrorsAndWarnings.AddMessage($"File format version doesn't used commonly (parsed value: {Header.FormatVersion}) "
+                                                  + "by C&C games, be aware of breaking this file.", StringTableParseException.MessageType.Warning);
 
-            Header.CSFnumberOfLabels = br.ReadUInt32(); // количество лейблов
-            Header.CSFnumberOfStrings = br.ReadUInt32(); // количество строк
+            Header.NumberOfLabels = br.ReadUInt32(); // labels count
+            Header.NumberOfStrings = br.ReadUInt32(); // values count
 
-            if (Header.CSFnumberOfLabels < Header.CSFnumberOfStrings)
-                parsingErrorsAndWarnings.AddMessage("В файле используются строки с дополнительным значением. "
-                                                  + "Конвертирование данного .csf файла в .str файл в будущем невозможно! "
-                                                  + "Советуем удалить все дополнительные значения."
+            if (Header.NumberOfLabels < Header.NumberOfStrings)
+                parsingErrorsAndWarnings.AddMessage("File contains strings with extra values. "
+                                                  + "Converting it to other string table formats would be only without extra values! "
+                                                  + "It is recommended to delete extra values from strings as depreceted feature."
                                                   , StringTableParseException.MessageType.Warning);
 
-            Header.CSFunknownBytes = br.ReadUInt32(); // никто не знает, что это за байты, и никто их не использует
-            Header.CSFlanguageCode = br.ReadUInt32(); // код языка (подробнее в CsfLanguageCode)
+            Header.UnknownBytes = br.ReadUInt32(); // unknown bytes
+            Header.LanguageCode = (CsfLanguageCode)br.ReadUInt32(); // language code (see more in CsfLanguageCode)
         }
 
         /// <summary>
-        ///     Парсинг тела .csf файла в указанном заранее потоке.
+        /// Parsing the body of the .csf file.
         /// </summary>
         public void ParseBody(BinaryReader br)
         {
-            // читать файл, пока не закончатся строки или не будет ошибки чтения
-            for (uint i = 0; i < Header.CSFnumberOfLabels || br.PeekChar() > -1; i++)
+            // read until the end of file or error
+            for (UInt32 i = 0; i < Header.NumberOfLabels || br.PeekChar() > -1; i++)
             {
-                // чтение лейбла
-                char[] lbl = br.ReadChars(4); // записывает строку ' LBL'
+                // read label
+                char[] lbl = br.ReadChars(4); // should be ' LBL'
 
-                // если у нас строка не является ' LBL', то движок игры считает следующие 4 бита для поиска слова ' LBL'
+                // if not ' LBL', read next 4 bytes
                 if (new string(lbl) != new string(LBL))
                 {
                     if (i > 0) i--;
                     continue;
                 }
 
-                uint countOfStrings = br.ReadUInt32();                     // количество строк в значении. почти всегда равно 1
+                UInt32 countOfStrings = br.ReadUInt32();                   // количество строк в значении. почти всегда равно 1
                                                                            // а если больше 1, то имеется дополнительные значения у строки,
                                                                            // которые на данный момент класс не умеет обрабатывать.
                                                                            // если 0, то значения нет
 
-                uint labelNameLength = br.ReadUInt32();                    // длина названия лейбла
+                UInt32 labelNameLength = br.ReadUInt32();              // длина названия лейбла
                 char[] labelName = br.ReadChars((int)labelNameLength); // само название лейбла
 
                 byte[] stringValue = FileEncoding.GetBytes(string.Empty);
@@ -158,7 +159,7 @@ namespace mah_boi.Tools.StringTable
                 {
                     // чтение значения лейбла
                     char[] rtsOrWrts = br.ReadChars(4);                                // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
-                    uint valueLength = br.ReadUInt32();                                // длина строки юникода, укороченная вдвое
+                    UInt32 valueLength = br.ReadUInt32();                                // длина строки юникода, укороченная вдвое
                     stringValue = br.ReadBytes(Convert.ToInt32(valueLength * 2)); // строка, конвертированная в интертированные байты
 
                     InvertAllBytesInArray(stringValue);
@@ -166,7 +167,7 @@ namespace mah_boi.Tools.StringTable
                     // чтение дополнительного значения лейбла
                     if (new string(rtsOrWrts) == new string(WRTS))
                     {
-                        uint extraValueLength = br.ReadUInt32();                                 // длина доп. значения
+                        UInt32 extraValueLength = br.ReadUInt32();                                 // длина доп. значения
                         extraStringValue = br.ReadChars(Convert.ToInt32(extraValueLength)); // само доп значение (проблема поддержки кодировки отличной от Unicode)
                     }
                 }

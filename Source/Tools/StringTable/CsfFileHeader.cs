@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace mah_boi.Tools.StringTable
+namespace mah_boi.Tools.StringTable;
+
+struct CsfFileHeader
 {
-    class CsfFileHeader
-    {
-        public char[] CSFchars;
-        public uint CSFformatVersion;
-        public uint CSFnumberOfLabels;
-        public uint CSFnumberOfStrings;
-        public uint CSFunknownBytes;
-        public uint CSFlanguageCode;
-
-        public CsfFileHeader()
-        {
-        }
-    }
+    public char[] CSFchars;
+    public UInt32 FormatVersion;
+    public UInt32 NumberOfLabels;
+    public UInt32 NumberOfStrings;
+    public UInt32 UnknownBytes;
+    public CsfLanguageCode LanguageCode;
 }
