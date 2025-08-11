@@ -5,7 +5,7 @@ namespace mah_boi.Tools.StringTable
     public class StringTableEntry
     {
         public string Name { get; set; }
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
         public string ExtraValue { get; set; } = null;
 
         public StringTableEntry()
@@ -22,6 +22,13 @@ namespace mah_boi.Tools.StringTable
         {
             Name  = stringName;
             Value = stringValue;
+        }
+
+        public StringTableEntry(string stringName, string stringValue, string stringExtraValue)
+        {
+            Name       = stringName;
+            Value      = stringValue;
+            ExtraValue = stringExtraValue;
         }
 
         /// <summary>

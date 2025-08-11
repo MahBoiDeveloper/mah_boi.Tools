@@ -102,10 +102,15 @@ namespace mah_boi.Tools.StringTable
             // read the header, that defines count of entries in the string table
             Header.CSFchars = br.ReadChars(4); // first 4 bytes must be " FSC"
 
-            // TODO: Make skip for next 4 bytes if previous one doesn't contain " FSC"
-            if (new string(Header.CSFchars) != new string(FSC))
-                parsingErrorsAndWarnings.AddMessage("Unable to read header: header doesn't contain ' FSC' string in the begining"
-                                                  + "This file games wouldn't be able to use.", StringTableParseException.MessageType.Error);
+            // read 4 chars until gets " FSC" string
+            for (;;)
+            {
+                if (new string(Header.CSFchars) == new string(FSC))
+                    break;
+
+                Header.CSFchars = br.ReadChars(4);
+            }
+            
 
             Header.FormatVersion = br.ReadUInt32(); // format version should be equal 3
 
@@ -113,8 +118,8 @@ namespace mah_boi.Tools.StringTable
                 parsingErrorsAndWarnings.AddMessage($"File format version doesn't used commonly (parsed value: {Header.FormatVersion}) "
                                                   + "by C&C games, be aware of breaking this file.", StringTableParseException.MessageType.Warning);
 
-            Header.NumberOfLabels = br.ReadUInt32(); // labels count
-            Header.NumberOfStrings = br.ReadUInt32(); // values count
+            Header.NumberOfLabels = br.ReadUInt32();  // label count
+            Header.NumberOfStrings = br.ReadUInt32(); // value count
 
             if (Header.NumberOfLabels < Header.NumberOfStrings)
                 parsingErrorsAndWarnings.AddMessage("File contains strings with extra values. "
@@ -144,38 +149,35 @@ namespace mah_boi.Tools.StringTable
                     continue;
                 }
 
-                UInt32 countOfStrings = br.ReadUInt32();                   // количество строк в значении. почти всегда равно 1
-                                                                           // а если больше 1, то имеется дополнительные значения у строки,
-                                                                           // которые на данный момент класс не умеет обрабатывать.
-                                                                           // если 0, то значения нет
-
-                UInt32 labelNameLength = br.ReadUInt32();              // длина названия лейбла
-                char[] labelName = br.ReadChars((int)labelNameLength); // само название лейбла
+                UInt32 countOfStrings = br.ReadUInt32();
+                UInt32 labelNameLength = br.ReadUInt32();
+                char[] labelName = br.ReadChars((int)labelNameLength);
 
                 byte[] stringValue = FileEncoding.GetBytes(string.Empty);
                 char[] extraStringValue = string.Empty.ToCharArray();
 
-                if (countOfStrings != 0) // отбрасывание строк с пустыми значениями, а то падения проги не избежать
+                if (countOfStrings != 0)
                 {
-                    // чтение значения лейбла
-                    char[] rtsOrWrts = br.ReadChars(4);                                // ' RTS' - доп. значения нет. 'WRTS' - доп. значение есть.
-                    UInt32 valueLength = br.ReadUInt32();                                // длина строки юникода, укороченная вдвое
-                    stringValue = br.ReadBytes(Convert.ToInt32(valueLength * 2)); // строка, конвертированная в интертированные байты
+                    // read label value
+                    char[] rtsOrWrts = br.ReadChars(4); // ' RTS' - hasn't extra value. 'WRTS' - has extra value
+                    UInt32 valueLength = br.ReadUInt32();
+                    stringValue = br.ReadBytes(Convert.ToInt32(valueLength * 2)); // data should be inverted
 
                     InvertAllBytesInArray(stringValue);
 
                     // чтение дополнительного значения лейбла
                     if (new string(rtsOrWrts) == new string(WRTS))
                     {
-                        UInt32 extraValueLength = br.ReadUInt32();                                 // длина доп. значения
-                        extraStringValue = br.ReadChars(Convert.ToInt32(extraValueLength)); // само доп значение (проблема поддержки кодировки отличной от Unicode)
+                        UInt32 extraValueLength = br.ReadUInt32();                          // length of extra value
+                        extraStringValue = br.ReadChars(Convert.ToInt32(extraValueLength)); // extra value (always in Unicode encoding)
                     }
-                }
 
-                if (extraStringValue == string.Empty.ToCharArray())
-                    Table.Add(new StringTableEntry(new string(labelName), new string(FileEncoding.GetChars(stringValue))));
+                    Table.Add(new StringTableEntry(new string(labelName), new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue)));
+                }
                 else
-                    ExtraTable.Add(new StringTableExtraString(new string(labelName), new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue)));
+                {
+                    Table.Add(new StringTableEntry(new string(labelName), null, null));
+                }
             }
         }
 
