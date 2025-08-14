@@ -77,6 +77,15 @@ public class CsfFile : StringTable
     public CsfFile(string fileName, Encoding encoding, List<StringTableEntry> strings) : base(fileName, encoding, strings)
     {
     }
+
+    /// <summary>
+    /// Class for parsing <u>.csf</u> file format.<br/>
+    /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
+    /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
+    /// </summary>
+    public CsfFile(StringTable stSample) : base(stSample)
+    {
+    }
     #endregion
 
     #region Parsing

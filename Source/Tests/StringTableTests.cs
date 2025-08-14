@@ -1,4 +1,4 @@
-﻿using mah_boi.Tools.StringTable;
+﻿using mah_boi.Tools.StringTableFormats;
 using System.Text;
 
 namespace mah_boi.Tools.Tests;
@@ -37,20 +37,13 @@ public sealed class StringTableTests
         Console.WriteLine($"Парсинг CSF файла по пути {pathConvertTest_SourceCsf}");
         CsfFile csf = new CsfFile(pathConvertTest_SourceCsf);
         Console.WriteLine($"Конвертация файла и сохранение его в {pathConvertTest_ResultStr}");
-        (StringTable)csf.SaveAs(pathConvertTest_ResultStr);
+        new StrFile(csf).SaveAs(pathConvertTest_ResultStr);
 
         Console.WriteLine();
 
         Console.WriteLine($"Парсинг STR файла по пути {pathConvertTest_SourceStr}");
         StrFile str = new StrFile(pathConvertTest_SourceStr, Encoding.UTF8);
-        Console.WriteLine($"Конвертируем ли файл: {str.IsConvertable()}");
         Console.WriteLine($"Конвертация файла и сохранение его в {pathConvertTest_ResultCsf}");
-        str.ToCsf().SaveAs(pathConvertTest_ResultCsf);
-
-        Console.WriteLine();
-        Console.WriteLine("***************************************************************");
-        Console.WriteLine("КОНЕЦ ТЕСТИРОВАНИЯ КОНВЕРТАЦИИ");
-        Console.WriteLine();
-        Console.WriteLine();
+        new CsfFile(str).SaveAs(pathConvertTest_ResultCsf);
     }
 }

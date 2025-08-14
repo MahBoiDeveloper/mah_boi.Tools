@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using mah_boi.Tools.Extensions;
-using mah_boi.Tools.StringTable.Exceptions;
+using mah_boi.Tools.StringTableFormats.Exceptions;
 
 namespace mah_boi.Tools.StringTableFormats;
 
@@ -80,6 +80,15 @@ public class StrFile : StringTable
     /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
     /// </summary>
     public StrFile(string fileName, Encoding encoding, List<StringTableEntry> stStringsList) : base(fileName, encoding, stStringsList)
+    {
+    }
+
+    /// <summary>
+    /// Class for parsing <u>.str</u> file format.<br/>
+    /// Supported games: GZH, TW, KW, RA3.<br/><br/>
+    /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
+    /// </summary>
+    public StrFile(StringTable stSample) : base(stSample)
     {
     }
     #endregion
