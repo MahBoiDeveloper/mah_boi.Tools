@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mah_boi.Tools.StringTable;
+namespace mah_boi.Tools.StringTableFormats;
 
 struct CsfFileHeader
 {

@@ -1,4 +1,4 @@
-﻿namespace mah_boi.Tools.StringTable;
+﻿namespace mah_boi.Tools.StringTableFormats;
 
 /// <summary>
 /// Supported string table file formats.

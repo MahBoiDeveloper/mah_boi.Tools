@@ -20,58 +20,12 @@ public sealed class StringTableTests
 
     [TestMethod]
     // TODO: Implement test.
-    public void AddTest()
+    public void Modification()
     {
     }
 
     [TestMethod]
-    // TODO: Implement test.
-    public void SaveTest()
-    {
-        Init();
-
-        string pathSaveTest_SourceCsf    = @"";
-        string pathConvertTest_ResultCsf = @"";
-        
-        string pathSaveTest_SourceStr    = @"";
-        string pathConvertTest_ResultStr = @"";
-
-        Console.WriteLine($"Создание CSF файла по пути {pathSaveTest_SourceCsf}");
-        CsfFile csf = new CsfFile(pathSaveTest_SourceCsf);
-        Console.WriteLine("Ошибки, найденные во время парсинга");
-        Console.WriteLine(csf.GetParsingMessages());
-        Console.WriteLine($"Сохранение файла по пути {pathConvertTest_ResultCsf}");
-        csf.SaveAs(pathConvertTest_ResultCsf);
-        Console.WriteLine("");
-        Console.Write($"Сравнение файлов {pathSaveTest_SourceCsf} и {pathConvertTest_ResultCsf}. Результат: ");
-        
-        if (csf == new CsfFile(pathConvertTest_ResultCsf))
-            Console.WriteLine("==");
-        else
-            Console.WriteLine("!=");
-
-        Console.WriteLine();
-        Console.WriteLine($"Создание STR файла по пути {pathSaveTest_SourceStr}");
-        StrFile str = new StrFile(pathSaveTest_SourceStr);
-        Console.WriteLine("");
-        Console.WriteLine("Ошибки, найденные во время парсинга");
-        Console.WriteLine("===============================================================");
-        Console.WriteLine(str.GetParsingMessages());
-        Console.WriteLine("===============================================================");
-        Console.WriteLine("");
-        Console.WriteLine($"Сохранение файла по пути {pathConvertTest_ResultStr}");
-        str.SaveAs(pathConvertTest_ResultStr);
-        Console.WriteLine("");
-        Console.Write($"Сравнение файлов {pathSaveTest_SourceStr} и {pathConvertTest_ResultStr}. Результат: ");
-        
-        if (str == new StrFile(pathConvertTest_ResultStr))
-            Console.WriteLine("==");
-        else
-            Console.WriteLine("!=");
-    }
-
-    [TestMethod]
-    public void ConvertTest()
+    public void Converting()
     {
         Init();
 
@@ -80,17 +34,10 @@ public sealed class StringTableTests
         string pathConvertTest_SourceStr = @"mah_boi.Tools\str2csf_orig.str";
         string pathConvertTest_ResultCsf = @"mah_boi.Tools\str2csf_rslt.csf";
 
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine("НАЧАЛО ТЕСТИРОВАНИЯ КОНВЕРТАЦИИ");
-        Console.WriteLine("***************************************************************");
-        Console.WriteLine();
-
         Console.WriteLine($"Парсинг CSF файла по пути {pathConvertTest_SourceCsf}");
         CsfFile csf = new CsfFile(pathConvertTest_SourceCsf);
-        Console.WriteLine($"Конвертируем ли файл: {csf.IsConvertable()}");
         Console.WriteLine($"Конвертация файла и сохранение его в {pathConvertTest_ResultStr}");
-        csf.ToStr().SaveAs(pathConvertTest_ResultStr);
+        (StringTable)csf.SaveAs(pathConvertTest_ResultStr);
 
         Console.WriteLine();
 

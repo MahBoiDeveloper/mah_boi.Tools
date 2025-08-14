@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace mah_boi.Tools.StringTable.Exceptions;
+namespace mah_boi.Tools.StringTableFormats.Exceptions;
 
 public class StringTableParseException : Exception
 {
