@@ -1,0 +1,4 @@
+[submodule "Libs/Rampastring.Tools"]
+	path = Libs/Rampastring.Tools
+	url = https://github.com/MahBoiDeveloper/Rampastring.Tools
+	branch = develop
