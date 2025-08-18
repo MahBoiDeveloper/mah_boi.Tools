@@ -107,7 +107,7 @@ public class StrFile : StringTable
         {
             currentLineNumber++;
 
-            // Skip line if it is a commentary or empty line
+            // skip line if it is a commentary or empty line
             if 
             (
                 currentLine.StartsWith("//") 
@@ -116,67 +116,67 @@ public class StrFile : StringTable
             )
                 continue;
 
-            // If read string has an error (multiple value)
+            // if read string has an error (multiple value)
             if
             (
                 searchStatus == LineType.End 
                 && !currentLine.Trim().Equals("end", StringComparison.InvariantCultureIgnoreCase)
             )
             {
-                parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
-                                                   + "После значения лейбла идёт другая строка со значением", StringTableParseException.MessageType.Error);
+                parsingErrorsAndWarnings.AddMessage($"Error in an entry formating ({currentLineNumber}): \"{currentLine}\" | "
+                                                   + "After a label doesn't follow a value", StringTableParseException.MessageType.Error);
                 searchStatus = LineType.Label;
             }
 
-            // считанная строка содержит ошибку, т.к. нет значения
+            // read entry contains error, because it hasn't value
             else if (currentLine.Trim().ToLower() == "end" && searchStatus == LineType.Value)
             {
-                parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
-                                                   + "После названия лейбла идёт закрытие строки, а не значение. "
-                                                   + "Воспользуйтесь ковычками \"\" для обозначения пустой строк", StringTableParseException.MessageType.Error);
+                parsingErrorsAndWarnings.AddMessage($"Error in an entry formating ({currentLineNumber}): \"{currentLine}\" | "
+                                                  + $"After the label follows closing \"{currentLine.Trim()}\", but not the value."
+                                                  +  "Use quotation marks (\"\") to define an empty string", StringTableParseException.MessageType.Error);
 
                 searchStatus = LineType.Label;
             }
 
-            // считанная строка - лейбл а-ля название строки
+            // read string is a label aka entry name
             else if
             (
-                searchStatus == (int)LineType.Label     // анализируемая строка является лейблом
-                && !currentLine.Trim().StartsWith("\"") // строка не является значением
+                searchStatus == LineType.Label          // analyzed string is a label
+                && !currentLine.Trim().StartsWith("\"") // analyzed string is not a value
             )
             {
-                if (currentLine.IsACII()) // символы в значении исключительно в кодировке ASCII
+                if (currentLine.IsACII())
                 {
                     stringName   = currentLine.Trim();
                     searchStatus = LineType.Value;
                 }
-                else                                   // символы в значении не в кодировке ASCII
+                else
                 {
-                    parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
-                                                       + "В названии строки содержатся не ASCII символы, что не является "
-                                                       + "допустимым. Замените их, чтобы строку можно было считать.",
+                    parsingErrorsAndWarnings.AddMessage($"Error in an entry formating ({currentLineNumber}): \"{currentLine}\" | "
+                                                       + "Entry name (label) has non ASCII symbols, that is not allowed. "
+                                                       + "Replace them to make file to be able parsed be the program.",
                                                         StringTableParseException.MessageType.Error);
                 }
             }
 
-            // считанная строка - полное значение
+            // read string is a value
             else if
             (
-                searchStatus == LineType.Value         // анализируемая строка - значение
-                && currentLine.Trim().StartsWith("\"") // значения всегда начинаются с таба+ковычка
-                && currentLine.Trim().EndsWith("\"")   // и оканчиваются ковычкой
+                searchStatus == LineType.Value         // analyzed string is a value
+                && currentLine.Trim().StartsWith("\"") // starts with "
+                && currentLine.Trim().EndsWith("\"")   // ends with "
             )
             {
                 stringValue  = currentLine.Trim().Replace("\"", string.Empty);
                 searchStatus = LineType.End;
             }
 
-            // считанная строка - это частичное значение
+            // read entry has a splitted value on the several lines
             else if
             (
-                searchStatus == LineType.Value         // анализируемая строка - значение
-                && currentLine.Trim().StartsWith("\"") // значение частичное, т.к. в строке только 1 ковычка, и стоит она в начале
-                && !currentLine.Trim().EndsWith("\"")  // и нет ковычки в конце
+                searchStatus == LineType.Value         // analyzed string is a value
+                && currentLine.Trim().StartsWith("\"") // starts with "
+                && !currentLine.Trim().EndsWith("\"")  // and not ends with "
             )
             {
                 stringValue += currentLine.Trim().Replace("\"", string.Empty);
@@ -184,9 +184,9 @@ public class StrFile : StringTable
 
             else if
             (
-                searchStatus == LineType.Value          // анализируемая строка - значение
-                && currentLine.Trim().StartsWith("\\n") // значение частичное, т.к. в начале строки \n
-                && !currentLine.Trim().EndsWith("\"")   // и нет ковычки в конце
+                searchStatus == LineType.Value          // analyzed string is a value
+                && currentLine.Trim().StartsWith("\\n") // value splitted by \n that placed in the start
+                && !currentLine.Trim().EndsWith("\"")   // and doesn't have " in the end of string
             )
             {
                 stringValue += currentLine.Trim();
@@ -194,9 +194,9 @@ public class StrFile : StringTable
 
             else if
             (
-                searchStatus == LineType.Value          // анализируемая строка - значение
-                && currentLine.Trim().StartsWith("\\n") // значение частичное, т.к. в начале строки \n
-                && currentLine.Trim().EndsWith("\"")    // и в строке только 1 ковычка, и стоит она в конце
+                searchStatus == LineType.Value          // analyzed string is a value
+                && currentLine.Trim().StartsWith("\\n") // value splitted by \n that placed in the start
+                && currentLine.Trim().EndsWith("\"")    // and ends with "
             )
             {
                 stringValue += currentLine.Trim().Replace("\"", string.Empty);
@@ -205,26 +205,26 @@ public class StrFile : StringTable
 
             else if
             (
-                searchStatus == LineType.Value           // если мы ищем значение
-                && !currentLine.Trim().StartsWith("\\n") // а текущая строка не начинается с \n, когда мы ищем значение
+                searchStatus == LineType.Value           // analyzed string is a value
+                && !currentLine.Trim().StartsWith("\\n") // and doesn't contain \n
             )
             {
-                parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
-                                                   + "Отсутствие символов \"\\n\" в начале составной строки.", StringTableParseException.MessageType.Error);
+                parsingErrorsAndWarnings.AddMessage($"Error in an entry formating ({currentLineNumber}): \"{currentLine}\" | "
+                                                   + "Unable to find \"\\n\" symblos in the begining of the string.", StringTableParseException.MessageType.Error);
             }
 
-            // считанная строка - окончание строки
+            // read string is an end of the entry
             else if (searchStatus == LineType.End && currentLine.Trim().ToLower() == "end")
             {
                 Table.Add(new StringTableEntry(stringName, stringValue));
                 searchStatus = (int)LineType.Label;
             }
 
-            // на случай не предвиденных проблем
+            // unknown errors
             else
             {
-                parsingErrorsAndWarnings.AddMessage($"Ошибка форматирования в строке ({currentLineNumber}): \"{currentLine}\" | "
-                                                   + "Неизвестная ошибка", StringTableParseException.MessageType.Error);
+                parsingErrorsAndWarnings.AddMessage($"Error in an entry formating ({currentLineNumber}): \"{currentLine}\" | "
+                                                   + "Unknown error", StringTableParseException.MessageType.Error);
             }
         }
     }
