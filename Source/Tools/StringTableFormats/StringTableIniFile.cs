@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace mah_boi.Tools.StringTableFormats;
 
-public class CnCNetIniFormat : StringTable
+public class StringTableIniFile : StringTable
 {
     #region Constructors
     /// <summary>
@@ -18,7 +18,7 @@ public class CnCNetIniFormat : StringTable
     /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public CnCNetIniFormat() : base()
+    public StringTableIniFile() : base()
     {
     }
 
@@ -27,17 +27,7 @@ public class CnCNetIniFormat : StringTable
     /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public CnCNetIniFormat(string fileName) : base(fileName)
-    {
-        Parse();
-    }
-
-    /// <summary>
-    /// Class for parsing <u>.csf</u> file format.<br/>
-    /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
-    /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
-    /// </summary>
-    public CnCNetIniFormat(string fileName, Encoding encoding) : base(fileName, encoding)
+    public StringTableIniFile(string fileName) : base(fileName)
     {
         Parse();
     }
@@ -47,7 +37,17 @@ public class CnCNetIniFormat : StringTable
     /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public CnCNetIniFormat(CnCNetIniFormat csfFile) : base(csfFile)
+    public StringTableIniFile(string fileName, Encoding encoding) : base(fileName, encoding)
+    {
+        Parse();
+    }
+
+    /// <summary>
+    /// Class for parsing <u>.csf</u> file format.<br/>
+    /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
+    /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
+    /// </summary>
+    public StringTableIniFile(StringTableIniFile csfFile) : base(csfFile)
     {
     }
 
@@ -56,7 +56,7 @@ public class CnCNetIniFormat : StringTable
     /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public CnCNetIniFormat(string fileName, List<StringTableEntry> strings) : base(fileName, strings)
+    public StringTableIniFile(string fileName, List<StringTableEntry> strings) : base(fileName, strings)
     {
     }
 
@@ -65,7 +65,7 @@ public class CnCNetIniFormat : StringTable
     /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public CnCNetIniFormat(string fileName, Encoding encoding, List<StringTableEntry> strings) : base(fileName, encoding, strings)
+    public StringTableIniFile(string fileName, Encoding encoding, List<StringTableEntry> strings) : base(fileName, encoding, strings)
     {
     }
 
@@ -74,7 +74,7 @@ public class CnCNetIniFormat : StringTable
     /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public CnCNetIniFormat(StringTable stSample) : base(stSample)
+    public StringTableIniFile(StringTable stSample) : base(stSample)
     {
     }
     #endregion
@@ -85,7 +85,6 @@ public class CnCNetIniFormat : StringTable
     /// </summary>
     public override void Parse()
     {
-
     }
 
     /// <summary>
@@ -108,9 +107,9 @@ public class CnCNetIniFormat : StringTable
     #endregion
 
     #region Other methods
-    public static bool operator == (CnCNetIniFormat firstFile, CnCNetIniFormat secondFile) => (StringTable)firstFile == (StringTable)secondFile;
-    public static bool operator != (CnCNetIniFormat firstFile, CnCNetIniFormat secondFile) => !(firstFile == secondFile);
-    public override bool Equals(object obj) => (CnCNetIniFormat)obj == this;
+    public static bool operator == (StringTableIniFile firstFile, StringTableIniFile secondFile) => (StringTable)firstFile == (StringTable)secondFile;
+    public static bool operator != (StringTableIniFile firstFile, StringTableIniFile secondFile) => !(firstFile == secondFile);
+    public override bool Equals(object obj) => (StringTableIniFile)obj == this;
     public override int GetHashCode() => base.GetHashCode();
     public override string ToString() => base.ToString();
     #endregion
