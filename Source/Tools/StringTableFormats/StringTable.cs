@@ -183,6 +183,17 @@ public abstract class StringTable
     public void AddString(StringTable stImportTable) => Table.AddRange(stImportTable.Table);
 
     /// <summary>
+    /// Add new entry to the string table.
+    /// </summary>
+    public void AddString(string name, string value = null, string extraValue = null)
+    {
+        if (name.IsNullOrEmpty())
+            return;
+
+        Table.Add(new StringTableEntry(name, value, extraValue));
+    }
+
+    /// <summary>
     /// Add new entry to the string table with name but without value.
     /// </summary>
     public void AddEmptyString(string stringName) => Table.Add(new StringTableEntry(stringName));

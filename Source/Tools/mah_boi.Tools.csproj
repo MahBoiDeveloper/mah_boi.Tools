@@ -1,9 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net4.8</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+	
+  <ItemGroup>
+	  <ProjectReference Include="../../Libs/Rampastring.Tools/Rampastring.Tools.csproj"/>
+  </ItemGroup>
 
 </Project>

@@ -1,12 +1,9 @@
-﻿using mah_boi.Tools.Extensions;
-using mah_boi.Tools.StringTableFormats.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
-using System.Threading.Tasks;
+
+using Rampastring.Tools;
+using mah_boi.Tools.Extensions;
 
 namespace mah_boi.Tools.StringTableFormats;
 
@@ -85,6 +82,12 @@ public class StringTableIniFile : StringTable
     /// </summary>
     public override void Parse()
     {
+        IniFile ini = new(FileName);
+        foreach (var sectionName in ini.GetSections())
+        {
+            var section = ini.GetSection(sectionName);
+            section.Keys.ForEach(kvp => AddString($"{section.SectionName}:{kvp.Key}", kvp.Value));
+        }
     }
 
     /// <summary>
@@ -92,6 +95,21 @@ public class StringTableIniFile : StringTable
     /// </summary>
     public override void Save()
     {
+        IniFile ini = new();
+
+        foreach (var entry in Table)
+        {
+            var split = entry.Name.Split(':');
+            
+            if (!ini.SectionExists(split[0]))
+                ini.AddSection(split[0]);
+
+            StringBuilder sb = new();
+            split.Where(x => x != split.First()).ForEach(x => sb.Append(x));
+            ini.SetStringValue(split[0], sb.ToString(), entry.Value);
+        }
+
+        ini.WriteIniFile(FileName);
     }
 
     /// <summary>
