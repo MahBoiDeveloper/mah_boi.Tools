@@ -1,13 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFramework>net4.8</TargetFramework>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-	
-  <ItemGroup>
-	  <ProjectReference Include="../../Libs/Rampastring.Tools/Rampastring.Tools.csproj"/>
-  </ItemGroup>
-
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFrameworks>net8.0;net4.8;netstandard2.0</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="../../Libs/Rampastring.Tools/Rampastring.Tools.csproj"/>
+	</ItemGroup>
 </Project>
