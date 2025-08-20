@@ -86,7 +86,7 @@ public class StringTableIniFile : StringTable
         foreach (var sectionName in ini.GetSections())
         {
             var section = ini.GetSection(sectionName);
-            section.Keys.ForEach(kvp => AddString($"{section.SectionName}:{kvp.Key}", kvp.Value));
+            section.Keys.ForEach(kvp => AddString($"{section.SectionName}:{kvp.Key}", kvp.Value.Replace("@", "\n").Replace("\\semicolon", ";")));
         }
     }
 
@@ -106,7 +106,7 @@ public class StringTableIniFile : StringTable
 
             StringBuilder sb = new();
             split.Where(x => x != split.First()).ForEach(x => sb.Append(x));
-            ini.SetStringValue(split[0], sb.ToString(), entry.Value);
+            ini.SetStringValue(split[0], sb.ToString(), entry.Value.Replace("\n", "@").Replace(";", "\\semicolon"));
         }
 
         ini.WriteIniFile(FileName);
