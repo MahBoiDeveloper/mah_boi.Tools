@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mah_boi.Tools.Extensions;
 
-public static class IEnumerableExtenstion
+public static class IEnumerableExtension
 {
     /// <summary>
     /// Apply action changes for all elements of collection container.
