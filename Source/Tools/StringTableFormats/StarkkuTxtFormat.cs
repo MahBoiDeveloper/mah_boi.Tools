@@ -17,9 +17,4 @@ public class StarkkuTxtFormat : StringTable
     {
         
     }
-
-    public override void SaveAs(string fileName)
-    {
-        
-    }
 }

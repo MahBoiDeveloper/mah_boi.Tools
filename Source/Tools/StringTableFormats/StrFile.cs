@@ -237,15 +237,6 @@ public class StrFile : StringTable
         using (StreamWriter sw = new(File.OpenWrite(FileName), FileEncoding))
             sw.WriteLine(ToString());
     }
-
-    /// <summary>
-    /// Save .str file format data to the destination file.
-    /// </summary>
-    public override void SaveAs(string fileName)
-    {
-        using (StreamWriter sw = new(File.OpenWrite(fileName), FileEncoding))
-            sw.WriteLine(ToString());
-    }
     #endregion
 
     #region Other methods

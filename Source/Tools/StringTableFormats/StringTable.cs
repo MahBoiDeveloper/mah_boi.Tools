@@ -131,9 +131,15 @@ public abstract class StringTable
     public abstract void Save();
 
     /// <summary>
-    /// Abstract method to save string table to special file format with new name.
+    /// Saves string table to special filename.
     /// </summary>
-    public abstract void SaveAs(string fileName);
+    public void SaveAs(string fileName)
+    {
+        string tmp = FileName;
+        FileName = fileName;
+        Save();
+        FileName = tmp;
+    }
 
     public override string ToString()
     {

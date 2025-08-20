@@ -111,17 +111,6 @@ public class StringTableIniFile : StringTable
 
         ini.WriteIniFile(FileName);
     }
-
-    /// <summary>
-    /// Save data to the specific file by path.
-    /// </summary>
-    public override void SaveAs(string fileName)
-    {
-        string tmp = FileName;
-        FileName = fileName;
-        Save();
-        FileName = tmp;
-    }
     #endregion
 
     #region Other methods
