@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace mah_boi.Tools.Extensions;
 
 public static class BinaryReaderExtension
 {
+    /// <summary>
+    /// Reads char array of uint32 length.
+    /// </summary>
     public static char[] ReadChars(this BinaryReader br, UInt32 length)
     {
         List<char> ret = new();
