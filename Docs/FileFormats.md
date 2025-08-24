@@ -102,7 +102,15 @@ end
 
 ### Starkku's File Format (TXT)
 
+Starkku's string table file format is one of the formats that allows Red Alert 2 / Yuri's Revenge modders to create a string table that can be edited with text editors such as Notepad++ and VS Code, but not only with Turbo String Table Editor, Siberian String Table Editor and others. The format's syntax is simple: `<String Name>|<String Value>`, but it does not support extra values. If string's value contains several lines of text splitted by enter, then new line should be defined as `\n` characters combination in the text.
 
+Examples:
+
+```txt
+BRIEF:ALL01|The Soviets have invaded. They outnumber us ten to one. You must assist special agent Tanya in New York. We are marshaling our forces as fast as we can, Commander, but we need time. A small American base, Fort Bradley, is in the New York area. If you can make contact, they may be able to assist in the defense of New York. Tanya will be moving through a chaotic battlefield. Keep your eye out for targets of opportunity and watch for new mission objectives. \n \n Objective 1: Destroy the Soviet Dreadnought fleet. \n \n Objective 2: Make contact with Fort Bradley. \n \n Objective 3: Keep Tanya alive.
+GUI:CAMPAIGNSLIST|Mission Selection
+WOL:WDTTERRITORYBACK|Return to the Faction Select menu
+```
 
 ### CnCNet's File Format (INI)
 
