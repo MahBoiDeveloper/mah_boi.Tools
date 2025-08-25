@@ -114,4 +114,15 @@ WOL:WDTTERRITORYBACK|Return to the Faction Select menu
 
 ### CnCNet's File Format (INI)
 
+The XNA CnCNet client features a new string table format that contains all of the client's strings within a specific .ini file. It does not allow extra values to be applied to strings and reads `@` and `\semicolon` as `\n` and `;` characters. As with the .ini file format, any characters after the `;` symbol is a comment and will not be parsed.
 
+Example:
+
+```ini
+[General]
+Name=Русский
+Author=mah_boi
+
+[Values]
+Client:ClientCore:EnterAName=Пожалуйста, введите никнейм.;Please enter a name.
+```
