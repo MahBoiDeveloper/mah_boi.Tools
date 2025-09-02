@@ -1,4 +1,5 @@
-﻿using mah_boi.Tools.Extensions;
+﻿using System;
+using mah_boi.Tools.Extensions;
 
 namespace mah_boi.Tools.StringTableFormats;
 
@@ -30,7 +31,7 @@ public class StringTableEntry
         Value      = stringValue;
         ExtraValue = stringExtraValue;
     }
-
+    
     /// <summary>
     /// Checks if string name has only ASCII characters
     /// </summary>
