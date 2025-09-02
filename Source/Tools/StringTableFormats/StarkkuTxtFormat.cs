@@ -78,7 +78,7 @@ public class StarkkuTxtFormat : StringTable
         foreach (var line in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
         {
             var split = line.Split('|');
-            AddString(split[0], split[1].Replace("\\n", "\n"));
+            Add(split[0], split[1].Replace("\\n", "\n"));
         }
     }
 

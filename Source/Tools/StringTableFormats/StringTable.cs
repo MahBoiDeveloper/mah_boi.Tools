@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,8 +10,21 @@ using mah_boi.Tools.StringTableFormats.Exceptions;
 
 namespace mah_boi.Tools.StringTableFormats;
 
-public abstract class StringTable
+public abstract class StringTable : IEnumerable<StringTableEntry>
 {
+    #region IEnumerable methods
+    /// <summary>
+    /// Returns an enumerator that iterates through the string table.
+    /// </summary>
+    public IEnumerator<StringTableEntry> GetEnumerator() => Table.GetEnumerator();
+
+    /// <summary>
+    /// Returns an enumerator that iterates through the string table.
+    /// </summary>
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    #endregion
+
     #region Fields and properties
     protected StringTableParseException        parsingErrorsAndWarnings = new();
     protected StringTableNonAsciiNameException nonAsciiNameException    = new();
@@ -169,7 +183,7 @@ public abstract class StringTable
     /// Adds string sample to the string table.<br/>
     /// If string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
     /// </summary>
-    public void AddString(StringTableEntry stString)
+    public void Add(StringTableEntry stString)
     {
         if (stString.IsACIIName())
             Table.Add(stString);
@@ -181,28 +195,23 @@ public abstract class StringTable
     /// Adds string range to the string table in the end of list.<br/>
     /// If even one string have non-ascii name, method thorws <see cref="StringTableNonAsciiNameException"/>.
     /// </summary>
-    public void AddString(List<StringTableEntry> stList) => Table.AddRange(stList.Where(x => x.IsACIIName()));
+    public void Add(List<StringTableEntry> stList) => Table.AddRange(stList.Where(x => x.IsACIIName()));
 
     /// <summary>
     /// Transfer data from given string table.
     /// </summary>
-    public void AddString(StringTable stImportTable) => Table.AddRange(stImportTable.Table);
+    public void Add(StringTable stImportTable) => Table.AddRange(stImportTable.Table);
 
     /// <summary>
     /// Add new entry to the string table.
     /// </summary>
-    public void AddString(string name, string value = null, string extraValue = null)
+    public void Add(string name, string value = null, string extraValue = null)
     {
         if (name.IsNullOrEmpty())
             return;
 
         Table.Add(new StringTableEntry(name, value, extraValue));
     }
-
-    /// <summary>
-    /// Add new entry to the string table with name but without value.
-    /// </summary>
-    public void AddEmptyString(string stringName) => Table.Add(new StringTableEntry(stringName));
     #endregion
 
     #region String table modify methods

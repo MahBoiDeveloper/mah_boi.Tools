@@ -86,7 +86,7 @@ public class StringTableIniFile : StringTable
         foreach (var sectionName in ini.GetSections())
         {
             var section = ini.GetSection(sectionName);
-            section.Keys.ForEach(kvp => AddString($"{section.SectionName}:{kvp.Key}", kvp.Value.Replace("@", "\n").Replace("\\semicolon", ";")));
+            section.Keys.ForEach(kvp => Add($"{section.SectionName}:{kvp.Key}", kvp.Value.Replace("@", "\n").Replace("\\semicolon", ";")));
         }
     }
 
