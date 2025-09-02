@@ -369,6 +369,18 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     public void DeleteStringsByValueOnMatch(string stringValue) => Table.RemoveAll(str => str.Value == stringValue);
 
     /// <summary>
+    /// Removes all entries from string table by name match.
+    /// </summary>
+    /// <param name="name">Deleting entries name.</param>
+    public void Delete(string name) => DeleteStringsByNameOnMatch(name);
+
+    /// <summary>
+    /// Removes all entries from string table by match.
+    /// </summary>
+    /// <param name="entry">Deleting entries data.</param>
+    public void Delete(StringTableEntry entry) => DeleteStringsOnMatch(entry);
+
+    /// <summary>
     /// Removes all string table data.
     /// </summary>
     public void Clear() => Table.Clear();
