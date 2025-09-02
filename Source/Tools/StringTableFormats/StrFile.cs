@@ -217,7 +217,7 @@ public class StrFile : StringTable
             else if (searchStatus == LineType.End && currentLine.Trim().ToLower() == "end")
             {
                 Table.Add(new StringTableEntry(stringName, stringValue));
-                searchStatus = (int)LineType.Label;
+                searchStatus = LineType.Label;
             }
 
             // unknown errors
