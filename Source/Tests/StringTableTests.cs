@@ -1,5 +1,6 @@
-﻿using mah_boi.Tools.StringTableFormats;
-using System.Text;
+﻿using System.Text;
+using mah_boi.Tools.Extensions;
+using mah_boi.Tools.StringTableFormats;
 
 namespace mah_boi.Tools.Tests;
 
@@ -7,11 +8,19 @@ namespace mah_boi.Tools.Tests;
 public sealed class StringTableTests
 {
     private Encoding? cp1251 = null;
-    private Encoding? unicode = Encoding.Unicode;
-    private Encoding? uft8 = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
-    private Encoding? ascii = Encoding.ASCII;
+    private readonly Encoding? unicode = Encoding.Unicode;
+    private readonly Encoding? uft8 = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+    private readonly Encoding? ascii = Encoding.ASCII;
+    private readonly StringTable stModification = new StrFile() 
+    {
+        { "Name:Test", "Test value" }
+    };
+    private readonly StringTableEntry steTest = new("Focus", "Pocus", "Amogus");
+    private readonly DirectoryInfo dataSamples = 
+        new(new DirectoryInfo(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.Parent?.Parent?.FullName + "\\DataSamples");
 
-    private void Init()
+    #region Opening
+    public StringTableTests()
     {
         // https://stackoverflow.com/questions/3967716/how-to-find-encoding-for-1251-codepage
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -19,16 +28,88 @@ public sealed class StringTableTests
     }
 
     [TestMethod]
-    // TODO: Implement test.
-    public void Modification()
+    public void Open_CSF()
     {
+        int count = 0;
+        dataSamples.GetFiles().Where(f => f.Extension == "csf").ForEach(f => count = new CsfFile(f.FullName).Count());
     }
 
     [TestMethod]
-    public void Converting()
+    public void Open_STR()
     {
-        Init();
+        int count = 0;
+        dataSamples.GetFiles().Where(f => f.Extension == "str").ForEach(f => count = new CsfFile(f.FullName).Count());
+    }
 
+    [TestMethod]
+    public void Open_TXT()
+    {
+        int count = 0;
+        dataSamples.GetFiles().Where(f => f.Extension == "txt").ForEach(f => count = new CsfFile(f.FullName).Count());
+    }
+
+    [TestMethod]
+    public void Open_INI()
+    {
+        int count = 0;
+        dataSamples.GetFiles().Where(f => f.Extension == "ini").ForEach(f => count = new CsfFile(f.FullName).Count());
+    }
+    #endregion
+
+    #region Mutation
+    [TestMethod]
+    public void Modification_CSF()
+    {
+        CsfFile expected = new(stModification);
+        
+        CsfFile result = new(stModification);
+        result.Add(steTest);
+        result.DeleteExtraValues();
+        result.DeleteStringByName(steTest.Name);
+
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Modification_STR()
+    {
+        StrFile expected = new(stModification);
+
+        StrFile result = new(stModification);
+        result.Add(steTest);
+        result.DeleteStringsOnMatch(steTest);
+
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Modification_TXT()
+    {
+        StarkkuTxtFormat expected = new(stModification);
+
+        StarkkuTxtFormat result = new(stModification);
+        result.Add(steTest);
+        result.Delete(steTest);
+
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Modification_INI()
+    {
+        StringTableIniFile expected = new(stModification);
+
+        StringTableIniFile result = new(stModification);
+        result.Add(steTest);
+        result.DeleteStringsOnMatch(steTest);
+
+        Assert.AreEqual(expected, result);
+    }
+    #endregion
+
+    [TestMethod]
+    public void Converting_AllTypes()
+    {
         string pathConvertTest_SourceCsf = @"mah_boi.Tools\csf2str_orig.csf";
         string pathConvertTest_ResultStr = @"mah_boi.Tools\csf2str_rslt.str";
         string pathConvertTest_SourceStr = @"mah_boi.Tools\str2csf_orig.str";
