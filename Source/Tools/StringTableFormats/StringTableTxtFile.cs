@@ -5,14 +5,17 @@ using System.Collections.Generic;
 
 namespace mah_boi.Tools.StringTableFormats;
 
-public class StarkkuTxtFormat : StringTable
+/// <summary>
+/// Class for parsing <u>.txt</u> file format as string table.<br/>
+/// </summary>
+public class StringTableTxtFile : StringTable
 {
     #region Contsructors
     /// <summary>
     /// Class for parsing <u>.txt</u> string table file format.<br/>
     /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
     /// </summary>
-    public StarkkuTxtFormat() : base()
+    public StringTableTxtFile() : base()
     {
     }
 
@@ -20,16 +23,7 @@ public class StarkkuTxtFormat : StringTable
     /// Class for parsing <u>.txt</u> string table file format.<br/>
     /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
     /// </summary>
-    public StarkkuTxtFormat(string fileName) : base(fileName)
-    {
-        Parse();
-    }
-
-    /// <summary>
-    /// Class for parsing <u>.txt</u> string table file format.<br/>
-    /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
-    /// </summary>
-    public StarkkuTxtFormat(string fileName, Encoding encoding) : base(fileName, encoding)
+    public StringTableTxtFile(string fileName) : base(fileName)
     {
         Parse();
     }
@@ -38,7 +32,16 @@ public class StarkkuTxtFormat : StringTable
     /// Class for parsing <u>.txt</u> string table file format.<br/>
     /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
     /// </summary>
-    public StarkkuTxtFormat(StarkkuTxtFormat strFile) : base(strFile)
+    public StringTableTxtFile(string fileName, Encoding encoding) : base(fileName, encoding)
+    {
+        Parse();
+    }
+
+    /// <summary>
+    /// Class for parsing <u>.txt</u> string table file format.<br/>
+    /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
+    /// </summary>
+    public StringTableTxtFile(StringTableTxtFile strFile) : base(strFile)
     {
         this.Format = strFile.Format;
         this.CategorySeparator = strFile.CategorySeparator;
@@ -51,7 +54,7 @@ public class StarkkuTxtFormat : StringTable
     /// Class for parsing <u>.txt</u> string table file format.<br/>
     /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
     /// </summary>
-    public StarkkuTxtFormat(string fileName, List<StringTableEntry> stStringsList) : base(fileName, stStringsList)
+    public StringTableTxtFile(string fileName, List<StringTableEntry> stStringsList) : base(fileName, stStringsList)
     {
     }
 
@@ -59,7 +62,7 @@ public class StarkkuTxtFormat : StringTable
     /// Class for parsing <u>.txt</u> string table file format.<br/>
     /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
     /// </summary>
-    public StarkkuTxtFormat(string fileName, Encoding encoding, List<StringTableEntry> stStringsList) : base(fileName, encoding, stStringsList)
+    public StringTableTxtFile(string fileName, Encoding encoding, List<StringTableEntry> stStringsList) : base(fileName, encoding, stStringsList)
     {
     }
 
@@ -67,7 +70,7 @@ public class StarkkuTxtFormat : StringTable
     /// Class for parsing <u>.txt</u> string table file format.<br/>
     /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
     /// </summary>
-    public StarkkuTxtFormat(StringTable stSample) : base(stSample)
+    public StringTableTxtFile(StringTable stSample) : base(stSample)
     {
     }
     #endregion

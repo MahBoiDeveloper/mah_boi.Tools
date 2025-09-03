@@ -7,6 +7,9 @@ using mah_boi.Tools.Extensions;
 
 namespace mah_boi.Tools.StringTableFormats;
 
+/// <summary>
+/// Class for parsing <u>.ini</u> file format as string table.<br/>
+/// </summary>
 public class StringTableIniFile : StringTable
 {
     #region Constructors
