@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Collections.Generic;
+
 using mah_boi.Tools.Extensions;
 using mah_boi.Tools.StringTableFormats.Exceptions;
 
@@ -170,7 +172,10 @@ public class CsfFile : StringTable
                 UInt32 valueLength = br.ReadUInt32();
                 stringValue = br.ReadBytes(Convert.ToInt32(valueLength * 2)); // data should be inverted
 
-                stringValue.ForEach(x => x = (byte)~x); // inverting all bytes
+                for (UInt32 j = 0; j < stringValue.Length; j++) // inverting all bytes in value array
+                {
+                    stringValue[j] = (byte)~stringValue[j];
+                }
 
                 // read string's extra value
                 if (new string(rtsOrWrts) == new string(WRTS))
@@ -179,7 +184,17 @@ public class CsfFile : StringTable
                     extraStringValue = br.ReadChars(extraValueLength); // extra value (always in Unicode encoding)
                 }
 
-                Table.Add(new StringTableEntry(new string(labelName), new string(FileEncoding.GetChars(stringValue)), new string(extraStringValue)));
+                // patch array to be able get good string from file encoding
+                if (FileEncoding == Encoding.UTF8)
+                {
+                    stringValue = stringValue.Where((elem, index) => index % 2 == 0).ToArray();
+                }
+
+                string strName = new string(labelName);
+                string strValue = new string(FileEncoding.GetChars(stringValue));
+                string strExtraValue = new string(extraStringValue);
+
+                Table.Add(new StringTableEntry(strName, strValue, strExtraValue == string.Empty ? null : strExtraValue));
             }
             else
             {
