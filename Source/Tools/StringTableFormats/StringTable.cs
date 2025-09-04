@@ -628,13 +628,14 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
 
     public static bool operator == (StringTable firstFile, StringTable secondFile)
     {
-        if (firstFile.FileName != secondFile.FileName) return false;
-
         if (firstFile.Table.Count != secondFile.Table.Count) return false;
 
         int countOfStrings = firstFile.Table.Count;
+        var sorted1 = firstFile.Table.OrderBy(elem => elem.Name).ToList();
+        var sorted2 = secondFile.Table.OrderBy(elem => elem.Name).ToList();
+
         for (int i = 0; i < countOfStrings; i++)
-            if (firstFile.Table[i] != secondFile.Table[i])
+            if (sorted1[i] != sorted2[i])
                 return false;
 
         return true;
