@@ -1,4 +1,38 @@
 # mah_boi.Tools
-Репозиторий представляет собой сборник классов для работы с различными форматами данных. На данный момент реализованы классы для работы с форматами `.csf` и `.str` представления [строковых таблиц](https://modenc.renegadeprojects.com/CSF_File_Format) в играх серии [C&C](https://ru.wikipedia.org/wiki/Command_%26_Conquer).
-## Компиляция
-В качестве компилятора использовался компилятор от Microsoft. Самый простой способ скомпилировать код — установить последнюю Visual Studio, открыть проект `mah_boi.Tools.sln` и запустить его компиляцию.
+
+Library with useful C# classes to work with different data formats:
+
+* Configuration .ini files through Rampastring.Tools implementation and `IniSerializer`
+* String table file formats:
+  * Westwood compiled string file ([CSF](https://modenc.renegadeprojects.com/CSF_File_Format))
+  * SAGE string table file ([STR](https://generals.projectperfectmod.com/genstr/))
+  * Configuration file as string table (INI)
+  * Starkku's string table text format (TXT)
+
+## License
+
+MIT License
+
+Copyright (c) 2021 mah_boi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Legal
+
+EA has not endorsed and does not support this product. Command & Conquer is registered trademarks of Electronic Arts Inc. All Rights Reserved.
