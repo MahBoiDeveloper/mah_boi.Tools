@@ -121,9 +121,10 @@ public sealed class StringTableTests
     [TestMethod]
     public void Comparing_Str_Csf()
     {
-        var csf = new CsfFile(dataSamples.FullName + @"test1.csf");
-        var str = new StrFile(dataSamples.FullName + @"test1.str");
+        var csf = new CsfFile(dataSamples.FullName + @"\test1.csf");
+        var str = new StrFile(dataSamples.FullName + @"\test1.str");
+        var tmp = new StrFile(csf);
 
-        Assert.AreEqual(true, str == new StrFile(csf));
+        Assert.AreEqual(true, str == tmp);
     }
 }
