@@ -119,7 +119,7 @@ public sealed class StringTableTests
     //}
 
     [TestMethod]
-    public void Comparing_Str_Csf()
+    public void Comparing_Str2Csf()
     {
         var csf = new CsfFile(dataSamples.FullName + @"\test1.csf");
         var str = new StrFile(dataSamples.FullName + @"\test1.str");
