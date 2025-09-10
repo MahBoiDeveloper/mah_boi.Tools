@@ -167,7 +167,7 @@ public class StrFile : StringTable
                 && currentLine.Trim().EndsWith("\"")   // ends with "
             )
             {
-                stringValue  = currentLine.Trim().Replace("\"", string.Empty);
+                stringValue  = currentLine.Trim().Replace("\"", string.Empty).Replace("\\n", "\n");
                 searchStatus = LineType.End;
             }
 
