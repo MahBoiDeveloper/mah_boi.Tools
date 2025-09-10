@@ -109,14 +109,15 @@ public sealed class StringTableTests
     }
     #endregion
 
-    //[TestMethod]
-    //public void Comparing_Csf_Str()
-    //{
-    //    var csf = new CsfFile(dataSamples.FullName +@"\test1.csf");
-    //    var str = new StrFile(dataSamples.FullName +@"\test1.str");
+    [TestMethod]
+    public void Comparing_Csf2Str()
+    {
+        var csf = new CsfFile(dataSamples.FullName + @"\Csf2Str.csf");
+        var str = new StrFile(dataSamples.FullName + @"\Csf2Str.str");
+        var tmp = new CsfFile(str);
 
-    //    Assert.AreEqual(csf, new CsfFile(str));
-    //}
+        Assert.AreEqual(true, csf == tmp);
+    }
 
     [TestMethod]
     public void Comparing_Str2Csf()
