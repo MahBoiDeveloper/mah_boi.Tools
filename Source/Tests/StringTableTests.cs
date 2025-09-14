@@ -109,6 +109,7 @@ public sealed class StringTableTests
     }
     #endregion
 
+    #region Comparison
     [TestMethod]
     public void Comparing_Csf2Str()
     {
@@ -128,4 +129,5 @@ public sealed class StringTableTests
 
         Assert.AreEqual(true, str == tmp);
     }
+    #endregion
 }
