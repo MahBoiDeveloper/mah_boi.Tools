@@ -80,7 +80,8 @@ public class StringTableTxtFile : StringTable
     {
         foreach (var line in new StreamReader(FileName, FileEncoding).ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
         {
-            var split = line.Split('|');
+            var semicolumnIndex = line.IndexOf(';');
+            var split = (semicolumnIndex != -1 ? line : line.Substring(0, semicolumnIndex)).Split('|');
             Add(split[0], split[1].Replace("\\n", "\n"));
         }
     }

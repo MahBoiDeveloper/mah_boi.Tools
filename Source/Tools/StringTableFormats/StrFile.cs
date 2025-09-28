@@ -235,7 +235,7 @@ public class StrFile : StringTable
     public override void Save()
     {
         using (StreamWriter sw = new(File.OpenWrite(FileName), FileEncoding))
-            sw.WriteLine(ToString());
+            sw.WriteLine(ToString().Replace("\n", "\\n"));
     }
     #endregion
 
