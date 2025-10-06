@@ -10,7 +10,7 @@ using mah_boi.Tools.StringTableFormats.Exceptions;
 
 namespace mah_boi.Tools.StringTableFormats;
 
-public abstract class StringTable : IEnumerable<StringTableEntry>
+public abstract class AbstractStringTable : IEnumerable<StringTableEntry>
 {
     #region IEnumerable methods
     /// <summary>
@@ -59,7 +59,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public StringTable()
+    public AbstractStringTable()
     {
         FileEncoding = Encoding.UTF8;
         FileName     = "TMP-" + DateTime.Now.ToString();
@@ -71,7 +71,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public StringTable(string fileName)
+    public AbstractStringTable(string fileName)
     {
         if (!File.Exists(fileName))
             File.Create(fileName);
@@ -86,7 +86,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public StringTable(string fileName, Encoding encoding)
+    public AbstractStringTable(string fileName, Encoding encoding)
     {
         if (!File.Exists(fileName))
             File.Create(fileName);
@@ -101,7 +101,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public StringTable(StringTable stFile)
+    public AbstractStringTable(AbstractStringTable stFile)
     {
         FileEncoding = stFile.FileEncoding;
         FileName     = stFile.FileName;
@@ -113,7 +113,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public StringTable(string fileName, List<StringTableEntry> strings)
+    public AbstractStringTable(string fileName, List<StringTableEntry> strings)
     {
         FileEncoding = Encoding.UTF8;
         FileName     = fileName;
@@ -125,7 +125,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     /// Supported games: RA2, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public StringTable(string fileName, Encoding encoding, List<StringTableEntry> strings)
+    public AbstractStringTable(string fileName, Encoding encoding, List<StringTableEntry> strings)
     {
         FileEncoding = encoding;
         FileName     = fileName;
@@ -200,7 +200,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     /// <summary>
     /// Transfer data from given string table.
     /// </summary>
-    public void Add(StringTable stImportTable) => Table.AddRange(stImportTable.Table);
+    public void Add(AbstractStringTable stImportTable) => Table.AddRange(stImportTable.Table);
 
     /// <summary>
     /// Add new entry to the string table.
@@ -618,7 +618,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
     /// <summary>
     /// Checks if string table could be converted to other file formats.
     /// </summary>
-    public static bool IsConvertableTo(StringTable stFormated, StringTableFormat format)
+    public static bool IsConvertableTo(AbstractStringTable stFormated, StringTableFormat format)
     {
         if (format == StringTableFormat.csf)
             return !stFormated.AreExtraValuesExist();
@@ -626,7 +626,7 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
         return true;
     }
 
-    public static bool operator == (StringTable firstFile, StringTable secondFile)
+    public static bool operator == (AbstractStringTable firstFile, AbstractStringTable secondFile)
     {
         if (firstFile.Table.Count != secondFile.Table.Count) return false;
 
@@ -640,9 +640,9 @@ public abstract class StringTable : IEnumerable<StringTableEntry>
 
         return true;
     }
-    public static bool operator != (StringTable a, StringTable b) => !(a == b);
+    public static bool operator != (AbstractStringTable a, AbstractStringTable b) => !(a == b);
 
-    public override bool Equals(object obj) => (StringTable)obj == this;
+    public override bool Equals(object obj) => (AbstractStringTable)obj == this;
 
     public override int GetHashCode() => base.GetHashCode();
     #endregion

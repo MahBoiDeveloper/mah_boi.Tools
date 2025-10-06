@@ -12,7 +12,7 @@ namespace mah_boi.Tools.StringTableFormats;
 /// Supported games: GZH, TW, KW, RA3.<br/><br/>
 /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
 /// </summary>
-public class StrFile : StringTable
+public class StrFile : AbstractStringTable
 {
     private enum LineType
     {
@@ -88,7 +88,7 @@ public class StrFile : StringTable
     /// Supported games: GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://generals.projectperfectmod.com/genstr/">here</see>.<br/>
     /// </summary>
-    public StrFile(StringTable stSample) : base(stSample)
+    public StrFile(AbstractStringTable stSample) : base(stSample)
     {
     }
     #endregion
@@ -241,7 +241,7 @@ public class StrFile : StringTable
 
     #region Other methods
 
-    public static bool operator == (StrFile a, StrFile b) => (StringTable)a == (StringTable)b;
+    public static bool operator == (StrFile a, StrFile b) => (AbstractStringTable)a == (AbstractStringTable)b;
 
     public static bool operator != (StrFile a, StrFile b) => !(a == b);
 

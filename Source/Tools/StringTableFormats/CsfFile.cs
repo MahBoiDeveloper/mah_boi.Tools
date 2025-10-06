@@ -14,7 +14,7 @@ namespace mah_boi.Tools.StringTableFormats;
 /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
 /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
 /// </summary>
-public class CsfFile : StringTable
+public class CsfFile : AbstractStringTable
 {
     private static readonly char[] FSC  = {' ', 'F', 'S', 'C' }; // begin of the CSF file
     private static readonly char[] LBL  = {' ', 'L', 'B', 'L' }; // begin of the label
@@ -85,7 +85,7 @@ public class CsfFile : StringTable
     /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public CsfFile(StringTable stSample) : base(stSample)
+    public CsfFile(AbstractStringTable stSample) : base(stSample)
     {
     }
     #endregion
@@ -249,7 +249,7 @@ public class CsfFile : StringTable
     #endregion
 
     #region Other methods
-    public static bool operator == (CsfFile firstFile, CsfFile secondFile) => (StringTable)firstFile == (StringTable)secondFile;
+    public static bool operator == (CsfFile firstFile, CsfFile secondFile) => (AbstractStringTable)firstFile == (AbstractStringTable)secondFile;
     public static bool operator != (CsfFile firstFile, CsfFile secondFile) => !(firstFile == secondFile);
     public override bool Equals(object obj) => (CsfFile)obj == this;
     public override int GetHashCode() => base.GetHashCode();

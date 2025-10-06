@@ -10,7 +10,7 @@ namespace mah_boi.Tools.StringTableFormats;
 /// <summary>
 /// Class for parsing <u>.ini</u> file format as string table.<br/>
 /// </summary>
-public class StringTableIniFile : StringTable
+public class StringTableIniFile : AbstractStringTable
 {
     #region Constructors
     /// <summary>
@@ -74,7 +74,7 @@ public class StringTableIniFile : StringTable
     /// Supported games: RA2YR, GZH, TW, KW, RA3.<br/><br/>
     /// Read more about string table format <see href="https://modenc2.markjfox.net/CSF_File_Format">here</see>.<br/>
     /// </summary>
-    public StringTableIniFile(StringTable stSample) : base(stSample)
+    public StringTableIniFile(AbstractStringTable stSample) : base(stSample)
     {
     }
     #endregion
@@ -117,7 +117,7 @@ public class StringTableIniFile : StringTable
     #endregion
 
     #region Other methods
-    public static bool operator == (StringTableIniFile firstFile, StringTableIniFile secondFile) => (StringTable)firstFile == (StringTable)secondFile;
+    public static bool operator == (StringTableIniFile firstFile, StringTableIniFile secondFile) => (AbstractStringTable)firstFile == (AbstractStringTable)secondFile;
     public static bool operator != (StringTableIniFile firstFile, StringTableIniFile secondFile) => !(firstFile == secondFile);
     public override bool Equals(object obj) => (StringTableIniFile)obj == this;
     public override int GetHashCode() => base.GetHashCode();

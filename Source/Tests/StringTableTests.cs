@@ -12,7 +12,7 @@ public sealed class StringTableTests
     private readonly Encoding? unicode = Encoding.Unicode;
     private readonly Encoding? uft8 = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
     private readonly Encoding? ascii = Encoding.ASCII;
-    private readonly StringTable stModification = new StrFile() 
+    private readonly AbstractStringTable stModification = new StrFile() 
     {
         { "Name:Test", "Test value" }
     };

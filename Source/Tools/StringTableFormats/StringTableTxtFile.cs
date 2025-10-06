@@ -8,7 +8,7 @@ namespace mah_boi.Tools.StringTableFormats;
 /// <summary>
 /// Class for parsing <u>.txt</u> file format as string table.<br/>
 /// </summary>
-public class StringTableTxtFile : StringTable
+public class StringTableTxtFile : AbstractStringTable
 {
     #region Contsructors
     /// <summary>
@@ -70,7 +70,7 @@ public class StringTableTxtFile : StringTable
     /// Class for parsing <u>.txt</u> string table file format.<br/>
     /// Read more about string table format <see href="https://github.com/Starkku/CSFTool">here</see>.<br/>
     /// </summary>
-    public StringTableTxtFile(StringTable stSample) : base(stSample)
+    public StringTableTxtFile(AbstractStringTable stSample) : base(stSample)
     {
     }
     #endregion
