@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mah_boi.Tools.Tests", "Sour
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rampastring.Tools", "Libs\Rampastring.Tools\Rampastring.Tools.csproj", "{39CBBFEA-445D-F5AB-9842-0DC782728764}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mah_boi.Tools.Benchmarks", "Source\Benchmarks\mah_boi.Tools.Benchmarks.csproj", "{A3FAA21D-4143-4122-0BBE-C752A620D19D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{39CBBFEA-445D-F5AB-9842-0DC782728764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39CBBFEA-445D-F5AB-9842-0DC782728764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39CBBFEA-445D-F5AB-9842-0DC782728764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3FAA21D-4143-4122-0BBE-C752A620D19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3FAA21D-4143-4122-0BBE-C752A620D19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3FAA21D-4143-4122-0BBE-C752A620D19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3FAA21D-4143-4122-0BBE-C752A620D19D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
