@@ -14,7 +14,9 @@ public static class BinaryReaderExtension
         char[] ret = new char[length];
 
         for (UInt32 i = 0; i < length; i++)
+        {
             ret[i] = br.ReadChar();
+        }
 
         return ret;
     }
