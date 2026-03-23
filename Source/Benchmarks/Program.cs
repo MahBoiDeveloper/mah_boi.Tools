@@ -10,7 +10,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        BenchmarkRunner.Run<RampaToolsBenchmarks>();
-        //new RampaToolsBenchmarks().SerializerInit();
+        BenchmarkRunner.Run<IniSerializerBenchmarks>();
+        //new IniSerializerBenchmarks().SerializerInit();
     }
 }

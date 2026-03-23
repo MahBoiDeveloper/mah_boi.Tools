@@ -8,7 +8,7 @@ namespace mah_boi.Tools.Benchmarks;
 [MemoryDiagnoser]
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [RankColumn]
-public class RampaToolsBenchmarks
+public class IniSerializerBenchmarks
 {
     private const string iniFile =
         """
@@ -21,7 +21,7 @@ public class RampaToolsBenchmarks
     IniFile ini = new(iniFile.ToStream());
 
     // Legacy code
-    public RampaToolsBenchmarks()
+    public IniSerializerBenchmarks()
     {
         IniSerializer iniSerializer = new(new ConversionsExtension());
         TestClass tcVar = new();
