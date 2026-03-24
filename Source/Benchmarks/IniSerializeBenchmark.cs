@@ -1,9 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 using Rampastring.Tools;
-using Rampastring.Tools.Extensions;
-using mah_boi.Tools;
-using mah_boi.Tools.Extensions;
 
 namespace mah_boi.Tools.Benchmarks;
 
@@ -22,7 +19,7 @@ public class IniSerializeBenchmark
     public void SerializerInit()
     {
         IniSerializer iniSerializer = new(new ConversionsExtension());
-        TestClass? tcVar = null;
+        ClassSample? tcVar = null;
 
         IniDeserializationOptions desser_options = new()
         {
@@ -31,13 +28,13 @@ public class IniSerializeBenchmark
             SkipUnableToParseTypes = true,
         };
 
-        tcVar = iniSerializer.Deserialize<TestClass>(ini, desser_options);
+        tcVar = iniSerializer.Deserialize<ClassSample>(ini, desser_options);
     }
 
     [Benchmark]
     public void ParserInit()
     {
-        TestClass tcVar = new();
+        ClassSample tcVar = new();
         tcVar.Name = ini.GetStringValue(nameof(tcVar), "Name", string.Empty );
         tcVar.Description = ini.GetStringValue(nameof(tcVar), "Description", string.Empty );
         tcVar.Id = ini.GetIntValue(nameof(tcVar), "Id", 0 );

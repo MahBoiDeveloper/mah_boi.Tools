@@ -1,6 +1,6 @@
 ﻿namespace mah_boi.Tools.Benchmarks;
 
-public class TestClass
+public class ClassSample
 {
     public string[] NamesArray { get; set; }
     public string Name { get; set; }
