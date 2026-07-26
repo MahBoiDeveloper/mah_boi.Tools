@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
-using Rampastring.Tools;
+using Rampastring.Tools.Ini;
 
 namespace mah_boi.Tools.Benchmarks;
 

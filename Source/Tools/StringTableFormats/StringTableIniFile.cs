@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-using Rampastring.Tools;
+using Rampastring.Tools.Ini;
 using mah_boi.Tools.Extensions;
 
 namespace mah_boi.Tools.StringTableFormats;

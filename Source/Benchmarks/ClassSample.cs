@@ -2,10 +2,10 @@
 
 public class ClassSample
 {
-    public string[] NamesArray { get; set; }
-    public string Name { get; set; }
+    public string[] NamesArray { get; set; } = [];
+    public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = "Description";
-    public string Type { get; set; }
+    public string Type { get; set; } = string.Empty;
     public string TypeDescription { get; set; } = "Test";
     public int Id { get; set; } = 0;
     public bool IsStatic { get; set; } = false;

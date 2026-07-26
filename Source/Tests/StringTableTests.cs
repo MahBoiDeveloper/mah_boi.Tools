@@ -69,7 +69,7 @@ public sealed class StringTableTests
         result.DeleteExtraValues();
         result.DeleteStringByName(steTest.Name);
 
-        Assert.AreEqual(expected, result);
+        Assert.AreSequenceEqual(expected, result);
     }
 
     [TestMethod]
@@ -81,7 +81,7 @@ public sealed class StringTableTests
         result.Add(steTest);
         result.DeleteStringsOnMatch(steTest);
 
-        Assert.AreEqual(expected, result);
+        Assert.AreSequenceEqual(expected, result);
     }
 
     [TestMethod]
@@ -93,7 +93,7 @@ public sealed class StringTableTests
         result.Add(steTest);
         result.Delete(steTest);
 
-        Assert.AreEqual(expected, result);
+        Assert.AreSequenceEqual(expected, result);
     }
 
     [TestMethod]
@@ -105,7 +105,7 @@ public sealed class StringTableTests
         result.Add(steTest);
         result.DeleteStringsOnMatch(steTest);
 
-        Assert.AreEqual(expected, result);
+        Assert.AreSequenceEqual(expected, result);
     }
     #endregion
 
